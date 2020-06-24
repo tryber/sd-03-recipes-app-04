@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import DetailsDrinkScreen from './components/detailsDrinkScreen';
+import Home from './components/Home'
 import './App.css';
 
 function App() {
   return (
     <Router>
-      <DetailsDrinkScreen />
+      <Switch>
+        <Route path="/" component={Home} />
+      </Switch>
 
     </Router>
     /* <div id="meals">
