@@ -13,19 +13,19 @@ export async function getRandomDrink() {
     .then((resp) => resp.json());
 }
 
-export async function getDrinks(option, search) {
-  if (option === 'ingredient') {
-    return fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${search}`)
-      .then((resp) => resp.json());
-  }
-  if (option === 'name') {
-    return fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`)
-      .then((resp) => resp.json());
-  }
-  if (option === 'letter') {
-    return fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${search}`)
-      .then((resp) => resp.json());
-  }
+export async function getDrinksByIngredient(search) {
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${search}`)
+    .then((resp) => resp.json());
+}
+
+export async function getDrinksByName(search) {
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`)
+    .then((resp) => resp.json());
+}
+
+export async function getDrinksByLetter(search) {
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${search}`)
+    .then((resp) => resp.json());
 }
 
 export async function getDrinkByID(id) {
