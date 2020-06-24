@@ -3,7 +3,7 @@ import React from 'react';
 function DetailsDrinkScreen() {
   return (
     <div>
-     <h1>DetailsDrinkScreen</h1>
+      <h1>DetailsDrinkScreen</h1>
     </div>
   );
 }
