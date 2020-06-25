@@ -26,11 +26,11 @@ const handleChangeInput = (name, ele, input, setInput) => {
   return IsPassword(name, ele);
 };
 
-const handleFormSubmit = (saveInput, input) => {
-  saveInput(input);
-};
+// const handleFormSubmit = (saveInput, input) => {
+//   saveInput(input);
+// };
 
-const createForm = (saveInput, input, setInput, informations, setInformations) => {
+function createForm(saveInput, input, setInput, informations, setInformations) {
   return (
     <form>
       <h2>Login</h2>
@@ -50,13 +50,13 @@ const createForm = (saveInput, input, setInput, informations, setInformations) =
         type="button"
         disabled={informations}
         data-testid="login-submit-btn"
-        onClick={handleFormSubmit(saveInput, input)}
+        // onClick={handleFormSubmit(saveInput, input)}
       >
         Entrar
       </button>
     </form>
   );
-};
+}
 
 function LoginScreen() {
   const { saveInput } = useContext(ContextAplication);
