@@ -3,7 +3,7 @@ import React from 'react';
 function FavoriteRecipes() {
   return (
     <div>
-      Teste
+      <h1>FavoriteRecipes</h1>
     </div>
   );
 }

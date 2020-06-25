@@ -3,7 +3,7 @@ import React from 'react';
 function ExploreFoodOriginScreen() {
   return (
     <div>
-      Teste
+      <h1>ExploreFoodOriginScreen</h1>
     </div>
   );
 }

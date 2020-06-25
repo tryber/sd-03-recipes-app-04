@@ -23,7 +23,7 @@ export const getByFirstLetter = async (firstLetter) => {
 };
 
 export const getFirstMeals = async () => {
-  const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`);
+  const meal = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const mealInfo = await meal.json();
   return mealInfo;
 };
@@ -35,7 +35,7 @@ export const getMealById = async (id) => {
 };
 
 export const getRandomMeal = async () => {
-  const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
+  const meal = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
   const mealInfo = await meal.json();
   return mealInfo;
 };

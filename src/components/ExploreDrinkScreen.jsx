@@ -3,7 +3,7 @@ import React from 'react';
 function ExploreDrinkScreen() {
   return (
     <div>
-      Teste
+      <h1>ExploreDrinkScreen</h1>
     </div>
   );
 }
