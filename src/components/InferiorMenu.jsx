@@ -6,13 +6,13 @@ import mealIcon from '../images/mealIcon.svg';
 import './CSS/InferiorMenu.css';
 
 function InferiorMenu() {
-  return(
+  return (
     <div className="inferior-menu-icons">
       <Link to="/bebidas"><img src={drinkIcon} alt="drink" /></Link>
       <Link to="/explorar"><img src={exploreIcon} alt="explore" /></Link>
       <Link to="/comidas"><img src={mealIcon} alt="meal" /></Link>
     </div>
-  )
+  );
 }
 
 export default InferiorMenu;

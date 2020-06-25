@@ -33,14 +33,15 @@ function App() {
         <Route exact path="/explorar" component={ExploreHomeScreen} />
         <Route exact path="/explorar/comidas" component={ExploreFoodScreen} />
         <Route exact path="/explorar/bebidas" component={ExploreDrinkScreen} />
-        <Route exact path="/explorar/comidas/ingredientes" component={ExploreFoodIngredientScreen} />
-        <Route exact path="/explorar/bebidas/ingredientes" component={ExploreDrinkIngredientScreen} />
+        <Route exact path="/explorar/comidas/ingredientes" 
+        component={ExploreFoodIngredientScreen} />
+        <Route exact path="/explorar/bebidas/ingredientes" 
+        component={ExploreDrinkIngredientScreen} />
         <Route exact path="/explorar/comidas/area" component={ExploreFoodOriginScreen} />
         <Route exact path="/perfil" component={ProfileScreen} />
         <Route exact path="/receitas-feitas" component={DoneRecipes} />
         <Route exact path="/receitas-favoritas" component={FavoriteRecipes} />
       </Switch>
-      <InferiorMenu />
     </div>
   );
 }
