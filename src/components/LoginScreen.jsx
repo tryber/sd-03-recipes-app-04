@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { ContextAplication } from '../context/ContextAplication';
+import { ContextAplication } from './context/ContextAplication';
+
 
 const IsEmail = (name, email, input, setInput, setInformations) => {
   const exclude = '/[^@-.w]|^[_@.-]|[._-]{2}|[@.]{2}|(@)[^@]*1/';

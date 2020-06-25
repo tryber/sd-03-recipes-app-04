@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-// import DetailsDrinkScreen from './components/ExploreDrinkScreen';
+// import DetailsDrinkScreen from './components/DetailsDrinkScreen';
 // import DetailsFoodScreen from './components/DetailsFoodScreen';
-// import DoneRecipes from './components';
+// import DoneRecipes from './components/DoneRecipes';
 // import ExploreDrinkIngredientScreen from './components/ExploreDrinkIngredientScreen';
 // import ExploreDrinkScreen from './components/ExploreDrinkScreen';
 // import ExploreFoodIngredientScreen from './components/ExploreFoodIngredientScreen';
@@ -18,7 +18,7 @@ import LoginScreen from './components/LoginScreen';
 // import ProgressFoodScreen from './components/ProgressFoodScreen';
 // import './App.css';
 
-import AplicationProvider from './context/ContextAplication';
+import AplicationProvider from './components/context/ContextAplication';
 
 function App() {
   return (
