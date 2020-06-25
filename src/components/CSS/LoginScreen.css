@@ -1,0 +1,52 @@
+.login-screen {
+  height: 640px;
+  width: 360px;
+}
+
+h2 {
+  align-items: flex-end;
+  color: black;
+  display: flex;
+  font-family: Roboto;
+  font-size: 39px;
+  font-style: normal;
+  font-weight: normal;
+  height: 46px;
+  left: 128px;
+  line-height: 46px;
+  position: absolute;
+  top: 79px;
+  width: 97px;
+}
+
+.email {
+  background: white;
+  border: 1px solid black;
+  box-sizing: border-box;
+  height: 58px;
+  left: 31px;
+  margin-top: 10px;
+  position: absolute;
+  top: 155px;
+  width: 293px;
+}
+
+.password {
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  height: 58px;
+  left: 30px;
+  position: absolute;
+  top: 243px;
+  width: 293px;
+}
+
+button {
+  background: #6ce34f;
+  height: 76px;
+  left: 11px;
+  position: absolute;
+  top: 389px;
+  width: 339px;
+}

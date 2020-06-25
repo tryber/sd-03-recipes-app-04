@@ -22,7 +22,7 @@ const AplicationProvider = ({ children }) => {
   };
 
   return (
-    <ContextAplication.Provider value={{ context }}>
+    <ContextAplication.Provider value={context}>
       {children}
     </ContextAplication.Provider>
   );

@@ -1,60 +1,40 @@
-import React, { useContext, useState } from 'react';
-import { ContextAplication } from './context/ContextAplication';
+import React, { useState, useEffect, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
+import { ContextAplication } from '../context/ContextAplication';
+import './CSS/LoginScreen.css';
 
-
-const IsEmail = (name, email, input, setInput, setInformations) => {
-  const exclude = '/[^@-.w]|^[_@.-]|[._-]{2}|[@.]{2}|(@)[^@]*1/';
-  const check = '/@[w-]+./';
-  const checkend = '/.[a-zA-Z]{2,3}$/';
-  if (
-    email.search(exclude) !== -1
-    || email.search(check) === -1
-    || email.search(checkend) === -1
-  ) {
-    return setInput({ ...input, [name]: email }) && setInformations(false);
-  }
-  return setInput({ ...input, [name]: email }) && setInformations(true);
+const handleChangeInput = (name, event, input, setInput) => {
+  setInput({ ...input, [name]: event });
 };
 
-const IsPassword = (name, password, input, setInput, setInformations) => {
-  setInput({ ...input, [name]: password });
-  if (input.password.length >= 6) return setInformations(true);
-  return null;
+const handleFormSubmit = (saveInput, input) => {
+  localStorage.setItem('user', JSON.stringify({ email: input.email }));
+  localStorage.setItem('mealsToken', 1);
+  localStorage.setItem('cocktailsToken', 1);
+
+  saveInput(input);
 };
 
-const handleChangeInput = (name, ele, input, setInput) => {
-  if (name === 'email') return IsEmail(name, ele, input, setInput);
-  return IsPassword(name, ele);
-};
-
-// const handleFormSubmit = (saveInput, input) => {
-//   saveInput(input);
-// };
-
-function createForm(saveInput, input, setInput, informations, setInformations) {
+function createForm(input, setInput) {
   return (
     <form>
       <h2>Login</h2>
       <input
+        className="email"
         data-testid="email-input"
-        onChange={(ele) => handleChangeInput('email', ele.target.value, input, setInput, setInformations)}
-        type="text"
+        onChange={(ele) => handleChangeInput('email', ele.target.value, input, setInput)}
+        type="email"
         name="email"
+        placeholder="Email"
       />
       <input
+        className="password"
         data-testid="password-input"
-        onChange={(ele) => handleChangeInput('password', ele.target.value, input, setInput, setInformations)}
+        onChange={(ele) => handleChangeInput('password', ele.target.value, input, setInput)}
         type="text"
         name="password"
+        placeholder="Senha"
       />
-      <button
-        type="button"
-        disabled={informations}
-        data-testid="login-submit-btn"
-        // onClick={handleFormSubmit(saveInput, input)}
-      >
-        Entrar
-      </button>
     </form>
   );
 }
@@ -62,11 +42,31 @@ function createForm(saveInput, input, setInput, informations, setInformations) {
 function LoginScreen() {
   const { saveInput } = useContext(ContextAplication);
   const [input, setInput] = useState({ email: '', password: '' });
-  const [informations, setInformations] = useState(false);
+  const [informations, setInformations] = useState(true);
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(() => {
+    const validEmailRegEx = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
+
+    if (!validEmailRegEx.test(input.email)
+      || (input.password.length < 6)) return setInformations(true);
+
+    return setInformations(false);
+  }, [input]);
+
+  if (user) return <Redirect to="/comidas" />;
 
   return (
-    <div>
-      {createForm(saveInput, input, setInput, informations, setInformations)}
+    <div className="login-screen">
+      {createForm(input, setInput, informations)}
+      <button
+        type="button"
+        disabled={informations}
+        data-testid="login-submit-btn"
+        onClick={() => handleFormSubmit(saveInput, input)}
+      >
+        <h3>Entrar</h3>
+      </button>
     </div>
   );
 }
