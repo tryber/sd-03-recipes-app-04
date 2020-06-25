@@ -16,7 +16,6 @@ import MainFoodScreen from './components/MainFoodScreen';
 import ProfileScreen from './components/ProfileScreen';
 import ProgressDrinkScreen from './components/ProgressDrinkScreen';
 import ProgressFoodScreen from './components/ProgressFoodScreen';
-import InferiorMenu from './components/InferiorMenu';
 import './App.css';
 
 function App() {
@@ -33,10 +32,12 @@ function App() {
         <Route exact path="/explorar" component={ExploreHomeScreen} />
         <Route exact path="/explorar/comidas" component={ExploreFoodScreen} />
         <Route exact path="/explorar/bebidas" component={ExploreDrinkScreen} />
-        <Route exact path="/explorar/comidas/ingredientes" 
-        component={ExploreFoodIngredientScreen} />
-        <Route exact path="/explorar/bebidas/ingredientes" 
-        component={ExploreDrinkIngredientScreen} />
+        <Route
+          exact path="/explorar/comidas/ingredientes"
+          component={ExploreFoodIngredientScreen} />
+        <Route
+          exact path="/explorar/bebidas/ingredientes"
+          component={ExploreDrinkIngredientScreen} />
         <Route exact path="/explorar/comidas/area" component={ExploreFoodOriginScreen} />
         <Route exact path="/perfil" component={ProfileScreen} />
         <Route exact path="/receitas-feitas" component={DoneRecipes} />
