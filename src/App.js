@@ -34,10 +34,12 @@ function App() {
         <Route exact path="/explorar/bebidas" component={ExploreDrinkScreen} />
         <Route
           exact path="/explorar/comidas/ingredientes"
-          component={ExploreFoodIngredientScreen} />
+          component={ExploreFoodIngredientScreen}
+        />
         <Route
           exact path="/explorar/bebidas/ingredientes"
-          component={ExploreDrinkIngredientScreen} />
+          component={ExploreDrinkIngredientScreen}
+        />
         <Route exact path="/explorar/comidas/area" component={ExploreFoodOriginScreen} />
         <Route exact path="/perfil" component={ProfileScreen} />
         <Route exact path="/receitas-feitas" component={DoneRecipes} />
