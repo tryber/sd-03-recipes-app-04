@@ -20,7 +20,7 @@ export const getByFirstLetter = async (firstLetter) => {
   const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`);
   const mealInfo = await meal.json();
   return mealInfo;
-}
+};
 
 export const getFirstMeals = async () => {
   const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`);
