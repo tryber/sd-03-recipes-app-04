@@ -42,6 +42,7 @@ function App() {
         <Route exact path={'/receitas-favoritas'} component={FavoriteRecipes} /> */}
       </Switch>
     </AplicationProvider>
+    <h1>Teste</h1>
   );
 }
 
