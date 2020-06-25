@@ -65,7 +65,7 @@ function LoginScreen() {
 
   return (
     <div>
-      {createForm([saveInput, input, setInput, informations, setInformations])}
+      {createForm(saveInput, input, setInput, informations, setInformations)}
     </div>
   );
 }
