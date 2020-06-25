@@ -33,3 +33,12 @@ background:url('src\images\profileIcon.svg');
   top: 12px;
   background: url('src\images\searchIcon.svg');
 }
+
+.headerDiv {
+    position: absolute;
+    width: 360px;
+    height: 58px;
+    left: 0px;
+    top: 0px;    
+    background: #C4C4C4;   
+}
