@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 function DetailsDrinkScreen() {
   return (
     <div>
+      Teste
     </div>
-  )
+  );
 }
 
 export default DetailsDrinkScreen;
