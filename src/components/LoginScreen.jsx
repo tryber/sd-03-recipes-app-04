@@ -49,7 +49,7 @@ function LoginScreen() {
     const validEmailRegEx = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
 
     if (!validEmailRegEx.test(input.email)
-      || (input.password.length < 6)) return setInformations(true);
+      || (input.password.length <= 6)) return setInformations(true);
 
     return setInformations(false);
   }, [input]);
