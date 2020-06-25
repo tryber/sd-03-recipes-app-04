@@ -1,0 +1,9 @@
+.inferior-menu-icons {
+  align-items: center;
+  background-color: grey;
+  display: flex;
+  height: 58px;
+  justify-content: space-between;
+  position: fixed;
+  width: 360px;
+}
