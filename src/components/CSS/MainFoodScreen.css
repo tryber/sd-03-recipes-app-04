@@ -5,7 +5,7 @@
 .recipes-results {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .recipes-results > img, h5 {
