@@ -48,24 +48,22 @@ function renderRadioButtons(setSearchBy) {
 }
 
 function doSearch(searchBy, searchedItem, setResult, setGoToRoute, setId) {
-  if (searchBy) {
-    switch (searchBy) {
-      case 'ingredient': {
-        api.getDrinksByIngredient(searchedItem)
+  switch (searchBy) {
+    case 'ingredient': {
+      api.getDrinksByIngredient(searchedItem)
+        .then((data) => checkResults(data, setResult, setGoToRoute, setId));
+      break;
+    }
+    case 'name': {
+      api.getDrinksByName(searchedItem)
+        .then((data) => checkResults(data, setResult, setGoToRoute, setId));
+      break;
+    }
+    default: {
+      if (searchedItem.length > 1) { alert('Sua busca deve conter somente 1 (um) caracter'); }
+      if (searchedItem.length === 1) {
+        api.getDrinksByLetter(searchedItem)
           .then((data) => checkResults(data, setResult, setGoToRoute, setId));
-        break;
-      }
-      case 'name': {
-        api.getDrinksByName(searchedItem)
-          .then((data) => checkResults(data, setResult, setGoToRoute, setId));
-        break;
-      }
-      default: {
-        if (searchedItem.length > 1) { alert('Sua busca deve conter somente 1 (um) caracter'); }
-        if (searchedItem.length === 1) {
-          api.getDrinksByLetter(searchedItem)
-            .then((data) => checkResults(data, setResult, setGoToRoute, setId));
-        }
       }
     }
   }
