@@ -10,10 +10,10 @@
   align-items: flex-end;
   color: black;
   display: flex;
-  font-family: Roboto,'Times New Roman', Times, serif;
+  font-family: Roboto, Times New Roman, Times, serif;
   font-size: 30px;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   height: 35px;
   left: 123px;
   line-height: 35px;
