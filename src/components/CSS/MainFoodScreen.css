@@ -1,4 +1,4 @@
-.food-screen{
+.food-screen {
   width: 360px;
 }
 
@@ -8,7 +8,7 @@
   justify-content: space-between;
 }
 
-.recipes-results > img, h5 {
+.recipes-results > img , h5 {
   margin: 10px;
   text-align: center;
   width: 150px;
