@@ -3,26 +3,23 @@ position: absolute;
 width: 30px;
 height: 30px;
 left: 15px;
-top: 12px;
-
-background:url('src\images\profileIcon.svg');
+top: 16px;
 }
 
 .foodTitle {
-    position: absolute;
-    width: 119px;
-    height: 35px;
-    left: 123px;
-    top: 12px;    
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 35px;
-    display: flex;
-    align-items: flex-end;    
-    color: #000000;
-
+  position: absolute;
+  width: 119px;
+  height: 35px;
+  left: 123px;
+  top: -10px;  
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 35px;
+  display: flex;
+  align-items: flex-end;  
+  color: #000000;
 }
 
 .searchIcon {
@@ -30,8 +27,7 @@ background:url('src\images\profileIcon.svg');
   width: 30px;
   height: 30px;
   left: 317px;
-  top: 12px;
-  background: url('src\images\searchIcon.svg');
+  top: 18px;
 }
 
 .headerDiv {
