@@ -15,7 +15,8 @@ export async function getRandomDrink() {
 
 export async function getDrinksByIngredient(search) {
   return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${search}`)
-    .then((resp) => resp.json());
+    .then((resp) => resp.json())
+    .catch((err) => console.log(err));
 }
 
 export async function getDrinksByName(search) {

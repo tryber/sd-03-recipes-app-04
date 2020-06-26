@@ -3,7 +3,8 @@ import { Redirect } from 'react-router-dom';
 import * as api from '../services/drink-api';
 
 function checkResults(data, setResult, setGoToRoute, setId) {
-  if (data.drinks === null) {
+  console.log(data)
+  if (data === undefined || data.drinks === null) {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   } else if (data.drinks.length === 1) {
     setId(data.drinks[0].idDrink);
