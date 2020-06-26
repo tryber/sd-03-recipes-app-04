@@ -13,7 +13,7 @@ function checkResults(data, setResult, setGoToRoute, setId) {
   }
 }
 
-function renderRadioButtons(setSearchBy) {
+function renderRadioButtons(setSearchBy, setDisabled) {
   return (
     <div className="radio-buttons">
       <label htmlFor="ingrediente">
@@ -21,7 +21,10 @@ function renderRadioButtons(setSearchBy) {
           id="ingredient"
           type="radio"
           name="search"
-          onChange={(e) => setSearchBy(e.target.id)}
+          onChange={(e) => {
+            setSearchBy(e.target.id);
+            setDisabled(false);
+          }}
         />
         Ingrediente
       </label>
@@ -30,7 +33,10 @@ function renderRadioButtons(setSearchBy) {
           id="name"
           type="radio"
           name="search"
-          onChange={(e) => setSearchBy(e.target.id)}
+          onChange={(e) => {
+            setSearchBy(e.target.id);
+            setDisabled(false);
+          }}
         />
         Nome
       </label>
@@ -39,7 +45,10 @@ function renderRadioButtons(setSearchBy) {
           id="first-letter"
           type="radio"
           name="search"
-          onChange={(e) => setSearchBy(e.target.id)}
+          onChange={(e) => {
+            setSearchBy(e.target.id);
+            setDisabled(false);
+          }}
         />
         Primeira Letra
       </label>
@@ -75,6 +84,7 @@ function DrinkSearchBar() {
   const [result, setResult] = useState([]);
   const [goToRoute, setGoToRoute] = useState(false);
   const [id, setId] = useState('');
+  const [disabled, setDisabled] = useState('true');
   return (
     <div>
       <input
@@ -83,11 +93,12 @@ function DrinkSearchBar() {
         onChange={(e) => setSearchedItem(e.target.value)}
         value={searchedItem}
       />
-      {renderRadioButtons(setSearchBy)}
+      {renderRadioButtons(setSearchBy, setDisabled)}
       <button
         onClick={() => doSearch(searchBy, searchedItem, setResult, setGoToRoute, setId)}
         className="search-button"
         type="button"
+        disabled={disabled}
       >
         Buscar
       </button>
@@ -95,10 +106,10 @@ function DrinkSearchBar() {
         {result.reduce((arr, e, i) => {
           if (i < 12) {
             return [...arr,
-            <div className="product-pic">
-              <img src={e.strDrinkThumb} alt="thumbnail" width="150px" />
-              <h5>{e.strDrink}</h5>
-            </div>,
+              <div className="product-pic">
+                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" />
+                <h5>{e.strDrink}</h5>
+              </div>,
             ];
           }
           return arr;
