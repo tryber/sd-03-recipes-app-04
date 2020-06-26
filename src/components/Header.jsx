@@ -34,11 +34,10 @@ function Header() {
           />
         )
         : null}
-      <button type="button" onClick={() => showHideInputSearch()}>
+      <button type="button" className="searchIcon" onClick={() => showHideInputSearch()}>
         <img
           src={searchIcon}
           alt="SearchIcon"
-          className="searchIcon"
           data-testid="search-top-btn"
         />
       </button>
