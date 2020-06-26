@@ -1,0 +1,15 @@
+.food-screen{
+  width: 360px;
+}
+
+.recipes-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.recipes-results > img, h5 {
+  margin: 10px;
+  text-align: center;
+  width: 150px;
+}

@@ -45,3 +45,9 @@ export const getIgredientPic = async (igredient) => {
   const mealInfo = await meal.json();
   return mealInfo;
 };
+
+export const getCategoriesList = async () => {
+  const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`);
+  const mealInfo = await meal.json();
+  return mealInfo;
+};
