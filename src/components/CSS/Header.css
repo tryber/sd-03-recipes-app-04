@@ -7,13 +7,13 @@
 }
 
 .foodTitle {
-  align-items: flex-end;  
-  color: #000000;
+  align-items: flex-end;
+  color: black;
   display: flex;
   font-family: Roboto;
+  font-size: 30px;
   font-style: normal;
   font-weight: normal;
-  font-size: 30px;
   height: 35px;
   left: 123px;
   line-height: 35px;
@@ -31,10 +31,10 @@
 }
 
 .headerDiv {
-  background: #C4C4C4;   
-  position: absolute;
+  background: #c4c4c4;   
   height: 58px;
-  left: 0px;
-  top: 0px;    
+  left: 0;
+  position: absolute;
+  top: 0;    
   width: 360px;
-  }
+}
