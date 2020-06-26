@@ -17,7 +17,12 @@ function Header() {
   return (
     <div className="headerDiv">
       <Link to="/perfil">
-        <img className="userProfileIcon" src={profileIcon} alt="ProfileIcon" data-testeid="profile-top-btn" />
+        <img
+          className="userProfileIcon"
+          src={profileIcon}
+          alt="ProfileIcon"
+          data-testeid="profile-top-btn"
+        />
       </Link>
       <h1 className="foodTitle" data-testid="page-title">Comidas</h1>
       {isInputSearchVisible
