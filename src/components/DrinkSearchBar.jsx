@@ -49,17 +49,23 @@ function renderRadioButtons(setSearchBy) {
 
 function doSearch(searchBy, searchedItem, setResult, setGoToRoute, setId) {
   if (searchBy) {
-    if (searchBy === 'ingredient') {
-      api.getDrinksByIngredient(searchedItem)
-        .then((data) => checkResults(data, setResult, setGoToRoute, setId));
-    } else if (searchBy === 'name') {
-      api.getDrinksByName(searchedItem)
-        .then((data) => checkResults(data, setResult, setGoToRoute, setId));
-    } else if (searchBy === 'first-letter') {
-      if (searchedItem.length > 1) { alert('Sua busca deve conter somente 1 (um) caracter'); }
-      if (searchedItem.length === 1) {
-        api.getDrinksByLetter(searchedItem)
+    switch (searchBy) {
+      case 'ingredient': {
+        api.getDrinksByIngredient(searchedItem)
           .then((data) => checkResults(data, setResult, setGoToRoute, setId));
+        break;
+      }
+      case 'name': {
+        api.getDrinksByName(searchedItem)
+          .then((data) => checkResults(data, setResult, setGoToRoute, setId));
+        break;
+      }
+      default: {
+        if (searchedItem.length > 1) { alert('Sua busca deve conter somente 1 (um) caracter'); }
+        if (searchedItem.length === 1) {
+          api.getDrinksByLetter(searchedItem)
+            .then((data) => checkResults(data, setResult, setGoToRoute, setId));
+        }
       }
     }
   }
@@ -91,10 +97,10 @@ function DrinkSearchBar() {
         {result.reduce((arr, e, i) => {
           if (i < 12) {
             return [...arr,
-              <div className="product-pic">
-                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" />
-                <h5>{e.strDrink}</h5>
-              </div>,
+            <div className="product-pic">
+              <img src={e.strDrinkThumb} alt="thumbnail" width="150px" />
+              <h5>{e.strDrink}</h5>
+            </div>,
             ];
           }
           return arr;
