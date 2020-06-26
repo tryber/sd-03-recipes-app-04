@@ -47,29 +47,30 @@ function renderRadioButtons(setSearchBy) {
   );
 }
 
+function doSearch(searchBy, searchedItem, setResult, setGoToRoute, setId) {
+  if (searchBy) {
+    if (searchBy === 'ingredient') {
+      api.getDrinksByIngredient(searchedItem)
+        .then((data) => checkResults(data, setResult, setGoToRoute, setId));
+    } else if (searchBy === 'name') {
+      api.getDrinksByName(searchedItem)
+        .then((data) => checkResults(data, setResult, setGoToRoute, setId));
+    } else if (searchBy === 'first-letter') {
+      if (searchedItem.length > 1) { alert('Sua busca deve conter somente 1 (um) caracter'); }
+      if (searchedItem.length === 1) {
+        api.getDrinksByLetter(searchedItem)
+          .then((data) => checkResults(data, setResult, setGoToRoute, setId));
+      }
+    }
+  }
+}
+
 function DrinkSearchBar() {
   const [searchedItem, setSearchedItem] = useState('');
   const [searchBy, setSearchBy] = useState('');
   const [result, setResult] = useState([]);
   const [goToRoute, setGoToRoute] = useState(false);
   const [id, setId] = useState('');
-  function doSearch() {
-    if (searchBy) {
-      if (searchBy === 'ingredient') {
-        api.getDrinksByIngredient(searchedItem)
-          .then((data) => checkResults(data, setResult, setGoToRoute, setId));
-      } else if (searchBy === 'name') {
-        api.getDrinksByName(searchedItem)
-          .then((data) => checkResults(data, setResult, setGoToRoute, setId));
-      } else if (searchBy === 'first-letter') {
-        if (searchedItem.length > 1) { alert('Sua busca deve conter somente 1 (um) caracter'); }
-        if (searchedItem.length === 1) {
-          api.getDrinksByLetter(searchedItem)
-            .then((data) => checkResults(data, setResult, setGoToRoute, setId));
-        }
-      }
-    }
-  }
   return (
     <div>
       <input
@@ -79,7 +80,13 @@ function DrinkSearchBar() {
         value={searchedItem}
       />
       {renderRadioButtons(setSearchBy)}
-      <button onClick={() => doSearch(searchBy, searchedItem)} className="search-button" type="button">Buscar</button>
+      <button
+        onClick={() => doSearch(searchBy, searchedItem, setResult, setGoToRoute, setId)}
+        className="search-button"
+        type="button"
+      >
+        Buscar
+      </button>
       <div className="recipes-results">
         {result.reduce((arr, e, i) => {
           if (i < 12) {
