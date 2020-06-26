@@ -1,0 +1,46 @@
+.login-screen {
+  align-items: center;
+  background-color: ghostwhite;
+  border: 1px solid black;
+  box-shadow: gray 5px 5px 2px;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  justify-content: center;
+  margin: auto;
+  margin-top: 20vh;
+  text-align: center;
+  width: 360px;
+}
+
+h2 {
+  color: black;
+  font-size: 39px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 46px;
+}
+
+.email {
+  background: white;
+  border: 1px solid black;
+  box-sizing: border-box;
+  height: 50px;
+  margin-top: 10px;
+  width: 293px;
+}
+
+.password {
+  background: white;
+  border: 1px solid black;
+  box-sizing: border-box;
+  height: 50px;
+  margin-top: 10px;
+  width: 293px;
+}
+
+button {
+  background: #6ce34f;
+  margin-top: 20px;
+  width: 260px;
+}
