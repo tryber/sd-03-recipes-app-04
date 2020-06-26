@@ -107,10 +107,10 @@ function FoodSearchBar() {
         {result.reduce((arr, e, i) => {
           if (i < 12) {
             return [...arr,
-            <div className="product-pic">
-              <img src={e.strMealThumb} alt="thumbnail" width="150px" />
-              <h5>{e.strMeal}</h5>
-            </div>,
+              <div className="product-pic">
+                <img src={e.strMealThumb} alt="thumbnail" width="150px" />
+                <h5>{e.strMeal}</h5>
+              </div>,
             ];
           }
           return arr;
