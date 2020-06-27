@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import ReactPlayer from 'react-player';
+import PropTypes from 'prop-types';
 // import CopyToClipboard from './CopyToClipboard';
 import { getMealById } from '../services/foodApi';
 import { getFirstDrinks } from '../services/drink-api';
@@ -48,8 +49,9 @@ function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
   const mealInfo = {
     id: idMeal,
     type: strType,
-    area: strArea.strArea,
+    area: strArea,
     category: strCategory,
+    alcoholicOrNor: undefined,
     name: strMeal,
     image: strMealThumb,
   };
@@ -68,7 +70,7 @@ function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
   }
 }
 
-export default function (props) {
+export default function DetailsFoodScreen(props) {
   const { id } = props.props.match.params;
   const storage = JSON.parse(localStorage.getItem('doneRecipes'));
   let started;
@@ -132,16 +134,36 @@ export default function (props) {
             {!hasStarted && !done && !started && (
               <button
                 type="button"
-                onClick={() => changeRecipeStatus(setHasStarted, recipeInfo, hasStarted, setGoToRoute)}
+                onClick={() => changeRecipeStatus(setHasStarted,
+                  recipeInfo, hasStarted, setGoToRoute)}
                 className="start-button"
               >
                 Iniciar Receita
               </button>
             )}
-            {started && !done && <button type="button" className="start-button">Continuar Receita</button>}
+            {started && !done && (
+            <button
+              type="button"
+              className="start-button"
+            >
+              Continuar Receita
+            </button>
+            )}
             <div className="share-and-favourite">
-              <button type="button" className="favourite" onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}>{isFavorite ? <img src={favorite} /> : <img src={notFavorite} />}</button>
-              <button type="button" className="favourite" onClick={() => copyToClipboard()}><img src={share} alt="icon" /></button>
+              <button
+                type="button"
+                className="favourite"
+                onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}
+              >
+                {isFavorite ? <img src={favorite} alt="favorite" /> : <img src={notFavorite} alt="favorite" />}
+              </button>
+              <button
+                type="button"
+                className="favourite"
+                onClick={() => copyToClipboard()}
+              >
+                <img src={share} alt="icon" />
+              </button>
             </div>
             {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
           </div>
@@ -150,3 +172,7 @@ export default function (props) {
     </div>
   );
 }
+
+DetailsFoodScreen.propTypes = {
+  props: PropTypes.string.isRequired,
+};
