@@ -29,14 +29,61 @@ html {
   flex-wrap: wrap;
 }
 
-.recipes-results > img, h5 {
+.recipes-results > img, h5, h1 {
+  text-align: center;
+  width: 100%;
+}
+ 
+.product-pic-recomendation > img, h5 {
   margin: 10px;
   text-align: center;
   width: 150px;
 }
 
 .product-pic {
+  align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.product-pic-recomendation {
   align-items: center;
+  overflow-x: auto;
+  display: flex;
+}
+
+span {
+  margin: 5px;
+}
+
+p {
+  text-align: justify;
+}
+
+.youtube {
+  width: 350px;
+}
+
+.bottom-buttons {
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+}
+
+.share-and-favourite > button {
+  background-color: orange;
+  width: 50%;
+}
+
+.share-and-favourite > img {
+  display: inline-block;
+  text-align: center;
+  background-color: orange;
+}
+
+.share-and-favourite {
+  display: flex;
+  background-color: orange;
 }

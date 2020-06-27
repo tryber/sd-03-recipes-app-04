@@ -24,9 +24,9 @@ function App() {
       <Route exact path="/" component={LoginScreen} />
       <Route exact path="/comidas" component={MainFoodScreen} />
       <Route exact path="/bebidas" component={MainDrinkScreen} />
-      <Route exact path={`/comidas/${'id-da-receita'}`} component={DetailsFoodScreen} />
-      <Route exact path={`/bebidas/${'id-da-receita'}`} component={DetailsDrinkScreen} />
-      <Route exact path={`/comidas/${'id-da-receita'}/in-progress`} component={ProgressFoodScreen} />
+      <Route exact path="/comidas/:id" render={(props) => <DetailsFoodScreen props={props} />} />
+      <Route exact path="/bebidas/:id" render={(props) => DetailsDrinkScreen(props)} />
+      <Route exact path="/comidas/:id/in-progress" render={ProgressFoodScreen} />
       <Route exact path={`/bebidas/${'id-da-receita'}/in-progress`} component={ProgressDrinkScreen} />
       <Route exact path="/explorar" component={ExploreHomeScreen} />
       <Route exact path="/explorar/comidas" component={ExploreFoodScreen} />
