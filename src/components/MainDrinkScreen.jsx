@@ -59,7 +59,7 @@ function MainFoodScreen() {
   useEffect(() => {
     getDrinks();
     getListDrinksCategories()
-      .then((answer) => setCategories(answer.drinks ));
+      .then((answer) => setCategories(answer.drinks));
   }, []);
 
   useEffect(() => {
