@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getFirstDrinks, getListDrinksCategories } from '../services/drink-api';
+import InferiorMenu from './InferiorMenu';
 import './CSS/MainFoodScreen.css';
 
 function FilterButtons(Categories, handleClick) {
@@ -81,6 +82,7 @@ function MainFoodScreen() {
     <div className="food-screen">
       {FilterButtons(Categories, handleClick)}
       {DrinksList(Data)}
+      <InferiorMenu />
     </div>
   );
 }
