@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getFirstDrinks, getListDrinksCategories } from '../services/drink-api';
+import { getFirstDrinks, getListDrinksCategories, getDrinkByCategories } from '../services/drink-api';
 import InferiorMenu from './InferiorMenu';
 import './CSS/MainFoodScreen.css';
 
@@ -64,14 +64,13 @@ function MainFoodScreen() {
   }, []);
 
   useEffect(() => {
-    getFirstDrinks()
-      .then((answer) => {
-        if (Filter !== 'All') {
-          setData(answer.drinks.filter((drink) => drink.strCategory === Filter));
-        } else {
-          getDrinks();
-        }
-      });
+    if (Filter === 'All') {
+      getFirstDrinks()
+        .then((answer) => setData(answer.drinks));
+    } else {
+      getDrinkByCategories(Filter)
+        .then((answer) => setData(answer.drinks));
+    }
   }, [Filter]);
 
   const handleClick = (event) => {

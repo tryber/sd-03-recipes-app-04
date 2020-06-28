@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getFirstMeals, getCategoriesList } from '../services/foodApi';
+import { getFirstMeals, getCategoriesList, getMealByCategorie } from '../services/foodApi';
 import InferiorMenu from './InferiorMenu';
 import './CSS/MainFoodScreen.css';
 
@@ -64,14 +64,13 @@ function MainFoodScreen() {
   }, []);
 
   useEffect(() => {
-    getFirstMeals()
-      .then((answer) => {
-        if (Filter !== 'All') {
-          setData(answer.meals.filter((meal) => meal.strCategory === Filter));
-        } else {
-          getMeals();
-        }
-      });
+    if (Filter === 'All') {
+      getFirstMeals()
+        .then((answer) => setData(answer.meals));
+    } else {
+      getMealByCategorie(Filter)
+        .then((answer) => setData(answer.meals));
+    }
   }, [Filter]);
 
   const handleClick = (event) => {
