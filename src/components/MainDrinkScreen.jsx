@@ -82,8 +82,9 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
-      {FilterButtons(Categories, handleClick)}
-      {DrinksList(Data)}
+      {isLoading && <div className="loader" />}
+      {!isLoading && FilterButtons(Categories, handleClick)}
+      {!isLoading && DrinksList(Data)}
       <InferiorMenu />
     </div>
   );
