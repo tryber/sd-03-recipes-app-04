@@ -51,6 +51,7 @@ function MainFoodScreen() {
   const [Data, setData] = useState([]);
   const [Categories, setCategories] = useState([]);
   const [Filter, setFilter] = useState('All');
+  const [isLoading, setisLoading] = useState(false);
 
   const getMeals = () => {
     getFirstMeals()
