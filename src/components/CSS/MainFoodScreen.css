@@ -6,10 +6,29 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding: 5px;
 }
 
 .recipes-results > img , h5 {
   margin: 10px;
   text-align: center;
   width: 150px;
+}
+
+.button-div{
+  text-align: center;
+}
+
+.button-main-screen {
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 1px;
+  padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  width: 100px;
 }

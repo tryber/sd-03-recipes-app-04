@@ -5,8 +5,8 @@ import './CSS/MainFoodScreen.css';
 
 function FilterButtons(Categories, handleClick) {
   return (
-    <div>
-      <button value="All" onClick={handleClick}>All</button>
+    <div className="button-div">
+      <button value="All" onClick={handleClick} className="button-main-screen">All</button>
       {Categories.reduce((arr, e, i) => {
         if (i < 5) {
           return [...arr,
@@ -14,6 +14,7 @@ function FilterButtons(Categories, handleClick) {
               data-testid={`${e.strCategory}-category-filter`}
               value={e.strCategory}
               onClick={handleClick}
+              className="button-main-screen"
             >
               {e.strCategory}
             </button>,
