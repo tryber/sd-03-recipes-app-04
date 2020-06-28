@@ -59,9 +59,11 @@ function MainFoodScreen() {
   };
 
   useEffect(() => {
+    setisLoading(true);
     getMeals();
     getCategoriesList()
       .then((answer) => setCategories(answer.categories));
+    setisLoading(false);
   }, []);
 
   useEffect(() => {
@@ -80,8 +82,9 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
-      {FilterButtons(Categories, handleClick)}
-      {MealsList(Data)}
+      {isLoading && <div class="loader"></div>}
+      {!isLoading && FilterButtons(Categories, handleClick)}
+      {!isLoading && MealsList(Data)}
       <InferiorMenu />
     </div>
   );

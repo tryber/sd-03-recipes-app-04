@@ -51,6 +51,7 @@ function MainFoodScreen() {
   const [Data, setData] = useState([]);
   const [Categories, setCategories] = useState([]);
   const [Filter, setFilter] = useState('All');
+  const [isLoading, setisLoading] = useState(false);
 
   const getDrinks = () => {
     getFirstDrinks()
@@ -58,9 +59,11 @@ function MainFoodScreen() {
   };
 
   useEffect(() => {
+    setisLoading(true);
     getDrinks();
     getListDrinksCategories()
       .then((answer) => setCategories(answer.drinks));
+    setisLoading(false);
   }, []);
 
   useEffect(() => {
