@@ -35,11 +35,11 @@
 .headerDiv {
   align-items: center;
   background-color: grey;
-  top: 0;
   display: flex;
   height: 58px;
   justify-content: space-between;
   overflow: hidden;
   position: fixed;
+  top: 0;
   width: 360px;
 }

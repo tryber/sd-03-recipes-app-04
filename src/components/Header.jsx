@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import { ContextAplication } from '../context/ContextAplication';
 import './CSS/Header.css';
 import FoodSearchBar from './FoodSearchBar';
 import DrinkSearchBar from './DrinkSearchBar';
+
 
 function Header(props) {
   const { screen } = props;
@@ -50,3 +52,7 @@ function Header(props) {
 }
 
 export default Header;
+
+Header.propTypes = {
+  screen: PropTypes.string.isRequired,
+};

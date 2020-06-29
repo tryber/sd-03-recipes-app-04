@@ -27,7 +27,12 @@ function BasicInfo() {
           if (i < 6) {
             return [...arr,
               <div data-testid={`${i}-recomendation-card`}>
-                <img src={e.strDrinkThumb} data-testid="recipe-photo" alt="thumbnail" width="200px" />
+                <img
+                  src={e.strDrinkThumb}
+                  data-testid="recipe-photo"
+                  alt="thumbnail"
+                  width="200px"
+                />
                 <h5 data-testid={`${i}-recomendation-title`}>{e.strDrink}</h5>
               </div>,
             ];

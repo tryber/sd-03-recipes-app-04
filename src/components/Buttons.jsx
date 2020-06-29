@@ -85,6 +85,34 @@ function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
   }
 }
 
+function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, goToRoute, id) {
+  return (
+    <div>
+      <button
+        type="button"
+        className="favourite"
+        data-testid="favorite-btn"
+        onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}
+        src={favorite}
+      >
+        {isFavorite || getIfHasBeenFavorited(id) ? <img src={favorite} alt="favorite" />
+          : <img src={notFavorite} alt="favorite" />}
+      </button>
+      <CopyToClipboard text={window.location.href}>
+        <button
+          data-testid="share-btn"
+          type="button"
+          onClick={() => alert('Link copiado!')}
+          className="favourite"
+        >
+          <img src={share} alt="icon" />
+        </button>
+      </CopyToClipboard>
+      {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
+    </div>
+  );
+}
+
 function Buttons() {
   const [hasStarted, setHasStarted] = useState(false);
   const [goToRoute, setGoToRoute] = useState(false);
@@ -114,27 +142,7 @@ function Buttons() {
         </button>
       )}
       <div className="share-and-favourite">
-        <button
-          type="button"
-          className="favourite"
-          data-testid="favorite-btn"
-          onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}
-          src={favorite}
-        >
-          {isFavorite || getIfHasBeenFavorited(id) ? <img src={favorite} alt="favorite" />
-            : <img src={notFavorite} alt="favorite" />}
-        </button>
-        <CopyToClipboard text={window.location.href}>
-          <button
-            data-testid="share-btn"
-            type="button"
-            onClick={() => alert('Link copiado!')}
-            className="favourite"
-          >
-            <img src={share} alt="icon" />
-          </button>
-        </CopyToClipboard>
-        {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
+        {renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
       </div>
     </div>
   );
