@@ -33,10 +33,13 @@
 }
 
 .headerDiv {
-  background: #c4c4c4;
+  align-items: center;
+  background-color: grey;
+  display: flex;
   height: 58px;
-  left: 0;
-  position: absolute;
+  justify-content: space-between;
+  overflow: hidden;
+  position: fixed;
   top: 0;
   width: 360px;
 }

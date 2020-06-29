@@ -3,28 +3,37 @@ import { Link } from 'react-router-dom';
 import { getFirstDrinks, getListDrinksCategories, getDrinkByCategories } from '../services/drink-api';
 import InferiorMenu from './InferiorMenu';
 import './CSS/MainFoodScreen.css';
+import Header from './Header';
 
 function FilterButtons(Categories, handleClick) {
   return (
-
-    <div className="button-div">
-      <button value="All" onClick={handleClick} className="button-main-screen">All</button>
-      {Categories.reduce((arr, e, i) => {
-        if (i < 5) {
-          return [...arr,
-            <button
-              data-testid={`${e.strCategory}-category-filter`}
-              value={e.strCategory}
-              onClick={handleClick}
-              className="button-main-screen"
-            >
-              {e.strCategory}
-            </button>,
-          ];
-        }
-        return arr;
-      }, [])}
-
+    <div>
+      <div className="button-div">
+        <button
+          type="button"
+          value="All"
+          onClick={handleClick}
+          className="button-main-screen"
+        >
+          All
+        </button>
+        {Categories.reduce((arr, e, i) => {
+          if (i < 5) {
+            return [...arr,
+              <button
+                type="button"
+                data-testid={`${e.strCategory}-category-filter`}
+                value={e.strCategory}
+                onClick={handleClick}
+                className="button-main-screen"
+              >
+                {e.strCategory}
+              </button>,
+            ];
+          }
+          return arr;
+        }, [])}
+      </div>
     </div>
   );
 }
@@ -84,6 +93,7 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
+      <Header screen="drink" />
       {isLoading && <div className="loader" />}
       {!isLoading && FilterButtons(Categories, handleClick)}
       {!isLoading && DrinksList(Data)}
