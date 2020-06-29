@@ -29,13 +29,21 @@ function App() {
         <Route exact path="/bebidas" component={MainDrinkScreen} />
         <Route exact path="/comidas/:id" render={(props) => <DetailsFoodScreen props={props} />} />
         <Route exact path="/bebidas/:id" render={(props) => DetailsDrinkScreen(props)} />
-        <Route exact path={`/comidas/${'id-da-receita'}/in-progress`} component={ProgressFoodScreen} />
-        <Route exact path={`/bebidas/${'id-da-receita'}/in-progress`} component={ProgressDrinkScreen} />
+        <Route exact path="/comidas/:id/in-progress" component={ProgressFoodScreen} />
+        <Route exact path="bebidas/:id/in-progress" component={ProgressDrinkScreen} />
         <Route exact path="/explorar" component={ExploreHomeScreen} />
         <Route exact path="/explorar/comidas" component={ExploreFoodScreen} />
         <Route exact path="/explorar/bebidas" component={ExploreDrinkScreen} />
-        <Route exact path="/explorar/comidas/ingredientes" component={ExploreFoodIngredientScreen} />
-        <Route exact path="/explorar/bebidas/ingredientes" component={ExploreDrinkIngredientScreen} />
+        <Route
+          exact
+          path="/explorar/comidas/ingredientes"
+          component={ExploreFoodIngredientScreen}
+        />
+        <Route
+          exact
+          path="/explorar/bebidas/ingredientes"
+          component={ExploreDrinkIngredientScreen}
+        />
         <Route exact path="/explorar/comidas/area" component={ExploreFoodOriginScreen} />
         <Route exact path="/perfil" component={ProfileScreen} />
         <Route exact path="/receitas-feitas" component={DoneRecipes} />
