@@ -1,0 +1,51 @@
+.food-screen {
+  margin: 60px 0;
+  width: 360px;
+}
+
+.recipes-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.recipes-results > img , h5 {
+  margin: 10px;
+  text-align: center;
+  width: 150px;
+}
+
+.button-div {
+  text-align: center;
+}
+
+.button-main-screen {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 1px;
+  padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  width: 100px;
+}
+
+.loader {
+  animation: spin 2s linear infinite;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-radius: 50%;
+  border-top: 16px solid black; /* Blue */
+  height: 60px;
+  width: 60px;
+}
+
+@keyframes spin {
+
+  0% { transform: rotate(0deg); }
+
+  100% { transform: rotate(360deg); }
+}
