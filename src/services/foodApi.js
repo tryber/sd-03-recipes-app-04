@@ -10,8 +10,8 @@ export const getMealByCategorie = async (category) => {
   return mealInfo;
 };
 
-export const getByIgredient = async (igredient) => {
-  const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=${igredient}`);
+export const getByIgredient = async (ingredient) => {
+  const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
   const mealInfo = await meal.json();
   return mealInfo;
 };

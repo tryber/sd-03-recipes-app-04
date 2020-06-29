@@ -2,16 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getFirstMeals, getCategoriesList, getMealByCategorie } from '../services/foodApi';
 import InferiorMenu from './InferiorMenu';
+import Header from './Header';
 import './CSS/MainFoodScreen.css';
 
 function FilterButtons(Categories, handleClick) {
   return (
     <div className="button-div">
-      <button value="All" onClick={handleClick} className="button-main-screen">All</button>
+      <button
+        type="button"
+        value="All"
+        onClick={handleClick}
+        className="button-main-screen"
+      >
+        All
+      </button>
       {Categories.reduce((arr, e, i) => {
         if (i < 5) {
           return [...arr,
             <button
+              type="button"
               data-testid={`${e.strCategory}-category-filter`}
               value={e.strCategory}
               onClick={handleClick}
@@ -81,11 +90,14 @@ function MainFoodScreen() {
   };
 
   return (
-    <div className="food-screen">
-      {isLoading && <div className="loader" />}
-      {!isLoading && FilterButtons(Categories, handleClick)}
-      {!isLoading && MealsList(Data)}
-      <InferiorMenu />
+    <div>
+      <div className="food-screen">
+        <Header screen="food" />
+        {isLoading && <div className="loader" />}
+        {!isLoading && FilterButtons(Categories, handleClick)}
+        {!isLoading && MealsList(Data)}
+        <InferiorMenu />
+      </div>
     </div>
   );
 }

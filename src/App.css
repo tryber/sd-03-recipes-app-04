@@ -1,62 +1,94 @@
-#meals {
+html {
+  border: 1px solid black;
   height: 100vh;
+  margin: 20px;
+  width: 360px;
+}
+
+#searched-item {
+  display: block;
+  margin: 10px auto;
+  width: 90%;
+}
+
+.radio-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+
+.search-button {
+  background-color: rgb(165, 165, 165);
+  margin-left: 17px;
+  margin-bottom: 20px;
+}
+
+.recipes-results {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.recipes-results > img, h5, h1 {
+  text-align: center;
   width: 100%;
-  background: #0fa36b;
+}
+ 
+.product-pic-recomendation > img, h5 {
+  margin: 30px;
+  text-align: center;
+  width: 150px;
+}
+
+.product-pic {
+  align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.product-pic-recomendation {
   align-items: center;
-  justify-content: center;
-  font-family: sans-serif;
-  color: #464646;
+  overflow-x: auto;
+  display: flex;
 }
 
-#rocksGlass {
-  max-height: 80vh;
-  animation: shake 1s infinite ease;
+span {
+  margin: 5px;
 }
 
-#iceLeft {
-  /* transform-origin set in px for firefox compatibility */
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-  animation: clink .8s infinite ease;
+p {
+  text-align: justify;
 }
 
-#iceRight {
-  /* transform-origin set in px for firefox compatibility */
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-  animation: clink .8s .2s infinite ease;
+.youtube {
+  width: 350px;
 }
 
-#meals > span {
-  color: aliceblue;
-  font-weight: 900;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 3em;
-  animation: shake 1.5s infinite ease;
+.start-button {
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
 }
 
-@keyframes shake {
-  0% {
-    transform: rotate(5deg);
-  }
-  50% {
-    transform: rotate(-5deg);
-  }
-  100% {
-    transform: rotate(5deg);
-  }
+.share-and-favourite > button {
+  background-color: orange;
+  width: 50%;
+  margin-bottom: 20px;
 }
 
-@keyframes clink {
-  0% {
-    transform: rotate(-10deg);
-  }
-  50% {
-    transform: rotate(20deg);
-  }
-  100% {
-    transform: rotate(-10deg);
-  }
+.share-and-favourite > img {
+  display: inline-block;
+  text-align: center;
+  background-color: orange;
+}
+
+.share-and-favourite {
+  display: flex;
+  background-color: orange;
+}
+
+.search-area {
+  margin-top: 50px;
 }
