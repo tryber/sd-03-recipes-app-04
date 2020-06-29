@@ -16,11 +16,12 @@ function checkResults(data, setResult, setGoToRoute, setId) {
 function renderRadioButtons(setSearchBy, setDisabled) {
   return (
     <div className="radio-buttons">
-      <label htmlFor="ingrediente">
+      <label htmlFor="ingredient">
         <input
           id="ingredient"
           type="radio"
           name="search"
+          data-testid="ingredient-search-radio"
           onChange={(e) => {
             setSearchBy(e.target.id);
             setDisabled(false);
@@ -33,6 +34,7 @@ function renderRadioButtons(setSearchBy, setDisabled) {
           id="name"
           type="radio"
           name="search"
+          data-testid="name-search-radio"
           onChange={(e) => {
             setSearchBy(e.target.id);
             setDisabled(false);
@@ -45,6 +47,7 @@ function renderRadioButtons(setSearchBy, setDisabled) {
           id="first-letter"
           type="radio"
           name="search"
+          data-testid="first-letter-search-radio"
           onChange={(e) => {
             setSearchBy(e.target.id);
             setDisabled(false);
@@ -93,12 +96,14 @@ function FoodSearchBar() {
         type="text"
         onChange={(e) => setSearchedItem(e.target.value)}
         value={searchedItem}
+        data-testid="search-input"
       />
       {renderRadioButtons(setSearchBy, setDisabled)}
       <button
         onClick={() => doSearch(searchBy, searchedItem, setResult, setGoToRoute, setId)}
         className="search-button"
         type="button"
+        data-testid="exec-search-btn"
         disabled={disabled}
       >
         Buscar

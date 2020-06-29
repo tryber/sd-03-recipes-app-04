@@ -35,7 +35,7 @@ html {
 }
  
 .product-pic-recomendation > img, h5 {
-  margin: 10px;
+  margin: 30px;
   text-align: center;
   width: 150px;
 }
@@ -64,7 +64,7 @@ p {
   width: 350px;
 }
 
-.bottom-buttons {
+.start-button {
   bottom: 0px;
   display: flex;
   flex-direction: column;
@@ -75,6 +75,7 @@ p {
 .share-and-favourite > button {
   background-color: orange;
   width: 50%;
+  margin-bottom: 20px;
 }
 
 .share-and-favourite > img {

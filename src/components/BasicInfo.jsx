@@ -8,27 +8,27 @@ function BasicInfo() {
   } = useContext(InfoContext);
   return (
     <div>
-      <img src={recipeInfo.strMealThumb} alt="thumb" width="100%" />
-      <h1>{recipeInfo.strMeal}</h1>
-      <h2>{recipeInfo.strCategory}</h2>
+      <img src={recipeInfo.strMealThumb} data-testid="recipe-photo" alt="thumb" width="100%" />
+      <h1 data-testid="recipe-title">{recipeInfo.strMeal}</h1>
+      <h2 data-testid="recipe-category">{recipeInfo.strCategory}</h2>
       <h3>Ingredientes</h3>
       {quantity.map((e, i) => (
-        <div>
+        <div data-testid={`${i}-ingredient-name-and-measure`}>
           <span>{recipeInfo[ingredients[i]]}</span>
           <span>{recipeInfo[e]}</span>
         </div>
       ))}
       <h3>Instruções</h3>
-      <p>{recipeInfo.strInstructions}</p>
-      <ReactPlayer width="350px" height="200px" url={recipeInfo.strYoutube} />
+      <p data-testid="instructions">{recipeInfo.strInstructions}</p>
+      <ReactPlayer width="350px" data-testid="video" height="200px" url={recipeInfo.strYoutube} />
       <h3>Recomedações</h3>
       <div className="product-pic-recomendation">
         {recomendation.reduce((arr, e, i) => {
           if (i < 6) {
             return [...arr,
-              <div>
-                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" />
-                <h5>{e.strDrink}</h5>
+              <div data-testid={`${i}-recomendation-card`}>
+                <img src={e.strDrinkThumb} data-testid="recipe-photo" alt="thumbnail" width="200px" />
+                <h5 data-testid={`${i}-recomendation-title`}>{e.strDrink}</h5>
               </div>,
             ];
           }

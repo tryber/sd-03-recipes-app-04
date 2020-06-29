@@ -10,14 +10,14 @@ function changeRecipeStatus(setHasStarted, recipeInfo, hasStarted, setGoToRoute)
   setGoToRoute(true);
   setHasStarted(true);
   const {
-    idMeal, strType, strArea, strCategory, strMeal, strMealThumb,
+    idMeal, strArea, strCategory, strMeal, strMealThumb,
   } = recipeInfo;
   const mealInfo = {
     id: idMeal,
-    type: strType,
+    type: 'comida',
     area: strArea.strArea,
     category: strCategory,
-    alcoholicOrNor: undefined,
+    alcoholicOrNot: '',
     name: strMeal,
     image: strMealThumb,
     doneDate: undefined,
@@ -47,17 +47,26 @@ function getLocalStorage(id) {
   return status;
 }
 
+function getIfHasBeenFavorited(id) {
+  const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (storage) {
+    const favorited = storage.find((e) => e.id === id);
+    return favorited;
+  }
+  return false;
+}
+
 function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
   setIsFavorite((isFavorite) => !isFavorite);
   const {
-    idMeal, strType, strArea, strCategory, strMeal, strMealThumb,
+    idMeal, strArea, strCategory, strMeal, strMealThumb,
   } = recipeInfo;
   const mealInfo = {
     id: idMeal,
-    type: strType,
+    type: 'comida',
     area: strArea,
     category: strCategory,
-    alcoholicOrNor: undefined,
+    alcoholicOrNot: '',
     name: strMeal,
     image: strMealThumb,
   };
@@ -86,6 +95,7 @@ function Buttons() {
     <div className="bottom-buttons">
       {!hasStarted && !getLocalStorage(id).done && !getLocalStorage(id).started && (
         <button
+          data-testid="start-recipe-btn"
           type="button"
           onClick={() => changeRecipeStatus(setHasStarted,
             recipeInfo, hasStarted, setGoToRoute)}
@@ -98,6 +108,7 @@ function Buttons() {
         <button
           type="button"
           className="start-button"
+          data-testid="start-recipe-btn"
         >
           Continuar Receita
         </button>
@@ -106,15 +117,18 @@ function Buttons() {
         <button
           type="button"
           className="favourite"
+          data-testid="favorite-btn"
           onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}
+          src={favorite}
         >
-          {isFavorite ? <img src={favorite} alt="favorite" />
+          {isFavorite || getIfHasBeenFavorited(id) ? <img src={favorite} alt="favorite" />
             : <img src={notFavorite} alt="favorite" />}
         </button>
         <CopyToClipboard text={window.location.href}>
           <button
+            data-testid="share-btn"
             type="button"
-            onClick={() => alert('Copiado')}
+            onClick={() => alert('Link copiado!')}
             className="favourite"
           >
             <img src={share} alt="icon" />
