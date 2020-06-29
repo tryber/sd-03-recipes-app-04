@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getFirstMeals, getCategoriesList, getMealByCategorie } from '../services/foodApi';
 import InferiorMenu from './InferiorMenu';
-import FoodSearchBar from './FoodSearchBar';
+import Header from './Header';
 import './CSS/MainFoodScreen.css';
 
 function FilterButtons(Categories, handleClick) {
@@ -83,8 +83,8 @@ function MainFoodScreen() {
 
   return (
     <div>
-      <FoodSearchBar />
       <div className="food-screen">
+        <Header screen="food" />
         {isLoading && <div className="loader" />}
         {!isLoading && FilterButtons(Categories, handleClick)}
         {!isLoading && MealsList(Data)}

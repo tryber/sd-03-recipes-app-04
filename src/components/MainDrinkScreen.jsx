@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import { getFirstDrinks, getListDrinksCategories, getDrinkByCategories } from '../services/drink-api';
 import InferiorMenu from './InferiorMenu';
 import './CSS/MainFoodScreen.css';
-import DrinkSearchBar from './DrinkSearchBar';
+import Header from './Header';
 
 function FilterButtons(Categories, handleClick) {
   return (
     <div>
-      <DrinkSearchBar />
       <div className="button-div">
         <button value="All" onClick={handleClick} className="button-main-screen">All</button>
         {Categories.reduce((arr, e, i) => {
@@ -86,6 +85,7 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
+      <Header screen="drink" />
       {isLoading && <div className="loader" />}
       {!isLoading && FilterButtons(Categories, handleClick)}
       {!isLoading && DrinksList(Data)}

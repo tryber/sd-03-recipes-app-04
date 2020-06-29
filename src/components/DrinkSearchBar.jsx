@@ -86,7 +86,7 @@ function DrinkSearchBar() {
   const [id, setId] = useState('');
   const [disabled, setDisabled] = useState('true');
   return (
-    <div>
+    <div className="search-area">
       <input
         id="searched-item"
         type="text"

@@ -1,0 +1,45 @@
+.userProfileIcon {
+  height: 30px;
+  left: 15px;
+  position: absolute;
+  top: 16px;
+  width: 30px;
+}
+
+.foodTitle {
+  align-items: flex-end;
+  color: black;
+  display: flex;
+  font-family: Roboto, Times New Roman, Times, serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  height: 35px;
+  left: 123px;
+  line-height: 35px;
+  position: absolute;
+  top: -10px;
+  width: 119px;
+}
+
+.searchIcon {
+  background-color: transparent;
+  border: none;
+  height: 30px;
+  left: 317px;
+  position: absolute;
+  top: 0;
+  width: 30px;
+}
+
+.headerDiv {
+  align-items: center;
+  background-color: grey;
+  top: 0;
+  display: flex;
+  height: 58px;
+  justify-content: space-between;
+  overflow: hidden;
+  position: fixed;
+  width: 360px;
+}

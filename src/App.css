@@ -88,3 +88,7 @@ p {
   display: flex;
   background-color: orange;
 }
+
+.search-area {
+  margin-top: 50px;
+}
