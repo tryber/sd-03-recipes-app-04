@@ -6,6 +6,7 @@ import './CSS/MainFoodScreen.css';
 
 function FilterButtons(Categories, handleClick) {
   return (
+
     <div className="button-div">
       <button value="All" onClick={handleClick} className="button-main-screen">All</button>
       {Categories.reduce((arr, e, i) => {
@@ -23,6 +24,7 @@ function FilterButtons(Categories, handleClick) {
         }
         return arr;
       }, [])}
+
     </div>
   );
 }

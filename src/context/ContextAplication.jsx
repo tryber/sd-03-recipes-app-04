@@ -7,6 +7,7 @@ const user = { email: '', password: '' };
 
 const AplicationProvider = ({ children }) => {
   const [informationsUser, setInformationsUser] = useState(user);
+  const [searchInputVisible, setSearchInputVisible] = useState(false);
 
   const saveInput = (input) => {
     const inputsLogin = {
@@ -16,9 +17,18 @@ const AplicationProvider = ({ children }) => {
     setInformationsUser(inputsLogin);
   };
 
+  const searchInput = (boolean) => {
+    const inputSearch = {
+      searchInputIsVisible: boolean,
+    };
+    setSearchInputVisible(inputSearch);
+  };
+
   const context = {
     informationsUser,
     saveInput,
+    searchInputVisible,
+    searchInput,
   };
 
   return (
