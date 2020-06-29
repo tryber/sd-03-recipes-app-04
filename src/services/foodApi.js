@@ -5,7 +5,7 @@ export const getMealByName = async (food) => {
 };
 
 export const getMealByCategorie = async (category) => {
-  const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/${category}.php`);
+  const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
   const mealInfo = await meal.json();
   return mealInfo;
 };
@@ -42,6 +42,12 @@ export const getRandomMeal = async () => {
 
 export const getIgredientPic = async (igredient) => {
   const meal = await fetch(`https://www.themealdb.com/images/ingredients/${igredient}.png`);
+  const mealInfo = await meal.json();
+  return mealInfo;
+};
+
+export const getCategoriesList = async () => {
+  const meal = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php');
   const mealInfo = await meal.json();
   return mealInfo;
 };
