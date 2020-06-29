@@ -21,7 +21,7 @@ export default function DetailsFoodScreen(props) {
   }, []);
   const quantity = Object.keys(recipeInfo).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(recipeInfo).filter((e) => e.includes('strMeasure'));
-  const context = { recipeInfo, quantity, ingredients, recomendation, id }
+  const context = { recipeInfo, quantity, ingredients, recomendation, id };
 
   return (
     <div>

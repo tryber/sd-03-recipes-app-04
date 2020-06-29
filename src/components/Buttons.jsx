@@ -77,7 +77,6 @@ function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
 }
 
 function Buttons() {
-
   const [hasStarted, setHasStarted] = useState(false);
   const [goToRoute, setGoToRoute] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
