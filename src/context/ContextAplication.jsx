@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import { getFirstMeals } from '../services/foodApi';
 import PropTypes from 'prop-types';
 
 export const ContextAplication = createContext();
@@ -8,6 +9,7 @@ const user = { email: '', password: '' };
 const AplicationProvider = ({ children }) => {
   const [informationsUser, setInformationsUser] = useState(user);
   const [searchInputVisible, setSearchInputVisible] = useState(false);
+  const [Data, setData] = useState([]);
 
   const saveInput = (input) => {
     const inputsLogin = {
@@ -17,18 +19,27 @@ const AplicationProvider = ({ children }) => {
     setInformationsUser(inputsLogin);
   };
 
-  const searchInput = (boolean) => {
-    const inputSearch = {
-      searchInputIsVisible: boolean,
-    };
-    setSearchInputVisible(inputSearch);
+  const searchInput = () => {
+    setSearchInputVisible(!searchInputVisible);
   };
+
+  const getMeals = () => {
+    getFirstMeals()
+      .then((answer) => setData(answer.meals));
+  };
+
+  const updateMeals = (answer) => {
+    setData(answer);
+  }
 
   const context = {
     informationsUser,
     saveInput,
     searchInputVisible,
     searchInput,
+    Data,
+    getMeals,
+    updateMeals,
   };
 
   return (

@@ -1,9 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Header from './Header';
+import InferiorMenu from './InferiorMenu';
+import './CSS/ExploreHomeScreen.css';
 
 function ExploreHomeScreen() {
   return (
-    <div>
-      <h1>ExploreHomeScreen</h1>
+    <div className="explore-screen">
+      <Header screen={"Explorar"}/>
+        <Link to="/explorar/comidas">
+          <p className="explore-button" data-testid="explore-food">Explorar Comidas</p>
+        </Link>
+        <Link to="/explorar/bebidas">
+          <p className="explore-button" data-testid="explore-drinks">Explorar Bebidas</p>
+        </Link>
+      <InferiorMenu />
     </div>
   );
 }

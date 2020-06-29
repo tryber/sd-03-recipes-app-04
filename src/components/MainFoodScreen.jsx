@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { getFirstMeals, getCategoriesList, getMealByCategorie } from '../services/foodApi';
+import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
 import Header from './Header';
 import './CSS/MainFoodScreen.css';
@@ -57,31 +58,30 @@ function MealsList(Data) {
 }
 
 function MainFoodScreen() {
-  const [Data, setData] = useState([]);
+  const {
+    Data,
+    getMeals,
+    updateMeals,
+    searchInputVisible,
+  } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
   const [Filter, setFilter] = useState('All');
   const [isLoading, setisLoading] = useState(false);
-
-  const getMeals = () => {
-    getFirstMeals()
-      .then((answer) => setData(answer.meals));
-  };
 
   useEffect(() => {
     setisLoading(true);
     getMeals();
     getCategoriesList()
-      .then((answer) => setCategories(answer.categories));
+      .then((answer) => setCategories(answer.meals));
     setisLoading(false);
   }, []);
 
   useEffect(() => {
     if (Filter === 'All') {
-      getFirstMeals()
-        .then((answer) => setData(answer.meals));
+      getMeals();
     } else {
       getMealByCategorie(Filter)
-        .then((answer) => setData(answer.meals));
+        .then((answer) => updateMeals(answer.meals));
     }
   }, [Filter]);
 
@@ -92,9 +92,9 @@ function MainFoodScreen() {
   return (
     <div>
       <div className="food-screen">
-        <Header screen="food" />
+        <Header screen={"Comidas"} />
         {isLoading && <div className="loader" />}
-        {!isLoading && FilterButtons(Categories, handleClick)}
+        {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
         {!isLoading && MealsList(Data)}
         <InferiorMenu />
       </div>
