@@ -8,6 +8,11 @@ export async function getListDrinksCategories() {
     .then((resp) => resp.json());
 }
 
+export async function getDrinkByCategories(categorie) {
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${categorie}`)
+    .then((resp) => resp.json());
+}
+
 export async function getRandomDrink() {
   return fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
     .then((resp) => resp.json());
