@@ -66,7 +66,7 @@ function MainFoodScreen() {
     setisLoading(true);
     getMeals();
     getCategoriesList()
-      .then((answer) => setCategories(answer.categories));
+      .then((answer) => setCategories(answer.meals));
     setisLoading(false);
   }, []);
 
