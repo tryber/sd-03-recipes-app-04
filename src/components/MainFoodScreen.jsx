@@ -7,8 +7,8 @@ import './CSS/MainFoodScreen.css';
 function FilterButtons(Categories, handleClick) {
   return (
     <div className="button-div">
-      <button 
-        value="All" 
+      <button
+        value="All"
         onClick={handleClick}className="button-main-screen"
         data-testid="All-category-filter"
       >All</button>

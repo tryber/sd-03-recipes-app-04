@@ -40,7 +40,7 @@ function DrinksList(Data) {
           return [...arr,
             <Link to={`/bebidas/${e.idDrink}`}>
               <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`}  />
+                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
                 <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
               </div>
             </Link>,
