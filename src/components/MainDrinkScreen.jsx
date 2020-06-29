@@ -7,7 +7,7 @@ import './CSS/MainFoodScreen.css';
 function FilterButtons(Categories, handleClick) {
   return (
     <div className="button-div">
-      <button value="All" onClick={handleClick} className="button-main-screen">All</button>
+      <button value="All" onClick={handleClick} className="button-main-screen" data-testid="All-category-filter">All</button>
       {Categories.reduce((arr, e, i) => {
         if (i < 5) {
           return [...arr,
@@ -34,9 +34,9 @@ function DrinksList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/bebidas/${e.idDrink}`}>
-              <div className="product-pic">
-                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" />
-                <h5>{e.strDrink}</h5>
+              <div className="product-pic" data-testid={`${i}-recipe-card`}>
+                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`}  />
+                <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
               </div>
             </Link>,
           ];
