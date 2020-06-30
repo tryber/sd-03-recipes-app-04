@@ -33,7 +33,7 @@ function Header(props) {
             className="userProfileIcon"
             src={profileIcon}
             alt="ProfileIcon"
-            data-testeid="profile-top-btn"
+            data-testid="profile-top-btn"
           />
         </Link>
         <h1 className="foodTitle" data-testid="page-title">Comidas</h1>
