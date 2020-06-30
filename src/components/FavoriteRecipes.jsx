@@ -32,22 +32,51 @@ function FavoriteRecipes() {
   return (
     <div>
       <div>
-        <button onClick={() => filterBy(setFavorites, 'comida')} type="button">Food</button>
-        <button onClick={() => filterBy(setFavorites, 'bebida')} type="button">Drinks</button>
-        <button onClick={() => getFavorites(setFavorites)} type="button">All</button>
+        <button
+          data-testid="filter-by-food-btn"
+          onClick={() => filterBy(setFavorites, 'comida')}
+          type="button"
+        >
+          Food
+        </button>
+        <button
+          data-testid="filter-by-drink-btn"
+          onClick={() => filterBy(setFavorites, 'bebida')}
+          type="button"
+        >
+          Drinks
+        </button>
+        <button
+          data-testid="filter-by-all-btn"
+          onClick={() => getFavorites(setFavorites)}
+          type="button"
+        >
+          All
+        </button>
       </div>
       <div className="favorite-recipes-container">
-        {favorites.map((e) => (
+        {favorites.map((e, i) => (
           (
             <div className="favorite-recipes-card">
-              <Link to={`/${e.type}s/${e.id}`}><img src={e.image} alt="favorite" width="150px" /></Link>
-              <Link to={`/${e.type}s/${e.id}`}><p>{e.name}</p></Link>
-              {(e.alcoholicOrNot === '') ? <p>{e.category}</p> : <p>{e.alcoholicOrNot}</p>}
-              {(e.alcoholicOrNot === '') && <p>{e.area}</p>}
-              <CopyToClipboard text={`http://localhost:3000/comidas/${e.id}`}>
-                <button type="button" onClick={() => alert('Link copiado!')}><img src={share} alt="share" /></button>
+              <Link to={`/${e.type}s/${e.id}`}><img data-testid={`${i}-horizontal-image`} src={e.image} alt="favorite" width="150px" /></Link>
+              <Link to={`/${e.type}s/${e.id}`}><p data-testid={`${i}-horizontal-name`}>{e.name}</p></Link>
+              <div data-testid={`${i}-horizontal-top-text`}>
+                {(e.alcoholicOrNot === '') ? <p>{`${e.area} - ${e.category}`}</p> : <p>{e.alcoholicOrNot}</p>}
+              </div>
+              <CopyToClipboard text={`http://localhost:3000/${e.type}s/${e.id}`}>
+                <button
+                  type="button"
+                  onClick={() => alert('Link copiado!')}
+                >
+                  <img data-testid={`${i}-horizontal-share-btn`} src={share} alt="share" />
+                </button>
               </CopyToClipboard>
-              <button onClick={() => updateStorage(e.id, setFavorites)} type="button"><img src={favorite} alt="favorite" /></button>
+              <button
+                onClick={() => updateStorage(e.id, setFavorites)}
+                type="button"
+              >
+                <img data-testid={`${i}-horizontal-favorite-btn`} src={favorite} alt="favorite" />
+              </button>
             </div>
           )
         ))}
