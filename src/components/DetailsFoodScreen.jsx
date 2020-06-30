@@ -2,8 +2,8 @@ import React, { useState, useEffect, createContext } from 'react';
 import PropTypes from 'prop-types';
 import { getMealById } from '../services/foodApi';
 import { getFirstDrinks } from '../services/drink-api';
-import BasicInfo from './BasicInfo';
-import Buttons from './Buttons';
+import BasicInfo from './FoodBasicInfo';
+import Buttons from './FoodButtons';
 
 export const InfoContext = createContext();
 
