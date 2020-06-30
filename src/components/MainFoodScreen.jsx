@@ -65,9 +65,9 @@ function MainFoodScreen() {
   const {
     Data,
     getMeals,
-    updateMeals,
+    setData,
     searchInputVisible,
-    changeIngredientFilter,
+    setingredientFilter,
   } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
   const [Filter, setFilter] = useState('All');
@@ -80,7 +80,7 @@ function MainFoodScreen() {
       .then((answer) => setCategories(answer.meals));
     setisLoading(false);
     return () => {
-      changeIngredientFilter('')
+      setingredientFilter('')
     }
   }, []);
 
@@ -89,7 +89,7 @@ function MainFoodScreen() {
       getMeals();
     } else {
       getMealByCategorie(Filter)
-        .then((answer) => updateMeals(answer.meals));
+        .then((answer) => setData(answer.meals));
     }
   }, [Filter]);
 

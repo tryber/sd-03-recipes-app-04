@@ -64,9 +64,9 @@ function MainFoodScreen() {
   const {
     Data,
     getDrinks,
-    updateDrinks,
+    setData,
     searchInputVisible,
-    changeIngredientFilter,
+    setingredientFilter,
   } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
   const [Filter, setFilter] = useState('All');
@@ -79,7 +79,7 @@ function MainFoodScreen() {
       .then((answer) => setCategories(answer.drinks));
     setisLoading(false);
     return () => {
-      changeIngredientFilter('')
+      setingredientFilter('')
     }
   }, []);
 
@@ -88,7 +88,7 @@ function MainFoodScreen() {
       getDrinks();
     } else {
       getDrinkByCategories(Filter)
-        .then((answer) => updateDrinks(answer.drinks));
+        .then((answer) => setData(answer.drinks));
     }
   }, [Filter]);
 
@@ -100,7 +100,7 @@ function MainFoodScreen() {
     <div className="food-screen">
       <Header screen={'Bebidas'} />
       {isLoading && <div className="loader" />}
-      {!isLoading && FilterButtons(Categories, handleClick)}
+      {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
       {!isLoading && DrinksList(Data)}
       <InferiorMenu />
     </div>

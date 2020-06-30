@@ -45,18 +45,6 @@ const AplicationProvider = ({ children }) => {
     }
   }
 
-  const updateMeals = (answer) => {
-    setData(answer);
-  };
-
-  const updateDrinks = (answer) => {
-    setData(answer);
-  };
-
-  const changeIngredientFilter = (ingredient) => {
-    setingredientFilter(ingredient);
-  }
-
   const context = {
     informationsUser,
     saveInput,
@@ -64,11 +52,10 @@ const AplicationProvider = ({ children }) => {
     searchInput,
     Data,
     getMeals,
-    updateMeals,
     ingredientFilter,
-    changeIngredientFilter,
     getDrinks,
-    updateDrinks,
+    setData,
+    setingredientFilter,
   };
 
   return (
