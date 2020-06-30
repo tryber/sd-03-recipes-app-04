@@ -7,7 +7,7 @@ import './CSS/ExploreHomeScreen.css';
 function ExploreHomeScreen() {
   return (
     <div className="explore-screen">
-      <Header screen={"Explorar"}/>
+      <Header screen={'Explorar'} />
         <Link to="/explorar/comidas">
           <p className="explore-button" data-testid="explore-food">Explorar Comidas</p>
         </Link>

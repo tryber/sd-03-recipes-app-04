@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
-import { getFirstMeals } from '../services/foodApi';
 import PropTypes from 'prop-types';
+import { getFirstMeals } from '../services/foodApi';
 
 export const ContextAplication = createContext();
 
@@ -30,7 +30,7 @@ const AplicationProvider = ({ children }) => {
 
   const updateMeals = (answer) => {
     setData(answer);
-  }
+  };
 
   const context = {
     informationsUser,
