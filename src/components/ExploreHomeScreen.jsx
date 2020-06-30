@@ -8,12 +8,12 @@ function ExploreHomeScreen() {
   return (
     <div className="explore-screen">
       <Header screen={'Explorar'} />
-        <Link to="/explorar/comidas">
-          <p className="explore-button" data-testid="explore-food">Explorar Comidas</p>
-        </Link>
-        <Link to="/explorar/bebidas">
-          <p className="explore-button" data-testid="explore-drinks">Explorar Bebidas</p>
-        </Link>
+      <Link to="/explorar/comidas">
+        <p className="explore-button" data-testid="explore-food">Explorar Comidas</p>
+      </Link>
+      <Link to="/explorar/bebidas">
+        <p className="explore-button" data-testid="explore-drinks">Explorar Bebidas</p>
+      </Link>
       <InferiorMenu />
     </div>
   );

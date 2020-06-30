@@ -16,15 +16,15 @@ function ExploreDrinkScreen() {
     <div className="explore-screen">
       <Header screen={'Explorar Bebidas'} />
       <Link to="/explorar/bebidas/ingredientes">
-        <div
+        <button
           className="explore-food-button"
           data-testid="explore-by-ingredient"
-        >Por Ingredientes</div>
+        >Por Ingredientes</button>
       </Link>
-      <div
+      <button
         className="explore-food-button" data-testid="explore-surprise"
         onClick={handleClick}
-      >Me Surpreenda!</div>
+      >Me Surpreenda!</button>
       {id !== '' && <Redirect to={`/bebidas/${id}`} />}
       <InferiorMenu />
     </div>

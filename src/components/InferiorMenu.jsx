@@ -13,7 +13,7 @@ function InferiorMenu() {
         <img src={exploreIcon} alt="explore" data-testid="explore-bottom-btn" />
       </Link>
       <Link to="/comidas"><img src={mealIcon} alt="meal" data-testid="food-bottom-btn" /></Link>
-  </div>
+    </div>
   );
 }
 

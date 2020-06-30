@@ -11,22 +11,25 @@ function ExploreFoodScreen() {
   const handleClick = () => {
     getRandomMeal()
       .then((answer) => setId(answer.meals[0].idMeal));
-  }
+  };
 
   return (
     <div className="explore-screen">
       <Header screen={'Explorar Comidas'} />
       <Link to="/explorar/comidas/ingredientes">
-        <div className="explore-food-button" data-testid="explore-by-ingredient">Por Ingredientes</div>
+        <button
+          className="explore-food-button"
+          data-testid="explore-by-ingredient"
+        >Por Ingredientes</button>
       </Link>
       <Link to="/explorar/comidas/area">
-        <div className="explore-food-button" data-testid="explore-by-area">Por Local de Origem</div>
+        <button className="explore-food-button" data-testid="explore-by-area">Por Local de Origem</button>
       </Link>
-      <div
+      <button
         className="explore-food-button"
         data-testid="explore-surprise"
         onClick={handleClick}
-      >Me Surpreenda!</div>
+      >Me Surpreenda!</button>
       {id !== '' && <Redirect to={`/comidas/${id}`} />}
       <InferiorMenu />
     </div>
