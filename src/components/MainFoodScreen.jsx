@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { getFirstMeals, getCategoriesList, getMealByCategorie } from '../services/foodApi';
+import { getCategoriesList, getMealByCategorie } from '../services/foodApi';
 import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
 import Header from './Header';
@@ -44,9 +44,9 @@ function MealsList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
-              <div className="product-pic">
-                <img src={e.strMealThumb} alt="thumbnail" width="150px" />
-                <h5>{e.strMeal}</h5>
+              <div className="product-pic" data-testid={`${i}-recipe-card`}>
+                <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+                <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
               </div>
             </Link>,
           ];

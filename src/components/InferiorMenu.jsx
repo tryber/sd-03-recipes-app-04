@@ -7,11 +7,13 @@ import './CSS/InferiorMenu.css';
 
 function InferiorMenu() {
   return (
-    <div className="inferior-menu-icons">
-      <Link to="/bebidas"><img src={drinkIcon} alt="drink" /></Link>
-      <Link to="/explorar"><img src={exploreIcon} alt="explore" /></Link>
-      <Link to="/comidas"><img src={mealIcon} alt="meal" /></Link>
-    </div>
+    <div className="inferior-menu-icons" data-testid="footer">
+      <Link to="/bebidas"><img src={drinkIcon} alt="drink" data-testid="drinks-bottom-btn" /></Link>
+      <Link to="/explorar">
+        <img src={exploreIcon} alt="explore" data-testid="explore-bottom-btn" />
+      </Link>
+      <Link to="/comidas"><img src={mealIcon} alt="meal" data-testid="food-bottom-btn" /></Link>
+  </div>
   );
 }
 
