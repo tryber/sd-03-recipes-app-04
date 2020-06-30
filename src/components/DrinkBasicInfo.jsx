@@ -11,12 +11,17 @@ function BasicInfo() {
       <h1 data-testid="recipe-title">{recipeInfo.strDrink}</h1>
       <h2 data-testid="recipe-category">{recipeInfo.strAlcoholic}</h2>
       <h3>Ingredientes</h3>
-      {quantity.map((e, i) => (
-        <div data-testid={`${i}-ingredient-name-and-measure`}>
-          <span>{recipeInfo[ingredients[i]]}</span>
-          <span>{recipeInfo[e]}</span>
-        </div>
-      ))}
+      {quantity.reduce((arr, e, i) => {
+        if (recipeInfo[e] !== null) {
+          return (
+            [...arr, (
+              <div data-testid={`${i}-ingredient-name-and-measure`}>
+                <span>{recipeInfo[ingredients[i]]}</span>
+                <span>{recipeInfo[e]}</span>
+              </div>)]
+          );
+        } return arr;
+      }, [])}
       <h3>Instruções</h3>
       <p data-testid="instructions">{recipeInfo.strInstructions}</p>
       <h3>Recomedações</h3>

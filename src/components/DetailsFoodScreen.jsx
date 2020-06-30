@@ -20,7 +20,7 @@ export default function DetailsFoodScreen(props) {
     getFirstDrinks().then((data) => setRecomendation(data.drinks));
   }, [id]);
   const quantity = Object.keys(recipeInfo).filter((e) => e.includes('strIngredient'));
-  const ingredients = Object.keys(recipeInfo).filter((e) => e.includes('strMeasure'));
+  const ingredients = (Object.keys(recipeInfo).filter((e) => e.includes('strMeasure')));
   const context = {
     recipeInfo, quantity, ingredients, recomendation, id,
   };

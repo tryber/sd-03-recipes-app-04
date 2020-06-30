@@ -5,6 +5,7 @@ import { DrinkContext } from './DetailsDrinkScreen';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
+import { getLocalStorage, getIfHasBeenFavorited } from './FoodButtons';
 
 function changeRecipeStatus(setHasStarted, recipeInfo, hasStarted, setGoToRoute) {
   setGoToRoute(true);
@@ -31,29 +32,6 @@ function changeRecipeStatus(setHasStarted, recipeInfo, hasStarted, setGoToRoute)
     const newStorage = [...storage, drinkInfo];
     localStorage.setItem('doneRecipes', JSON.stringify(newStorage));
   }
-}
-
-function getLocalStorage(id) {
-  const storage = JSON.parse(localStorage.getItem('doneRecipes'));
-  let started;
-  let done;
-  if (!storage) {
-    started = false;
-  } else {
-    started = storage.find((e) => e.id === id);
-    done = storage.find((e) => e.doneDate !== undefined);
-  }
-  const status = { started, done };
-  return status;
-}
-
-function getIfHasBeenFavorited(id) {
-  const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  if (storage) {
-    const favorited = storage.find((e) => e.id === id);
-    return favorited;
-  }
-  return false;
 }
 
 function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
