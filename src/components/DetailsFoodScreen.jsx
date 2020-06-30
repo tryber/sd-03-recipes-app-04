@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getMealById } from '../services/foodApi';
 import { getFirstDrinks } from '../services/drink-api';
 import BasicInfo from './BasicInfo';
-import Buttons from  './Buttons';
+import Buttons from './Buttons';
 
 export const InfoContext = createContext();
 

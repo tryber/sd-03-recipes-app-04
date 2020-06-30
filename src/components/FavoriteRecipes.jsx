@@ -24,6 +24,34 @@ function getFavorites(setFavorites) {
   setFavorites(storage);
 }
 
+function renderfilterButtons(setFavorites) {
+  return (
+    <div>
+      <button
+        data-testid="filter-by-food-btn"
+        onClick={() => filterBy(setFavorites, 'comida')}
+        type="button"
+      >
+        Food
+      </button>
+      <button
+        data-testid="filter-by-drink-btn"
+        onClick={() => filterBy(setFavorites, 'bebida')}
+        type="button"
+      >
+        Drinks
+      </button>
+      <button
+        data-testid="filter-by-all-btn"
+        onClick={() => getFavorites(setFavorites)}
+        type="button"
+      >
+        All
+      </button>
+    </div>
+  );
+}
+
 function FavoriteRecipes() {
   const [favorites, setFavorites] = useState([]);
   useEffect(() => {
@@ -31,29 +59,7 @@ function FavoriteRecipes() {
   }, []);
   return (
     <div>
-      <div>
-        <button
-          data-testid="filter-by-food-btn"
-          onClick={() => filterBy(setFavorites, 'comida')}
-          type="button"
-        >
-          Food
-        </button>
-        <button
-          data-testid="filter-by-drink-btn"
-          onClick={() => filterBy(setFavorites, 'bebida')}
-          type="button"
-        >
-          Drinks
-        </button>
-        <button
-          data-testid="filter-by-all-btn"
-          onClick={() => getFavorites(setFavorites)}
-          type="button"
-        >
-          All
-        </button>
-      </div>
+      {renderfilterButtons(setFavorites)}
       <div className="favorite-recipes-container">
         {favorites.map((e, i) => (
           (

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { InfoContext }  from './DetailsFoodScreen';
+import { InfoContext } from './DetailsFoodScreen';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
@@ -93,7 +93,8 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
         onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}
         src={favorite}
       >
-        {getIfHasBeenFavorited(id) ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
+        {getIfHasBeenFavorited(id)
+          ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
           : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
       </button>
       <CopyToClipboard text={window.location.href}>
