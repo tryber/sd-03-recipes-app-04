@@ -15,8 +15,8 @@ function BasicInfo() {
       {quantity.reduce((arr, e, i) => {
         if (recipeInfo[e] !== '') {
           return (
-            [...arr, (
-              <div data-testid={`${i}-ingredient-name-and-measure`}>
+          [...arr, (
+            <div data-testid={`${i}-ingredient-name-and-measure`}>
                 <span>{recipeInfo[ingredients[i]]}</span>
                 <span>{recipeInfo[e]}</span>
               </div>)]
@@ -31,15 +31,15 @@ function BasicInfo() {
         {recomendation.reduce((arr, e, i) => {
           if (i < 6) {
             return [...arr,
-              <div data-testid={`${i}-recomendation-card`}>
-                <img
-                  src={e.strDrinkThumb}
-                  data-testid="recipe-photo"
-                  alt="thumbnail"
-                  width="200px"
-                />
-                <h5 data-testid={`${i}-recomendation-title`}>{e.strDrink}</h5>
-              </div>,
+            <div data-testid={`${i}-recomendation-card`}>
+              <img
+                src={e.strDrinkThumb}
+                data-testid="recipe-photo"
+                alt="thumbnail"
+                width="200px"
+              />
+              <h5 data-testid={`${i}-recomendation-title`}>{e.strDrink}</h5>
+            </div>,
             ];
           }
           return arr;
