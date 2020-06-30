@@ -6,7 +6,7 @@ import profileIcon from '../images/profileIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../components/CSS/DoneRecipes.css';
 
-const header = () => {
+function header() {
   return (
     <div className="header-recipes-done">
       <img
@@ -17,7 +17,7 @@ const header = () => {
       <p>Receitas Feitas</p>
     </div>
   );
-};
+}
 
 const buttons = (setRecipes, state) => {
   const food = state.filter((e) => e.type === 'comida');
@@ -52,11 +52,17 @@ const buttons = (setRecipes, state) => {
   );
 };
 
-const renderRecipes = (recipes) => {
+function renderRecipes(recipes) {
   console.log(recipes);
   return (
     <div>
-      {recipes.map(({ image, id, name, category, type }) => {
+      {recipes.map(({
+        image,
+        id,
+        name,
+        category,
+        type,
+      }) => {
         return (
           <div className="recipes-done" key={id}>
             <Link to={`${type}s/${id}`}>
@@ -86,7 +92,7 @@ const renderRecipes = (recipes) => {
       })}
     </div>
   );
-};
+}
 
 function DoneRecipes() {
   const [recipes, setRecipes] = useState(JSON.parse(localStorage.getItem('doneRecipes')));

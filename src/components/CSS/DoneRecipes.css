@@ -7,10 +7,8 @@
   align-items: center;
   background-color: grey;
   display: flex;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
   font-size: 30px;
+  font-style: normal;
   height: 58px;
   justify-content: space-around;
   overflow: hidden;
