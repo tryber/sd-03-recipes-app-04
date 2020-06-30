@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { InfoContext } from './DetailsFoodScreen';
+import { DrinkContext } from './DetailsDrinkScreen';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
@@ -10,16 +10,16 @@ function changeRecipeStatus(setHasStarted, recipeInfo, hasStarted, setGoToRoute)
   setGoToRoute(true);
   setHasStarted(true);
   const {
-    idMeal, strArea, strCategory, strMeal, strMealThumb,
+    idDrink, strDrink, strDrinkThumb, strAlcoholic, strCategory,
   } = recipeInfo;
-  const mealInfo = {
-    id: idMeal,
-    type: 'comida',
-    area: strArea.strArea,
+  const drinkInfo = {
+    id: idDrink,
+    type: 'bebida',
+    area: '',
     category: strCategory,
-    alcoholicOrNot: '',
-    name: strMeal,
-    image: strMealThumb,
+    alcoholicOrNot: strAlcoholic,
+    name: strDrink,
+    image: strDrinkThumb,
     doneDate: undefined,
     tags: undefined,
   };
@@ -28,7 +28,7 @@ function changeRecipeStatus(setHasStarted, recipeInfo, hasStarted, setGoToRoute)
     if (!storage) {
       storage = [];
     }
-    const newStorage = [...storage, mealInfo];
+    const newStorage = [...storage, drinkInfo];
     localStorage.setItem('doneRecipes', JSON.stringify(newStorage));
   }
 }
@@ -56,31 +56,30 @@ function getIfHasBeenFavorited(id) {
   return false;
 }
 
-function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
-  setIsFavorite((isFavorite) => !isFavorite);
+function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
+  setIsFavorite((fav) => !fav);
   const {
-    idMeal, strArea, strCategory, strMeal, strMealThumb,
+    idDrink, strDrink, strDrinkThumb, strAlcoholic, strCategory,
   } = recipeInfo;
-  const mealInfo = {
-    id: idMeal,
-    type: 'comida',
-    area: strArea,
+  const drinkInfo = {
+    id: idDrink,
+    type: 'bebida',
+    area: '',
     category: strCategory,
-    alcoholicOrNot: '',
-    name: strMeal,
-    image: strMealThumb,
+    alcoholicOrNot: strAlcoholic,
+    name: strDrink,
+    image: strDrinkThumb,
   };
-  if (!isfavorite) {
-    let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (!storage) {
-      storage = [];
-    }
-    const newStorage = [...storage, mealInfo];
+  let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (!storage) {
+    storage = [];
+  }
+  if (!isFavorite) {
+    const newStorage = [...storage, drinkInfo];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
-  if (isfavorite) {
-    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const newStorage = storage.filter((e) => !e.id === idMeal);
+  if (isFavorite) {
+    const newStorage = storage.filter((e) => !e.id === idDrink);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
 }
@@ -91,24 +90,23 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
       <button
         type="button"
         className="favourite"
-        data-testid="favorite-btn"
         onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}
         src={favorite}
       >
-        {isFavorite || getIfHasBeenFavorited(id) ? <img src={favorite} alt="favorite" />
-          : <img src={notFavorite} alt="favorite" />}
+        {getIfHasBeenFavorited(id)
+          ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
+          : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
       </button>
       <CopyToClipboard text={window.location.href}>
         <button
-          data-testid="share-btn"
           type="button"
           onClick={() => alert('Link copiado!')}
           className="favourite"
         >
-          <img src={share} alt="icon" />
+          <img data-testid="share-btn" src={share} alt="icon" />
         </button>
       </CopyToClipboard>
-      {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
+      {goToRoute && <Redirect to={`/bebidas/${id}/in-progress`} />}
     </div>
   );
 }
@@ -117,7 +115,10 @@ function Buttons() {
   const [hasStarted, setHasStarted] = useState(false);
   const [goToRoute, setGoToRoute] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { recipeInfo, id } = useContext(InfoContext);
+  const { recipeInfo, id } = useContext(DrinkContext);
+  useEffect(() => {
+    if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
+  }, [id]);
 
   return (
     <div className="bottom-buttons">

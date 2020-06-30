@@ -39,7 +39,9 @@ export async function getDrinkByID(id) {
     .then((resp) => resp.json());
 }
 
-export async function getIngredientImage(ingredient) {
-  return fetch(`https://www.thecocktaildb.com/images/ingredients/${ingredient}.png`)
+export async function getIngredientsList() {
+  return fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
     .then((resp) => resp.json());
 }
+
+

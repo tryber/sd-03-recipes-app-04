@@ -10,6 +10,7 @@ function FilterButtons(Categories, handleClick) {
   return (
     <div className="button-div">
       <button
+        data-testid="All-category-filter"
         type="button"
         value="All"
         onClick={handleClick}
@@ -44,7 +45,10 @@ function MealsList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
+              <div
+                className="product-pic"
+                data-testid={`${i}-recipe-card`}
+              >
                 <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
                 <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
               </div>
@@ -63,6 +67,7 @@ function MainFoodScreen() {
     getMeals,
     updateMeals,
     searchInputVisible,
+    changeIngredientFilter,
   } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
   const [Filter, setFilter] = useState('All');
@@ -74,6 +79,9 @@ function MainFoodScreen() {
     getCategoriesList()
       .then((answer) => setCategories(answer.meals));
     setisLoading(false);
+    return () => {
+      changeIngredientFilter('')
+    }
   }, []);
 
   useEffect(() => {
@@ -86,7 +94,7 @@ function MainFoodScreen() {
   }, [Filter]);
 
   const handleClick = (event) => {
-    setFilter(event.target.value);
+    event.target.value !== Filter ? setFilter(event.target.value) : setFilter('All');
   };
 
   return (

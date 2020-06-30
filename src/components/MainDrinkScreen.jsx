@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { getFirstDrinks, getListDrinksCategories, getDrinkByCategories } from '../services/drink-api';
+import { getListDrinksCategories, getDrinkByCategories } from '../services/drink-api';
+import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
 import './CSS/MainFoodScreen.css';
 import Header from './Header';
@@ -10,6 +11,7 @@ function FilterButtons(Categories, handleClick) {
     <div>
       <div className="button-div">
         <button
+          data-testid="All-category-filter"
           type="button"
           value="All"
           onClick={handleClick}
@@ -59,15 +61,16 @@ function DrinksList(Data) {
 }
 
 function MainFoodScreen() {
-  const [Data, setData] = useState([]);
+  const {
+    Data,
+    getDrinks,
+    updateDrinks,
+    searchInputVisible,
+    changeIngredientFilter,
+  } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
   const [Filter, setFilter] = useState('All');
   const [isLoading, setisLoading] = useState(false);
-
-  const getDrinks = () => {
-    getFirstDrinks()
-      .then((answer) => setData(answer.drinks));
-  };
 
   useEffect(() => {
     setisLoading(true);
@@ -75,20 +78,22 @@ function MainFoodScreen() {
     getListDrinksCategories()
       .then((answer) => setCategories(answer.drinks));
     setisLoading(false);
+    return () => {
+      changeIngredientFilter('')
+    }
   }, []);
 
   useEffect(() => {
     if (Filter === 'All') {
-      getFirstDrinks()
-        .then((answer) => setData(answer.drinks));
+      getDrinks();
     } else {
       getDrinkByCategories(Filter)
-        .then((answer) => setData(answer.drinks));
+        .then((answer) => updateDrinks(answer.drinks));
     }
   }, [Filter]);
 
   const handleClick = (event) => {
-    setFilter(event.target.value);
+    event.target.value !== Filter ? setFilter(event.target.value) : setFilter('All');
   };
 
   return (
