@@ -1,5 +1,4 @@
 html {
-  border: 1px solid black;
   height: 100vh;
   margin: 20px;
   width: 360px;
@@ -87,6 +86,7 @@ p {
 .share-and-favourite {
   display: flex;
   background-color: orange;
+  margin-bottom: 50px;
 }
 
 .search-area {

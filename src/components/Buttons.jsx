@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { InfoContext } from './DetailsFoodScreen';
@@ -56,8 +56,7 @@ function getIfHasBeenFavorited(id) {
   return false;
 }
 
-function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
-  setIsFavorite((isFavorite) => !isFavorite);
+function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
   const {
     idMeal, strArea, strCategory, strMeal, strMealThumb,
   } = recipeInfo;
@@ -70,7 +69,8 @@ function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
     name: strMeal,
     image: strMealThumb,
   };
-  if (!isfavorite) {
+  if (!isFavorite) {
+    setIsFavorite((fav) => !fav);
     let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (!storage) {
       storage = [];
@@ -78,8 +78,12 @@ function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
     const newStorage = [...storage, mealInfo];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
-  if (isfavorite) {
-    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (isFavorite) {
+    setIsFavorite((fav) => !fav);
+    let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (!storage) {
+      storage = [];
+    }
     const newStorage = storage.filter((e) => !e.id === idMeal);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
@@ -95,7 +99,7 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
         onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}
         src={favorite}
       >
-        {isFavorite || getIfHasBeenFavorited(id) ? <img src={favorite} alt="favorite" />
+        {getIfHasBeenFavorited(id) ? <img src={favorite} alt="favorite" />
           : <img src={notFavorite} alt="favorite" />}
       </button>
       <CopyToClipboard text={window.location.href}>
@@ -118,6 +122,9 @@ function Buttons() {
   const [goToRoute, setGoToRoute] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const { recipeInfo, id } = useContext(InfoContext);
+  useEffect(() => {
+    if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
+  }, []);
 
   return (
     <div className="bottom-buttons">
