@@ -23,7 +23,10 @@ function ExploreFoodScreen() {
         >Por Ingredientes</button>
       </Link>
       <Link to="/explorar/comidas/area">
-        <button className="explore-food-button" data-testid="explore-by-area">Por Local de Origem</button>
+        <button
+          className="explore-food-button"
+          data-testid="explore-by-area"
+        >Por Local de Origem</button>
       </Link>
       <button
         className="explore-food-button"
