@@ -33,7 +33,7 @@ function changeRecipeStatus(setHasStarted, recipeInfo, hasStarted, setGoToRoute)
   }
 }
 
-function getLocalStorage(id) {
+export function getLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('doneRecipes'));
   let started;
   let done;
@@ -47,7 +47,7 @@ function getLocalStorage(id) {
   return status;
 }
 
-function getIfHasBeenFavorited(id) {
+export function getIfHasBeenFavorited(id) {
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (storage) {
     const favorited = storage.find((e) => e.id === id);

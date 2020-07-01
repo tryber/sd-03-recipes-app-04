@@ -43,7 +43,7 @@ const AplicationProvider = ({ children }) => {
       getDrinksByIngredient(ingredientFilter)
         .then((answer) => setData(answer.drinks));
     }
-  }
+  };
 
   const context = {
     informationsUser,

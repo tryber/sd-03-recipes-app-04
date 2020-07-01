@@ -70,7 +70,7 @@ function MainFoodScreen() {
     setingredientFilter,
   } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
-  const [Filter, setFilter] = useState('All');
+  const [FoodFilter, setFoodFilter] = useState('All');
   const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
@@ -80,21 +80,21 @@ function MainFoodScreen() {
       .then((answer) => setCategories(answer.meals));
     setisLoading(false);
     return () => {
-      setingredientFilter('')
-    }
+      setingredientFilter('');
+    };
   }, []);
 
   useEffect(() => {
-    if (Filter === 'All') {
+    if (FoodFilter === 'All') {
       getMeals();
     } else {
-      getMealByCategorie(Filter)
+      getMealByCategorie(FoodFilter)
         .then((answer) => setData(answer.meals));
     }
-  }, [Filter]);
+  }, [FoodFilter]);
 
   const handleClick = (event) => {
-    event.target.value !== Filter ? setFilter(event.target.value) : setFilter('All');
+    (event.target.value !== FoodFilter ? setFoodFilter(event.target.value) : setFoodFilter('All'));
   };
 
   return (

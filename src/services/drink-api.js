@@ -43,5 +43,3 @@ export async function getIngredientsList() {
   return fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
     .then((resp) => resp.json());
 }
-
-
