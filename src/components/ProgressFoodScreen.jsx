@@ -10,8 +10,7 @@ function ProgressFoodScreen(props) {
   useEffect(() => {
     getMealById(id).then((data) => {
       setInProgressRecipe(data.meals[0]);
-      /*       console.log(data.meals[0]);
- */ });
+    });
   }, []);
   const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
@@ -24,8 +23,6 @@ function ProgressFoodScreen(props) {
         {inProgressRecipe.strMeal}
       </h1>
       <h3 data-testid="recipe-category">{inProgressRecipe.strCategory}</h3>
-      {console.log(quantity, ingredients)}
-
       {quantity.map((e, i) => (
         <div data-testid={`${i}-ingredient-name-and-measure`}>
           <span>
