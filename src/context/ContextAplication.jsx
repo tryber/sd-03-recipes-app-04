@@ -26,7 +26,7 @@ const AplicationProvider = ({ children }) => {
   };
 
   const getMeals = () => {
-    switch(ingredientFilter) {
+    switch (ingredientFilter) {
       case '':
         getFirstMeals()
           .then((answer) => setData(answer.meals));
@@ -38,7 +38,7 @@ const AplicationProvider = ({ children }) => {
   };
 
   const getDrinks = () => {
-    switch(ingredientFilter) {
+    switch (ingredientFilter) {
       case '':
         getFirstDrinks()
           .then((answer) => setData(answer.drinks));
