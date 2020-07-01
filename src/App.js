@@ -16,6 +16,7 @@ import MainFoodScreen from './components/MainFoodScreen';
 import ProfileScreen from './components/ProfileScreen';
 import ProgressDrinkScreen from './components/ProgressDrinkScreen';
 import ProgressFoodScreen from './components/ProgressFoodScreen';
+import NotFound from './components/NotFound';
 import './App.css';
 
 import AplicationProvider from './context/ContextAplication';
@@ -28,7 +29,7 @@ function App() {
         <Route exact path="/comidas" component={MainFoodScreen} />
         <Route exact path="/bebidas" component={MainDrinkScreen} />
         <Route exact path="/comidas/:id" render={(props) => <DetailsFoodScreen props={props} />} />
-        <Route exact path="/bebidas/:id" render={(props) => DetailsDrinkScreen(props)} />
+        <Route exact path="/bebidas/:id" render={(props) => <DetailsDrinkScreen props={props} />} />
         <Route exact path="/comidas/:id/in-progress" component={ProgressFoodScreen} />
         <Route exact path="bebidas/:id/in-progress" component={ProgressDrinkScreen} />
         <Route exact path="/explorar" component={ExploreHomeScreen} />
@@ -48,6 +49,7 @@ function App() {
         <Route exact path="/perfil" component={ProfileScreen} />
         <Route exact path="/receitas-feitas" component={DoneRecipes} />
         <Route exact path="/receitas-favoritas" component={FavoriteRecipes} />
+        <Route component={NotFound} />
       </Switch>
     </AplicationProvider>
   );

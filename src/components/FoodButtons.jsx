@@ -1,53 +1,34 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { InfoContext } from './DetailsFoodScreen';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
+import { ContextAplication } from '../context/ContextAplication';
 
-function changeRecipeStatus(setHasStarted, recipeInfo, hasStarted, setGoToRoute) {
-  setGoToRoute(true);
-  setHasStarted(true);
-  const {
-    idMeal, strArea, strCategory, strMeal, strMealThumb,
-  } = recipeInfo;
-  const mealInfo = {
-    id: idMeal,
-    type: 'comida',
-    area: strArea.strArea,
-    category: strCategory,
-    alcoholicOrNot: '',
-    name: strMeal,
-    image: strMealThumb,
-    doneDate: undefined,
-    tags: undefined,
-  };
-  if (!hasStarted) {
-    let storage = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (!storage) {
-      storage = [];
-    }
-    const newStorage = [...storage, mealInfo];
-    localStorage.setItem('doneRecipes', JSON.stringify(newStorage));
+export function getDoneLocalStorage(id) {
+  const storage = JSON.parse(localStorage.getItem('doneRecipes'));
+  let done;
+  if (!storage) {
+    done = false;
+  } else {
+    done = storage.find((e) => e.id !== id);
   }
+  return done;
 }
 
-function getLocalStorage(id) {
-  const storage = JSON.parse(localStorage.getItem('doneRecipes'));
+export function getStartedLocalStorage(id) {
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let started;
-  let done;
   if (!storage) {
     started = false;
   } else {
-    started = storage.find((e) => e.id === id);
-    done = storage.find((e) => e.doneDate !== undefined);
+    started = Object.keys(storage).find((e) => e === id);
   }
-  const status = { started, done };
-  return status;
+  return started;
 }
 
-function getIfHasBeenFavorited(id) {
+export function getIfHasBeenFavorited(id) {
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (storage) {
     const favorited = storage.find((e) => e.id === id);
@@ -56,8 +37,8 @@ function getIfHasBeenFavorited(id) {
   return false;
 }
 
-function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
-  setIsFavorite((isFavorite) => !isFavorite);
+function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
+  setIsFavorite((fav) => !fav);
   const {
     idMeal, strArea, strCategory, strMeal, strMealThumb,
   } = recipeInfo;
@@ -70,16 +51,15 @@ function clickFavorite(setIsFavorite, recipeInfo, isfavorite) {
     name: strMeal,
     image: strMealThumb,
   };
-  if (!isfavorite) {
-    let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (!storage) {
-      storage = [];
-    }
+  let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (!storage) {
+    storage = [];
+  }
+  if (!isFavorite) {
     const newStorage = [...storage, mealInfo];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
-  if (isfavorite) {
-    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (isFavorite) {
     const newStorage = storage.filter((e) => !e.id === idMeal);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
@@ -91,21 +71,20 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
       <button
         type="button"
         className="favourite"
-        data-testid="favorite-btn"
         onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}
         src={favorite}
       >
-        {isFavorite || getIfHasBeenFavorited(id) ? <img src={favorite} alt="favorite" />
-          : <img src={notFavorite} alt="favorite" />}
+        {getIfHasBeenFavorited(id)
+          ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
+          : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
       </button>
       <CopyToClipboard text={window.location.href}>
         <button
-          data-testid="share-btn"
           type="button"
           onClick={() => alert('Link copiado!')}
           className="favourite"
         >
-          <img src={share} alt="icon" />
+          <img data-testid="share-btn" src={share} alt="icon" />
         </button>
       </CopyToClipboard>
       {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
@@ -114,29 +93,32 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
 }
 
 function Buttons() {
-  const [hasStarted, setHasStarted] = useState(false);
   const [goToRoute, setGoToRoute] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { recipeInfo, id } = useContext(InfoContext);
+  const { recipeInfo, id } = useContext(ContextAplication);
+
+  useEffect(() => {
+    if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
+  }, [id]);
 
   return (
     <div className="bottom-buttons">
-      {!hasStarted && !getLocalStorage(id).done && !getLocalStorage(id).started && (
+      {!getDoneLocalStorage(id) && !getStartedLocalStorage(id) && (
         <button
           data-testid="start-recipe-btn"
           type="button"
-          onClick={() => changeRecipeStatus(setHasStarted,
-            recipeInfo, hasStarted, setGoToRoute)}
+          onClick={() => setGoToRoute(true)}
           className="start-button"
         >
           Iniciar Receita
         </button>
       )}
-      {getLocalStorage(id).started && !getLocalStorage(id).done && (
+      {getStartedLocalStorage(id) && !getDoneLocalStorage(id) && (
         <button
           type="button"
           className="start-button"
           data-testid="start-recipe-btn"
+          onClick={() => setGoToRoute(true)}
         >
           Continuar Receita
         </button>
@@ -144,6 +126,7 @@ function Buttons() {
       <div className="share-and-favourite">
         {renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
       </div>
+      {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
     </div>
   );
 }
