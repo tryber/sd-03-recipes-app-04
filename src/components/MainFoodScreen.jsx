@@ -21,15 +21,15 @@ function FilterButtons(Categories, handleClick) {
       {Categories.reduce((arr, e, i) => {
         if (i < 5) {
           return [...arr,
-          <button
-            type="button"
-            data-testid={`${e.strCategory}-category-filter`}
-            value={e.strCategory}
-            onClick={handleClick}
-            className="button-main-screen"
-          >
-            {e.strCategory}
-          </button>,
+            <button
+              type="button"
+              data-testid={`${e.strCategory}-category-filter`}
+              value={e.strCategory}
+              onClick={handleClick}
+              className="button-main-screen"
+            >
+              {e.strCategory}
+            </button>,
           ];
         }
         return arr;
@@ -44,15 +44,15 @@ function MealsList(Data) {
       {Data.reduce((arr, e, i) => {
         if (i < 12) {
           return [...arr,
-          <Link to={`/comidas/${e.idMeal}`}>
-            <div
-              className="product-pic"
-              data-testid={`${i}-recipe-card`}
-            >
-              <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
-              <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
-            </div>
-          </Link>,
+            <Link to={`/comidas/${e.idMeal}`}>
+              <div
+                className="product-pic"
+                data-testid={`${i}-recipe-card`}
+              >
+                <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+                <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
+              </div>
+            </Link>,
           ];
         }
         return arr;
@@ -95,21 +95,19 @@ function MainFoodScreen() {
 
   const handleClick = (event) => {
     if (event.target.value !== FoodFilter) {
-      setFoodFilter(event.target.value)
+      setFoodFilter(event.target.value);
     } else {
-      setFoodFilter('All')
+      setFoodFilter('All');
     }
   };
 
   return (
-    <div>
-      <div className="food-screen">
-        <Header screen={'Comidas'} />
-        {isLoading && <div className="loader" />}
-        {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
-        {!isLoading && MealsList(Data)}
-        <InferiorMenu />
-      </div>
+    <div className="food-screen">
+      <Header screen={'Comidas'} />
+      {isLoading && <div className="loader" />}
+      {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
+      {!isLoading && MealsList(Data)}
+      <InferiorMenu />
     </div>
   );
 }

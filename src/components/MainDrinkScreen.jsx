@@ -94,9 +94,9 @@ function MainFoodScreen() {
 
   const handleClick = (event) => {
     if (event.target.value !== DrinkFilter) {
-      setDrinkFilter(event.target.value)
+      setDrinkFilter(event.target.value);
     } else {
-      setDrinkFilter('All')
+      setDrinkFilter('All');
     }
   };
 
