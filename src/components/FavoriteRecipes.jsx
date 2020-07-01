@@ -27,7 +27,7 @@ function getFavorites(setFavorites) {
 
 function renderfilterButtons(setFavorites) {
   return (
-    <div>
+    <div className="favorite-filter-buttons">
       <button
         data-testid="filter-by-food-btn"
         onClick={() => filterBy(setFavorites, 'comida')}
