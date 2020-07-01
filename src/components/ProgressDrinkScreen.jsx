@@ -1,11 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { getDrinkByID } from '../services/drink-api';
 
-function ProgressDrinkScreen() {
+function ProgressDrinkScreen(props) {
+  const [inProgressRecipe, setInProgressRecipe] = useState([]);
+  const { match } = props;
+  const { params } = match;
+  const { id } = params;
+  useEffect(() => {
+    getDrinkByID(id).then((data) => {
+      console.log(data);
+      // setInProgressRecipe(data.meals[0]);
+    });
+  }, []);
+  const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
+  const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
   return (
     <div>
-      <h1>ProgressDrinkScreen</h1>
+      <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
+      <button type="button" data-testid="share-btn"> share Button </button>
+      <button type="button" data-testid="favorite-btn"> Favorite Button</button>
+      <h1 data-testid="recipe-title">
+        {inProgressRecipe.strMeal}
+      </h1>
+      <h3 data-testid="recipe-category">{inProgressRecipe.strCategory}</h3>
+      {quantity.map((e, i) => (
+        <>
+          {console.log(inProgressRecipe[`strIngredient${i}`])}
+          {inProgressRecipe[`strIngredient${i}`] !== null
+          && inProgressRecipe[`strIngredient${i}`] !== undefined
+          && inProgressRecipe[`strIngredient${i}`] !== ''
+            ? (
+              <div data-testid={`${i}-ingredient-step`}>
+                <span>
+                  <input type="checkbox" />
+                  <span>{inProgressRecipe[e]}</span>
+                  {inProgressRecipe[ingredients[i]]}
+                </span>
+              </div>
+            )
+            : null }
+        </>
+
+      ))}
+
+      <div data-testid="instructions">
+        {inProgressRecipe.strInstructions}
+      </div>
+      <button data-testid="finish-recipe-btn" type="button">
+        Finish Recipe Button
+      </button>
     </div>
   );
 }
+
+ProgressDrinkScreen.propTypes = {
+  // id: PropTypes.string.isRequired,
+  match: PropTypes.string.isRequired,
+
+};
 
 export default ProgressDrinkScreen;
