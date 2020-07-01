@@ -10,12 +10,12 @@ import renderWithRouter from './RenderService';
 import ProfileScreen from '../components/ProfileScreen';
 
 class LocalStorage {
-  constructor(obj = {}) {this.store = obj; };
+  constructor(obj = {}) { this.store = obj; };
   setItem = (key, val) => { this.store[key] = val.toString(); };
   getItem = key => this.store[key];
   removeItem = key => { delete this.store[key]; };
   clear = () => { this.store = {} };
-};
+}
 
 window.localStorage = new LocalStorage();
 
