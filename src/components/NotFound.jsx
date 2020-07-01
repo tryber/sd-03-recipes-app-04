@@ -1,11 +1,11 @@
 import React from 'react';
 
-function SearchBar() {
+function NotFound() {
   return (
     <div>
-      Teste
+      Not Found
     </div>
   );
 }
 
-export default SearchBar;
+export default NotFound;
