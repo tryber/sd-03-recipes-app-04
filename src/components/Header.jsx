@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
@@ -10,20 +10,7 @@ import DrinkSearchBar from './DrinkSearchBar';
 
 function Header(props) {
   const { screen } = props;
-  const [isInputSearchVisible, setIsInputSearchVisible] = useState(false);
-  const { searchInput, searchInputVisible } = useContext(ContextAplication);
-  function ShowHideInputSearch() {
-    console.log(searchInputVisible, isInputSearchVisible);
-    if (isInputSearchVisible) {
-      setIsInputSearchVisible(false);
-      // if context for false set it as true to show input Search
-      searchInput(true);
-    } else if (!isInputSearchVisible) {
-      setIsInputSearchVisible(true);
-      // if context for true set it as false to hidde input Search
-      searchInput(false);
-    }
-  }
+  const { searchInputVisible, searchInput } = useContext(ContextAplication);
   return (
     <div>
       <div className="headerDiv">
@@ -35,17 +22,17 @@ function Header(props) {
             data-testid="profile-top-btn"
           />
         </Link>
-        <h1 className="foodTitle" data-testid="page-title">Comidas</h1>
-        <button type="button" className="searchIcon" onClick={() => ShowHideInputSearch()}>
+        <h1 className="foodTitle" data-testid="page-title">{screen}</h1>
+        {(screen === 'Comidas' || screen === 'Bebidas') && <button type="button" className="searchIcon" onClick={() => searchInput()}>
           <img
             src={searchIcon}
             alt="SearchIcon"
             data-testid="search-top-btn"
           />
-        </button>
+        </button>}
       </div>
-      {isInputSearchVisible && (screen === 'food') && <FoodSearchBar />}
-      {isInputSearchVisible && (screen === 'drink') && <DrinkSearchBar />}
+      {searchInputVisible && (screen === 'Comidas') && <FoodSearchBar />}
+      {searchInputVisible && (screen === 'Bebidas') && <DrinkSearchBar />}
     </div>
   );
 }
