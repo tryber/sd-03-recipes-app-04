@@ -14,7 +14,12 @@ function MealsList(Data) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
               <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+                <img
+                  src={e.strMealThumb}
+                  alt="thumbnail"
+                  width="150px"
+                  data-testid={`${i}-card-img`}
+                />
                 <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
               </div>
             </Link>,
@@ -36,14 +41,20 @@ function renderAreaFilter(areas, setAreaFilter, areaFilter, setMealsByArea) {
       }}
       value={areaFilter}
     >
-      {areas.map((e) => <option data-testid={`${e.strArea}-option`} value={e.strArea}>{e.strArea}</option>)}
+      {areas.map((e) => (
+        <option
+          data-testid={`${e.strArea}-option`}
+          value={e.strArea}
+        >
+          {e.strArea}
+        </option>
+      ))}
       <option data-testid="All-option" value="All">All</option>
     </select>
   );
 }
 
 function ShowResultsByArea(Data, mealsByArea, areaFilter) {
-  console.log(mealsByArea);
   if (areaFilter !== 'All') {
     return (
       mealsByArea.reduce((arr, e, i) => {
@@ -51,7 +62,12 @@ function ShowResultsByArea(Data, mealsByArea, areaFilter) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
               <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+                <img
+                  src={e.strMealThumb}
+                  alt="thumbnail"
+                  width="150px"
+                  data-testid={`${i}-card-img`}
+                />
                 <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
               </div>
             </Link>,
