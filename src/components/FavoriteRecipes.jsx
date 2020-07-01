@@ -5,7 +5,6 @@ import './CSS/FavoriteRecipes.css';
 import favorite from '../images/blackHeartIcon.svg';
 import share from '../images/shareIcon.svg';
 import Header from './Header';
-import InferiorMenu from './InferiorMenu';
 
 function updateStorage(id, setFavorites) {
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -90,7 +89,6 @@ function FavoriteRecipes() {
           )
         ))}
       </div>
-      <InferiorMenu />
     </div>
   );
 }
