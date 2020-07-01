@@ -6,10 +6,8 @@ function BasicInfo() {
   const {
     recipeInfo, recomendation,
   } = useContext(ContextAplication);
-
   const quantity = Object.keys(recipeInfo).filter((e) => e.includes('strIngredient'));
   const ingredients = (Object.keys(recipeInfo).filter((e) => e.includes('strMeasure')));
-
   return (
     <div>
       <img src={recipeInfo.strMealThumb} data-testid="recipe-photo" alt="thumb" width="100%" />
