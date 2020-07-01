@@ -23,7 +23,7 @@ function Header(props) {
           />
         </Link>
         <h1 className="foodTitle" data-testid="page-title">{screen}</h1>
-        {(screen === 'Comidas' || screen === 'Bebidas') && <button type="button" className="searchIcon" onClick={() => searchInput()}>
+        {(screen === 'Comidas' || screen === 'Bebidas' || screen === 'Explorar Origem') && <button type="button" className="searchIcon" onClick={() => searchInput()}>
           <img
             src={searchIcon}
             alt="SearchIcon"
