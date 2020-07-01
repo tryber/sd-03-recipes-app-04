@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getFirstMeals, getByIgredient } from '../services/foodApi';
-import { getFirstDrinks, getDrinksByIngredient } from '../services/drink-api';
+import { getFirstMeals, getMealById, getByIgredient } from '../services/foodApi';
+import { getFirstDrinks, getDrinksByIngredient, getDrinkByID } from '../services/drink-api';
 
 export const ContextAplication = createContext();
 
@@ -11,6 +11,9 @@ const AplicationProvider = ({ children }) => {
   const [informationsUser, setInformationsUser] = useState(user);
   const [searchInputVisible, setSearchInputVisible] = useState(false);
   const [Data, setData] = useState([]);
+  const [recipeInfo, setRecipeInfo] = useState([]);
+  const [id, setId] = useState('');
+  const [recomendation, setRecomendation] = useState([]);
   const [ingredientFilter, setingredientFilter] = useState('');
 
   const saveInput = (input) => {
@@ -49,6 +52,22 @@ const AplicationProvider = ({ children }) => {
     }
   };
 
+  const getFoodScreenInfos = (foodId) => {
+    getMealById(foodId).then((data) => {
+      setRecipeInfo(data.meals[0]);
+      setId(foodId);
+    });
+    getFirstDrinks().then((data) => setRecomendation(data.drinks));
+  };
+
+  const getDrinkScreenInfos = (drinkId) => {
+    getDrinkByID(drinkId).then((data) => {
+      setRecipeInfo(data.drinks[0]);
+      setId(drinkId);
+    });
+    getFirstMeals().then((data) => setRecomendation(data.meals));
+  };
+
   const context = {
     informationsUser,
     saveInput,
@@ -56,6 +75,11 @@ const AplicationProvider = ({ children }) => {
     searchInput,
     Data,
     getMeals,
+    getFoodScreenInfos,
+    getDrinkScreenInfos,
+    recipeInfo,
+    recomendation,
+    id,
     ingredientFilter,
     getDrinks,
     setData,
