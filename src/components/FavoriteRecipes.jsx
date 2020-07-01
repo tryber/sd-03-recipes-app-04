@@ -4,6 +4,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import './CSS/FavoriteRecipes.css';
 import favorite from '../images/blackHeartIcon.svg';
 import share from '../images/shareIcon.svg';
+import Header from './Header';
 
 function updateStorage(id, setFavorites) {
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -26,7 +27,7 @@ function getFavorites(setFavorites) {
 
 function renderfilterButtons(setFavorites) {
   return (
-    <div>
+    <div className="favorite-filter-buttons">
       <button
         data-testid="filter-by-food-btn"
         onClick={() => filterBy(setFavorites, 'comida')}
@@ -59,6 +60,7 @@ function FavoriteRecipes() {
   }, []);
   return (
     <div>
+      <Header screen="Receitas Favoritas" />
       {renderfilterButtons(setFavorites)}
       <div className="favorite-recipes-container">
         {favorites.map((e, i) => (
