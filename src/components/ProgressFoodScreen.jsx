@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { getMealById } from '../services/foodApi';
 
-function ProgressFoodScreen() {
+function ProgressFoodScreen(props) {
+  const { id } = props.match.params;
+  useEffect(() => {
+    getMealById(id).then((data) => {
+      console.log(data.meals);
+    });
+  });
+  console.log(id);
   return (
     <div>
       InProgressRecipe Placeholder
