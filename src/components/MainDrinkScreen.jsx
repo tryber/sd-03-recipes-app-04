@@ -105,7 +105,7 @@ function MainFoodScreen() {
       <Header screen={'Bebidas'} />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
-      {!isLoading && DrinksList(Data)}
+      {!isLoading && !searchInputVisible && DrinksList(Data)}
       <InferiorMenu />
     </div>
   );
