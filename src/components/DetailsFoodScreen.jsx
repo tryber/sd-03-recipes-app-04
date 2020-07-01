@@ -2,8 +2,8 @@ import React, { useState, useEffect, createContext } from 'react';
 import PropTypes from 'prop-types';
 import { getMealById } from '../services/foodApi';
 import { getFirstDrinks } from '../services/drink-api';
-import BasicInfo from './BasicInfo';
-import Buttons from './Buttons';
+import BasicInfo from './FoodBasicInfo';
+import Buttons from './FoodButtons';
 
 export const InfoContext = createContext();
 
@@ -18,10 +18,12 @@ export default function DetailsFoodScreen(props) {
       setIsLoading(false);
     });
     getFirstDrinks().then((data) => setRecomendation(data.drinks));
-  }, []);
+  }, [id]);
   const quantity = Object.keys(recipeInfo).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(recipeInfo).filter((e) => e.includes('strMeasure'));
-  const context = { recipeInfo, quantity, ingredients, recomendation, id };
+  const context = {
+    recipeInfo, quantity, ingredients, recomendation, id,
+  };
 
   return (
     <div>

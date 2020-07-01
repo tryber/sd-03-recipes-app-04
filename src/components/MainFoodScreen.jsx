@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { getFirstMeals, getCategoriesList, getMealByCategorie } from '../services/foodApi';
+import { getCategoriesList, getMealByCategorie } from '../services/foodApi';
+import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
 import Header from './Header';
 import './CSS/MainFoodScreen.css';
@@ -9,6 +10,7 @@ function FilterButtons(Categories, handleClick) {
   return (
     <div className="button-div">
       <button
+        data-testid="All-category-filter"
         type="button"
         value="All"
         onClick={handleClick}
@@ -43,9 +45,12 @@ function MealsList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
-              <div className="product-pic">
-                <img src={e.strMealThumb} alt="thumbnail" width="150px" />
-                <h5>{e.strMeal}</h5>
+              <div
+                className="product-pic"
+                data-testid={`${i}-recipe-card`}
+              >
+                <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+                <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
               </div>
             </Link>,
           ];
@@ -57,47 +62,52 @@ function MealsList(Data) {
 }
 
 function MainFoodScreen() {
-  const [Data, setData] = useState([]);
+  const {
+    Data,
+    getMeals,
+    setData,
+    searchInputVisible,
+    setingredientFilter,
+  } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
-  const [Filter, setFilter] = useState('All');
+  const [FoodFilter, setFoodFilter] = useState('All');
   const [isLoading, setisLoading] = useState(false);
-
-  const getMeals = () => {
-    getFirstMeals()
-      .then((answer) => setData(answer.meals));
-  };
 
   useEffect(() => {
     setisLoading(true);
     getMeals();
     getCategoriesList()
-      .then((answer) => setCategories(answer.categories));
+      .then((answer) => setCategories(answer.meals));
     setisLoading(false);
+    return () => {
+      setingredientFilter('');
+    };
   }, []);
 
   useEffect(() => {
-    if (Filter === 'All') {
-      getFirstMeals()
-        .then((answer) => setData(answer.meals));
+    if (FoodFilter === 'All') {
+      getMeals();
     } else {
-      getMealByCategorie(Filter)
+      getMealByCategorie(FoodFilter)
         .then((answer) => setData(answer.meals));
     }
-  }, [Filter]);
+  }, [FoodFilter]);
 
   const handleClick = (event) => {
-    setFilter(event.target.value);
+    if (event.target.value !== FoodFilter) {
+      setFoodFilter(event.target.value);
+    } else {
+      setFoodFilter('All');
+    }
   };
 
   return (
-    <div>
-      <div className="food-screen">
-        <Header screen="food" />
-        {isLoading && <div className="loader" />}
-        {!isLoading && FilterButtons(Categories, handleClick)}
-        {!isLoading && MealsList(Data)}
-        <InferiorMenu />
-      </div>
+    <div className="food-screen">
+      <Header screen={'Comidas'} />
+      {isLoading && <div className="loader" />}
+      {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
+      {!isLoading && !searchInputVisible && MealsList(Data)}
+      <InferiorMenu />
     </div>
   );
 }
