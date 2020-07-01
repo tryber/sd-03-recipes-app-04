@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { getMealById } from '../services/foodApi';
 
 function ProgressFoodScreen(props) {
   const [inProgressRecipe, setInProgressRecipe] = useState([]);
-  const { id } = props.match.params;
+  const { match } = props;
+  const { params } = match;
+  const { id } = params;
   useEffect(() => {
     getMealById(id).then((data) => {
       setInProgressRecipe(data.meals[0]);
@@ -33,5 +36,11 @@ function ProgressFoodScreen(props) {
     </div>
   );
 }
+
+ProgressFoodScreen.propTypes = {
+  id: PropTypes.string.isRequired,
+  match: PropTypes.string.isRequired,
+
+};
 
 export default ProgressFoodScreen;
