@@ -7,7 +7,7 @@ import Header from './Header';
 
 function ExploreDrinkIngredientScreen() {
   const [ingredients, setingredients] = useState([]);
-  const { changeIngredientFilter } = useContext(ContextAplication);
+  const { setingredientFilter } = useContext(ContextAplication);
 
   useEffect(() => {
     getIngredientsList()
@@ -25,7 +25,7 @@ function ExploreDrinkIngredientScreen() {
                 <button
                   className="product-pic"
                   data-testid={`${i}-ingredient-card`}
-                  onClick={() => changeIngredientFilter(e.strIngredient1)}
+                  onClick={() => setingredientFilter(e.strIngredient1)}
                 >
                   <img
                     src={`https://www.thecocktaildb.com/images/ingredients/${e.strIngredient1}.png`}

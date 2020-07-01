@@ -26,22 +26,26 @@ const AplicationProvider = ({ children }) => {
   };
 
   const getMeals = () => {
-    if (ingredientFilter === '') {
-      getFirstMeals()
-        .then((answer) => setData(answer.meals));
-    } else {
-      getByIgredient(ingredientFilter)
-        .then((answer) => setData(answer.meals));
+    switch(ingredientFilter) {
+      case '':
+        getFirstMeals()
+          .then((answer) => setData(answer.meals));
+        break;
+      default:
+        getByIgredient(ingredientFilter)
+          .then((answer) => setData(answer.meals));
     }
   };
 
   const getDrinks = () => {
-    if (ingredientFilter === '') {
-      getFirstDrinks()
-      .then((answer) => setData(answer.drinks));
-    } else {
-      getDrinksByIngredient(ingredientFilter)
-        .then((answer) => setData(answer.drinks));
+    switch(ingredientFilter) {
+      case '':
+        getFirstDrinks()
+          .then((answer) => setData(answer.drinks));
+        break;
+      default:
+        getDrinksByIngredient(ingredientFilter)
+          .then((answer) => setData(answer.drinks));
     }
   };
 
