@@ -10,6 +10,13 @@ export const getMealByCategorie = async (category) => {
   return mealInfo;
 };
 
+export const getMealByArea = async (area) => {
+  const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
+  const mealInfo = await meal.json();
+  console.log(mealInfo)
+  return mealInfo;
+};
+
 export const getByIgredient = async (ingredient) => {
   const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
   const mealInfo = await meal.json();
@@ -48,6 +55,12 @@ export const getIgredientPic = async (igredient) => {
 
 export const getCategoriesList = async () => {
   const meal = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+  const mealInfo = await meal.json();
+  return mealInfo;
+};
+
+export const getAreaList = async () => {
+  const meal = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
   const mealInfo = await meal.json();
   return mealInfo;
 };

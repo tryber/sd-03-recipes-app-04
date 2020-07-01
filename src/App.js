@@ -16,6 +16,7 @@ import MainFoodScreen from './components/MainFoodScreen';
 import ProfileScreen from './components/ProfileScreen';
 import ProgressDrinkScreen from './components/ProgressDrinkScreen';
 import ProgressFoodScreen from './components/ProgressFoodScreen';
+import NotFound from './components/NotFound';
 import './App.css';
 
 import AplicationProvider from './context/ContextAplication';
@@ -48,6 +49,7 @@ function App() {
         <Route exact path="/perfil" component={ProfileScreen} />
         <Route exact path="/receitas-feitas" component={DoneRecipes} />
         <Route exact path="/receitas-favoritas" component={FavoriteRecipes} />
+        <Route component={NotFound} />
       </Switch>
     </AplicationProvider>
   );
