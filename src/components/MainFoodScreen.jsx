@@ -10,6 +10,7 @@ function FilterButtons(Categories, handleClick) {
   return (
     <div className="button-div">
       <button
+        data-testid="All-category-filter"
         type="button"
         value="All"
         onClick={handleClick}
@@ -44,7 +45,10 @@ function MealsList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
+              <div
+                className="product-pic"
+                data-testid={`${i}-recipe-card`}
+              >
                 <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
                 <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
               </div>
@@ -61,11 +65,12 @@ function MainFoodScreen() {
   const {
     Data,
     getMeals,
-    updateMeals,
+    setData,
     searchInputVisible,
+    setingredientFilter,
   } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
-  const [Filter, setFilter] = useState('All');
+  const [FoodFilter, setFoodFilter] = useState('All');
   const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
@@ -74,30 +79,35 @@ function MainFoodScreen() {
     getCategoriesList()
       .then((answer) => setCategories(answer.meals));
     setisLoading(false);
+    return () => {
+      setingredientFilter('');
+    };
   }, []);
 
   useEffect(() => {
-    if (Filter === 'All') {
+    if (FoodFilter === 'All') {
       getMeals();
     } else {
-      getMealByCategorie(Filter)
-        .then((answer) => updateMeals(answer.meals));
+      getMealByCategorie(FoodFilter)
+        .then((answer) => setData(answer.meals));
     }
-  }, [Filter]);
+  }, [FoodFilter]);
 
   const handleClick = (event) => {
-    setFilter(event.target.value);
+    if (event.target.value !== FoodFilter) {
+      setFoodFilter(event.target.value);
+    } else {
+      setFoodFilter('All');
+    }
   };
 
   return (
-    <div>
-      <div className="food-screen">
-        <Header screen={'Comidas'} />
-        {isLoading && <div className="loader" />}
-        {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
-        {!isLoading && MealsList(Data)}
-        <InferiorMenu />
-      </div>
+    <div className="food-screen">
+      <Header screen={'Comidas'} />
+      {isLoading && <div className="loader" />}
+      {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
+      {!isLoading && !searchInputVisible && MealsList(Data)}
+      <InferiorMenu />
     </div>
   );
 }

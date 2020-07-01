@@ -88,6 +88,7 @@ function DrinkSearchBar() {
   const [goToRoute, setGoToRoute] = useState(false);
   const [id, setId] = useState('');
   const [disabled, setDisabled] = useState('true');
+
   return (
     <div className="search-area">
       <input

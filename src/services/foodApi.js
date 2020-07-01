@@ -46,14 +46,14 @@ export const getRandomMeal = async () => {
   return mealInfo;
 };
 
-export const getIgredientPic = async (ingredient) => {
-  const meal = await fetch(`https://www.themealdb.com/images/ingredients/${ingredient}.png`);
+export const getCategoriesList = async () => {
+  const meal = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
   const mealInfo = await meal.json();
   return mealInfo;
 };
 
-export const getCategoriesList = async () => {
-  const meal = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+export const getIngredientsList = async () => {
+  const meal = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
   const mealInfo = await meal.json();
   return mealInfo;
 };

@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
-import { DrinkContext } from './DetailsDrinkScreen';
+import { ContextAplication } from '../context/ContextAplication';
 
 function BasicInfo() {
   const {
     recipeInfo, recomendation,
-  } = useContext(DrinkContext);
+  } = useContext(ContextAplication);
+
+  const quantity = Object.keys(recipeInfo).filter((e) => e.includes('strIngredient'));
+  const ingredients = (Object.keys(recipeInfo).filter((e) => e.includes('strMeasure')));
+
   return (
     <div>
       <img src={recipeInfo.strDrinkThumb} data-testid="recipe-photo" alt="thumb" width="100%" />

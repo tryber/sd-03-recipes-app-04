@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { DrinkContext } from './DetailsDrinkScreen';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import { getDoneLocalStorage, getStartedLocalStorage, getIfHasBeenFavorited } from './FoodButtons';
+import { ContextAplication } from '../context/ContextAplication';
 
 function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
   setIsFavorite((fav) => !fav);
@@ -65,7 +65,7 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
 function Buttons() {
   const [goToRoute, setGoToRoute] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { recipeInfo, id } = useContext(DrinkContext);
+  const { recipeInfo, id } = useContext(ContextAplication);
   useEffect(() => {
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
   }, [id]);

@@ -1,6 +1,5 @@
 html {
   height: 100vh;
-  margin: 20px;
   width: 360px;
 }
 
@@ -73,8 +72,8 @@ p {
 
 .share-and-favourite > button {
   background-color: orange;
+  margin-bottom: 50px;
   width: 50%;
-  margin-bottom: 20px;
 }
 
 .share-and-favourite > img {

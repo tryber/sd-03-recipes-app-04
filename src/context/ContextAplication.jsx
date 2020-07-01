@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getFirstMeals, getMealById } from '../services/foodApi';
-import { getFirstDrinks } from '../services/drink-api';
+import { getFirstMeals, getMealById, getByIgredient } from '../services/foodApi';
+import { getFirstDrinks, getDrinksByIngredient, getDrinkByID } from '../services/drink-api';
 
 export const ContextAplication = createContext();
 
@@ -14,6 +14,7 @@ const AplicationProvider = ({ children }) => {
   const [recipeInfo, setRecipeInfo] = useState([]);
   const [id, setId] = useState('');
   const [recomendation, setRecomendation] = useState([]);
+  const [ingredientFilter, setingredientFilter] = useState('');
 
   const saveInput = (input) => {
     const inputsLogin = {
@@ -28,12 +29,27 @@ const AplicationProvider = ({ children }) => {
   };
 
   const getMeals = () => {
-    getFirstMeals()
-      .then((answer) => setData(answer.meals));
+    switch (ingredientFilter) {
+      case '':
+        getFirstMeals()
+          .then((answer) => setData(answer.meals));
+        break;
+      default:
+        getByIgredient(ingredientFilter)
+          .then((answer) => setData(answer.meals));
+    }
   };
 
-  const updateMeals = (answer) => {
-    setData(answer);
+  const getDrinks = () => {
+    switch (ingredientFilter) {
+      case '':
+        getFirstDrinks()
+          .then((answer) => setData(answer.drinks));
+        break;
+      default:
+        getDrinksByIngredient(ingredientFilter)
+          .then((answer) => setData(answer.drinks));
+    }
   };
 
   const getFoodScreenInfos = (foodId) => {
@@ -44,6 +60,14 @@ const AplicationProvider = ({ children }) => {
     getFirstDrinks().then((data) => setRecomendation(data.drinks));
   };
 
+  const getDrinkScreenInfos = (drinkId) => {
+    getDrinkByID(drinkId).then((data) => {
+      setRecipeInfo(data.drinks[0]);
+      setId(drinkId);
+    });
+    getFirstMeals().then((data) => setRecomendation(data.meals));
+  };
+
   const context = {
     informationsUser,
     saveInput,
@@ -51,11 +75,15 @@ const AplicationProvider = ({ children }) => {
     searchInput,
     Data,
     getMeals,
-    updateMeals,
     getFoodScreenInfos,
+    getDrinkScreenInfos,
     recipeInfo,
     recomendation,
     id,
+    ingredientFilter,
+    getDrinks,
+    setData,
+    setingredientFilter,
   };
 
   return (

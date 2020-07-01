@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import BasicInfo from './DrinkBasicInfo';
-import Buttons from './DrinkButtons';
+import DrinkBasicInfo from './DrinkBasicInfo';
+import DrinkButtons from './DrinkButtons';
 import { ContextAplication } from '../context/ContextAplication';
-
 
 export default function DetailsDrinkScreen(props) {
   const { id } = props.props.match.params;
@@ -19,8 +18,8 @@ export default function DetailsDrinkScreen(props) {
       {isLoading && <h1>Carregando...</h1>}
       {!isLoading && (
         <div>
-            {!isLoading && <BasicInfo />}
-            {!isLoading && <Buttons />}
+            {!isLoading && <DrinkBasicInfo />}
+            {!isLoading && <DrinkButtons />}
         </div>
       )}
     </div>

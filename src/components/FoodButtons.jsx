@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { InfoContext } from './DetailsFoodScreen';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
@@ -19,7 +18,7 @@ export function getDoneLocalStorage(id) {
 }
 
 export function getStartedLocalStorage(id) {
-  const storage = JSON.parse(localStorage.getItem('inProggressRecipes'));
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let started;
   if (!storage) {
     started = false;
