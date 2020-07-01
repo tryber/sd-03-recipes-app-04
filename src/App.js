@@ -31,7 +31,7 @@ function App() {
         <Route exact path="/comidas/:id" render={(props) => <DetailsFoodScreen props={props} />} />
         <Route exact path="/bebidas/:id" render={(props) => <DetailsDrinkScreen props={props} />} />
         <Route exact path="/comidas/:id/in-progress" component={ProgressFoodScreen} />
-        <Route exact path="bebidas/:id/in-progress" component={ProgressDrinkScreen} />
+        <Route exact path="/bebidas/:id/in-progress" component={ProgressDrinkScreen} />
         <Route exact path="/explorar" component={ExploreHomeScreen} />
         <Route exact path="/explorar/comidas" component={ExploreFoodScreen} />
         <Route exact path="/explorar/bebidas" component={ExploreDrinkScreen} />
