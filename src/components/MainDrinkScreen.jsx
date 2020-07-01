@@ -45,9 +45,9 @@ function DrinksList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/bebidas/${e.idDrink}`}>
-              <div className="product-pic">
-                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" />
-                <h5>{e.strDrink}</h5>
+              <div className="product-pic" data-testid={`${i}-recipe-card`}>
+                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+                <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
               </div>
             </Link>,
           ];
@@ -93,7 +93,7 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
-      <Header screen="drink" />
+      <Header screen={'Bebidas'} />
       {isLoading && <div className="loader" />}
       {!isLoading && FilterButtons(Categories, handleClick)}
       {!isLoading && DrinksList(Data)}

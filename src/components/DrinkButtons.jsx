@@ -5,34 +5,7 @@ import { DrinkContext } from './DetailsDrinkScreen';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
-import { getLocalStorage, getIfHasBeenFavorited } from './FoodButtons';
-
-function changeRecipeStatus(setHasStarted, recipeInfo, hasStarted, setGoToRoute) {
-  setGoToRoute(true);
-  setHasStarted(true);
-  const {
-    idDrink, strDrink, strDrinkThumb, strAlcoholic, strCategory,
-  } = recipeInfo;
-  const drinkInfo = {
-    id: idDrink,
-    type: 'bebida',
-    area: '',
-    category: strCategory,
-    alcoholicOrNot: strAlcoholic,
-    name: strDrink,
-    image: strDrinkThumb,
-    doneDate: undefined,
-    tags: undefined,
-  };
-  if (!hasStarted) {
-    let storage = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (!storage) {
-      storage = [];
-    }
-    const newStorage = [...storage, drinkInfo];
-    localStorage.setItem('doneRecipes', JSON.stringify(newStorage));
-  }
-}
+import { getDoneLocalStorage, getStartedLocalStorage, getIfHasBeenFavorited } from './FoodButtons';
 
 function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
   setIsFavorite((fav) => !fav);
@@ -90,7 +63,6 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
 }
 
 function Buttons() {
-  const [hasStarted, setHasStarted] = useState(false);
   const [goToRoute, setGoToRoute] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const { recipeInfo, id } = useContext(DrinkContext);
@@ -100,22 +72,22 @@ function Buttons() {
 
   return (
     <div className="bottom-buttons">
-      {!hasStarted && !getLocalStorage(id).done && !getLocalStorage(id).started && (
+      {!getDoneLocalStorage(id) && !getStartedLocalStorage(id) && (
         <button
           data-testid="start-recipe-btn"
           type="button"
-          onClick={() => changeRecipeStatus(setHasStarted,
-            recipeInfo, hasStarted, setGoToRoute)}
+          onClick={() => setGoToRoute(true)}
           className="start-button"
         >
           Iniciar Receita
         </button>
       )}
-      {getLocalStorage(id).started && !getLocalStorage(id).done && (
+      {getStartedLocalStorage(id) && !getDoneLocalStorage(id) && (
         <button
           type="button"
           className="start-button"
           data-testid="start-recipe-btn"
+          onClick={() => setGoToRoute(true)}
         >
           Continuar Receita
         </button>
@@ -123,6 +95,7 @@ function Buttons() {
       <div className="share-and-favourite">
         {renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
       </div>
+      {goToRoute && <Redirect to={`/bebidas/${id}/in-progress`} />}
     </div>
   );
 }
