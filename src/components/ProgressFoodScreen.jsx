@@ -10,9 +10,11 @@ function ProgressFoodScreen(props) {
   useEffect(() => {
     getMealById(id).then((data) => {
       setInProgressRecipe(data.meals[0]);
-      console.log(data.meals[0]);
-    });
+      /*       console.log(data.meals[0]);
+ */ });
   }, []);
+  const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
+  const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
   return (
     <div>
       <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
@@ -22,11 +24,18 @@ function ProgressFoodScreen(props) {
         {inProgressRecipe.strMeal}
       </h1>
       <h3 data-testid="recipe-category">{inProgressRecipe.strCategory}</h3>
-      <ul>
-        <li>
-          Recipe List Placeholder
-        </li>
-      </ul>
+      {console.log(quantity, ingredients)}
+
+      {quantity.map((e, i) => (
+        <div data-testid={`${i}-ingredient-name-and-measure`}>
+          <span>
+            <input type="checkbox" />
+            {inProgressRecipe[ingredients[i]]}
+          </span>
+          <span>{inProgressRecipe[e]}</span>
+        </div>
+      ))}
+
       <div data-testid="instructions">
         {inProgressRecipe.strInstructions}
       </div>
