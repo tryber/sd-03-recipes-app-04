@@ -28,7 +28,7 @@ function ExploreFoodIngredientScreen() {
                   onClick={() => setingredientFilter(e.strIngredient)}
                 >
                   <img
-                    src={`https://www.themealdb.com/images/ingredients/${e.strIngredient}.png`}
+                    src={`https://www.themealdb.com/images/ingredients/${e.strIngredient}-Small.png`}
                     alt="thumbnail" width="150px"
                     data-testid={`${i}-card-img`}
                   />

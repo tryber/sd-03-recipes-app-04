@@ -28,7 +28,7 @@ function ExploreDrinkIngredientScreen() {
                   onClick={() => setingredientFilter(e.strIngredient1)}
                 >
                   <img
-                    src={`https://www.thecocktaildb.com/images/ingredients/${e.strIngredient1}.png`}
+                    src={`https://www.thecocktaildb.com/images/ingredients/${e.strIngredient1}-Small.png`}
                     alt="thumbnail" width="150px"
                     data-testid={`${i}-card-img`}
                   />
