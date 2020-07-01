@@ -16,11 +16,11 @@ function BasicInfo() {
       {quantity.reduce((arr, e, i) => {
         if (recipeInfo[e] !== null) {
           return (
-          [...arr, (
-            <div data-testid={`${i}-ingredient-name-and-measure`}>
-              <span>{recipeInfo[ingredients[i]]}</span>
-              <span>{recipeInfo[e]}</span>
-            </div>)]
+            [...arr, (
+              <div data-testid={`${i}-ingredient-name-and-measure`}>
+                <span>{recipeInfo[ingredients[i]]}</span>
+                <span>{recipeInfo[e]}</span>
+              </div>)]
           );
         } return arr;
       }, [])}
