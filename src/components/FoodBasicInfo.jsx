@@ -3,9 +3,7 @@ import ReactPlayer from 'react-player';
 import { ContextAplication } from '../context/ContextAplication';
 
 function BasicInfo() {
-  const {
-    recipeInfo, recomendation,
-  } = useContext(ContextAplication);
+  const { recipeInfo, recomendation } = useContext(ContextAplication);
   const quantity = Object.keys(recipeInfo).filter((e) => e.includes('strIngredient'));
   const ingredients = (Object.keys(recipeInfo).filter((e) => e.includes('strMeasure')));
   return (
