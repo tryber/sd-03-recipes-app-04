@@ -5,6 +5,7 @@ import { InfoContext } from './DetailsFoodScreen';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
+import { ContextAplication } from '../context/ContextAplication';
 
 export function getDoneLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -95,7 +96,7 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
 function Buttons() {
   const [goToRoute, setGoToRoute] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { recipeInfo, id } = useContext(InfoContext);
+  const { recipeInfo, id } = useContext(ContextAplication);
 
   useEffect(() => {
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }

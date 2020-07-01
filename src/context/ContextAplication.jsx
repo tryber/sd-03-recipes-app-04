@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getFirstMeals } from '../services/foodApi';
+import { getFirstMeals, getMealById } from '../services/foodApi';
+import { getFirstDrinks } from '../services/drink-api';
 
 export const ContextAplication = createContext();
 
@@ -10,6 +11,9 @@ const AplicationProvider = ({ children }) => {
   const [informationsUser, setInformationsUser] = useState(user);
   const [searchInputVisible, setSearchInputVisible] = useState(false);
   const [Data, setData] = useState([]);
+  const [recipeInfo, setRecipeInfo] = useState([]);
+  const [id, setId] = useState('');
+  const [recomendation, setRecomendation] = useState([]);
 
   const saveInput = (input) => {
     const inputsLogin = {
@@ -32,6 +36,14 @@ const AplicationProvider = ({ children }) => {
     setData(answer);
   };
 
+  const getFoodScreenInfos = (foodId) => {
+    getMealById(foodId).then((data) => {
+      setRecipeInfo(data.meals[0]);
+      setId(foodId);
+    });
+    getFirstDrinks().then((data) => setRecomendation(data.drinks));
+  };
+
   const context = {
     informationsUser,
     saveInput,
@@ -40,6 +52,10 @@ const AplicationProvider = ({ children }) => {
     Data,
     getMeals,
     updateMeals,
+    getFoodScreenInfos,
+    recipeInfo,
+    recomendation,
+    id,
   };
 
   return (

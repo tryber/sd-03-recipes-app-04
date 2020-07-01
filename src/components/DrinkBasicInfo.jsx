@@ -3,7 +3,7 @@ import { DrinkContext } from './DetailsDrinkScreen';
 
 function BasicInfo() {
   const {
-    recipeInfo, quantity, ingredients, recomendation,
+    recipeInfo, recomendation,
   } = useContext(DrinkContext);
   return (
     <div>
