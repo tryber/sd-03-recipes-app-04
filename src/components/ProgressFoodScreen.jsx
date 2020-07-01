@@ -24,12 +24,21 @@ function ProgressFoodScreen(props) {
       </h1>
       <h3 data-testid="recipe-category">{inProgressRecipe.strCategory}</h3>
       {quantity.map((e, i) => (
-        <div data-testid={`${i}-ingredient-name-and-measure`}>
-          <span>
-            <input type="checkbox" />
-            {inProgressRecipe[ingredients[i]]}
-          </span>
-          <span>{inProgressRecipe[e]}</span>
+        <div data-testid={`${i}-ingredient-step`}>
+          {console.log(inProgressRecipe[`strIngredient${i}`])}
+          {inProgressRecipe[`strIngredient${i}`] !== null
+          && inProgressRecipe[`strIngredient${i}`] !== undefined
+          && inProgressRecipe[`strIngredient${i}`] !== ''
+          && inProgressRecipe[`strIngredient${i}`] !== ' '
+            ? (
+              <span>
+                <input type="checkbox" />
+                <span>{inProgressRecipe[e]}</span>
+                {inProgressRecipe[ingredients[i]]}
+              </span>
+            )
+            : console.log(inProgressRecipe[`strIngredient${i}`])}
+
         </div>
       ))}
 
