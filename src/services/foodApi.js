@@ -13,7 +13,6 @@ export const getMealByCategorie = async (category) => {
 export const getMealByArea = async (area) => {
   const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
   const mealInfo = await meal.json();
-  console.log(mealInfo)
   return mealInfo;
 };
 
