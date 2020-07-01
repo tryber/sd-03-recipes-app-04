@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { getFirstDrinks, getListDrinksCategories, getDrinkByCategories } from '../services/drink-api';
+import { getListDrinksCategories, getDrinkByCategories } from '../services/drink-api';
+import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
 import './CSS/MainFoodScreen.css';
 import Header from './Header';
@@ -10,6 +11,7 @@ function FilterButtons(Categories, handleClick) {
     <div>
       <div className="button-div">
         <button
+          data-testid="All-category-filter"
           type="button"
           value="All"
           onClick={handleClick}
@@ -45,9 +47,9 @@ function DrinksList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/bebidas/${e.idDrink}`}>
-              <div className="product-pic">
-                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" />
-                <h5>{e.strDrink}</h5>
+              <div className="product-pic" data-testid={`${i}-recipe-card`}>
+                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+                <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
               </div>
             </Link>,
           ];
@@ -59,15 +61,16 @@ function DrinksList(Data) {
 }
 
 function MainFoodScreen() {
-  const [Data, setData] = useState([]);
+  const {
+    Data,
+    getDrinks,
+    setData,
+    searchInputVisible,
+    setingredientFilter,
+  } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
-  const [Filter, setFilter] = useState('All');
+  const [DrinkFilter, setDrinkFilter] = useState('All');
   const [isLoading, setisLoading] = useState(false);
-
-  const getDrinks = () => {
-    getFirstDrinks()
-      .then((answer) => setData(answer.drinks));
-  };
 
   useEffect(() => {
     setisLoading(true);
@@ -75,28 +78,34 @@ function MainFoodScreen() {
     getListDrinksCategories()
       .then((answer) => setCategories(answer.drinks));
     setisLoading(false);
+    return () => {
+      setingredientFilter('');
+    };
   }, []);
 
   useEffect(() => {
-    if (Filter === 'All') {
-      getFirstDrinks()
-        .then((answer) => setData(answer.drinks));
+    if (DrinkFilter === 'All') {
+      getDrinks();
     } else {
-      getDrinkByCategories(Filter)
+      getDrinkByCategories(DrinkFilter)
         .then((answer) => setData(answer.drinks));
     }
-  }, [Filter]);
+  }, [DrinkFilter]);
 
   const handleClick = (event) => {
-    setFilter(event.target.value);
+    if (event.target.value !== DrinkFilter) {
+      setDrinkFilter(event.target.value);
+    } else {
+      setDrinkFilter('All');
+    }
   };
 
   return (
     <div className="food-screen">
-      <Header screen="drink" />
+      <Header screen={'Bebidas'} />
       {isLoading && <div className="loader" />}
-      {!isLoading && FilterButtons(Categories, handleClick)}
-      {!isLoading && DrinksList(Data)}
+      {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
+      {!isLoading && !searchInputVisible && DrinksList(Data)}
       <InferiorMenu />
     </div>
   );
