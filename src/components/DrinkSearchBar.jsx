@@ -18,6 +18,7 @@ function renderRadioButtons(setSearchBy, setDisabled) {
     <div className="radio-buttons">
       <label htmlFor="ingrediente">
         <input
+          data-testid="ingredient-search-radio"
           id="ingredient"
           type="radio"
           name="search"
@@ -30,6 +31,7 @@ function renderRadioButtons(setSearchBy, setDisabled) {
       </label>
       <label htmlFor="name">
         <input
+          data-testid="name-search-radio"
           id="name"
           type="radio"
           name="search"
@@ -42,6 +44,7 @@ function renderRadioButtons(setSearchBy, setDisabled) {
       </label>
       <label htmlFor="first-letter">
         <input
+          data-testid="first-letter-search-radio"
           id="first-letter"
           type="radio"
           name="search"
@@ -85,9 +88,11 @@ function DrinkSearchBar() {
   const [goToRoute, setGoToRoute] = useState(false);
   const [id, setId] = useState('');
   const [disabled, setDisabled] = useState('true');
+
   return (
     <div className="search-area">
       <input
+        data-testid="search-input"
         id="searched-item"
         type="text"
         onChange={(e) => setSearchedItem(e.target.value)}
@@ -95,6 +100,7 @@ function DrinkSearchBar() {
       />
       {renderRadioButtons(setSearchBy, setDisabled)}
       <button
+        data-testid="exec-search-btn"
         onClick={() => doSearch(searchBy, searchedItem, setResult, setGoToRoute, setId)}
         className="search-button"
         type="button"
@@ -106,9 +112,9 @@ function DrinkSearchBar() {
         {result.reduce((arr, e, i) => {
           if (i < 12) {
             return [...arr,
-              <div className="product-pic">
-                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" />
-                <h5>{e.strDrink}</h5>
+              <div className="product-pic" data-testid={`${i}-recipe-card`}>
+                <img src={e.strDrinkThumb} data-testid={`${i}-card-img`} alt="thumbnail" width="150px" />
+                <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
               </div>,
             ];
           }
