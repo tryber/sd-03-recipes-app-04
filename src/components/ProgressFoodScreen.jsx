@@ -38,7 +38,7 @@ function ProgressFoodScreen(props) {
 }
 
 ProgressFoodScreen.propTypes = {
-  id: PropTypes.string.isRequired,
+  // id: PropTypes.string.isRequired,
   match: PropTypes.string.isRequired,
 
 };
