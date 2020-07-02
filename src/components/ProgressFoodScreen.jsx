@@ -40,14 +40,28 @@ function ProgressFoodScreen(props) {
   }, []);
   const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
-  const data = mountRecipeList(quantity, ingredients)
+  const data = mountRecipeList(quantity, ingredients);
   return (
     <div>
+      <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
+      <button type="button" data-testid="share-btn"> share Button </button>
+      <button type="button" data-testid="favorite-btn"> Favorite Button</button>
+      <h1 data-testid="recipe-title"> Ingredients </h1>
+      <h3 data-testid="recipe-category">{inProgressRecipe.strCategory}</h3>
       {console.log(data)}
+      {data.map((element, i) => (
+        <div key={element.meal} data-testid={`${i}-ingredient-step`}>
+          <span>
+            <input type="checkbox" />
+            <span>{element.meal}</span>
+            {element.mensure}
+          </span>
+        </div>
+      ))}
       <div data-testid="instructions">
         {inProgressRecipe.strInstructions}
       </div>
-      <button disable data-testid="finish-recipe-btn" type="button">
+      <button data-testid="finish-recipe-btn" type="button">
         Finish Recipe Button
       </button>
     </div>
