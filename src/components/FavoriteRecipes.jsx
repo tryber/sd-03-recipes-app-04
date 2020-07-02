@@ -8,7 +8,7 @@ import share from '../images/shareIcon.svg';
 function updateStorage(id, setFavorites) {
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const newStorage = storage.filter((e) => e.id !== id);
-  localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
+ 
   setFavorites(newStorage);
 }
 
