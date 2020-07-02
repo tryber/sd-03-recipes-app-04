@@ -25,10 +25,11 @@ function ProgressDrinkScreen(props) {
       </h1>
       <h3 data-testid="recipe-category">{inProgressDrink.strCategory}</h3>
       {quantity.map((e, i) => (
+
         <>
-          {console.log(inProgressDrink[`strIngredient${i}`])}
-          {inProgressDrink[`strIngredient${i}`] !== ' '
-          && inProgressDrink[`strIngredient${i}`] !== null
+          {console.log(inProgressDrink[e] !== null)}
+          {inProgressDrink[e] !== null
+          && inProgressDrink[e] !== ''
             ? (
               <div data-testid={`${i}-ingredient-step`}>
                 <span>
@@ -38,7 +39,7 @@ function ProgressDrinkScreen(props) {
                 </span>
               </div>
             )
-            : null }
+            : ' '}
         </>
 
       ))}

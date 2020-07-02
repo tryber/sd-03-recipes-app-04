@@ -25,10 +25,8 @@ function ProgressFoodScreen(props) {
       <h3 data-testid="recipe-category">{inProgressRecipe.strCategory}</h3>
       {quantity.map((e, i) => (
         <>
-          {console.log(inProgressRecipe[`strIngredient${i}`])}
-          {inProgressRecipe[`strIngredient${i}`] !== null
-          && inProgressRecipe[`strIngredient${i}`] !== undefined
-          && inProgressRecipe[`strIngredient${i}`] !== ''
+          {inProgressRecipe[e] !== null
+          && inProgressRecipe[e] !== ''
             ? (
               <div data-testid={`${i}-ingredient-step`}>
                 <span>
@@ -38,7 +36,7 @@ function ProgressFoodScreen(props) {
                 </span>
               </div>
             )
-            : null }
+            : null}
         </>
 
       ))}
