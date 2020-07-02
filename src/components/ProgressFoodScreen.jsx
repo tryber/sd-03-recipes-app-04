@@ -4,6 +4,7 @@ import { getMealById } from '../services/foodApi';
 
 function ProgressFoodScreen(props) {
   const [inProgressRecipe, setInProgressRecipe] = useState([]);
+  const [ingredientsDone, setIngredientsDone] = useState([]);
   const { match } = props;
   const { params } = match;
   const { id } = params;
@@ -30,7 +31,7 @@ function ProgressFoodScreen(props) {
             ? (
               <div data-testid={`${i}-ingredient-step`}>
                 <span>
-                  <input type="checkbox" />
+                  <input type="checkbox" onClick={() => console.log(`clicou em ${inProgressRecipe[e]}`)} />
                   <span>{inProgressRecipe[e]}</span>
                   {inProgressRecipe[ingredients[i]]}
                 </span>
@@ -44,7 +45,7 @@ function ProgressFoodScreen(props) {
       <div data-testid="instructions">
         {inProgressRecipe.strInstructions}
       </div>
-      <button data-testid="finish-recipe-btn" type="button">
+      <button disable data-testid="finish-recipe-btn" type="button">
         Finish Recipe Button
       </button>
     </div>
