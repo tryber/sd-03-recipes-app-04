@@ -6,12 +6,10 @@ function ProgressFoodScreen(props) {
   const [inProgressRecipe, setInProgressRecipe] = useState([]);
   const [ingredientsDone, setIngredientsDone] = useState([]);
   const [checked, setChecked] = useState(false);
-
   const { match } = props;
   const { params } = match;
   const { id } = params;
   const ingredientsDoneList = [];
-
   /*   function saveDoneIngredients(checkedIngredient, checkedParametro) {
     const ingredients = [];
     ingredients.push(...ingredientsDone, checkedIngredient);
@@ -33,6 +31,15 @@ function ProgressFoodScreen(props) {
     return ingredientsDoneList;
   }
 
+  function changeChecked(element) {
+    if (element.checked === false) {
+      element.checked = true;
+      console.log(element);
+    } else {
+      element.checked = false;
+      console.log(element);
+    }
+  }
   useEffect(() => {
     getMealById(id).then((data) => {
       setInProgressRecipe(data.meals[0]);
@@ -52,7 +59,7 @@ function ProgressFoodScreen(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
-            <input type="checkbox" />
+            <input type="checkbox" checked={element.checked} onChange={() => changeChecked(element)} />
             <span>{element.meal}</span>
             {element.mensure}
           </span>
