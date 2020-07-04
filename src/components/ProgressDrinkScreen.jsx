@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import share from '../images/shareIcon.svg';
 import { getDrinkByID } from '../services/drink-api';
 
 function ProgressDrinkScreen(props) {
   const [inProgressDrink, setInProgressDrink] = useState([]);
+  const [showCopyAlert, setShowCopyAlert] = useState(false);
   const { match } = props;
   const { params } = match;
   const { id } = params;
@@ -70,6 +72,22 @@ function ProgressDrinkScreen(props) {
     setChecked(checked);
     localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: { [id]: checked.checkbox } }));
   }
+  function copyContent(text) {
+    const separetedText = text.split('/');
+    console.log(separetedText);
+    const modifiedText = `${separetedText[0]}//${separetedText[2]}/${separetedText[4]}/${separetedText[5]}`;
+    navigator.clipboard.writeText(modifiedText)
+      .then(() => {
+        setShowCopyAlert(true);
+        alert('Link copiado!');
+        alert(modifiedText);
+        alert('Link copiado!');
+      })
+      .catch((err) => {
+        console.log('Something went wrong', err);
+      });
+    alert('Link copiado!');
+  }
 
   const quantity = Object.keys(inProgressDrink).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressDrink).filter((e) => e.includes('strMeasure'));
@@ -78,7 +96,15 @@ function ProgressDrinkScreen(props) {
   return (
     <div>
       <img src={inProgressDrink.strDrinkThumb} alt="" data-testid="recipe-photo" />
-      <button type="button" data-testid="share-btn"> share Button </button>
+      {showCopyAlert ? <h2>Link copiado!</h2> : null}
+      <button
+        data-testid="share-btn"
+        type="button"
+        onClick={() => copyContent(`http://localhost:3000/${props.location.pathname}`)}
+        className="favourite"
+      >
+        <img src={share} alt="icon" />
+      </button>
       <button type="button" data-testid="favorite-btn"> Favorite Button</button>
       <h1 data-testid="recipe-title">
         {inProgressDrink.strMeal}

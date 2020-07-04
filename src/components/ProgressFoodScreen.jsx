@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import share from '../images/shareIcon.svg';
 import { getMealById } from '../services/foodApi';
 
 function ProgressFoodScreen(props) {
   const [inProgressRecipe, setInProgressRecipe] = useState([]);
-  /*   const [ingredientsDone, setIngredientsDone] = useState([]);
- */ const checkedlist = {
+  const [showCopyAlert, setShowCopyAlert] = useState(false);
+  const checkedlist = {
     checkbox: [
       { id: 0, name: '', checked: false },
       { id: 1, checked: false },
@@ -67,18 +66,19 @@ function ProgressFoodScreen(props) {
     setChecked(checked);
     localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox } }));
   }
-  function copyContent(text) {
+  async function copyContent(text, event) {
     const separetedText = text.split('/');
     console.log(separetedText);
     const modifiedText = `${separetedText[0]}//${separetedText[2]}/${separetedText[4]}/${separetedText[5]}`;
-    navigator.clipboard.writeText(modifiedText)
+    await navigator.clipboard.writeText(modifiedText)
       .then(() => {
-        alert('Link copiado!');
+        setShowCopyAlert(true);
         alert(modifiedText);
+        alert('Link copiado!');
         alert('Link copiado!');
       })
       .catch((err) => {
-        console.log('Something went wrong', err);
+        console.log(err);
       });
   }
 
@@ -95,11 +95,11 @@ function ProgressFoodScreen(props) {
   return (
     <div>
       <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
-
+      {showCopyAlert ? <h2>Link copiado!</h2> : null}
       <button
-        data-testid="share-btn"
         type="button"
-        onClick={() => copyContent(`http://localhost:3000/${props.location.pathname}`)}
+        data-testid="share-btn"
+        onClick={(event) => copyContent(`http://localhost:3000/${props.location.pathname}`, event)}
         className="favourite"
       >
         <img src={share} alt="icon" />
