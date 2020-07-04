@@ -78,7 +78,6 @@ function ProgressFoodScreen(props) {
 
   return (
     <div>
-      {console.log(checkLocalStorage.meals[id])}
       <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
       <button type="button" data-testid="share-btn"> share Button </button>
       <button type="button" data-testid="favorite-btn"> Favorite Button</button>
