@@ -92,7 +92,7 @@ function ProgressDrinkScreen(props) {
   const quantity = Object.keys(inProgressDrink).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressDrink).filter((e) => e.includes('strMeasure'));
   const data = mountRecipeList(quantity, ingredients);
-  const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  // const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   return (
     <div>
       <img src={inProgressDrink.strDrinkThumb} alt="" data-testid="recipe-photo" />

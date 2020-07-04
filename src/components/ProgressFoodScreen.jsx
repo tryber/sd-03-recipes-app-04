@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { getIfHasBeenFavorited } from './FoodButtons';
 import share from '../images/shareIcon.svg';
+import notFavorite from '../images/whiteHeartIcon.svg';
+import favorite from '../images/blackHeartIcon.svg';
 import { getMealById } from '../services/foodApi';
+import { ContextAplication } from '../context/ContextAplication';
 
 function ProgressFoodScreen(props) {
   const [inProgressRecipe, setInProgressRecipe] = useState([]);
   const [showCopyAlert, setShowCopyAlert] = useState(false);
+  const { recipeInfo } = useContext(ContextAplication);
+  const [isFavorite, setIsFavorite] = useState(false);
   const checkedlist = {
     checkbox: [
       { id: 0, name: '', checked: false },
@@ -56,6 +62,34 @@ function ProgressFoodScreen(props) {
     setChecked(element);
   } */
 
+  function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
+    setIsFavorite((fav) => !fav);
+    const {
+      idMeal, strArea, strCategory, strMeal, strMealThumb,
+    } = recipeInfo;
+    const mealInfo = {
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    };
+    let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (!storage) {
+      storage = [];
+    }
+    if (!isFavorite) {
+      const newStorage = [...storage, mealInfo];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
+    }
+    if (isFavorite) {
+      const newStorage = storage.filter((e) => !e.id === idMeal);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
+    }
+  }
+
   function changeChecked(event) {
     checked.checkbox.forEach((checkbox) => {
       if (checkbox.id === Number(event.target.id)) {
@@ -105,7 +139,17 @@ function ProgressFoodScreen(props) {
         <img src={share} alt="icon" />
       </button>
 
-      <button type="button" data-testid="favorite-btn"> Favorite Button</button>
+      <button
+        type="button"
+        className="favourite"
+        onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}
+        src={favorite}
+      >
+        {getIfHasBeenFavorited(id)
+          ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
+          : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
+      </button>
+
       <h1 data-testid="recipe-title"> Ingredients </h1>
       <h3 data-testid="recipe-category">{inProgressRecipe.strCategory}</h3>
       {data.map((element, i) => (
