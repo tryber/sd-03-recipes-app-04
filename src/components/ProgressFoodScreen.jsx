@@ -10,7 +10,7 @@ import { ContextAplication } from '../context/ContextAplication';
 function ProgressFoodScreen(props) {
   const [inProgressRecipe, setInProgressRecipe] = useState([]);
   const [showCopyAlert, setShowCopyAlert] = useState(false);
-  const { recipeInfo } = useContext(ContextAplication);
+  const { recipeInfo, id } = useContext(ContextAplication);
   const [isFavorite, setIsFavorite] = useState(false);
   const checkedlist = {
     checkbox: [
@@ -41,7 +41,7 @@ function ProgressFoodScreen(props) {
   const [checked, setChecked] = useState(checkedlist);
   const { match } = props;
   const { params } = match;
-  const { id } = params;
+  const { id : idRecipe } = params;
   const ingredientsDoneList = [];
 
   function mountRecipeList(quantity, ingredients) {
@@ -98,7 +98,7 @@ function ProgressFoodScreen(props) {
       }
     });
     setChecked(checked);
-    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox } }));
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [idRecipe]: checked.checkbox } }));
   }
   async function copyContent(text, event) {
     const separetedText = text.split('/');
@@ -117,7 +117,7 @@ function ProgressFoodScreen(props) {
   }
 
   useEffect(() => {
-    getMealById(id).then((data) => {
+    getMealById(idRecipe).then((data) => {
       setInProgressRecipe(data.meals[0]);
     });
   }, [showCopyAlert]);
