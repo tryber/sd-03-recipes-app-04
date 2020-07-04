@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import share from '../images/shareIcon.svg';
 import { getMealById } from '../services/foodApi';
 
 function ProgressFoodScreen(props) {
@@ -65,6 +67,20 @@ function ProgressFoodScreen(props) {
     setChecked(checked);
     localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox } }));
   }
+  function copyContent(text) {
+    const separetedText = text.split('/');
+    console.log(separetedText);
+    const modifiedText = `${separetedText[0]}//${separetedText[2]}/${separetedText[4]}/${separetedText[5]}`;
+    navigator.clipboard.writeText(modifiedText)
+      .then(() => {
+        alert('Link copiado!');
+        alert(modifiedText);
+        alert('Link copiado!');
+      })
+      .catch((err) => {
+        console.log('Something went wrong', err);
+      });
+  }
 
   useEffect(() => {
     getMealById(id).then((data) => {
@@ -79,7 +95,16 @@ function ProgressFoodScreen(props) {
   return (
     <div>
       <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
-      <button type="button" data-testid="share-btn"> share Button </button>
+
+      <button
+        data-testid="share-btn"
+        type="button"
+        onClick={() => copyContent(`http://localhost:3000/${props.location.pathname}`)}
+        className="favourite"
+      >
+        <img src={share} alt="icon" />
+      </button>
+
       <button type="button" data-testid="favorite-btn"> Favorite Button</button>
       <h1 data-testid="recipe-title"> Ingredients </h1>
       <h3 data-testid="recipe-category">{inProgressRecipe.strCategory}</h3>
