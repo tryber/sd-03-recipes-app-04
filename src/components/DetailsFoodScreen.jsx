@@ -16,6 +16,8 @@ export default function DetailsFoodScreen(props) {
     getMealById(id).then((data) => {
       setRecipeInfo(data.meals[0]);
       setIsLoading(false);
+      
+
     });
     getFirstDrinks().then((data) => setRecomendation(data.drinks));
   }, [id]);

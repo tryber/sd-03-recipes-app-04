@@ -7,7 +7,7 @@ function ProgressFoodScreen(props) {
   /*   const [ingredientsDone, setIngredientsDone] = useState([]);
  */ const checkedlist = {
     checkbox: [
-      { id: 0, checked: false },
+      { id: 0, name: '', checked: false },
       { id: 1, checked: false },
       { id: 2, checked: false },
       { id: 3, checked: false },
@@ -57,11 +57,13 @@ function ProgressFoodScreen(props) {
 
   function changeChecked(event) {
     checked.checkbox.forEach((checkbox) => {
-      console.log(checkbox.id, Number(event.target.id));
-      if (checkbox.id === Number(event.target.id)) checkbox.checked = event.target.checked;
+      if (checkbox.id === Number(event.target.id)) {
+        checkbox.name = event.target.name;
+        checkbox.checked = event.target.checked;
+      }
     });
     setChecked(checked);
-    console.log(checked);
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox } }));
   }
 
   useEffect(() => {
@@ -72,8 +74,11 @@ function ProgressFoodScreen(props) {
   const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
   const data = mountRecipeList(quantity, ingredients);
+  const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
   return (
     <div>
+      {console.log(checkLocalStorage.meals[id])}
       <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
       <button type="button" data-testid="share-btn"> share Button </button>
       <button type="button" data-testid="favorite-btn"> Favorite Button</button>
@@ -82,7 +87,7 @@ function ProgressFoodScreen(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
-            <input id={i} type="checkbox" onClick={(event) => changeChecked(event)} />
+            <input id={i} type="checkbox" name={element.meal} onChange={(event) => changeChecked(event)} />
             <span>{element.meal}</span>
             {element.mensure}
           </span>
@@ -94,6 +99,7 @@ function ProgressFoodScreen(props) {
       <button data-testid="finish-recipe-btn" type="button">
         Finish Recipe Button
       </button>
+
     </div>
   );
 }
