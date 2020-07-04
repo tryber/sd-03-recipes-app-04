@@ -86,7 +86,7 @@ function ProgressFoodScreen(props) {
     getMealById(id).then((data) => {
       setInProgressRecipe(data.meals[0]);
     });
-  }, []);
+  }, [showCopyAlert]);
   const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
   const data = mountRecipeList(quantity, ingredients);
