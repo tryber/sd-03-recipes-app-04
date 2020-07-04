@@ -87,7 +87,7 @@ function ProgressFoodScreen(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
-            <input id={i} type="checkbox" name={element.meal} onChange={(event) => changeChecked(event)} />
+            <input id={i} type="checkbox" checked name={element.meal} onClick={(event) => changeChecked(event)} />
             <span>{element.meal}</span>
             {element.mensure}
           </span>
