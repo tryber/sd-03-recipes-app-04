@@ -199,7 +199,7 @@ function ProgressFoodScreen(props) {
       </div>
       {buttonEnabled
         ? (
-          <button enable data-testid="finish-recipe-btn" type="button">
+          <button enable data-testid="finish-recipe-btn" onClick={(() => props.history.push('/receitas-feitas'))} type="button">
             Finish Recipe Button
           </button>
         )

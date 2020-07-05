@@ -142,9 +142,9 @@ function ProgressDrinkScreen(props) {
     }));
     localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: { [id]: checked.checkbox }, countChecked }));
   }
+
   function copyContent(text) {
     const separetedText = text.split('/');
-    console.log(separetedText);
     const modifiedText = `${separetedText[0]}//${separetedText[2]}/${separetedText[4]}/${separetedText[5]}`;
     navigator.clipboard.writeText(modifiedText)
       .then(() => {
@@ -166,7 +166,6 @@ function ProgressDrinkScreen(props) {
   const data = mountRecipeList(quantity, ingredients);
   const buttonEnabled = countChecked === data.length;
 
-  // const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   return (
     <div>
       <img src={inProgressDrink.strDrinkThumb} alt="" data-testid="recipe-photo" />
@@ -208,7 +207,7 @@ function ProgressDrinkScreen(props) {
       </div>
       {buttonEnabled
         ? (
-          <button enable data-testid="finish-recipe-btn" type="button">
+          <button enable data-testid="finish-recipe-btn" onClick={(() => props.history.push('/receitas-feitas'))} type="button">
             Finish Recipe Button
           </button>
         )
