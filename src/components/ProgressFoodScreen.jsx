@@ -70,8 +70,8 @@ function ProgressFoodScreen(props) {
     return false;
   }
   
-  function clickFavorite(recipeInfo, isFavorite) {
-    setIsFavorite(!isFavorite);
+  function clickFavorite(recipeInfo, isFavoritePar) {
+    setIsFavorite(!isFavoritePar);
     const {
       idMeal, strArea, strCategory, strMeal, strMealThumb,
     } = recipeInfo;
@@ -88,11 +88,11 @@ function ProgressFoodScreen(props) {
     if (!storage) {
       storage = [];
     }
-    if (!isFavorite) {
+    if (!isFavoritePar) {
       const newStorage = [...storage, mealInfo];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
     }
-    if (isFavorite) {
+    if (isFavoritePar) {
       const newStorage = storage.filter((e) => !e.id === idMeal);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
     }

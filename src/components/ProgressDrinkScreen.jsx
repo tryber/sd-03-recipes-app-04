@@ -57,9 +57,8 @@ function ProgressDrinkScreen(props) {
     return false;
   }
 
-  function clickFavorite(recipeInfo, isFavorite) {
-    console.log(recipeInfo);
-    setIsFavorite(!isFavorite);
+  function clickFavorite(recipeInfo, isFavoritePar) {
+    setIsFavorite(!isFavoritePar);
     const {
       idDrink, strDrink, strAlcoholic, strDrinkThumb, strCategory,
     } = recipeInfo;
@@ -76,11 +75,11 @@ function ProgressDrinkScreen(props) {
     if (!storage) {
       storage = [];
     }
-    if (!isFavorite) {
+    if (!isFavoritePar) {
       const newStorage = [...storage, mealInfo];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
     }
-    if (isFavorite) {
+    if (isFavoritePar) {
       const newStorage = storage.filter((e) => !e.id === idDrink);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
     }
@@ -98,11 +97,6 @@ function ProgressDrinkScreen(props) {
 
     return ingredientsDoneList;
   }
-
-  /*   function changeChecked(element, event) {
-    console.log(event.target.checked);
-    setChecked(element);
-  } */
 
   function changeChecked(event) {
     checked.checkbox.forEach((checkbox) => {
