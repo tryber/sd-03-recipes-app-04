@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import './CSS/FavoriteRecipes.css';
 import favorite from '../images/blackHeartIcon.svg';
 import share from '../images/shareIcon.svg';
 import Header from './Header';
+
+function copyToClipboard(type, id) {
+  alert('Link copiado');
+  navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`);
+}
 
 function updateStorage(id, setFavorites) {
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -71,14 +75,12 @@ function FavoriteRecipes() {
               <div data-testid={`${i}-horizontal-top-text`}>
                 {(e.alcoholicOrNot === '') ? <p>{`${e.area} - ${e.category}`}</p> : <p>{e.alcoholicOrNot}</p>}
               </div>
-              <CopyToClipboard text={`http://localhost:3000/${e.type}s/${e.id}`}>
-                <button
-                  type="button"
-                  onClick={() => alert('Link copiado!')}
-                >
-                  <img data-testid={`${i}-horizontal-share-btn`} src={share} alt="share" />
-                </button>
-              </CopyToClipboard>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(e.type, e.id)}
+              >
+                <img data-testid={`${i}-horizontal-share-btn`} src={share} alt="share" />
+              </button>
               <button
                 onClick={() => updateStorage(e.id, setFavorites)}
                 type="button"

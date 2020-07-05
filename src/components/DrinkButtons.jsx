@@ -4,7 +4,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
-import { getDoneLocalStorage, getStartedLocalStorage, getIfHasBeenFavorited } from './FoodButtons';
+import { getDoneLocalStorage, getStartedLocalStorage, getIfHasBeenFavorited, copyToClipboard } from './FoodButtons';
 import { ContextAplication } from '../context/ContextAplication';
 
 function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
@@ -48,15 +48,13 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
           ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
           : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
       </button>
-      <CopyToClipboard text={window.location.href}>
-        <button
-          type="button"
-          onClick={() => alert('Link copiado!')}
-          className="favourite"
-        >
-          <img data-testid="share-btn" src={share} alt="icon" />
-        </button>
-      </CopyToClipboard>
+      <button
+        type="button"
+        onClick={() => copyToClipboard()}
+        className="favourite"
+      >
+        <img data-testid="share-btn" src={share} alt="icon" />
+      </button>
       {goToRoute && <Redirect to={`/bebidas/${id}/in-progress`} />}
     </div>
   );

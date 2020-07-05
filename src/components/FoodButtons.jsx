@@ -6,6 +6,14 @@ import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import { ContextAplication } from '../context/ContextAplication';
 
+export function copyToClipboard() {
+  navigator.clipboard.writeText(window.location.href)
+    .then(() => {
+      alert('Link copiado!');
+    });
+}
+
+
 export function getDoneLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('doneRecipes'));
   let done;
@@ -78,15 +86,13 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
           ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
           : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
       </button>
-      <CopyToClipboard text={window.location.href}>
-        <button
-          type="button"
-          onClick={() => alert('Link copiado!')}
-          className="favourite"
-        >
-          <img data-testid="share-btn" src={share} alt="icon" />
-        </button>
-      </CopyToClipboard>
+      <button
+        type="button"
+        onClick={() => copyToClipboard()}
+        className="favourite"
+      >
+        <img data-testid="share-btn" src={share} alt="icon" />
+      </button>
       {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
     </div>
   );
