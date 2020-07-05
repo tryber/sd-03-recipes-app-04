@@ -11,8 +11,8 @@ function ProgressFoodScreen(props) {
   const [showCopyAlert, setShowCopyAlert] = useState(false);
   // const { recipeInfo, id } = useContext(ContextAplication);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [isButtonEnable, setIsButtonEnable ] = useState(false);
-  const checkedlist = {
+  /*   const [isButtonEnable, setIsButtonEnable] = useState(false);
+ */ const checkedlist = {
     checkbox: [
       { id: 0, name: '', checked: false },
       { id: 1, checked: false },
@@ -43,6 +43,8 @@ function ProgressFoodScreen(props) {
   const { params } = match;
   const { id } = params;
   const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const [countChecked, setCountChecked] = useState(0);
+
   const ingredientsDoneList = [];
 
   function mountRecipeList(quantity, ingredients) {
@@ -58,10 +60,6 @@ function ProgressFoodScreen(props) {
     return ingredientsDoneList;
   }
 
-  /*   function changeChecked(element, event) {
-    console.log(event.target.checked);
-    setChecked(element);
-  } */
   function getIfHasBeenFavorited(id) {
     const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (storage) {
@@ -100,7 +98,18 @@ function ProgressFoodScreen(props) {
   }
 
   function changeChecked(event, value) {
+    console.log(event.target.checked);
     checked.checkbox.forEach((checkbox) => {
+      if (event.target.checked === true) {
+        setCountChecked(countChecked + 1);
+      } if (event.target.checked === false) {
+        console.log(countChecked);
+        if (checkLocalStorage.countChecked < 0) {
+          setCountChecked(countChecked + 1);
+        } else {
+          setCountChecked(countChecked - 1);
+        }
+      }
       if (checkbox.id === Number(event.target.id)) {
         checkbox.name = event.target.name;
         checkbox.checked = event.target.checked;
@@ -113,13 +122,11 @@ function ProgressFoodScreen(props) {
         checkbox: value,
       },
     }));
-    // setChecked(checked);
-    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox } }));
-    console.log();
+    // setCountChecked(checkLocalStorage.countChecked);
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox }, countChecked }));
   }
   function copyContent(text, event) {
     const separetedText = text.split('/');
-    console.log(separetedText);
     const modifiedText = `${separetedText[0]}//${separetedText[2]}/${separetedText[4]}/${separetedText[5]}`;
     navigator.clipboard.writeText(modifiedText)
       .then(() => {
@@ -145,18 +152,17 @@ function ProgressFoodScreen(props) {
 
   useEffect(() => {
     if (checkLocalStorage === null) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox } }));
+      localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox }, countChecked }));
     }
   }, [checkLocalStorage]);
 
   useEffect(() => {
-
-  }, [checked]);
+  }, [checked, countChecked]);
 
   const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
   const data = mountRecipeList(quantity, ingredients);
-
+  const buttonEnabled = countChecked === data.length;
   return (
     <div>
       <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
@@ -186,7 +192,6 @@ function ProgressFoodScreen(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
-            {console.log(checkLocalStorage.meals[id][i].checked)}
             <input id={i} type="checkbox" checked={checkLocalStorage.meals[id][i].checked} name={element.meal} onClick={(event) => changeChecked(event, checked.checkbox[i].checked)} />
             <span>{element.meal}</span>
             {element.mensure}
@@ -196,10 +201,17 @@ function ProgressFoodScreen(props) {
       <div data-testid="instructions">
         {inProgressRecipe.strInstructions}
       </div>
-      <button disabled data-testid="finish-recipe-btn" type="button">
-        Finish Recipe Button
-      </button>
-
+      {buttonEnabled
+        ? (
+          <button enable data-testid="finish-recipe-btn" type="button">
+            Finish Recipe Button
+          </button>
+        )
+        : (
+          <button disabled data-testid="finish-recipe-btn" type="button">
+            Finish Recipe Button
+          </button>
+        )}
     </div>
   );
 }
