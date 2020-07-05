@@ -63,6 +63,21 @@ function ProgressFoodScreen(props) {
   useEffect(() => {
   }, [checked, countChecked]);
 
+  function copyContent(text, event) {
+    const separetedText = text.split('/');
+    const modifiedText = `${separetedText[0]}//${separetedText[2]}/${separetedText[4]}/${separetedText[5]}`;
+    navigator.clipboard.writeText(modifiedText)
+      .then(() => {
+        setShowCopyAlert(true);
+        alert(modifiedText);
+        alert('Link copiado!');
+        alert('Link copiado!');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   function changeChecked(event, value) {
     console.log(event.target.checked);
     checked.checkbox.forEach((checkbox) => {
@@ -141,20 +156,6 @@ function ProgressFoodScreen(props) {
     return ingredientsDoneList;
   }
 
-  function copyContent(text, event) {
-    const separetedText = text.split('/');
-    const modifiedText = `${separetedText[0]}//${separetedText[2]}/${separetedText[4]}/${separetedText[5]}`;
-    navigator.clipboard.writeText(modifiedText)
-      .then(() => {
-        setShowCopyAlert(true);
-        alert(modifiedText);
-        alert('Link copiado!');
-        alert('Link copiado!');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
   
   const data = mountRecipeList(quantity, ingredients);
   const buttonEnabled = countChecked === data.length;
