@@ -1,16 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { getIfHasBeenFavorited } from './FoodButtons';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import { getMealById } from '../services/foodApi';
-import { ContextAplication } from '../context/ContextAplication';
+// import { ContextAplication } from '../context/ContextAplication';
 
 function ProgressFoodScreen(props) {
   const [inProgressRecipe, setInProgressRecipe] = useState([]);
   const [showCopyAlert, setShowCopyAlert] = useState(false);
-  const { recipeInfo, id } = useContext(ContextAplication);
+  // const { recipeInfo, id } = useContext(ContextAplication);
   const [isFavorite, setIsFavorite] = useState(false);
   const checkedlist = {
     checkbox: [
@@ -41,7 +40,7 @@ function ProgressFoodScreen(props) {
   const [checked, setChecked] = useState(checkedlist);
   const { match } = props;
   const { params } = match;
-  const { id : idRecipe } = params;
+  const { id } = params;
   const ingredientsDoneList = [];
 
   function mountRecipeList(quantity, ingredients) {
@@ -61,9 +60,18 @@ function ProgressFoodScreen(props) {
     console.log(event.target.checked);
     setChecked(element);
   } */
-
-  function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
-    setIsFavorite((fav) => !fav);
+  function getIfHasBeenFavorited(id) {
+    console.log(id);
+    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (storage) {
+      const favorited = storage.find((e) => e.id === id);
+      return favorited;
+    }
+    return false;
+  }
+  
+  function clickFavorite(recipeInfo, isFavorite) {
+    setIsFavorite(!isFavorite);
     const {
       idMeal, strArea, strCategory, strMeal, strMealThumb,
     } = recipeInfo;
@@ -98,7 +106,7 @@ function ProgressFoodScreen(props) {
       }
     });
     setChecked(checked);
-    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [idRecipe]: checked.checkbox } }));
+    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox } }));
   }
   async function copyContent(text, event) {
     const separetedText = text.split('/');
@@ -117,10 +125,15 @@ function ProgressFoodScreen(props) {
   }
 
   useEffect(() => {
-    getMealById(idRecipe).then((data) => {
+    getMealById(id).then((data) => {
       setInProgressRecipe(data.meals[0]);
     });
-  }, [showCopyAlert]);
+  }, []);
+
+  useEffect(() => {
+    if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
+  }, [id]);
+  
   const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
   const data = mountRecipeList(quantity, ingredients);
@@ -142,7 +155,7 @@ function ProgressFoodScreen(props) {
       <button
         type="button"
         className="favourite"
-        onClick={() => clickFavorite(setIsFavorite, recipeInfo, isFavorite)}
+        onClick={() => clickFavorite(inProgressRecipe, isFavorite)}
         src={favorite}
       >
         {getIfHasBeenFavorited(id)
