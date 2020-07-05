@@ -11,6 +11,7 @@ function ProgressFoodScreen(props) {
   const [showCopyAlert, setShowCopyAlert] = useState(false);
   // const { recipeInfo, id } = useContext(ContextAplication);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isButtonEnable, setIsButtonEnable ] = useState(false);
   const checkedlist = {
     checkbox: [
       { id: 0, name: '', checked: false },
@@ -41,6 +42,7 @@ function ProgressFoodScreen(props) {
   const { match } = props;
   const { params } = match;
   const { id } = params;
+  const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const ingredientsDoneList = [];
 
   function mountRecipeList(quantity, ingredients) {
@@ -61,7 +63,6 @@ function ProgressFoodScreen(props) {
     setChecked(element);
   } */
   function getIfHasBeenFavorited(id) {
-    console.log(id);
     const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (storage) {
       const favorited = storage.find((e) => e.id === id);
@@ -69,7 +70,7 @@ function ProgressFoodScreen(props) {
     }
     return false;
   }
-  
+
   function clickFavorite(recipeInfo, isFavoritePar) {
     setIsFavorite(!isFavoritePar);
     const {
@@ -98,15 +99,23 @@ function ProgressFoodScreen(props) {
     }
   }
 
-  function changeChecked(event) {
+  function changeChecked(event, value) {
     checked.checkbox.forEach((checkbox) => {
       if (checkbox.id === Number(event.target.id)) {
         checkbox.name = event.target.name;
         checkbox.checked = event.target.checked;
       }
     });
-    setChecked(checked);
+    setChecked((prevState) => ({
+      ...prevState,
+      checked: {
+        ...prevState.checkbox.checked,
+        checkbox: value,
+      },
+    }));
+    // setChecked(checked);
     localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox } }));
+    console.log();
   }
   function copyContent(text, event) {
     const separetedText = text.split('/');
@@ -133,11 +142,20 @@ function ProgressFoodScreen(props) {
   useEffect(() => {
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
   }, [id]);
-  
+
+  useEffect(() => {
+    if (checkLocalStorage === null) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox } }));
+    }
+  }, [checkLocalStorage]);
+
+  useEffect(() => {
+
+  }, [checked]);
+
   const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
   const data = mountRecipeList(quantity, ingredients);
-  const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   return (
     <div>
@@ -168,7 +186,8 @@ function ProgressFoodScreen(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
-            <input id={i} type="checkbox" checked name={element.meal} onClick={(event) => changeChecked(event)} />
+            {console.log(checkLocalStorage.meals[id][i].checked)}
+            <input id={i} type="checkbox" checked={checkLocalStorage.meals[id][i].checked} name={element.meal} onClick={(event) => changeChecked(event, checked.checkbox[i].checked)} />
             <span>{element.meal}</span>
             {element.mensure}
           </span>
@@ -177,7 +196,7 @@ function ProgressFoodScreen(props) {
       <div data-testid="instructions">
         {inProgressRecipe.strInstructions}
       </div>
-      <button data-testid="finish-recipe-btn" type="button">
+      <button disabled data-testid="finish-recipe-btn" type="button">
         Finish Recipe Button
       </button>
 

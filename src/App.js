@@ -24,7 +24,6 @@ import AplicationProvider from './context/ContextAplication';
 function App() {
   return (
     <AplicationProvider>
-      {localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: 'checked.checkbox' }))}
       <Switch>
         <Route exact path="/" component={LoginScreen} />
         <Route exact path="/comidas" component={MainFoodScreen} />
