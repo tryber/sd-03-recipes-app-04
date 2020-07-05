@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './CSS/FavoriteRecipes.css';
 import favorite from '../images/blackHeartIcon.svg';
 import share from '../images/shareIcon.svg';
@@ -8,6 +7,11 @@ import Header from './Header';
 import meal from '../images/meal.svg';
 import drink from '../images/drink.svg';
 import filter from '../images/filter.svg';
+
+function copyToClipboard(type, id) {
+  navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)
+    .then(() => alert('Link copiado'));
+}
 
 function getColors() {
   const r = Math.floor(Math.random() * 256);
@@ -82,21 +86,19 @@ function FavoriteRecipes() {
         <div className="favorite-recipes-container">
           {favorites.map((e, i) => (
             (
-              <div className="favorite-recipes-card" style={{backgroundColor: getColors()}}>
+              <div className="favorite-recipes-card" style={{ backgroundColor: getColors() }}>
                 <Link to={`/${e.type}s/${e.id}`}><img data-testid={`${i}-horizontal-image`} src={e.image} alt="favorite" width="150px" /></Link>
                 <Link to={`/${e.type}s/${e.id}`}><p data-testid={`${i}-horizontal-name`}>{e.name}</p></Link>
                 <div data-testid={`${i}-horizontal-top-text`}>
                   {(e.alcoholicOrNot === '') ? <p>{`${e.area} - ${e.category}`}</p> : <p>{e.alcoholicOrNot}</p>}
                 </div>
                 <div className="favorite-and-share">
-                  <CopyToClipboard text={`http://localhost:3000/${e.type}s/${e.id}`}>
-                    <button
-                      type="button"
-                      onClick={() => alert('Link copiado!')}
-                    >
-                      <img data-testid={`${i}-horizontal-share-btn`} src={share} alt="share" />
-                    </button>
-                  </CopyToClipboard>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard(e.type, e.id)}
+                  >
+                    <img data-testid={`${i}-horizontal-share-btn`} src={share} alt="share" />
+                  </button>
                   <button
                     onClick={() => updateStorage(e.id, setFavorites)}
                     type="button"

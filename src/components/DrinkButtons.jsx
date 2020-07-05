@@ -1,10 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
-import { getDoneLocalStorage, getStartedLocalStorage, getIfHasBeenFavorited } from './FoodButtons';
+import { getDoneLocalStorage, getStartedLocalStorage, getIfHasBeenFavorited, copyToClipboard } from './FoodButtons';
 import { ContextAplication } from '../context/ContextAplication';
 
 function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
@@ -56,15 +55,13 @@ function renderShareButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)
 function renderFavoriteButton() {
   return (
     <div className="share-and-favourite">
-      <CopyToClipboard text={window.location.href}>
-        <button
-          type="button"
-          onClick={() => alert('Link copiado!')}
-          className="favourite"
-        >
-          <img data-testid="share-btn" src={share} alt="icon" />
-        </button>
-      </CopyToClipboard>
+      <button
+        type="button"
+        onClick={() => copyToClipboard()}
+        className="favourite"
+      >
+        <img data-testid="share-btn" src={share} alt="icon" />
+      </button>
     </div>
   );
 }

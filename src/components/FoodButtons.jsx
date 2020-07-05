@@ -1,10 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import { ContextAplication } from '../context/ContextAplication';
+
+export function copyToClipboard() {
+  navigator.clipboard.writeText(window.location.href)
+    .then(() => alert('Link copiado'));
+}
 
 export function getDoneLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -86,15 +90,13 @@ function renderFavoriteButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, 
 function renderShareButton() {
   return (
     <div className="share-and-favourite">
-      <CopyToClipboard text={navigator.clipboard.writeText(window.location.href)}>
-        <button
-          type="button"
-          onClick={() => alert('Link copiado!')}
-          className="favourite"
-        >
-          <img data-testid="share-btn" src={share} alt="icon" />
-        </button>
-      </CopyToClipboard>
+      <button
+        type="button"
+        onClick={() => copyToClipboard()}
+        className="favourite"
+      >
+        <img data-testid="share-btn" src={share} alt="icon" />
+      </button>
     </div>
   );
 }
