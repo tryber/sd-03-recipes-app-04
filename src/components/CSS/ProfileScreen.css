@@ -1,24 +1,30 @@
-.header-profile {
-  align-items: center;
-  background: #c4c4c4;
-  display: flex;
-  height: 58px;
-  margin-bottom: 60px;
-  width: 360px;
-}
-
-p {
-  font-size: 35px;
-  margin-left: 28%;
-}
-
-button {
-  background-color: #c4c4c4;
-  border-radius: 5px;
-  height: 53px;
-  width: 329px;
-}
-
 .container-profile {
+  height: 100vh;
+  background-image: url(../../images/loginbackground.jpg);
+}
+
+.profile-screen-buttons {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 500px;
+}
+
+.profile-screen-buttons h1 {
+  font-size: 20px;
+  margin: 100px 0 0 0;
+}
+
+.profile-screen-buttons button {
+  background: rgb(32, 193, 214);
+  border-radius: 50px;
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.25);
+  color: black;
+  font-size: 30px;
+  height: 82px;
   text-align: center;
+  line-height: 50px;
+  width: 300px;
 }

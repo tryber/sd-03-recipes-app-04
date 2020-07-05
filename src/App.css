@@ -1,7 +1,3 @@
-html {
-  height: 100vh;
-  width: 360px;
-}
 
 #searched-item {
   display: block;
@@ -32,23 +28,7 @@ html {
   width: 100%;
 }
  
-.product-pic-recomendation > img, h5 {
-  margin: 30px;
-  text-align: center;
-  width: 150px;
-}
 
-.product-pic {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.product-pic-recomendation {
-  align-items: center;
-  overflow-x: auto;
-  display: flex;
-}
 
 span {
   margin: 5px;
@@ -58,40 +38,3 @@ p {
   text-align: justify;
 }
 
-.youtube {
-  width: 350px;
-}
-
-.start-button {
-  bottom: 0px;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  width: 100%;
-}
-
-.share-and-favourite > button {
-  background-color: orange;
-  margin-bottom: 50px;
-  width: 50%;
-}
-
-.share-and-favourite > img {
-  display: inline-block;
-  text-align: center;
-  background-color: orange;
-}
-
-.share-and-favourite {
-  display: flex;
-  background-color: orange;
-  margin-bottom: 50px;
-}
-
-.search-area {
-  margin-top: 50px;
-}
-
-.favorite-filter-buttons {
-  margin-top: 50px;
-}

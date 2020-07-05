@@ -1,12 +1,64 @@
 .favorite-recipes-container {
   display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  width: 360px;
+  justify-content: space-around;
 }
-
-
+.favorite-recipes-card a img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
 .favorite-recipes-card {
+  position: relative;
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 5px;
   width: 150px;
+  /* background-color: thistle; */
+  border-radius: 20px;
+}
+
+.favorite-recipes-card div p {
+  font-size: 0.75rem;
+}
+
+.favorite-recipes-screen {
+  margin-top: 70px;
+  height: 90vh;
+  background-image: url(../../images/loginbackground.jpg);
+}
+
+.filter-and-cards {
+  margin-top: 70px;
+}
+
+.favorite-filter-buttons {
+  position: relative;
+  top: 20px;
+}
+
+.favorite-and-share {
+  position: absolute;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  top: 90px
+}
+
+.favorite-and-share button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(32, 193, 214);
+}
+
+.favorite-and-share button img {
+  width: 15px;
+  height: 15px;
 }

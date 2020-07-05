@@ -12,17 +12,17 @@ function MealsList(Data) {
       {Data.reduce((arr, e, i) => {
         if (i < 12) {
           return [...arr,
-            <Link to={`/comidas/${e.idMeal}`}>
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img
-                  src={e.strMealThumb}
-                  alt="thumbnail"
-                  width="150px"
-                  data-testid={`${i}-card-img`}
-                />
-                <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
-              </div>
-            </Link>,
+          <Link to={`/comidas/${e.idMeal}`}>
+            <div className="product-pic" data-testid={`${i}-recipe-card`}>
+              <img
+                src={e.strMealThumb}
+                alt="thumbnail"
+                width="150px"
+                data-testid={`${i}-card-img`}
+              />
+              <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
+            </div>
+          </Link>,
           ];
         }
         return arr;
@@ -34,6 +34,7 @@ function MealsList(Data) {
 function renderAreaFilter(areas, setAreaFilter, areaFilter, setMealsByArea) {
   return (
     <select
+      className="select-filter"
       data-testid="explore-by-area-dropdown"
       onChange={(e) => {
         getMealByArea(e.target.value).then((data) => setMealsByArea(data.meals));
@@ -60,17 +61,17 @@ function ShowResultsByArea(Data, mealsByArea, areaFilter) {
       mealsByArea.reduce((arr, e, i) => {
         if (i < 12) {
           return [...arr,
-            <Link to={`/comidas/${e.idMeal}`}>
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img
-                  src={e.strMealThumb}
-                  alt="thumbnail"
-                  width="150px"
-                  data-testid={`${i}-card-img`}
-                />
-                <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
-              </div>
-            </Link>,
+          <Link to={`/comidas/${e.idMeal}`}>
+            <div className="product-pic" data-testid={`${i}-recipe-card`}>
+              <img
+                src={e.strMealThumb}
+                alt="thumbnail"
+                width="150px"
+                data-testid={`${i}-card-img`}
+              />
+              <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
+            </div>
+          </Link>,
           ];
         }
         return arr;

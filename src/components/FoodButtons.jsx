@@ -65,9 +65,9 @@ function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
   }
 }
 
-function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, goToRoute, id) {
+function renderFavoriteButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id) {
   return (
-    <div>
+    <div className="share-and-favourite">
       <button
         type="button"
         className="favourite"
@@ -78,7 +78,15 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
           ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
           : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
       </button>
-      <CopyToClipboard text={window.location.href}>
+      {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
+    </div>
+  );
+}
+
+function renderShareButton() {
+  return (
+    <div className="share-and-favourite">
+      <CopyToClipboard text={navigator.clipboard.writeText(window.location.href)}>
         <button
           type="button"
           onClick={() => alert('Link copiado!')}
@@ -87,7 +95,6 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
           <img data-testid="share-btn" src={share} alt="icon" />
         </button>
       </CopyToClipboard>
-      {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
     </div>
   );
 }
@@ -103,6 +110,7 @@ function Buttons() {
 
   return (
     <div className="bottom-buttons">
+      {renderFavoriteButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
       {!getDoneLocalStorage(id) && !getStartedLocalStorage(id) && (
         <button
           data-testid="start-recipe-btn"
@@ -123,9 +131,7 @@ function Buttons() {
           Continuar Receita
         </button>
       )}
-      <div className="share-and-favourite">
-        {renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
-      </div>
+      {renderShareButton()}
       {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
     </div>
   );

@@ -8,8 +8,11 @@ function BasicInfo() {
   const quantity = Object.keys(recipeInfo).filter((e) => e.includes('strIngredient'));
   const ingredients = (Object.keys(recipeInfo).filter((e) => e.includes('strMeasure')));
   return (
-    <div>
-      <img src={recipeInfo.strDrinkThumb} data-testid="recipe-photo" alt="thumb" width="100%" />
+    <div className="basic-info">
+      <div className="wrapper">
+        <div className="square" />
+        <img src={recipeInfo.strDrinkThumb} data-testid="recipe-photo" alt="thumb" width="100%" />
+      </div>
       <h1 data-testid="recipe-title">{recipeInfo.strDrink}</h1>
       <h2 data-testid="recipe-category">{recipeInfo.strAlcoholic}</h2>
       <h3>Ingredientes</h3>

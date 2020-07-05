@@ -5,6 +5,14 @@ import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
 import './CSS/MainFoodScreen.css';
 import Header from './Header';
+import ordinary from '../images/ordinary.svg';
+import cocktail from '../images/cocktail.svg';
+import cocoa from '../images/cocoa.svg';
+import unknown from '../images/unknown.svg';
+import shake from '../images/shake.svg';
+import filter from '../images/filter.svg';
+
+const drinkPics = [ordinary, cocktail, shake, unknown, cocoa];
 
 function FilterButtons(Categories, handleClick) {
   return (
@@ -17,6 +25,7 @@ function FilterButtons(Categories, handleClick) {
           onClick={handleClick}
           className="button-main-screen"
         >
+          <img src={filter} alt="filter" width="20px" />
           All
         </button>
         {Categories.reduce((arr, e, i) => {
@@ -29,6 +38,7 @@ function FilterButtons(Categories, handleClick) {
                 onClick={handleClick}
                 className="button-main-screen"
               >
+                <img src={drinkPics[i]} alt={drinkPics[i]} width="20px" />
                 {e.strCategory}
               </button>,
             ];
@@ -47,8 +57,8 @@ function DrinksList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/bebidas/${e.idDrink}`}>
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+              <div className={`product-pic-${i} product-pic`} data-testid={`${i}-recipe-card`}>
+                <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
                 <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
               </div>
             </Link>,

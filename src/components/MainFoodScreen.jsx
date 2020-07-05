@@ -5,6 +5,14 @@ import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
 import Header from './Header';
 import './CSS/MainFoodScreen.css';
+import chicken from '../images/chicken.svg';
+import beef from '../images/beef.svg';
+import goat from '../images/goat.svg';
+import dessert from '../images/dessert.svg';
+import breakfast from '../images/breakfast.svg';
+import filter from '../images/filter.svg';
+
+const filterPics = [beef, breakfast, chicken, dessert, goat]
 
 function FilterButtons(Categories, handleClick) {
   return (
@@ -16,6 +24,7 @@ function FilterButtons(Categories, handleClick) {
         onClick={handleClick}
         className="button-main-screen"
       >
+        <img src={filter} width="20px" alt="filter" />
         All
       </button>
       {Categories.reduce((arr, e, i) => {
@@ -28,6 +37,7 @@ function FilterButtons(Categories, handleClick) {
               onClick={handleClick}
               className="button-main-screen"
             >
+              <img src={filterPics[i]} width="20px"/>
               {e.strCategory}
             </button>,
           ];
@@ -46,11 +56,11 @@ function MealsList(Data) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
               <div
-                className="product-pic"
+                className={`product-pic-${i} product-pic`}
                 data-testid={`${i}-recipe-card`}
               >
-                <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
-                <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
+                <img src={e.strMealThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
+                <p data-testid={`${i}-card-name`}>{e.strMeal}</p>
               </div>
             </Link>,
           ];

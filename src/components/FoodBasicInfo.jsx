@@ -7,8 +7,11 @@ function BasicInfo() {
   const quantity = Object.keys(recipeInfo).filter((e) => e.includes('strIngredient'));
   const ingredients = (Object.keys(recipeInfo).filter((e) => e.includes('strMeasure')));
   return (
-    <div>
-      <img src={recipeInfo.strMealThumb} data-testid="recipe-photo" alt="thumb" width="100%" />
+    <div className="basic-info">
+      <div className="wrapper">
+        <div className="square" />
+        <img src={recipeInfo.strMealThumb} data-testid="recipe-photo" alt="thumb" />
+      </div>
       <h1 data-testid="recipe-title">{recipeInfo.strMeal}</h1>
       <h2 data-testid="recipe-category">{recipeInfo.strCategory}</h2>
       <h3>Ingredientes</h3>
@@ -25,7 +28,7 @@ function BasicInfo() {
       }, [])}
       <h3>Instruções</h3>
       <p data-testid="instructions">{recipeInfo.strInstructions}</p>
-      <ReactPlayer width="350px" data-testid="video" height="200px" url={recipeInfo.strYoutube} />
+      <ReactPlayer width="100%" data-testid="video" height="200px" url={recipeInfo.strYoutube} />
       <h3>Recomedações</h3>
       <div className="product-pic-recomendation">
         {recomendation.reduce((arr, e, i) => {
@@ -36,7 +39,6 @@ function BasicInfo() {
                   src={e.strDrinkThumb}
                   data-testid="recipe-photo"
                   alt="thumbnail"
-                  width="200px"
                 />
                 <h5 data-testid={`${i}-recomendation-title`}>{e.strDrink}</h5>
               </div>,

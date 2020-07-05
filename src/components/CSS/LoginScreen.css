@@ -1,16 +1,16 @@
 .login-screen {
   align-items: center;
-  background-color: ghostwhite;
+  background-image: url(../../images/loginbackground.jpg);
+  background-size: cover;
   border: 1px solid black;
   box-shadow: gray 5px 5px 2px;
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 100vh;
   justify-content: center;
   margin: auto;
-  margin-top: 20vh;
   text-align: center;
-  width: 360px;
+  width: 100%;
 }
 
 h2 {
@@ -21,26 +21,35 @@ h2 {
   line-height: 46px;
 }
 
-.email {
-  background: white;
-  border: 1px solid black;
-  box-sizing: border-box;
-  height: 50px;
-  margin-top: 10px;
-  width: 293px;
-}
-
-.password {
-  background: white;
-  border: 1px solid black;
-  box-sizing: border-box;
-  height: 50px;
-  margin-top: 10px;
-  width: 293px;
-}
-
-button {
-  background: #6ce34f;
+.btn-login {
+  width: 40%;
   margin-top: 20px;
-  width: 260px;
+  background-color: rgb(32, 193, 214);
+}
+
+.btn-login:disabled {
+  opacity: 0.7;
+  width: 40%;
+  margin-top: 20px;
+  background-color: rgb(32, 193, 214);
+}
+
+.input-login {
+ margin: auto;
+  width: 70%;
+  color: rgb(32, 193, 214);
+}
+
+.app-name {
+  color: rgb(32, 193, 214);
+  font-size: 4rem;
+  font-family: 'Chalkduster';
+}
+
+.input-login {
+  background-color: transparent;
+  border: transparent;
+  border-bottom: 2px solid rgb(32, 193, 214);
+  padding: 15px 0;
+  color: rgb(32, 193, 214);
 }

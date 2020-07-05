@@ -18,27 +18,30 @@ function ExploreFoodIngredientScreen() {
     <div>
       <Header screen={'Explorar Ingredientes'} />
       <div className="food-screen">
-        {ingredients.reduce((arr, e, i) => {
-          if (i < 12) {
-            return [...arr,
+        <div className="ingridients-list">
+          {ingredients.reduce((arr, e, i) => {
+            if (i < 12) {
+              return [...arr,
               <Link to="/comidas">
                 <button
-                  className="product-pic"
-                  data-testid={`${i}-ingredient-card`}
+                  type="button"
+                  className={`product-pic-${i} product-pic`}
+                  data-testid={`${i}-ingredient-card `}
                   onClick={() => setingredientFilter(e.strIngredient)}
                 >
                   <img
                     src={`https://www.themealdb.com/images/ingredients/${e.strIngredient}-Small.png`}
-                    alt="thumbnail" width="150px"
+                    alt="thumbnail" width="120px"
                     data-testid={`${i}-card-img`}
                   />
                   <h5 data-testid={`${i}-card-name`}>{e.strIngredient}</h5>
                 </button>
               </Link>,
-            ];
-          }
-          return arr;
-        }, [])}
+              ];
+            }
+            return arr;
+          }, [])}
+        </div>
       </div>
       <InferiorMenu />
     </div>

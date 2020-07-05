@@ -35,9 +35,9 @@ function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
   }
 }
 
-function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, goToRoute, id) {
+function renderShareButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id) {
   return (
-    <div>
+    <div className="share-and-favourite">
       <button
         type="button"
         className="favourite"
@@ -48,6 +48,14 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
           ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
           : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
       </button>
+      {goToRoute && <Redirect to={`/bebidas/${id}/in-progress`} />}
+    </div>
+  );
+}
+
+function renderFavoriteButton() {
+  return (
+    <div className="share-and-favourite">
       <CopyToClipboard text={window.location.href}>
         <button
           type="button"
@@ -57,7 +65,6 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
           <img data-testid="share-btn" src={share} alt="icon" />
         </button>
       </CopyToClipboard>
-      {goToRoute && <Redirect to={`/bebidas/${id}/in-progress`} />}
     </div>
   );
 }
@@ -72,6 +79,7 @@ function Buttons() {
 
   return (
     <div className="bottom-buttons">
+      {renderShareButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
       {!getDoneLocalStorage(id) && !getStartedLocalStorage(id) && (
         <button
           data-testid="start-recipe-btn"
@@ -92,9 +100,7 @@ function Buttons() {
           Continuar Receita
         </button>
       )}
-      <div className="share-and-favourite">
-        {renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
-      </div>
+      {renderFavoriteButton()}
       {goToRoute && <Redirect to={`/bebidas/${id}/in-progress`} />}
     </div>
   );

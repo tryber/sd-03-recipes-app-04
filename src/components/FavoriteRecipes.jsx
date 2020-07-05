@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import CopyToClipboard from 'react-copy-to-clipboard';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './CSS/FavoriteRecipes.css';
 import favorite from '../images/blackHeartIcon.svg';
 import share from '../images/shareIcon.svg';
 import Header from './Header';
+import meal from '../images/meal.svg';
+import drink from '../images/drink.svg';
+import filter from '../images/filter.svg';
+
+function getColors() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
+}
 
 function updateStorage(id, setFavorites) {
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -29,24 +39,30 @@ function renderfilterButtons(setFavorites) {
   return (
     <div className="favorite-filter-buttons">
       <button
+        className="button-main-screen"
         data-testid="filter-by-food-btn"
         onClick={() => filterBy(setFavorites, 'comida')}
         type="button"
       >
+        <img src={meal} alt="meal" width="30px" />
         Food
       </button>
       <button
+        className="button-main-screen"
         data-testid="filter-by-drink-btn"
         onClick={() => filterBy(setFavorites, 'bebida')}
         type="button"
       >
+        <img src={drink} alt="drink" width="30px" />
         Drinks
       </button>
       <button
+        className="button-main-screen"
         data-testid="filter-by-all-btn"
         onClick={() => getFavorites(setFavorites)}
         type="button"
       >
+        <img src={filter} alt="filter" width="20px" />
         All
       </button>
     </div>
@@ -61,33 +77,37 @@ function FavoriteRecipes() {
   return (
     <div>
       <Header screen="Receitas Favoritas" />
-      {renderfilterButtons(setFavorites)}
-      <div className="favorite-recipes-container">
-        {favorites.map((e, i) => (
-          (
-            <div className="favorite-recipes-card">
-              <Link to={`/${e.type}s/${e.id}`}><img data-testid={`${i}-horizontal-image`} src={e.image} alt="favorite" width="150px" /></Link>
-              <Link to={`/${e.type}s/${e.id}`}><p data-testid={`${i}-horizontal-name`}>{e.name}</p></Link>
-              <div data-testid={`${i}-horizontal-top-text`}>
-                {(e.alcoholicOrNot === '') ? <p>{`${e.area} - ${e.category}`}</p> : <p>{e.alcoholicOrNot}</p>}
+      <div className="favorite-recipes-screen">
+        {renderfilterButtons(setFavorites)}
+        <div className="favorite-recipes-container">
+          {favorites.map((e, i) => (
+            (
+              <div className="favorite-recipes-card" style={{backgroundColor: getColors()}}>
+                <Link to={`/${e.type}s/${e.id}`}><img data-testid={`${i}-horizontal-image`} src={e.image} alt="favorite" width="150px" /></Link>
+                <Link to={`/${e.type}s/${e.id}`}><p data-testid={`${i}-horizontal-name`}>{e.name}</p></Link>
+                <div data-testid={`${i}-horizontal-top-text`}>
+                  {(e.alcoholicOrNot === '') ? <p>{`${e.area} - ${e.category}`}</p> : <p>{e.alcoholicOrNot}</p>}
+                </div>
+                <div className="favorite-and-share">
+                  <CopyToClipboard text={`http://localhost:3000/${e.type}s/${e.id}`}>
+                    <button
+                      type="button"
+                      onClick={() => alert('Link copiado!')}
+                    >
+                      <img data-testid={`${i}-horizontal-share-btn`} src={share} alt="share" />
+                    </button>
+                  </CopyToClipboard>
+                  <button
+                    onClick={() => updateStorage(e.id, setFavorites)}
+                    type="button"
+                  >
+                    <img data-testid={`${i}-horizontal-favorite-btn`} src={favorite} alt="favorite" />
+                  </button>
+                </div>
               </div>
-              <CopyToClipboard text={`http://localhost:3000/${e.type}s/${e.id}`}>
-                <button
-                  type="button"
-                  onClick={() => alert('Link copiado!')}
-                >
-                  <img data-testid={`${i}-horizontal-share-btn`} src={share} alt="share" />
-                </button>
-              </CopyToClipboard>
-              <button
-                onClick={() => updateStorage(e.id, setFavorites)}
-                type="button"
-              >
-                <img data-testid={`${i}-horizontal-favorite-btn`} src={favorite} alt="favorite" />
-              </button>
-            </div>
-          )
-        ))}
+            )
+          ))}
+        </div>
       </div>
     </div>
   );

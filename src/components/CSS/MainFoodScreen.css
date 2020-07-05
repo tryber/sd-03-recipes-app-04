@@ -1,6 +1,8 @@
 .food-screen {
-  margin: 60px 0;
+  margin: 70px 0;
   width: 360px;
+  background-image: url(../../images/loginbackground.jpg);
+  background-size: cover;
 }
 
 .recipes-results {
@@ -10,42 +12,115 @@
   padding: 5px;
 }
 
-.recipes-results > img , h5 {
+.recipes-results p {
   margin: 10px;
   text-align: center;
   width: 150px;
+  font-size: 1.2rem;
+  max-height: 50px;
 }
 
 .button-div {
+  padding-top: 20px;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-pic {
+  width: 160px;
+  height: 200px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10%;
+}
+
+.product-pic-0 {
+  background-color: blanchedalmond;
+}
+.product-pic-1 {
+  background-color: rgb(113, 201, 91);
+}
+.product-pic-2 {
+  background-color: rgb(185, 73, 176);
+}
+.product-pic-3 {
+  background-color: rgb(188, 236, 99);
+}
+.product-pic-4 {
+  background-color: rgb(201, 100, 33);
+}
+.product-pic-5 {
+  background-color: rgb(143, 143, 194);
+}
+.product-pic-6 {
+  background-color: rgb(128, 56, 66);
+}
+.product-pic-7 {
+  background-color: rgb(156, 180, 46);
+}
+
+.product-pic-8 {
+  background-color: rgb(146, 41, 55);
+}
+
+.product-pic-9 {
+  background-color: rgb(13, 117, 91);
+}
+
+.product-pic-10 {
+  background-color: rgb(139, 112, 20);
+}
+
+.product-pic-11 {
+  background-color: rgb(126, 177, 111);
+}
+
+.product-pic-12 {
+  background-color: rgb(156, 155, 211);
 }
 
 .button-main-screen {
-  background-color: #4caf50;
+  background-color: rgb(71, 179, 152);
   border: none;
-  border-radius: 8px;
+  border-radius: 50px;
+  font-weight: 800;
   color: white;
   display: inline-block;
-  font-size: 14px;
-  margin: 2px 1px;
+  font-size: 10px;
+  margin: 5px 10px;
   padding: 2px;
   text-align: center;
   text-decoration: none;
   width: 100px;
+  height: 50px;
+  opacity: 0.8;
 }
 
 .loader {
   animation: spin 2s linear infinite;
-  border: 16px solid #f3f3f3; /* Light grey */
+  border: 16px solid #f3f3f3;
+  /* Light grey */
   border-radius: 50%;
-  border-top: 16px solid black; /* Blue */
+  border-top: 16px solid black;
+  /* Blue */
   height: 60px;
   width: 60px;
 }
 
 @keyframes spin {
-
-  0% { transform: rotate(0deg); }
-
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
+
+.recipe-image {
+  border-radius: 50%;
+}
+
