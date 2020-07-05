@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import share from '../images/shareIcon.svg';
+import notFavorite from '../images/whiteHeartIcon.svg';
+import favorite from '../images/blackHeartIcon.svg';
 import { getDrinkByID } from '../services/drink-api';
 
 function ProgressDrinkScreen(props) {
   const [inProgressDrink, setInProgressDrink] = useState([]);
   const [showCopyAlert, setShowCopyAlert] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const { match } = props;
   const { params } = match;
   const { id } = params;
@@ -43,6 +46,45 @@ function ProgressDrinkScreen(props) {
       setInProgressDrink(data.drinks[0]);
     });
   }, []);
+
+  function getIfHasBeenFavorited(id) {
+    console.log(id);
+    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (storage) {
+      const favorited = storage.find((e) => e.id === id);
+      return favorited;
+    }
+    return false;
+  }
+
+  function clickFavorite(recipeInfo, isFavorite) {
+    console.log(recipeInfo);
+    setIsFavorite(!isFavorite);
+    const {
+      idDrink, strDrink, strAlcoholic, strDrinkThumb, strCategory,
+    } = recipeInfo;
+    const mealInfo = {
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    };
+    let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (!storage) {
+      storage = [];
+    }
+    if (!isFavorite) {
+      const newStorage = [...storage, mealInfo];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
+    }
+    if (isFavorite) {
+      const newStorage = storage.filter((e) => !e.id === idDrink);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
+    }
+  }
 
   function mountRecipeList(quantity, ingredients) {
     quantity.map((e, i) => (inProgressDrink[e] !== null && inProgressDrink[e] !== ''
@@ -89,6 +131,10 @@ function ProgressDrinkScreen(props) {
     alert('Link copiado!');
   }
 
+  useEffect(() => {
+    if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
+  }, [id]);
+
   const quantity = Object.keys(inProgressDrink).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressDrink).filter((e) => e.includes('strMeasure'));
   const data = mountRecipeList(quantity, ingredients);
@@ -105,7 +151,16 @@ function ProgressDrinkScreen(props) {
       >
         <img src={share} alt="icon" />
       </button>
-      <button type="button" data-testid="favorite-btn"> Favorite Button</button>
+      <button
+        type="button"
+        className="favourite"
+        onClick={() => clickFavorite(inProgressDrink, isFavorite)}
+        src={favorite}
+      >
+        {getIfHasBeenFavorited(id)
+          ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
+          : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
+      </button>
       <h1 data-testid="recipe-title">
         {inProgressDrink.strMeal}
       </h1>

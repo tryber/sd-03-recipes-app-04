@@ -108,11 +108,11 @@ function ProgressFoodScreen(props) {
     setChecked(checked);
     localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox } }));
   }
-  async function copyContent(text, event) {
+  function copyContent(text, event) {
     const separetedText = text.split('/');
     console.log(separetedText);
     const modifiedText = `${separetedText[0]}//${separetedText[2]}/${separetedText[4]}/${separetedText[5]}`;
-    await navigator.clipboard.writeText(modifiedText)
+    navigator.clipboard.writeText(modifiedText)
       .then(() => {
         setShowCopyAlert(true);
         alert(modifiedText);
