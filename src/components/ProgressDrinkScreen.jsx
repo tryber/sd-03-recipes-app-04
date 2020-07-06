@@ -50,12 +50,12 @@ function ProgressDrinkScreen(props) {
 
   useEffect(() => {
   }, [checked, countChecked]);
- 
-  function mountRecipeList(quantity, ingredients) {
-    quantity.map((e, i) => (inProgressDrink[e] !== null && inProgressDrink[e] !== ''
+
+  function mountRecipeList(quantityPar, ingredientsPar) {
+    quantityPar.map((e, i) => (inProgressDrink[e] !== null && inProgressDrink[e] !== ''
       ? ingredientsDoneList.push({
         meal: inProgressDrink[e],
-        mensure: inProgressDrink[ingredients[i]],
+        mensure: inProgressDrink[ingredientsPar[i]],
         checked: checked.checkbox[i],
       })
       : null
@@ -102,7 +102,7 @@ function ProgressDrinkScreen(props) {
       <button
         type="button"
         className="favourite"
-        onClick={() => clickFavorite(inProgressDrink, isFavorite, setIsFavorite,'bebida')}
+        onClick={() => clickFavorite(inProgressDrink, isFavorite, setIsFavorite, 'bebida')}
         src={favorite}
       >
         {getIfHasBeenFavorited(id)

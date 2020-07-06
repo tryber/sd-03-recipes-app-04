@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
@@ -64,11 +64,11 @@ function ProgressFoodScreen(props) {
       });
   }
 
-  function mountRecipeList(quantity, ingredients) {
-    quantity.map((e, i) => (inProgressRecipe[e] !== null && inProgressRecipe[e] !== ''
+  function mountRecipeList(quantityPar, ingredientsPar) {
+    quantityPar.map((e, i) => (inProgressRecipe[e] !== null && inProgressRecipe[e] !== ''
       ? ingredientsDoneList.push({
         meal: inProgressRecipe[e],
-        mensure: inProgressRecipe[ingredients[i]],
+        mensure: inProgressRecipe[ingredientsPar[i]],
         checked: checked.checkbox[i],
       })
       : null
