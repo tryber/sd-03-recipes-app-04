@@ -4,6 +4,7 @@ import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import { getDrinkByID } from '../services/drink-api';
+import checkedlist from './checklist';
 
 function ProgressDrinkScreen(props) {
   const [inProgressDrink, setInProgressDrink] = useState([]);
@@ -17,31 +18,6 @@ function ProgressDrinkScreen(props) {
   const { match } = props;
   const { params } = match;
   const { id } = params;
-  const checkedlist = {
-    checkbox: [
-      { id: 0, name: '', checked: false },
-      { id: 1, checked: false },
-      { id: 2, checked: false },
-      { id: 3, checked: false },
-      { id: 4, checked: false },
-      { id: 5, checked: false },
-      { id: 6, checked: false },
-      { id: 7, checked: false },
-      { id: 8, checked: false },
-      { id: 9, checked: false },
-      { id: 10, checked: false },
-      { id: 11, checked: false },
-      { id: 12, checked: false },
-      { id: 13, checked: false },
-      { id: 14, checked: false },
-      { id: 15, checked: false },
-      { id: 16, checked: false },
-      { id: 17, checked: false },
-      { id: 18, checked: false },
-      { id: 19, checked: false },
-      { id: 20, checked: false },
-    ],
-  };
   const [checked, setChecked] = useState(checkedlist);
 
   useEffect(() => {
@@ -50,6 +26,16 @@ function ProgressDrinkScreen(props) {
       setInProgressDrink(data.drinks[0]);
     });
   }, []);
+
+  function getIfHasBeenFavorited(idPar) {
+    console.log(idPar);
+    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (storage) {
+      const favorited = storage.find((e) => e.id === idPar);
+      return favorited;
+    }
+    return false;
+  }
 
   useEffect(() => {
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
@@ -64,15 +50,7 @@ function ProgressDrinkScreen(props) {
   useEffect(() => {
   }, [checked, countChecked]);
 
-  function getIfHasBeenFavorited(id) {
-    console.log(id);
-    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (storage) {
-      const favorited = storage.find((e) => e.id === id);
-      return favorited;
-    }
-    return false;
-  }
+  
 
   function clickFavorite(recipeInfo, isFavoritePar) {
     setIsFavorite(!isFavoritePar);
@@ -221,9 +199,11 @@ function ProgressDrinkScreen(props) {
 }
 
 ProgressDrinkScreen.propTypes = {
-  // id: PropTypes.string.isRequired,
   match: PropTypes.string.isRequired,
-
+  location: PropTypes.string.isRequired,
+  pathname: PropTypes.string.isRequired,
+  history: PropTypes.string.isRequired,
+  push: PropTypes.string.isRequired,
 };
 
 export default ProgressDrinkScreen;

@@ -9,7 +9,7 @@ import Header from './Header';
 function updateStorage(id, setFavorites) {
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const newStorage = storage.filter((e) => e.id !== id);
- 
+
   setFavorites(newStorage);
 }
 
