@@ -11,8 +11,9 @@ import cocoa from '../images/cocoa.svg';
 import unknown from '../images/unknown.svg';
 import shake from '../images/shake.svg';
 import filter from '../images/filter.svg';
+import { renderButtons } from './MainFoodScreen';
 
-const drinkPics = [ordinary, cocktail, shake, unknown, cocoa];
+const filterPics = [ordinary, cocktail, shake, unknown, cocoa];
 
 function FilterButtons(Categories, handleClick) {
   return (
@@ -31,16 +32,7 @@ function FilterButtons(Categories, handleClick) {
         {Categories.reduce((arr, e, i) => {
           if (i < 5) {
             return [...arr,
-            <button
-              type="button"
-              data-testid={`${e.strCategory}-category-filter`}
-              value={e.strCategory}
-              onClick={handleClick}
-              className="button-main-screen"
-            >
-              <img src={drinkPics[i]} alt={drinkPics[i]} width="20px" />
-              {e.strCategory}
-            </button>,
+              renderButtons(e.strCategory, handleClick, i, filterPics),
             ];
           }
           return arr;
@@ -56,12 +48,12 @@ function DrinksList(Data) {
       {Data.reduce((arr, e, i) => {
         if (i < 12) {
           return [...arr,
-          <Link to={`/bebidas/${e.idDrink}`}>
-            <div className={`product-pic-${i} product-pic`} data-testid={`${i}-recipe-card`}>
-              <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
-              {(e.strDrink !== undefined) && <h5 data-testid={`${i}-card-name`}>{(e.strDrink.length > 30) ? `${e.strDrink.slice(0, 30)}...` : e.strDrink}</h5>}
-            </div>
-          </Link>,
+            <Link to={`/bebidas/${e.idDrink}`}>
+              <div className={`product-pic-${i} product-pic`} data-testid={`${i}-recipe-card`}>
+                <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
+                {(e.strDrink !== undefined) && <h5 data-testid={`${i}-card-name`}>{(e.strDrink.length > 30) ? `${e.strDrink.slice(0, 30)}...` : e.strDrink}</h5>}
+              </div>
+            </Link>,
           ];
         }
         return arr;
@@ -112,7 +104,7 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
-      <Header screen={'Bebidas'} />
+      <Header screen="Bebidas" />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
       {!isLoading && !searchInputVisible && DrinksList(Data)}

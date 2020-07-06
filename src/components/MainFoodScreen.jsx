@@ -12,7 +12,22 @@ import dessert from '../images/dessert.svg';
 import breakfast from '../images/breakfast.svg';
 import filter from '../images/filter.svg';
 
-const filterPics = [beef, breakfast, chicken, dessert, goat]
+const filterPics = [beef, breakfast, chicken, dessert, goat];
+
+export function renderButtons(category, handleClick, i, pics) {
+  return (
+    <button
+      type="button"
+      data-testid={`${category}-category-filter`}
+      value={category}
+      onClick={handleClick}
+      className="button-main-screen"
+    >
+      <img src={pics[i]} width="20px" alt="pic" />
+      {category}
+    </button>
+  );
+}
 
 function FilterButtons(Categories, handleClick) {
   return (
@@ -30,16 +45,7 @@ function FilterButtons(Categories, handleClick) {
       {Categories.reduce((arr, e, i) => {
         if (i < 5) {
           return [...arr,
-            <button
-              type="button"
-              data-testid={`${e.strCategory}-category-filter`}
-              value={e.strCategory}
-              onClick={handleClick}
-              className="button-main-screen"
-            >
-              <img src={filterPics[i]} width="20px"/>
-              {e.strCategory}
-            </button>,
+            renderButtons(e.strCategory, handleClick, i, filterPics),
           ];
         }
         return arr;
@@ -60,7 +66,7 @@ function MealsList(Data) {
                 data-testid={`${i}-recipe-card`}
               >
                 <img src={e.strMealThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
-                {(e.strMeal !== undefined) && <h5 data-testid={`${i}-card-name`}>{(e.strMeal.length > 30) ? `${e.strMeal.slice(0, 30)}...` : e.strMeal }</h5>}
+                {(e.strMeal !== undefined) && <h5 data-testid={`${i}-card-name`}>{(e.strMeal.length > 30) ? `${e.strMeal.slice(0, 30)}...` : e.strMeal}</h5>}
               </div>
             </Link>,
           ];
@@ -113,7 +119,7 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
-      <Header screen={'Comidas'} />
+      <Header screen="Comidas" />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
       {!isLoading && !searchInputVisible && MealsList(Data)}

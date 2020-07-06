@@ -115,12 +115,12 @@ function FoodSearchBar() {
         {result.reduce((arr, e, i) => {
           if (i < 12) {
             return [...arr,
-            <Link to={`/comidas/${e.idMeal}`}>
-              <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`}>
-                <img data-testid={`${i}-card-img`} className="recipe-image" src={e.strMealThumb} alt="thumbnail" width="120px" />
-                <h5 data-testid={`${i}-card-name`}>{(e.strMeal.length > 30) ? `${e.strMeal.slice(0, 30)}...` : e.strMeal }</h5>
-              </div>
-            </Link>,
+              <Link to={`/comidas/${e.idMeal}`}>
+                <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`}>
+                  <img data-testid={`${i}-card-img`} className="recipe-image" src={e.strMealThumb} alt="thumbnail" width="120px" />
+                  <h5 data-testid={`${i}-card-name`}>{(e.strMeal.length > 30) ? `${e.strMeal.slice(0, 30)}...` : e.strMeal }</h5>
+                </div>
+              </Link>,
             ];
           }
           return arr;

@@ -1,5 +1,5 @@
 .welcome-phrase {
-  animation: puff-in-center 1s cubic-bezier(0.470, 0.745, 0.715) 0.5s both;
+  animation: puff-in-center 1s both;
   color: rgb(32, 193, 214);
   font-family: Chalkduster, sans-serif;
   font-size: 50px;

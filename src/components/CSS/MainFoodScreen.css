@@ -1,5 +1,5 @@
 .food-screen {
-  background-image: url("../../images/loginbackground.jpg");
+  background-image: url('../../images/loginbackground.jpg');
   background-size: cover;
   margin: 70px 0;
   min-height: 80vh;
@@ -65,7 +65,7 @@
 }
 
 .product-pic-6 {
-  background-color: #Fbf8d7;
+  background-color: #fbf8d7;
 }
 
 .product-pic-7 {
@@ -90,7 +90,7 @@
 
 
 .button-main-screen {
-  background-color: #3ec1D6;
+  background-color: #3ec1d6;
   border: none;
   border-radius: 50px;
   color: white;

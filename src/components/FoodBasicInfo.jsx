@@ -4,6 +4,33 @@ import { Link } from 'react-router-dom';
 import { ContextAplication } from '../context/ContextAplication';
 import background from '../images/loginbackground.jpg';
 
+function renderRcomendations(recomendation) {
+  return (
+    <div>
+      <h3>Recomedações</h3>
+      <div className="product-pic-recomendation">
+        {recomendation.reduce((arr, e, i) => {
+          if (i < 6) {
+            return [...arr,
+            <Link to={`/bebidas/${e.idDrink}`}>
+              <div data-testid={`${i}-recomendation-card`}>
+                <img
+                  src={e.strDrinkThumb}
+                  data-testid="recipe-photo"
+                  alt="thumbnail"
+                />
+                <h5 data-testid={`${i}-recomendation-title`}>{e.strDrink}</h5>
+              </div>
+            </Link>,
+            ];
+          }
+          return arr;
+        }, [])}
+      </div>
+    </div>
+  );
+}
+
 function BasicInfo() {
   const { recipeInfo, recomendation } = useContext(ContextAplication);
   const quantity = Object.keys(recipeInfo).filter((e) => e.includes('strIngredient'));
@@ -34,26 +61,7 @@ function BasicInfo() {
         <p data-testid="instructions">{recipeInfo.strInstructions}</p>
       </div>
       <ReactPlayer width="100%" data-testid="video" height="200px" url={recipeInfo.strYoutube} />
-      <h3>Recomedações</h3>
-      <div className="product-pic-recomendation">
-        {recomendation.reduce((arr, e, i) => {
-          if (i < 6) {
-            return [...arr,
-            <Link to={`/bebidas/${e.idDrink}`}>
-              <div data-testid={`${i}-recomendation-card`}>
-                <img
-                  src={e.strDrinkThumb}
-                  data-testid="recipe-photo"
-                  alt="thumbnail"
-                />
-                <h5 data-testid={`${i}-recomendation-title`}>{e.strDrink}</h5>
-              </div>
-            </Link>,
-            ];
-          }
-          return arr;
-        }, [])}
-      </div>
+      {renderRcomendations(recomendation)}
     </div>
   );
 }

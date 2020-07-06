@@ -37,7 +37,7 @@ function Header(props) {
           </div>
         )}
         {(screen !== 'Comidas' && screen !== 'Bebidas' && screen !== 'Explorar Origem') && (
-          <div className="no-search-button"/>
+          <div className="no-search-button" />
         )}
       </div>
       {searchInputVisible && (screen === 'Comidas') && <FoodSearchBar />}

@@ -40,6 +40,7 @@
   border-bottom: rgb(32, 193, 214) 3px solid;
   color: rgb(32, 193, 214);
   font-size: 2rem;
+  transition: background-color 5000s;
 }
 
 .radio-buttons label {
@@ -62,8 +63,4 @@ p {
 
 ::placeholder {
   color: rgb(32, 193, 214);
-}
-
-.search-area > input {
-  transition: background-color 5000s;
 }
