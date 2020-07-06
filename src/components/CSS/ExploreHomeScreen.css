@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
-
 .explore-screen {
-  background-image: url(../../images/loginbackground.jpg);
+  background-image: url("../../images/loginbackground.jpg");
   background-size: cover;
   height: 90vh;
-  margin: 60px 0 0 0;
+  margin: 60px 0 0;
   width: 360px;
 }
 
@@ -26,7 +24,7 @@
   border-radius: 50px;
   box-shadow: 0 15px 10px rgba(0, 0, 0, 0.25);
   color: white;
-  font-family: 'Crimson Text', serif;
+  font-family: Crimson Text, serif;
   font-size: 30px;
   height: 82px;
   left: 30px;
@@ -48,7 +46,7 @@
 
 .explore-menu p {
   color: white;
-  font-family: 'Crimson Text', serif;
+  font-family: Crimson Text, serif;
   font-size: 1.5rem;
 }
 

@@ -1,4 +1,4 @@
-#searched-item {
+.searched-item {
   display: block;
   margin: 10px auto;
   width: 90%;
@@ -6,7 +6,7 @@
 
 .radio-buttons {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin: 10px;
 }
 
@@ -25,16 +25,16 @@
 .recipes-results {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin-bottom: 60px;
 }
 
-.recipes-results>img, h5, h1 {
+.recipes-results > img , h5 , h1 {
   text-align: center;
   width: 100%;
 }
 
-.search-area>input {
+.search-area > input {
   background-color: transparent;
   border: transparent;
   border-bottom: rgb(32, 193, 214) 3px solid;
@@ -64,6 +64,6 @@ p {
   color: rgb(32, 193, 214);
 }
 
-input {
+.search-area > input {
   transition: background-color 5000s;
 }

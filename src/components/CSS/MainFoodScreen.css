@@ -1,5 +1,5 @@
 .food-screen {
-  background-image: url(../../images/loginbackground.jpg);
+  background-image: url("../../images/loginbackground.jpg");
   background-size: cover;
   margin: 70px 0;
   min-height: 80vh;
@@ -41,7 +41,7 @@
 }
 
 .product-pic-0 {
-  background-color: #DFBC41;
+  background-color: #dfbc41;
 }
 
 .product-pic-1 {
@@ -49,23 +49,23 @@
 }
 
 .product-pic-2 {
-  background-color: #FCF7C9
+  background-color: #fcf7c9;
 }
 
 .product-pic-3 {
-  background-color: #C9DA73
+  background-color: #c9da73;
 }
 
 .product-pic-4 {
-  background-color: #D3A585
+  background-color: #d3a585;
 }
 
 .product-pic-5 {
-  background-color: #FAC55E;
+  background-color: #fac55e;
 }
 
 .product-pic-6 {
-  background-color: #FBF8D7;
+  background-color: #Fbf8d7;
 }
 
 .product-pic-7 {
@@ -73,24 +73,24 @@
 }
 
 .product-pic-8 {
-  background-color: #C79B7E;
+  background-color: #c79b7e;
 }
 
 .product-pic-9 {
-  background-color: #F9F5BF;
+  background-color: #f9f5bf;
 }
 
 .product-pic-10 {
-  background-color: rgb(180, 211, 230)
+  background-color: rgb(180, 211, 230);
 }
 
 .product-pic-11 {
-  background-color: #C67206;
+  background-color: #c67206;
 }
 
 
 .button-main-screen {
-  background-color: #3EC1D6;
+  background-color: #3ec1D6;
   border: none;
   border-radius: 50px;
   color: white;
@@ -116,9 +116,11 @@
 }
 
 @keyframes spin {
+
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -134,5 +136,5 @@ button {
 }
 
 h5 {
-  font-family: Roboto;
+  font-family: Roboto, serif;
 }

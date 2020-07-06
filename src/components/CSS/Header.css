@@ -15,7 +15,7 @@
 
 .headerDiv {
   align-items: center;
-  background-color: #CCE8ED;
+  background-color: #cce8ed;
   display: flex;
   height: 70px;
   justify-content: space-around;
@@ -30,12 +30,12 @@
   align-items: center;
   border-radius: 50%;
   display: flex;
-  justify-content: center;
   height: 60px;
+  justify-content: center;
   width: 60px;
 }
 
-.headerDiv>div:first-child {
+.headerDiv > div:first-child {
   background-color: rgb(32, 193, 214);
 }
 
@@ -48,7 +48,7 @@
   background-color: rgb(32, 193, 214);
   border-radius: 50%;
   display: flex;
-  justify-content: center;
   height: 60px;
+  justify-content: center;
   width: 60px;
 }

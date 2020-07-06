@@ -73,7 +73,6 @@ function ShowResultsByArea(Data, mealsByArea, areaFilter) {
                   data-testid={`${i}-card-img`}
                 />
                 <h5 data-testid={`${i}-card-name`}>{(e.strMeal.length > 30) ? `${e.strMeal.slice(0, 30)}...` : e.strMeal}</h5>
-                {/* <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5> */}
               </div>
             </Link>,
             ];

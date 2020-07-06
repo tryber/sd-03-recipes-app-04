@@ -1,6 +1,6 @@
 .login-screen {
   align-items: center;
-  background-image: url(../../images/loginbackground.jpg);
+  background-image: url("../../images/loginbackground.jpg");
   background-size: cover;
   border: 1px solid black;
   box-shadow: gray 5px 5px 2px;
@@ -34,15 +34,9 @@ h2 {
   width: 40%;
 }
 
-.input-login {
-  color: rgb(32, 193, 214);
-  margin: auto;
-  width: 70%;
-}
-
 .app-name {
   color: rgb(32, 193, 214);
-  font-family: 'Chalkduster';
+  font-family: Chalkduster, serif;
   font-size: 4rem;
 }
 
@@ -51,5 +45,7 @@ h2 {
   border: transparent;
   border-bottom: 2px solid rgb(32, 193, 214);
   color: rgb(32, 193, 214);
+  margin: auto;
   padding: 15px 0;
+  width: 70%;
 }

@@ -13,7 +13,7 @@
 }
 
 .favorite-recipes-card p {
-  color: #3F77A6;
+  color: #3f77a6;
   height: 10px;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .favorite-recipes-screen {
-  background-image: url(../../images/loginbackground.jpg);
+  background-image: url("../../images/loginbackground.jpg");
   height: 90vh;
   margin-top: 70px;
 }

@@ -1,6 +1,6 @@
 .inferior-menu-icons {
   align-items: center;
-  background-color: #CCE8ED;
+  background-color: #CCe8ed;
   bottom: 0;
   display: flex;
   height: 70px;
@@ -13,8 +13,8 @@
 }
 
 .inferior-menu-icons > div {
-  background-color: rgb(32, 193, 214);
   align-items: center;
+  background-color: rgb(32, 193, 214);
   border-radius: 50%;
   display: flex;
   height: 60px;

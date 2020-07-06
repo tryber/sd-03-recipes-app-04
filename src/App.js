@@ -17,7 +17,7 @@ import ProfileScreen from './components/ProfileScreen';
 import ProgressDrinkScreen from './components/ProgressDrinkScreen';
 import ProgressFoodScreen from './components/ProgressFoodScreen';
 import NotFound from './components/NotFound';
-import WelcomeScreen from './components/WelcomeScreen'
+import WelcomeScreen from './components/WelcomeScreen';
 import './App.css';
 
 import AplicationProvider from './context/ContextAplication';

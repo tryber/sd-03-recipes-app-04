@@ -8,7 +8,7 @@ import meal from '../images/meal.svg';
 import drink from '../images/drink.svg';
 import filter from '../images/filter.svg';
 
-const colors = ['#DFBC41', '#e7736a', '#FCF7C9', '#C9DA73', '#D3A585', '#FAC55E', '#FBF8D7', '#63c252', '#C79B7E', '#F9F5BF', '#C67206', '#3EC1D6']
+const colors = ['#DFBC41', '#e7736a', '#FCF7C9', '#C9DA73', '#D3A585', '#FAC55E', '#FBF8D7', '#63c252', '#C79B7E', '#F9F5BF', '#C67206', '#3EC1D6'];
 
 function copyToClipboard(type, id) {
   navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)

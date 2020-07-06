@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import './CSS/WelcomeScreen.css';
 
-
-
 function WelcomeScreen() {
   const [redirect, setRedirect] = useState(false);
 

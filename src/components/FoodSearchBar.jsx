@@ -94,6 +94,7 @@ function FoodSearchBar() {
     <div className="search-area">
       <input
         id="searched-item"
+        className="searched-item"
         type="text"
         placeholder="Buscar"
         onChange={(e) => setSearchedItem(e.target.value)}

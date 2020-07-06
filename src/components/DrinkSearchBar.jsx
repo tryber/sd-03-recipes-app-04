@@ -18,6 +18,7 @@ function renderRadioButtons(setSearchBy, setDisabled) {
     <div className="radio-buttons">
       <label htmlFor="ingrediente">
         <input
+          className="searched-item"
           data-testid="ingredient-search-radio"
           id="ingredient"
           type="radio"
@@ -112,12 +113,12 @@ function DrinkSearchBar() {
         {result.reduce((arr, e, i) => {
           if (i < 12) {
             return [...arr,
-            <Link to={`/bebidas/${e.idDrink}`}>
-              <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`}>
-                <img src={e.strDrinkThumb} className="recipe-image" data-testid={`${i}-card-img`} alt="thumbnail" width="150px" />
-                <h5 data-testid={`${i}-card-name`}>{(e.strDrink.length > 30) ? `${e.strDrink.slice(0, 30)}...` : e.strDrink }</h5>
-              </div>
-            </Link>,
+              <Link to={`/bebidas/${e.idDrink}`}>
+                <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`}>
+                  <img src={e.strDrinkThumb} className="recipe-image" data-testid={`${i}-card-img`} alt="thumbnail" width="150px" />
+                  <h5 data-testid={`${i}-card-name`}>{(e.strDrink.length > 30) ? `${e.strDrink.slice(0, 30)}...` : e.strDrink}</h5>
+                </div>
+              </Link>,
             ];
           }
           return arr;

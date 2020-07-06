@@ -11,7 +11,7 @@
   width: 360px;
 }
 
-.wrapper>img {
+.wrapper > img {
   border-radius: 50%;
   height: 200px;
   position: relative;
@@ -26,8 +26,8 @@
   border-radius: 50%;
   height: 300px;
   position: absolute;
-  top: -50px;
   right: -15%;
+  top: -50px;
   width: 300px;
 }
 
@@ -47,7 +47,7 @@
   margin: 10px;
 }
 
-.product-pic-recomendation img, h5 {
+.product-pic-recomendation img , h5 {
   text-align: center;
   width: 170px;
 }
@@ -83,7 +83,7 @@
   width: 100px;
 }
 
-.share-and-favourite>button {
+.share-and-favourite > button {
   background-color: rgb(41, 137, 192);
   border: groove 3px rgb(86, 230, 19);
   border-radius: 50%;

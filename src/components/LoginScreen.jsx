@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { ContextAplication } from '../context/ContextAplication';
-import './CSS/bootstrap.min.css';
 
 import './CSS/LoginScreen.css';
 

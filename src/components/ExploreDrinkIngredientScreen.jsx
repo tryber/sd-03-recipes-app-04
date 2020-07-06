@@ -22,21 +22,21 @@ function ExploreDrinkIngredientScreen() {
           {ingredients.reduce((arr, e, i) => {
             if (i < 12) {
               return [...arr,
-              <Link to="/bebidas">
-                <button
-                  type="button"
-                  className={`product-pic-${i} product-pic`}
-                  data-testid={`${i}-ingredient-card`}
-                  onClick={() => setingredientFilter(e.strIngredient1)}
-                >
-                  <img
-                    src={`https://www.thecocktaildb.com/images/ingredients/${e.strIngredient1}-Small.png`}
-                    alt="thumbnail" width="150px"
-                    data-testid={`${i}-card-img`}
-                  />
-                  <h5 data-testid={`${i}-card-name`}>{e.strIngredient1}</h5>
-                </button>
-              </Link>,
+                <Link to="/bebidas">
+                  <button
+                    type="button"
+                    className={`product-pic-${i} product-pic`}
+                    data-testid={`${i}-ingredient-card`}
+                    onClick={() => setingredientFilter(e.strIngredient1)}
+                  >
+                    <img
+                      src={`https://www.thecocktaildb.com/images/ingredients/${e.strIngredient1}-Small.png`}
+                      alt="thumbnail" width="150px"
+                      data-testid={`${i}-card-img`}
+                    />
+                    <h5 data-testid={`${i}-card-name`}>{e.strIngredient1}</h5>
+                  </button>
+                </Link>,
               ];
             }
             return arr;
