@@ -14,18 +14,25 @@ import filter from '../images/filter.svg';
 
 const filterPics = [beef, breakfast, chicken, dessert, goat];
 
-export function renderButtons(category, handleClick, i, pics) {
+export function renderFilterButtons(Categories, handleClick, pics) {
   return (
-    <button
-      type="button"
-      data-testid={`${category}-category-filter`}
-      value={category}
-      onClick={handleClick}
-      className="button-main-screen"
-    >
-      <img src={pics[i]} width="20px" alt="pic" />
-      {category}
-    </button>
+    Categories.reduce((arr, e, i) => {
+      if (i < 5) {
+        return [...arr,
+          <button
+            type="button"
+            data-testid={`${e.strCategory}-category-filter`}
+            value={e.strCategory}
+            onClick={handleClick}
+            className="button-main-screen"
+          >
+            <img src={pics[i]} width="20px" alt="pic" />
+            {e.strCategory}
+          </button>,
+        ];
+      }
+      return arr;
+    }, [])
   );
 }
 
@@ -42,14 +49,7 @@ function FilterButtons(Categories, handleClick) {
         <img src={filter} width="20px" alt="filter" />
         All
       </button>
-      {Categories.reduce((arr, e, i) => {
-        if (i < 5) {
-          return [...arr,
-            renderButtons(e.strCategory, handleClick, i, filterPics),
-          ];
-        }
-        return arr;
-      }, [])}
+      {renderFilterButtons(Categories, handleClick, filterPics)}
     </div>
   );
 }
@@ -119,7 +119,7 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
-      <Header screen="Comidas" />
+      <Header screen={'Comidas'} />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
       {!isLoading && !searchInputVisible && MealsList(Data)}

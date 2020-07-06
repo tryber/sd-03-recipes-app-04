@@ -11,7 +11,7 @@ import cocoa from '../images/cocoa.svg';
 import unknown from '../images/unknown.svg';
 import shake from '../images/shake.svg';
 import filter from '../images/filter.svg';
-import { renderButtons } from './MainFoodScreen';
+import { renderFilterButtons } from './MainFoodScreen';
 
 const filterPics = [ordinary, cocktail, shake, unknown, cocoa];
 
@@ -23,20 +23,13 @@ function FilterButtons(Categories, handleClick) {
           data-testid="All-category-filter"
           type="button"
           value="All"
-          onClick={(e) => handleClick(e)}
+          onClick={handleClick}
           className="button-main-screen"
         >
           <img src={filter} alt="filter" width="20px" />
           All
         </button>
-        {Categories.reduce((arr, e, i) => {
-          if (i < 5) {
-            return [...arr,
-              renderButtons(e.strCategory, handleClick, i, filterPics),
-            ];
-          }
-          return arr;
-        }, [])}
+        {renderFilterButtons(Categories, handleClick, filterPics)}
       </div>
     </div>
   );
@@ -62,7 +55,7 @@ function DrinksList(Data) {
   );
 }
 
-function MainDrinkScreen() {
+function MainFoodScreen() {
   const {
     Data,
     getDrinks,
@@ -113,4 +106,4 @@ function MainDrinkScreen() {
   );
 }
 
-export default MainDrinkScreen;
+export default MainFoodScreen;
