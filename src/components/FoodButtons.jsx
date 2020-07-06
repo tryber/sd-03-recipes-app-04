@@ -7,7 +7,7 @@ import { ContextAplication } from '../context/ContextAplication';
 
 export function copyToClipboard() {
   navigator.clipboard.writeText(window.location.href)
-    .then(() => alert('Link copiado'));
+    .then(() => alert('Link copiado!'));
 }
 
 export function getDoneLocalStorage(id) {

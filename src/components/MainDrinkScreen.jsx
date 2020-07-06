@@ -23,7 +23,7 @@ function FilterButtons(Categories, handleClick) {
           data-testid="All-category-filter"
           type="button"
           value="All"
-          onClick={handleClick}
+          onClick={(e) => handleClick(e)}
           className="button-main-screen"
         >
           <img src={filter} alt="filter" width="20px" />
@@ -51,7 +51,7 @@ function DrinksList(Data) {
             <Link to={`/bebidas/${e.idDrink}`}>
               <div className={`product-pic-${i} product-pic`} data-testid={`${i}-recipe-card`}>
                 <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
-                {(e.strDrink !== undefined) && <h5 data-testid={`${i}-card-name`}>{(e.strDrink.length > 30) ? `${e.strDrink.slice(0, 30)}...` : e.strDrink}</h5>}
+                <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
               </div>
             </Link>,
           ];
@@ -62,7 +62,7 @@ function DrinksList(Data) {
   );
 }
 
-function MainFoodScreen() {
+function MainDrinkScreen() {
   const {
     Data,
     getDrinks,
@@ -113,4 +113,4 @@ function MainFoodScreen() {
   );
 }
 
-export default MainFoodScreen;
+export default MainDrinkScreen;

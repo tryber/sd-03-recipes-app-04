@@ -12,7 +12,7 @@ const colors = ['#DFBC41', '#e7736a', '#FCF7C9', '#C9DA73', '#D3A585', '#FAC55E'
 
 function copyToClipboard(type, id) {
   navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)
-    .then(() => alert('Link copiado'));
+    .then(() => alert('Link copiado!'));
 }
 
 function getColors() {

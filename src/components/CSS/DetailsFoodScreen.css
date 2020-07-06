@@ -74,12 +74,13 @@ h2 {
   background-color: rgb(41, 137, 192);
   border: groove 3px rgb(86, 230, 19);
   border-radius: 50%;
+  bottom: 0;
   box-shadow: 5px 5px 5px rgb(27, 71, 6);
   display: block;
   height: 100px;
-  margin: 0 10px 10px;
+  margin-bottom: 5px;
   opacity: 1;
-  right: 30%;
+  position: fixed;
   width: 100px;
 }
 
@@ -94,6 +95,7 @@ h2 {
 .share-and-favourite {
   display: flex;
   justify-content: space-around;
+  margin: 0 80px 25px;
 }
 
 .search-area {
