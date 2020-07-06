@@ -9,7 +9,7 @@
 .recipes-results {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 5px;
 }
 
@@ -40,53 +40,60 @@
   border-radius: 10%;
 }
 
+
+
+
 .product-pic-0 {
-  background-color: blanchedalmond;
+  background-color: #DFBC41;
 }
+
 .product-pic-1 {
-  background-color: rgb(113, 201, 91);
+  background-color: #e7736a;
 }
+
 .product-pic-2 {
-  background-color: rgb(185, 73, 176);
+  background-color: #FCF7C9
 }
+
 .product-pic-3 {
-  background-color: rgb(188, 236, 99);
+  background-color: #C9DA73
 }
+
 .product-pic-4 {
-  background-color: rgb(201, 100, 33);
+  background-color: #D3A585
 }
+
 .product-pic-5 {
-  background-color: rgb(143, 143, 194);
+  background-color: #FAC55E;
 }
+
 .product-pic-6 {
-  background-color: rgb(128, 56, 66);
+  background-color: #FBF8D7;
 }
+
 .product-pic-7 {
-  background-color: rgb(156, 180, 46);
+  background-color: #63c252;
 }
 
 .product-pic-8 {
-  background-color: rgb(146, 41, 55);
+  background-color: #C79B7E;
 }
 
 .product-pic-9 {
-  background-color: rgb(13, 117, 91);
+  background-color: #F9F5BF;
 }
 
 .product-pic-10 {
-  background-color: rgb(139, 112, 20);
+  background-color: rgb(180, 211, 230)
 }
 
 .product-pic-11 {
-  background-color: rgb(126, 177, 111);
+  background-color: #C67206;
 }
 
-.product-pic-12 {
-  background-color: rgb(156, 155, 211);
-}
 
 .button-main-screen {
-  background-color: rgb(71, 179, 152);
+  background-color: #3EC1D6;
   border: none;
   border-radius: 50px;
   font-weight: 800;
@@ -124,4 +131,13 @@
 
 .recipe-image {
   border-radius: 50%;
+}
+
+button {
+  transition: 0.3s;
+  background-color: blue;
+}
+
+h5 {
+  font-family: Roboto;
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
+
 .explore-screen {
   margin: 60px 0 0 0;
   width: 360px;
@@ -23,7 +25,6 @@
   background: rgb(32, 193, 214);
   border-radius: 50px;
   box-shadow: 0 15px 10px rgba(0, 0, 0, 0.25);
-  color: black;
   font-size: 30px;
   height: 82px;
   text-align: center;
@@ -32,6 +33,8 @@
   margin-top: 50px;
   left: 30px;
   position: relative;
+  font-family: 'Crimson Text', serif;
+  color: white;
 }
 
 .explore-menu {
@@ -41,6 +44,12 @@
   height: 450px;
   align-items: center;
   justify-content: center;
+}
+
+.explore-menu p {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.5rem;
+  color: white;
 }
 
 .select-filter {

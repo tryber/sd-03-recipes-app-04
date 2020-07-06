@@ -10,9 +10,21 @@
   height: 120px;
   border-radius: 50%;
 }
+
+.favorite-recipes-card p {
+  color: #3F77A6;
+  height: 10px;
+}
+
+.favorite-recipes-card div {
+  margin: 0;
+  height: 20px;
+}
+
 .favorite-recipes-card {
   position: relative;
   align-items: center;
+height: 200px;
   display: flex;
   flex-direction: column;
   margin: 5px;
