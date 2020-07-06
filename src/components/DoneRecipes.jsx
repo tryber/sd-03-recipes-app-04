@@ -6,18 +6,16 @@ import profileIcon from '../images/profileIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../components/CSS/DoneRecipes.css';
 
-function header() {
-  return (
-    <div className="header-recipes-done">
-      <img
-        src={profileIcon}
-        alt="ProfileIcon"
-        data-testeid="profile-top-btn"
-      />
-      <p>Receitas Feitas</p>
-    </div>
-  );
-}
+const header = () => (
+  <div className="header-recipes-done">
+    <img
+      src={profileIcon}
+      alt="ProfileIcon"
+      data-testeid="profile-top-btn"
+    />
+    <p>Receitas Feitas</p>
+  </div>
+);
 
 const buttons = (setRecipes, state) => {
   const food = state.filter((e) => e.type === 'comida');
@@ -77,7 +75,7 @@ function renderRecipes(recipes) {
             <Link to={`${type}s/${id}`} data-testid={`${id}-horizontal-name`}>{name}</Link>
             <p data-testid={`${id}-horizontal-done-date`}>{id}</p>
             <p data-testid={`${id}-${name}-horizontal-tag`}>{category}</p>
-            <CopyToClipboard text={window.location.href}>
+            <CopyToClipboard text={navigator.clipboard.writeText(window.location.href)}>
               <button
                 className="share"
                 type="button"
