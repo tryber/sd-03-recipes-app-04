@@ -8,7 +8,6 @@ import './CSS/Header.css';
 import FoodSearchBar from './FoodSearchBar';
 import DrinkSearchBar from './DrinkSearchBar';
 
-
 function Header(props) {
   const { screen } = props;
   const { searchInputVisible, searchInput } = useContext(ContextAplication);
