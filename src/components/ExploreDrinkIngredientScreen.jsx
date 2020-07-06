@@ -31,7 +31,8 @@ function ExploreDrinkIngredientScreen() {
                   >
                     <img
                       src={`https://www.thecocktaildb.com/images/ingredients/${e.strIngredient1}-Small.png`}
-                      alt="thumbnail" width="150px"
+                      alt="thumbnail"
+                      width="120px"
                       data-testid={`${i}-card-img`}
                     />
                     <h5 data-testid={`${i}-card-name`}>{e.strIngredient1}</h5>

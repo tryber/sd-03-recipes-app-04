@@ -17,32 +17,33 @@ const filterPics = [ordinary, cocktail, shake, unknown, cocoa];
 
 function FilterButtons(Categories, handleClick) {
   return (
-    <div>
-      <div className="button-div">
-        <button
-          data-testid="All-category-filter"
-          type="button"
-          value="All"
-          onClick={handleClick}
-          className="button-main-screen"
-        >
-          <img src={filter} alt="filter" width="20px" />
-          All
-        </button>
-        {renderFilterButtons(Categories, handleClick, filterPics)}
-      </div>
+    <div className="button-div">
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        value="All"
+        onClick={handleClick}
+        className="button-main-screen"
+      >
+        <img src={filter} width="20px" alt="filter" />
+        All
+      </button>
+      {renderFilterButtons(Categories, handleClick, filterPics)}
     </div>
   );
 }
 
-function DrinksList(Data) {
+function DrinkList(Data) {
   return (
     <div className="recipes-results">
       {Data.reduce((arr, e, i) => {
         if (i < 12) {
           return [...arr,
             <Link to={`/bebidas/${e.idDrink}`}>
-              <div className={`product-pic-${i} product-pic`} data-testid={`${i}-recipe-card`}>
+              <div
+                className={`product-pic-${i} product-pic`}
+                data-testid={`${i}-recipe-card`}
+              >
                 <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
                 <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
               </div>
@@ -55,7 +56,7 @@ function DrinksList(Data) {
   );
 }
 
-function MainFoodScreen() {
+function MainDrinkScreen() {
   const {
     Data,
     getDrinks,
@@ -97,13 +98,13 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
-      <Header screen="Bebidas" />
+      <Header screen={'Bebidas'} />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
-      {!isLoading && !searchInputVisible && DrinksList(Data)}
+      {!isLoading && !searchInputVisible && DrinkList(Data)}
       <InferiorMenu />
     </div>
   );
 }
 
-export default MainFoodScreen;
+export default MainDrinkScreen;

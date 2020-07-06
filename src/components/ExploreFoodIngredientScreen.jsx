@@ -26,7 +26,7 @@ function ExploreFoodIngredientScreen() {
                   <button
                     type="button"
                     className={`product-pic-${i} product-pic`}
-                    data-testid={`${i}-ingredient-card `}
+                    data-testid={`${i}-ingredient-card`}
                     onClick={() => setingredientFilter(e.strIngredient)}
                   >
                     <img
