@@ -1,5 +1,5 @@
 export function changeChecked(event,
-  value, setCountChecked, setChecked, checked, countChecked, checkLocalStorage, id) {
+  value, setCountChecked, setChecked, checked, countChecked, checkLocalStorage, id, type) {
   checked.checkbox.forEach((checkbox) => {
     if (event.target.checked === true) {
       setCountChecked(countChecked + 1);
@@ -23,23 +23,36 @@ export function changeChecked(event,
       checkbox: value,
     },
   }));
-  localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox }, countChecked }));
+  localStorage.setItem('inProgressRecipes', JSON.stringify({ [type]: { [id]: checked.checkbox }, countChecked }));
 }
 
-export function clickFavorite(recipeInfo, isFavoritePar, setIsFavorite) {
+export function clickFavorite(recipeInfo, isFavoritePar, setIsFavorite, type) {
   setIsFavorite(!isFavoritePar);
   const {
     idMeal, strArea, strCategory, strMeal, strMealThumb,
   } = recipeInfo;
-  const mealInfo = {
-    id: idMeal,
-    type: 'comida',
-    area: strArea,
-    category: strCategory,
-    alcoholicOrNot: '',
-    name: strMeal,
-    image: strMealThumb,
-  };
+  const {
+    idDrink, strDrink, strAlcoholic, strDrinkThumb,
+  } = recipeInfo;
+  const mealInfo = type === 'comida'
+    ? {
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    }
+    : {
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    };
   let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (!storage) {
     storage = [];

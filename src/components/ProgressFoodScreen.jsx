@@ -95,7 +95,7 @@ function ProgressFoodScreen(props) {
       <button
         type="button"
         className="favourite"
-        onClick={() => clickFavorite(inProgressRecipe, isFavorite, setIsFavorite)}
+        onClick={() => clickFavorite(inProgressRecipe, isFavorite, setIsFavorite, 'comida')}
         src={favorite}
       >
         {getIfHasBeenFavorited(id)
@@ -108,7 +108,7 @@ function ProgressFoodScreen(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
-            <input id={i} type="checkbox" checked={checkLocalStorage.meals[id][i].checked} name={element.meal} onClick={(event) => changeChecked(event, checked.checkbox[i].checked, setCountChecked, setChecked, checked, countChecked, checkLocalStorage, id)} />
+            <input id={i} type="checkbox" checked={checkLocalStorage.meals[id][i].checked} name={element.meal} onClick={(event) => changeChecked(event, checked.checkbox[i].checked, setCountChecked, setChecked, checked, countChecked, checkLocalStorage, id, 'meals')} />
             <span>{element.meal}</span>
             {element.mensure}
           </span>

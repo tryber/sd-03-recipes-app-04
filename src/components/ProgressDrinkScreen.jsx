@@ -4,6 +4,7 @@ import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import { getDrinkByID } from '../services/drink-api';
+import { changeChecked, clickFavorite } from './functionsProgressScreen';
 import checkedlist from './checklist';
 
 function ProgressDrinkScreen(props) {
@@ -49,37 +50,7 @@ function ProgressDrinkScreen(props) {
 
   useEffect(() => {
   }, [checked, countChecked]);
-
-  
-
-  function clickFavorite(recipeInfo, isFavoritePar) {
-    setIsFavorite(!isFavoritePar);
-    const {
-      idDrink, strDrink, strAlcoholic, strDrinkThumb, strCategory,
-    } = recipeInfo;
-    const mealInfo = {
-      id: idDrink,
-      type: 'bebida',
-      area: '',
-      category: strCategory,
-      alcoholicOrNot: strAlcoholic,
-      name: strDrink,
-      image: strDrinkThumb,
-    };
-    let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (!storage) {
-      storage = [];
-    }
-    if (!isFavoritePar) {
-      const newStorage = [...storage, mealInfo];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
-    }
-    if (isFavoritePar) {
-      const newStorage = storage.filter((e) => !e.id === idDrink);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
-    }
-  }
-
+ 
   function mountRecipeList(quantity, ingredients) {
     quantity.map((e, i) => (inProgressDrink[e] !== null && inProgressDrink[e] !== ''
       ? ingredientsDoneList.push({
@@ -91,34 +62,6 @@ function ProgressDrinkScreen(props) {
     ));
 
     return ingredientsDoneList;
-  }
-
-  function changeChecked(event, value) {
-    console.log(event.target.checked);
-    checked.checkbox.forEach((checkbox) => {
-      if (event.target.checked === true) {
-        setCountChecked(countChecked + 1);
-      } if (event.target.checked === false) {
-        console.log(countChecked);
-        if (checkLocalStorage.countChecked < 0) {
-          setCountChecked(countChecked + 1);
-        } else {
-          setCountChecked(countChecked - 1);
-        }
-      }
-      if (checkbox.id === Number(event.target.id)) {
-        checkbox.name = event.target.name;
-        checkbox.checked = event.target.checked;
-      }
-    });
-    setChecked((prevState) => ({
-      ...prevState,
-      checked: {
-        ...prevState.checkbox.checked,
-        checkbox: value,
-      },
-    }));
-    localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: { [id]: checked.checkbox }, countChecked }));
   }
 
   function copyContent(text) {
@@ -159,7 +102,7 @@ function ProgressDrinkScreen(props) {
       <button
         type="button"
         className="favourite"
-        onClick={() => clickFavorite(inProgressDrink, isFavorite)}
+        onClick={() => clickFavorite(inProgressDrink, isFavorite, setIsFavorite,'bebida')}
         src={favorite}
       >
         {getIfHasBeenFavorited(id)
@@ -173,7 +116,7 @@ function ProgressDrinkScreen(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
-            <input id={i} type="checkbox" checked={checkLocalStorage.cocktails[id][i].checked} name={element.meal} onClick={(event) => changeChecked(event, checked.checkbox[i].checked)} />
+            <input id={i} type="checkbox" checked={checkLocalStorage.cocktails[id][i].checked} name={element.cocktails} onClick={(event) => changeChecked(event, checked.checkbox[i].checked, setCountChecked, setChecked, checked, countChecked, checkLocalStorage, id, 'cocktails')} />
             <span>{element.meal}</span>
             {element.mensure}
           </span>
