@@ -1,9 +1,9 @@
 .food-screen {
+  background-image: url(../../images/loginbackground.jpg);
+  background-size: cover;
   margin: 70px 0;
   min-height: 80vh;
   width: 360px;
-  background-image: url(../../images/loginbackground.jpg);
-  background-size: cover;
 }
 
 .recipes-results {
@@ -14,34 +14,31 @@
 }
 
 .recipes-results p {
+  font-size: 1rem;
+  line-height: 1.2rem;
   margin: 10px;
+  max-height: 50px;
   text-align: center;
   width: 150px;
-  font-size: 1rem;
-  max-height: 50px;
-  line-height: 1.2rem;
 }
 
 .button-div {
-  padding-top: 20px;
-  text-align: center;
   display: flex;
   flex-wrap: wrap;
+  padding-top: 20px;
+  text-align: center;
 }
 
 .product-pic {
-  width: 160px;
-  height: 200px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 160px;
 }
-
-
-
 
 .product-pic-0 {
   background-color: #DFBC41;
@@ -96,26 +93,24 @@
   background-color: #3EC1D6;
   border: none;
   border-radius: 50px;
-  font-weight: 800;
   color: white;
   display: inline-block;
   font-size: 10px;
+  font-weight: 800;
+  height: 50px;
   margin: 5px 10px;
+  opacity: 0.8;
   padding: 2px;
   text-align: center;
   text-decoration: none;
   width: 100px;
-  height: 50px;
-  opacity: 0.8;
 }
 
 .loader {
   animation: spin 2s linear infinite;
   border: 16px solid #f3f3f3;
-  /* Light grey */
   border-radius: 50%;
   border-top: 16px solid black;
-  /* Blue */
   height: 60px;
   width: 60px;
 }
@@ -134,8 +129,8 @@
 }
 
 button {
-  transition: 0.3s;
   background-color: blue;
+  transition: 0.3s;
 }
 
 h5 {

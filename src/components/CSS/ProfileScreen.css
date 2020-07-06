@@ -1,34 +1,31 @@
 .container-profile {
-  height: 100vh;
   background-image: url(../../images/loginbackground.jpg);
+  height: 100vh;
 }
 
 .profile-screen-buttons {
-
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   height: 500px;
+  justify-content: space-between;
  
 }
 
 .profile-screen-buttons h1 {
   font-size: 20px;
   margin: 100px 0 0 0;
-  
 }
 
 .profile-screen-buttons button {
   background: rgb(32, 193, 214);
   border-radius: 50px;
   box-shadow: 0 15px 10px rgba(0, 0, 0, 0.25);
-  color: black;
   font-size: 30px;
+  font-family: 'Crimson Text', serif;
   height: 82px;
-  text-align: center;
   line-height: 50px;
+  text-align: center;
   width: 300px;
   color: white;
-  font-family: 'Crimson Text', serif;
 }

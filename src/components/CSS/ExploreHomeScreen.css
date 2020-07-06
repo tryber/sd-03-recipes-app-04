@@ -38,37 +38,37 @@
 }
 
 .explore-menu {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  position: relative;
   height: 450px;
-  align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .explore-menu p {
+  color: white;
   font-family: 'Crimson Text', serif;
   font-size: 1.5rem;
-  color: white;
 }
 
 .select-filter {
-  position: relative;
-  text-align: center;
-  width: 50%;
-  height: 40px;
   background-color: rgb(32, 193, 214);
   border-radius: 20px;
-  display: block;
-  margin: 20px auto;
-  top: 20px;
   color: white;
+  display: block;
+  height: 40px;
+  margin: 20px auto;
+  position: relative;
+  text-align: center;
+  top: 20px;
+  width: 50%;
 }
 
 .ingridients-list {
-  padding-top: 30px;
-  width: 360px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding-top: 30px;
+  width: 360px;
 }

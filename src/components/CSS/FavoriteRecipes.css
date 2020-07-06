@@ -1,14 +1,15 @@
 .favorite-recipes-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   margin-top: 20px;
   width: 360px;
-  justify-content: space-around;
 }
+
 .favorite-recipes-card a img {
-  width: 120px;
-  height: 120px;
   border-radius: 50%;
+  height: 120px;
+  width: 120px;
 }
 
 .favorite-recipes-card p {
@@ -17,20 +18,19 @@
 }
 
 .favorite-recipes-card div {
-  margin: 0;
   height: 20px;
+  margin: 0;
 }
 
 .favorite-recipes-card {
-  position: relative;
   align-items: center;
-height: 200px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
+  height: 200px;
   margin: 5px;
+  position: relative;
   width: 150px;
-  /* background-color: thistle; */
-  border-radius: 20px;
 }
 
 .favorite-recipes-card div p {
@@ -38,9 +38,9 @@ height: 200px;
 }
 
 .favorite-recipes-screen {
-  margin-top: 70px;
-  height: 90vh;
   background-image: url(../../images/loginbackground.jpg);
+  height: 90vh;
+  margin-top: 70px;
 }
 
 .filter-and-cards {
@@ -53,24 +53,24 @@ height: 200px;
 }
 
 .favorite-and-share {
-  position: absolute;
-  width: 70%;
   display: flex;
   justify-content: space-between;
-  top: 90px
+  position: absolute;
+  top: 90px;
+  width: 70%;
 }
 
 .favorite-and-share button {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
   align-items: center;
   background-color: rgb(32, 193, 214);
+  border-radius: 50%;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  width: 30px;
 }
 
 .favorite-and-share button img {
-  width: 15px;
   height: 15px;
+  width: 15px;
 }

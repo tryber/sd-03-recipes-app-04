@@ -12,29 +12,29 @@
 
 .search-button {
   background-color: rgb(32, 193, 214);
-  color: white;
-  font-weight: 900;
-  width: 150px;
-  height: 50px;
   border-radius: 30px;
+  color: white;
+  display: block;
+  font-weight: 900;
+  height: 50px;
   margin: auto;
   margin-bottom: 20px;
-  display: block;
+  width: 150px;
 }
 
 .recipes-results {
   display: flex;
-  justify-content: space-evenly;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   margin-bottom: 60px;
 }
 
-.recipes-results > img, h5, h1 {
+.recipes-results>img, h5, h1 {
   text-align: center;
   width: 100%;
 }
- 
-.search-area > input {
+
+.search-area>input {
   background-color: transparent;
   border: transparent;
   border-bottom: rgb(32, 193, 214) 3px solid;
@@ -43,7 +43,7 @@
 }
 
 .radio-buttons label {
-color: rgb(41, 33, 158);
+  color: rgb(41, 33, 158);
   font-size: 1rem;
   font-weight: 900;
 }
@@ -67,5 +67,3 @@ p {
 input {
   transition: background-color 5000s;
 }
-
-

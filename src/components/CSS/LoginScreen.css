@@ -22,34 +22,34 @@ h2 {
 }
 
 .btn-login {
-  width: 40%;
-  margin-top: 20px;
   background-color: rgb(32, 193, 214);
+  margin-top: 20px;
+  width: 40%;
 }
 
 .btn-login:disabled {
+  background-color: rgb(32, 193, 214);
+  margin-top: 20px;
   opacity: 0.7;
   width: 40%;
-  margin-top: 20px;
-  background-color: rgb(32, 193, 214);
 }
 
 .input-login {
- margin: auto;
-  width: 70%;
   color: rgb(32, 193, 214);
+  margin: auto;
+  width: 70%;
 }
 
 .app-name {
   color: rgb(32, 193, 214);
-  font-size: 4rem;
   font-family: 'Chalkduster';
+  font-size: 4rem;
 }
 
 .input-login {
   background-color: transparent;
   border: transparent;
   border-bottom: 2px solid rgb(32, 193, 214);
-  padding: 15px 0;
   color: rgb(32, 193, 214);
+  padding: 15px 0;
 }

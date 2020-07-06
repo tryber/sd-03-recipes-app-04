@@ -1,26 +1,25 @@
 .inferior-menu-icons {
   align-items: center;
   background-color: #CCE8ED;
-
   bottom: 0;
   display: flex;
   height: 70px;
   justify-content: space-between;
+  left: 0;
   overflow: hidden;
   position: fixed;
-  width: 360px;
-  left: 0;
   right: 0;
+  width: 360px;
 }
 
 .inferior-menu-icons > div {
   background-color: rgb(32, 193, 214);
-  width: 60px;
-  height: 60px;
+  align-items: center;
   border-radius: 50%;
   display: flex;
+  height: 60px;
   justify-content: center;
-  align-items: center;
   margin-left: 20px;
   margin-right: 20px;
+  width: 60px;
 }
