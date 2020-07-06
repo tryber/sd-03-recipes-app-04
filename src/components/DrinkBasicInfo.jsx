@@ -3,6 +3,34 @@ import { Link } from 'react-router-dom';
 import { ContextAplication } from '../context/ContextAplication';
 import background from '../images/loginbackground.jpg';
 
+function renderRecomendations(recomendation) {
+  return (
+    <div>
+      <h3>Recomedações</h3>
+      <div className="product-pic-recomendation">
+        {recomendation.reduce((arr, e, i) => {
+          if (i < 6) {
+            return [...arr,
+              <Link to={`/comidas/${e.idMeal}`}>
+                <div data-testid={`${i}-recomendation-card`}>
+                  <img
+                    src={e.strMealThumb}
+                    data-testid="recipe-photo"
+                    alt="thumbnail"
+                    width="200px"
+                  />
+                  <h5 data-testid={`${i}-recomendation-title`}>{e.strMeal}</h5>
+                </div>
+              </Link>,
+            ];
+          }
+          return arr;
+        }, [])}
+      </div>
+    </div>
+  );
+}
+
 function BasicInfo() {
   const {
     recipeInfo, recomendation,
@@ -32,27 +60,7 @@ function BasicInfo() {
       }, [])}
       <h3>Instruções</h3>
       <p data-testid="instructions">{recipeInfo.strInstructions}</p>
-      <h3>Recomedações</h3>
-      <div className="product-pic-recomendation">
-        {recomendation.reduce((arr, e, i) => {
-          if (i < 6) {
-            return [...arr,
-            <Link to={`/comidas/${e.idMeal}`}>
-              <div data-testid={`${i}-recomendation-card`}>
-                <img
-                  src={e.strMealThumb}
-                  data-testid="recipe-photo"
-                  alt="thumbnail"
-                  width="200px"
-                />
-                <h5 data-testid={`${i}-recomendation-title`}>{e.strMeal}</h5>
-              </div>
-            </Link>,
-            ];
-          }
-          return arr;
-        }, [])}
-      </div>
+      {renderRecomendations(recomendation)}
     </div>
   );
 }

@@ -16,7 +16,7 @@ function ExploreFoodIngredientScreen() {
 
   return (
     <div>
-      <Header screen={'Explorar Ingredientes'} />
+      <Header screen="Explorar Ingredientes" />
       <div className="food-screen">
         <div className="ingridients-list">
           {ingredients.reduce((arr, e, i) => {
@@ -31,7 +31,8 @@ function ExploreFoodIngredientScreen() {
                 >
                   <img
                     src={`https://www.themealdb.com/images/ingredients/${e.strIngredient}-Small.png`}
-                    alt="thumbnail" width="120px"
+                    alt="thumbnail"
+                    width="120px"
                     data-testid={`${i}-card-img`}
                   />
                   <h5 data-testid={`${i}-card-name`}>{e.strIngredient}</h5>

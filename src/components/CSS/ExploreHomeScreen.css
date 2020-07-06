@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
 
 .explore-screen {
-  margin: 60px 0 0 0;
-  width: 360px;
-  height: 90vh;
   background-image: url(../../images/loginbackground.jpg);
   background-size: cover;
+  height: 90vh;
+  margin: 60px 0 0 0;
+  width: 360px;
 }
 
 .explore-button {
@@ -15,26 +15,26 @@
   color: black;
   font-size: 30px;
   height: 82px;
-  text-align: center;
   line-height: 80px;
-  width: 300px;
   margin-top: 40px;
+  text-align: center;
+  width: 300px;
 }
 
 .explore-food-button {
   background: rgb(32, 193, 214);
   border-radius: 50px;
   box-shadow: 0 15px 10px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-family: 'Crimson Text', serif;
   font-size: 30px;
   height: 82px;
-  text-align: center;
-  line-height: 80px;
-  width: 300px;
-  margin-top: 50px;
   left: 30px;
+  line-height: 80px;
+  margin-top: 50px;
   position: relative;
-  font-family: 'Crimson Text', serif;
-  color: white;
+  text-align: center;
+  width: 300px;
 }
 
 .explore-menu {
