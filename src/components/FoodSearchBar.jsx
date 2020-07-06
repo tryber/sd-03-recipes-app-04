@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import * as api from '../services/foodApi';
+import './CSS/SearchBar.css';
 
 function checkResults(data, setResult, setGoToRoute, setId) {
   if (data.meals === null) {
@@ -94,6 +95,7 @@ function FoodSearchBar() {
       <input
         id="searched-item"
         type="text"
+        placeholder="Buscar"
         onChange={(e) => setSearchedItem(e.target.value)}
         value={searchedItem}
         data-testid="search-input"
@@ -112,10 +114,12 @@ function FoodSearchBar() {
         {result.reduce((arr, e, i) => {
           if (i < 12) {
             return [...arr,
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img data-testid={`${i}-card-img`} src={e.strMealThumb} alt="thumbnail" width="150px" />
-                <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
-              </div>,
+            <Link to={`/comidas/${e.idMeal}`}>
+              <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`}>
+                <img data-testid={`${i}-card-img`} className="recipe-image" src={e.strMealThumb} alt="thumbnail" width="120px" />
+                <h5 data-testid={`${i}-card-name`}>{(e.strMeal.length > 30) ? `${e.strMeal.slice(0, 30)}...` : e.strMeal }</h5>
+              </div>
+            </Link>,
             ];
           }
           return arr;

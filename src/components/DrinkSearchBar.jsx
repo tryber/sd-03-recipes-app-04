@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import * as api from '../services/drink-api';
 
 function checkResults(data, setResult, setGoToRoute, setId) {
@@ -112,10 +112,12 @@ function DrinkSearchBar() {
         {result.reduce((arr, e, i) => {
           if (i < 12) {
             return [...arr,
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img src={e.strDrinkThumb} data-testid={`${i}-card-img`} alt="thumbnail" width="150px" />
-                <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
-              </div>,
+            <Link to={`/bebidas/${e.idDrink}`}>
+              <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`}>
+                <img src={e.strDrinkThumb} className="recipe-image" data-testid={`${i}-card-img`} alt="thumbnail" width="150px" />
+                <h5 data-testid={`${i}-card-name`}>{(e.strDrink.length > 30) ? `${e.strDrink.slice(0, 30)}...` : e.strDrink }</h5>
+              </div>
+            </Link>,
             ];
           }
           return arr;

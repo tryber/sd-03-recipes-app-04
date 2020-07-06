@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { ContextAplication } from '../context/ContextAplication';
 
 function BasicInfo() {
@@ -19,11 +20,11 @@ function BasicInfo() {
       {quantity.reduce((arr, e, i) => {
         if (recipeInfo[e] !== null) {
           return (
-          [...arr, (
-            <div data-testid={`${i}-ingredient-name-and-measure`}>
-              <span>{recipeInfo[ingredients[i]]}</span>
-              <span>{recipeInfo[e]}</span>
-            </div>)]
+            [...arr, (
+              <div data-testid={`${i}-ingredient-name-and-measure`}>
+                <span>{recipeInfo[ingredients[i]]}</span>
+                <span>{recipeInfo[e]}</span>
+              </div>)]
           );
         } return arr;
       }, [])}
@@ -34,6 +35,7 @@ function BasicInfo() {
         {recomendation.reduce((arr, e, i) => {
           if (i < 6) {
             return [...arr,
+            <Link to={`/comidas/${e.idMeal}`}>
               <div data-testid={`${i}-recomendation-card`}>
                 <img
                   src={e.strMealThumb}
@@ -42,7 +44,8 @@ function BasicInfo() {
                   width="200px"
                 />
                 <h5 data-testid={`${i}-recomendation-title`}>{e.strMeal}</h5>
-              </div>,
+              </div>
+            </Link>,
             ];
           }
           return arr;

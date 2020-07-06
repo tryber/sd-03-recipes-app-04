@@ -1,9 +1,9 @@
 .foodTitle {
-  color: black;
-  font-family: Roboto, Times New Roman, Times, serif;
+  color: rgb(32, 193, 214);
+  font-family: Chalkduster, Times New Roman, Times, serif;
   font-size: 30px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 900;
   margin: 0;
   width: 200px;
 }

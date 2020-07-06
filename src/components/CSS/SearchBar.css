@@ -1,0 +1,61 @@
+#searched-item {
+  display: block;
+  margin: 10px auto;
+  width: 90%;
+}
+
+.radio-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+
+.search-button {
+  background-color: rgb(32, 193, 214);
+  color: white;
+  font-weight: 900;
+  width: 150px;
+  height: 50px;
+  border-radius: 30px;
+  margin: auto;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.recipes-results {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+
+.recipes-results > img, h5, h1 {
+  text-align: center;
+  width: 100%;
+}
+ 
+.search-area > input {
+  background-color: transparent;
+  border: transparent;
+  border-bottom: rgb(32, 193, 214) 3px solid;
+  color: rgb(32, 193, 214);
+  font-size: 2rem;
+}
+
+.radio-buttons label {
+color: rgb(41, 33, 158);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+span {
+  margin: 5px;
+}
+
+p {
+  text-align: justify;
+}
+
+.search-area {
+  padding-top: 20px;
+}

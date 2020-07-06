@@ -60,7 +60,9 @@ function MealsList(Data) {
                 data-testid={`${i}-recipe-card`}
               >
                 <img src={e.strMealThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
-                <p data-testid={`${i}-card-name`}>{e.strMeal}</p>
+                {(e.strMeal !== undefined) && <h5 data-testid={`${i}-card-name`}>{(e.strMeal.length > 30) ? `${e.strMeal.slice(0, 30)}...` : e.strMeal }</h5>}
+                
+                 {/* <h5 data-testid={`${i}-card-name`}>{e.strMeal }</h5> */}
               </div>
             </Link>,
           ];

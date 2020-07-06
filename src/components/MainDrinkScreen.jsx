@@ -31,16 +31,16 @@ function FilterButtons(Categories, handleClick) {
         {Categories.reduce((arr, e, i) => {
           if (i < 5) {
             return [...arr,
-              <button
-                type="button"
-                data-testid={`${e.strCategory}-category-filter`}
-                value={e.strCategory}
-                onClick={handleClick}
-                className="button-main-screen"
-              >
-                <img src={drinkPics[i]} alt={drinkPics[i]} width="20px" />
-                {e.strCategory}
-              </button>,
+            <button
+              type="button"
+              data-testid={`${e.strCategory}-category-filter`}
+              value={e.strCategory}
+              onClick={handleClick}
+              className="button-main-screen"
+            >
+              <img src={drinkPics[i]} alt={drinkPics[i]} width="20px" />
+              {e.strCategory}
+            </button>,
             ];
           }
           return arr;
@@ -56,12 +56,12 @@ function DrinksList(Data) {
       {Data.reduce((arr, e, i) => {
         if (i < 12) {
           return [...arr,
-            <Link to={`/bebidas/${e.idDrink}`}>
-              <div className={`product-pic-${i} product-pic`} data-testid={`${i}-recipe-card`}>
-                <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
-                <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
-              </div>
-            </Link>,
+          <Link to={`/bebidas/${e.idDrink}`}>
+            <div className={`product-pic-${i} product-pic`} data-testid={`${i}-recipe-card`}>
+              <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
+              {(e.strDrink !== undefined) && <h5 data-testid={`${i}-card-name`}>{(e.strDrink.length > 30) ? `${e.strDrink.slice(0, 30)}...` : e.strDrink}</h5>}
+            </div>
+          </Link>,
           ];
         }
         return arr;
