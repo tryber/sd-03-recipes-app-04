@@ -4,6 +4,7 @@ import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import { getMealById } from '../services/foodApi';
+import { changeChecked, clickFavorite } from './functionsProgressScreen';
 import checkedlist from './checklist';
 
 function ProgressFoodScreen(props) {
@@ -18,7 +19,7 @@ function ProgressFoodScreen(props) {
   const ingredientsDoneList = [];
   const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
- 
+
   const [checked, setChecked] = useState(checkedlist);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ function ProgressFoodScreen(props) {
   useEffect(() => {
   }, [checked, countChecked]);
 
-  function copyContent(text, event) {
+  function copyContent(text) {
     const separetedText = text.split('/');
     const modifiedText = `${separetedText[0]}//${separetedText[2]}/${separetedText[4]}/${separetedText[5]}`;
     navigator.clipboard.writeText(modifiedText)
@@ -63,64 +64,6 @@ function ProgressFoodScreen(props) {
       });
   }
 
-  function changeChecked(event, value) {
-    console.log(event.target.checked);
-    checked.checkbox.forEach((checkbox) => {
-      if (event.target.checked === true) {
-        setCountChecked(countChecked + 1);
-      } if (event.target.checked === false) {
-        console.log(countChecked);
-        if (checkLocalStorage.countChecked < 0) {
-          setCountChecked(countChecked + 1);
-        } else {
-          setCountChecked(countChecked - 1);
-        }
-      }
-      if (checkbox.id === Number(event.target.id)) {
-        checkbox.name = event.target.name;
-        checkbox.checked = event.target.checked;
-      }
-    });
-    setChecked((prevState) => ({
-      ...prevState,
-      checked: {
-        ...prevState.checkbox.checked,
-        checkbox: value,
-      },
-    }));
-    localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox }, countChecked }));
-  }
-
-  function clickFavorite(recipeInfo, isFavoritePar) {
-    setIsFavorite(!isFavoritePar);
-    const {
-      idMeal, strArea, strCategory, strMeal, strMealThumb,
-    } = recipeInfo;
-    const mealInfo = {
-      id: idMeal,
-      type: 'comida',
-      area: strArea,
-      category: strCategory,
-      alcoholicOrNot: '',
-      name: strMeal,
-      image: strMealThumb,
-    };
-    let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (!storage) {
-      storage = [];
-    }
-    if (!isFavoritePar) {
-      const newStorage = [...storage, mealInfo];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
-    }
-    if (isFavoritePar) {
-      const newStorage = storage.filter((e) => !e.id === idMeal);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
-    }
-  }
-
- 
-
   function mountRecipeList(quantity, ingredients) {
     quantity.map((e, i) => (inProgressRecipe[e] !== null && inProgressRecipe[e] !== ''
       ? ingredientsDoneList.push({
@@ -134,7 +77,6 @@ function ProgressFoodScreen(props) {
     return ingredientsDoneList;
   }
 
-  
   const data = mountRecipeList(quantity, ingredients);
   const buttonEnabled = countChecked === data.length;
   return (
@@ -153,7 +95,7 @@ function ProgressFoodScreen(props) {
       <button
         type="button"
         className="favourite"
-        onClick={() => clickFavorite(inProgressRecipe, isFavorite)}
+        onClick={() => clickFavorite(inProgressRecipe, isFavorite, setIsFavorite)}
         src={favorite}
       >
         {getIfHasBeenFavorited(id)
@@ -166,7 +108,7 @@ function ProgressFoodScreen(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
-            <input id={i} type="checkbox" checked={checkLocalStorage.meals[id][i].checked} name={element.meal} onClick={(event) => changeChecked(event, checked.checkbox[i].checked)} />
+            <input id={i} type="checkbox" checked={checkLocalStorage.meals[id][i].checked} name={element.meal} onClick={(event) => changeChecked(event, checked.checkbox[i].checked, setCountChecked, setChecked, checked, countChecked, checkLocalStorage, id)} />
             <span>{element.meal}</span>
             {element.mensure}
           </span>
