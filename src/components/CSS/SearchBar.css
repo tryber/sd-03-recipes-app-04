@@ -59,3 +59,13 @@ p {
 .search-area {
   padding-top: 20px;
 }
+
+::placeholder {
+  color: rgb(32, 193, 214);
+}
+
+input {
+  transition: background-color 5000s;
+}
+
+
