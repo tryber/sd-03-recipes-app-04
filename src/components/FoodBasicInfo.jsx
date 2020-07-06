@@ -12,16 +12,16 @@ function renderRcomendations(recomendation) {
         {recomendation.reduce((arr, e, i) => {
           if (i < 6) {
             return [...arr,
-            <Link to={`/bebidas/${e.idDrink}`}>
-              <div data-testid={`${i}-recomendation-card`}>
-                <img
-                  src={e.strDrinkThumb}
-                  data-testid="recipe-photo"
-                  alt="thumbnail"
-                />
-                <h5 data-testid={`${i}-recomendation-title`}>{e.strDrink}</h5>
-              </div>
-            </Link>,
+              <Link to={`/bebidas/${e.idDrink}`}>
+                <div data-testid={`${i}-recomendation-card`}>
+                  <img
+                    src={e.strDrinkThumb}
+                    data-testid="recipe-photo"
+                    alt="thumbnail"
+                  />
+                  <h5 data-testid={`${i}-recomendation-title`}>{e.strDrink}</h5>
+                </div>
+              </Link>,
             ];
           }
           return arr;
@@ -48,11 +48,11 @@ function BasicInfo() {
       {quantity.reduce((arr, e, i) => {
         if (recipeInfo[e] !== '') {
           return (
-            [...arr, (
-              <div data-testid={`${i}-ingredient-name-and-measure`}>
-                <span>{recipeInfo[ingredients[i]]}</span>
-                <span>{recipeInfo[e]}</span>
-              </div>)]
+          [...arr, (
+            <div data-testid={`${i}-ingredient-name-and-measure`}>
+              <span>{recipeInfo[ingredients[i]]}</span>
+              <span>{recipeInfo[e]}</span>
+            </div>)]
           );
         } return arr;
       }, [])}
