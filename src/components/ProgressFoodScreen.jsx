@@ -6,20 +6,29 @@ import checkedlist from './checklist';
 import MealsRenderRecipesInProgress from './helpersComponents/MealsRenderRecipesInProgress';
 
 function ProgressFoodScreen(props) {
+  const ingredientsDoneList = [];
+  const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+  const { match: { params: { id } } } = props;
+  const { location, history } = props;
+  const { pathname } = location;
+
   const [inProgressRecipe, setInProgressRecipe] = useState([]);
   const [showCopyAlert, setShowCopyAlert] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { match } = props;
-  const { params } = match;
-  const { id } = params;
-  const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const [countChecked, setCountChecked] = useState(0);
-  const ingredientsDoneList = [];
+  const [checked, setChecked] = useState(checkedlist);
+
   const quant = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
   const ingred = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
-  const [checked, setChecked] = useState(checkedlist);
-  useEffect(() => { getMealById(id).then((data) => { setInProgressRecipe(data.meals[0]); }); }, []);
-  useEffect(() => { if (getIfHasBeenFavorited(id)) { setIsFavorite(true); } }, [id]);
+
+  useEffect(() => {
+    getMealById(id)
+      .then((data) => { setInProgressRecipe(data.meals[0]); });
+  }, []);
+  useEffect(() => {
+    if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
+  }, [id]);
   useEffect(() => {
     if (checkLocalStorage === null) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox }, countChecked }));
@@ -28,8 +37,6 @@ function ProgressFoodScreen(props) {
   useEffect(() => {}, [checked, countChecked]);
   const data = mountRecipeList(quant, ingred, inProgressRecipe, checked, ingredientsDoneList);
   const buttonEnabled = countChecked === data.length;
-  const { location, history } = props;
-  const { pathname } = location;
   return (
     <MealsRenderRecipesInProgress
       values={{
