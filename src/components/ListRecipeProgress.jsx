@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import notFavorite from '../images/whiteHeartIcon.svg';
+import favorite from '../images/blackHeartIcon.svg';
+import share from '../images/shareIcon.svg';
 
 function ListRecipeProgress(props) {
   const { listValues } = props;
@@ -15,9 +18,37 @@ function ListRecipeProgress(props) {
     countChecked,
     history,
     changeChecked,
+    showCopyAlert,
+    clickFavorite,
+    isFavorite,
+    setIsFavorite,
+    getIfHasBeenFavorited,
+    copyContent,
+    pathname,
   } = listValues;
   return (
     <div>
+      <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
+      {showCopyAlert ? <h2>Link copiado!</h2> : null}
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={(event) => copyContent(`http://localhost:3000/${pathname}`, event)}
+        className="favourite"
+      >
+        <img src={share} alt="icon" />
+      </button>
+
+      <button
+        type="button"
+        className="favourite"
+        onClick={() => clickFavorite(inProgressRecipe, isFavorite, setIsFavorite, 'comida')}
+        src={favorite}
+      >
+        {getIfHasBeenFavorited(id)
+          ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
+          : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
+      </button>
       <h1 data-testid="recipe-title"> Ingredients </h1>
       <h3 data-testid="recipe-category">{inProgressRecipe.strCategory}</h3>
       {data.map((element, i) => (
