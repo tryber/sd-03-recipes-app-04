@@ -5,7 +5,6 @@ import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import {
   getDoneLocalStorage,
-  getStartedLocalStorage,
   getIfHasBeenFavorited,
   copyToClipboard,
 } from './FoodButtons';
@@ -37,6 +36,17 @@ function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
     const newStorage = storage.filter((e) => !e.id === idDrink);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
+}
+
+function getStartedLocalStorage(id) {
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  let started;
+  if (!storage) {
+    started = false;
+  } else {
+    started = Object.keys(storage.cocktails).find((e) => e === id);
+  }
+  return started;
 }
 
 function renderFavoriteButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id) {

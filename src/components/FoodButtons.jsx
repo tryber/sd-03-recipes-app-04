@@ -24,13 +24,13 @@ export function getDoneLocalStorage(id) {
   return done;
 }
 
-export function getStartedLocalStorage(id) {
+function getStartedLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let started;
   if (!storage) {
     started = false;
   } else {
-    started = Object.keys(storage).find((e) => e === id);
+    started = Object.keys(storage.meals).find((e) => e === id);
   }
   return started;
 }
