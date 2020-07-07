@@ -21,8 +21,8 @@
   justify-content: center;
   margin-left: 20px;
   margin-right: 20px;
-  transition: 1s;
   transform: scale3d(1, 1, 1);
+  transition: 1s;
   width: 60px;
 }
 
