@@ -5,13 +5,8 @@ import { handleChecked } from './MealsControlsRecipeProgress';
 function CockTailsControlsRecipeProgress(props) {
   const { valuesToRender } = props;
   const {
-    inProgressDrink,
-    data,
-    checkLocalStorage,
-    buttonEnabled,
-    id,
-    checked,
-    history,
+    inProgressDrink, data, checkLocalStorage, buttonEnabled,
+    id, checked, history,
   } = valuesToRender;
   return (
     <div>

@@ -31,13 +31,8 @@ export function handleChecked(event, value, type, values) {
 function MealsControlsRecipeProgress(props) {
   const { valuesToRender } = props;
   const {
-    inProgressRecipe,
-    data,
-    checkLocalStorage,
-    buttonEnabled,
-    id,
-    checked,
-    history,
+    inProgressRecipe, data, checkLocalStorage, buttonEnabled,
+    id, checked, history,
   } = valuesToRender;
   return (
     <div>
