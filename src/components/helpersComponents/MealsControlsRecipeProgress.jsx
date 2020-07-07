@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import { changeChecked } from './functionsProgressScreen';
 
-function handleChecked(event, value, type, values) {
+export function handleChecked(event, value, type, values) {
   const { checked, setCountChecked, countChecked, checkLocalStorage, setChecked, id } = values;
   checked.checkbox.forEach((checkbox) => {
     if (event.target.checked === true) {

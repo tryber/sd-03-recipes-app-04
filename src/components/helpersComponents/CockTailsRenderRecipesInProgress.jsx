@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { copyContent } from './MealsfunctionsProgressScreen';
+import { copyContent } from '../functionsProgressScreen';
 import CockTailsListRecipeProgress from './CockTailsListRecipeProgress';
 import share from '../../images/shareIcon.svg';
 

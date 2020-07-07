@@ -14,13 +14,12 @@ function ProgressDrinkScreen(props) {
   const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const quant = Object.keys(inProgressDrink).filter((e) => e.includes('strIngredient'));
   const ingred = Object.keys(inProgressDrink).filter((e) => e.includes('strMeasure'));
-  const { match: { params: { id }} } = props;
+  const { match: { params: { id } } } = props;
 
   const [checked, setChecked] = useState(checkedlist);
 
   useEffect(() => {
     getDrinkByID(id).then((data) => {
-      console.log(data.drinks[0]);
       setInProgressDrink(data.drinks[0]);
     });
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }

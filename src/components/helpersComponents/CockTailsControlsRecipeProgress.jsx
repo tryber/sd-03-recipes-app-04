@@ -1,34 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { changeChecked } from './functionsProgressScreen';
-
-function handleChecked(event, value, type, values) {
-  const { checked, setCountChecked, countChecked, checkLocalStorage, setChecked, id } = values;
-  checked.checkbox.forEach((checkbox) => {
-    if (event.target.checked === true) {
-      setCountChecked(countChecked + 1);
-    } if (event.target.checked === false) {
-      console.log(countChecked);
-      if (checkLocalStorage.countChecked < 0) {
-        setCountChecked(countChecked + 1);
-      } else {
-        setCountChecked(countChecked - 1);
-      }
-    }
-    if (checkbox.id === Number(event.target.id)) {
-      // checkbox.name = event.target.name;
-      checkbox.checked = event.target.checked;
-    }
-  });
-  setChecked((prevState) => ({
-    ...prevState,
-    checked: {
-      ...prevState.checkbox.checked,
-      checkbox: value,
-    },
-  }));
-  localStorage.setItem('inProgressRecipes', JSON.stringify({ [type]: { [id]: checked.checkbox }, countChecked }));
-}
+import { handleChecked } from './MealsControlsRecipeProgress';
 
 function CockTailsControlsRecipeProgress(props) {
   const { valuesToRender } = props;
