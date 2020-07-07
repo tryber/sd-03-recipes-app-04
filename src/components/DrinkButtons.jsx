@@ -3,7 +3,12 @@ import { Redirect } from 'react-router-dom';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
-import { getDoneLocalStorage, getStartedLocalStorage, getIfHasBeenFavorited, copyToClipboard } from './FoodButtons';
+import {
+  getDoneLocalStorage,
+  getStartedLocalStorage,
+  getIfHasBeenFavorited,
+  copyToClipboard,
+} from './FoodButtons';
 import { ContextAplication } from '../context/ContextAplication';
 
 function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
