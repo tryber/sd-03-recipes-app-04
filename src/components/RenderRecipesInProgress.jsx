@@ -7,7 +7,7 @@ import share from '../images/shareIcon.svg';
 function RenderRecipesInProgressMeals(props) {
   const { values } = props;
   const {
-    setShowCopyAlert, 
+    setShowCopyAlert,
     inProgressRecipe,
     showCopyAlert,
     pathname,

@@ -19,12 +19,7 @@ function ProgressFoodScreen(props) {
   const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
   const [checked, setChecked] = useState(checkedlist);
 
-  useEffect(() => {
-    getMealById(id).then((data) => {
-      setInProgressRecipe(data.meals[0]);
-    });
-  }, []);
-
+  useEffect(() => { getMealById(id).then((data) => { setInProgressRecipe(data.meals[0]); }); }, []);
   function getIfHasBeenFavorited(idPar) {
     const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (storage) {
@@ -33,9 +28,7 @@ function ProgressFoodScreen(props) {
     }
     return false;
   }
-  useEffect(() => {
-    if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
-  }, [id]);
+  useEffect(() => { if (getIfHasBeenFavorited(id)) { setIsFavorite(true); } }, [id]);
 
   useEffect(() => {
     if (checkLocalStorage === null) {
@@ -43,8 +36,7 @@ function ProgressFoodScreen(props) {
     }
   }, [checkLocalStorage]);
 
-  useEffect(() => {
-  }, [checked, countChecked]);
+  useEffect(() => {}, [checked, countChecked]);
   const data = mountRecipeList(quantity,
     ingredients, inProgressRecipe, checked, ingredientsDoneList);
   const buttonEnabled = countChecked === data.length;

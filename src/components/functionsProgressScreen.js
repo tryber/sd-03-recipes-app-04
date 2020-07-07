@@ -82,7 +82,8 @@ export function copyContent(text, setShowCopyAlert) {
     });
 }
 
-export function mountRecipeList(quantityPar, ingredientsPar, inProgressRecipe, checked, ingredientsDoneList) {
+export function mountRecipeList(quantityPar, ingredientsPar,
+  inProgressRecipe, checked, ingredientsDoneList) {
   quantityPar.map((e, i) => (inProgressRecipe[e] !== null && inProgressRecipe[e] !== ''
     ? ingredientsDoneList.push({
       meal: inProgressRecipe[e],
@@ -93,4 +94,4 @@ export function mountRecipeList(quantityPar, ingredientsPar, inProgressRecipe, c
   ));
 
   return ingredientsDoneList;
-} 
+}
