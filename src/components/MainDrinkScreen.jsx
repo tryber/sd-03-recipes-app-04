@@ -10,7 +10,6 @@ import cocktail from '../images/cocktail.svg';
 import cocoa from '../images/cocoa.svg';
 import unknown from '../images/unknown.svg';
 import shake from '../images/shake.svg';
-import filter from '../images/filter.svg';
 import { renderFilterButtons } from './MainFoodScreen';
 
 const filterPics = [ordinary, cocktail, shake, unknown, cocoa];
@@ -25,7 +24,6 @@ function FilterButtons(Categories, handleClick) {
         onClick={handleClick}
         className="button-main-screen"
       >
-        <img src={filter} width="20px" alt="filter" />
         All
       </button>
       {renderFilterButtons(Categories, handleClick, filterPics)}

@@ -10,7 +10,6 @@ import beef from '../images/beef.svg';
 import goat from '../images/goat.svg';
 import dessert from '../images/dessert.svg';
 import breakfast from '../images/breakfast.svg';
-import filter from '../images/filter.svg';
 
 const filterPics = [beef, breakfast, chicken, dessert, goat];
 
@@ -46,7 +45,6 @@ function FilterButtons(Categories, handleClick) {
         onClick={handleClick}
         className="button-main-screen"
       >
-        <img src={filter} width="20px" alt="filter" />
         All
       </button>
       {renderFilterButtons(Categories, handleClick, filterPics)}
