@@ -27,7 +27,7 @@ export function getDoneLocalStorage(id) {
 function getStartedLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let started;
-  if (!storage.meals) {
+  if (!storage) {
     started = false;
   } else {
     started = Object.keys(storage.meals).find((e) => e === id);

@@ -26,10 +26,12 @@ function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
   };
   let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (!storage) {
+    console.log('teste')
     storage = [];
   }
   if (!isFavorite) {
     const newStorage = [...storage, drinkInfo];
+    console.log(newStorage)
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
   if (isFavorite) {
@@ -41,7 +43,7 @@ function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
 function getStartedLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let started;
-  if (!storage.cocktails) {
+  if (!storage) {
     started = false;
   } else {
     started = Object.keys(storage.cocktails).find((e) => e === id);
