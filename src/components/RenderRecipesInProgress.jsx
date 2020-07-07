@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { copyContent } from './functionsProgressScreen';
 import ListRecipeProgress from './ListRecipeProgress';
 import share from '../images/shareIcon.svg';
 
 function RenderRecipesInProgressMeals(props) {
   const { values } = props;
   const {
+    setShowCopyAlert, 
     inProgressRecipe,
     showCopyAlert,
-    copyContent,
     pathname,
   } = values;
   return (
@@ -19,7 +19,7 @@ function RenderRecipesInProgressMeals(props) {
       <button
         type="button"
         data-testid="share-btn"
-        onClick={(event) => copyContent(`http://localhost:3000/${pathname}`, event)}
+        onClick={() => copyContent(`http://localhost:3000/${pathname}`, setShowCopyAlert)}
         className="favourite"
       >
         <img src={share} alt="icon" />

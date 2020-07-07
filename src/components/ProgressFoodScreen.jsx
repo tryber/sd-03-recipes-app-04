@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getMealById } from '../services/foodApi';
+import { mountRecipeList } from './functionsProgressScreen';
 import checkedlist from './checklist';
 import RenderRecipesInProgressMeals from './RenderRecipesInProgress';
 
@@ -44,36 +45,8 @@ function ProgressFoodScreen(props) {
 
   useEffect(() => {
   }, [checked, countChecked]);
-
-  function copyContent(text) {
-    const separetedText = text.split('/');
-    const modifiedText = `${separetedText[0]}//${separetedText[2]}/${separetedText[4]}/${separetedText[5]}`;
-    navigator.clipboard.writeText(modifiedText)
-      .then(() => {
-        setShowCopyAlert(true);
-        alert(modifiedText);
-        alert('Link copiado!');
-        alert('Link copiado!');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  function mountRecipeList(quantityPar, ingredientsPar) {
-    quantityPar.map((e, i) => (inProgressRecipe[e] !== null && inProgressRecipe[e] !== ''
-      ? ingredientsDoneList.push({
-        meal: inProgressRecipe[e],
-        mensure: inProgressRecipe[ingredientsPar[i]],
-        checked: checked.checkbox[i],
-      })
-      : null
-    ));
-
-    return ingredientsDoneList;
-  }
-
-  const data = mountRecipeList(quantity, ingredients);
+  const data = mountRecipeList(quantity,
+    ingredients, inProgressRecipe, checked, ingredientsDoneList);
   const buttonEnabled = countChecked === data.length;
   const { location, history } = props;
   const { pathname } = location;
@@ -84,7 +57,7 @@ function ProgressFoodScreen(props) {
         buttonEnabled,
         inProgressRecipe,
         showCopyAlert,
-        copyContent,
+        setShowCopyAlert,
         checkLocalStorage,
         isFavorite,
         getIfHasBeenFavorited,
