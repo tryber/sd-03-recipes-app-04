@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { copyContent } from './functionsProgressScreen';
-import ListRecipeProgress from './ListRecipeProgress';
-import share from '../images/shareIcon.svg';
+import { copyContent } from './MealsfunctionsProgressScreen';
+import CockTailsListRecipeProgress from './CockTailsListRecipeProgress';
+import share from '../../images/shareIcon.svg';
 
-function RenderRecipesInProgressMeals(props) {
+function CocktailsRenderRecipesInProgress(props) {
   const { values } = props;
   const {
     setShowCopyAlert,
-    inProgressRecipe,
+    inProgressDrink,
     showCopyAlert,
     pathname,
   } = values;
   return (
     <div>
-      <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
+      <img src={inProgressDrink.strDrinkThumb} alt="" data-testid="recipe-photo" />
       {showCopyAlert ? <h2>Link copiado!</h2> : null}
       <button
         type="button"
@@ -24,12 +24,12 @@ function RenderRecipesInProgressMeals(props) {
       >
         <img src={share} alt="icon" />
       </button>
-      <ListRecipeProgress listValues={values} />
+      <CockTailsListRecipeProgress listValues={values} />
     </div>
   );
 }
 
-RenderRecipesInProgressMeals.propTypes = {
+CocktailsRenderRecipesInProgress.propTypes = {
   values: PropTypes.string.isRequired,
 };
-export default RenderRecipesInProgressMeals;
+export default CocktailsRenderRecipesInProgress;

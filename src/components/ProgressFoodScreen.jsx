@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getMealById } from '../services/foodApi';
 import { mountRecipeList, getIfHasBeenFavorited } from './functionsProgressScreen';
 import checkedlist from './checklist';
-import RenderRecipesInProgressMeals from './RenderRecipesInProgress';
+import MealsRenderRecipesInProgress from './helpersComponents/MealsRenderRecipesInProgress';
 
 function ProgressFoodScreen(props) {
   const [inProgressRecipe, setInProgressRecipe] = useState([]);
@@ -31,7 +31,7 @@ function ProgressFoodScreen(props) {
   const { location, history } = props;
   const { pathname } = location;
   return (
-    <RenderRecipesInProgressMeals
+    <MealsRenderRecipesInProgress
       values={{
         data,
         buttonEnabled,

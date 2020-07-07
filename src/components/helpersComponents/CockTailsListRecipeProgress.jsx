@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import notFavorite from '../images/whiteHeartIcon.svg';
-import favorite from '../images/blackHeartIcon.svg';
-import ControlsRecipeProgress from './ControlsRecipeProgress';
-import { clickFavorite, getIfHasBeenFavorited } from './functionsProgressScreen';
+import notFavorite from '../../images/whiteHeartIcon.svg';
+import favorite from '../../images/blackHeartIcon.svg';
+import CockTailsControlsRecipeProgress from './CockTailsControlsRecipeProgress';
+import { clickFavorite, getIfHasBeenFavorited } from './MealsfunctionsProgressScreen';
 
-function ListRecipeProgress(props) {
+function CockTailsListRecipeProgress(props) {
   const { listValues } = props;
   const {
     inProgressRecipe,
@@ -18,21 +18,21 @@ function ListRecipeProgress(props) {
       <button
         type="button"
         className="favourite"
-        onClick={() => clickFavorite(inProgressRecipe, isFavorite, setIsFavorite, 'comida')}
+        onClick={() => clickFavorite(inProgressRecipe, isFavorite, setIsFavorite, 'bebida')}
         src={favorite}
       >
         {getIfHasBeenFavorited(id)
           ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
           : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
       </button>
-      <ControlsRecipeProgress
+      <CockTailsControlsRecipeProgress
         valuesToRender={listValues}
       />
     </div>
   );
 }
-ListRecipeProgress.propTypes = {
+CockTailsListRecipeProgress.propTypes = {
   listValues: PropTypes.string.isRequired,
 };
 
-export default ListRecipeProgress;
+export default CockTailsListRecipeProgress;
