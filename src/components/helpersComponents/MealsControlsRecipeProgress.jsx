@@ -8,7 +8,6 @@ export function handleChecked(event, value, type, values) {
     if (event.target.checked === true) {
       setCountChecked(countChecked + 1);
     } if (event.target.checked === false) {
-      console.log(countChecked);
       if (checkLocalStorage.countChecked < 0) {
         setCountChecked(countChecked + 1);
       } else {
