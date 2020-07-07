@@ -18,7 +18,6 @@ function ProgressFoodScreen(props) {
   const quantity = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
   const ingredients = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
   const [checked, setChecked] = useState(checkedlist);
-
   useEffect(() => { getMealById(id).then((data) => { setInProgressRecipe(data.meals[0]); }); }, []);
   useEffect(() => { if (getIfHasBeenFavorited(id)) { setIsFavorite(true); } }, [id]);
   useEffect(() => {
