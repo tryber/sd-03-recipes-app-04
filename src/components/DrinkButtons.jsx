@@ -34,7 +34,7 @@ function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
   }
 }
 
-function renderShareButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id) {
+function renderFavoriteButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id) {
   return (
     <div className="share-and-favourite">
       <button
@@ -52,12 +52,12 @@ function renderShareButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)
   );
 }
 
-function renderFavoriteButton() {
+function renderShareButton(setHide) {
   return (
     <div className="share-and-favourite">
       <button
         type="button"
-        onClick={() => copyToClipboard()}
+        onClick={() => copyToClipboard(setHide)}
         className="favourite"
       >
         <img data-testid="share-btn" src={share} alt="icon" />
@@ -69,6 +69,7 @@ function renderFavoriteButton() {
 function Buttons() {
   const [goToRoute, setGoToRoute] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [hide, setHide] = useState(true);
   const { recipeInfo, id } = useContext(ContextAplication);
   useEffect(() => {
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
@@ -76,7 +77,7 @@ function Buttons() {
 
   return (
     <div className="bottom-buttons">
-      {renderShareButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
+      {renderFavoriteButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
       {!getDoneLocalStorage(id) && !getStartedLocalStorage(id) && (
         <button
           data-testid="start-recipe-btn"
@@ -97,7 +98,8 @@ function Buttons() {
           Continuar Receita
         </button>
       )}
-      {renderFavoriteButton()}
+      {renderShareButton(setHide)}
+      <p className="alert" hidden={hide}>Link copiado!</p>
       {goToRoute && <Redirect to={`/bebidas/${id}/in-progress`} />}
     </div>
   );

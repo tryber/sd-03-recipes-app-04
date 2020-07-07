@@ -5,9 +5,12 @@ import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import { ContextAplication } from '../context/ContextAplication';
 
-export function copyToClipboard() {
-  navigator.clipboard.writeText(window.location.href)
-    .then(() => alert('Link copiado!'));
+export function copyToClipboard(setHide) {
+  navigator.clipboard.writeText(window.location.href);
+  setHide(false);
+  setTimeout(() => {
+    setHide(true);
+  }, 2000);
 }
 
 export function getDoneLocalStorage(id) {
@@ -87,12 +90,12 @@ function renderFavoriteButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, 
   );
 }
 
-function renderShareButton() {
+function renderShareButton(setHide) {
   return (
     <div className="share-and-favourite">
       <button
         type="button"
-        onClick={() => copyToClipboard()}
+        onClick={() => copyToClipboard(setHide)}
         className="favourite"
       >
         <img data-testid="share-btn" src={share} alt="icon" />
@@ -104,6 +107,7 @@ function renderShareButton() {
 function Buttons() {
   const [goToRoute, setGoToRoute] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [hide, setHide] = useState(true);
   const { recipeInfo, id } = useContext(ContextAplication);
 
   useEffect(() => {
@@ -133,7 +137,8 @@ function Buttons() {
           Continuar Receita
         </button>
       )}
-      {renderShareButton()}
+      {renderShareButton(setHide)}
+      <p className="alert" hidden={hide}>Link copiado!</p>
       {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
     </div>
   );

@@ -10,9 +10,14 @@ import filter from '../images/filter.svg';
 
 const colors = ['#DFBC41', '#e7736a', '#FCF7C9', '#C9DA73', '#D3A585', '#FAC55E', '#FBF8D7', '#63c252', '#C79B7E', '#F9F5BF', '#C67206', '#3EC1D6'];
 
-function copyToClipboard(type, id) {
+function copyToClipboard(type, id, setHide) {
   navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)
-    .then(() => alert('Link copiado!'));
+    .then(() => {
+      setHide(false);
+      setTimeout(() => {
+        setHide(true);
+      }, 2000);
+    });
 }
 
 function getColors() {
@@ -75,6 +80,7 @@ function renderfilterButtons(setFavorites) {
 
 function FavoriteRecipes() {
   const [favorites, setFavorites] = useState([]);
+  const [hide, setHide] = useState(true);
   useEffect(() => {
     getFavorites(setFavorites);
   }, []);
@@ -82,6 +88,7 @@ function FavoriteRecipes() {
     <div>
       <Header screen="Receitas Favoritas" />
       <div className="favorite-recipes-screen">
+        <p className="alert-favorite-screen" hidden={hide}>Link copiado!</p>
         {renderfilterButtons(setFavorites)}
         <div className="favorite-recipes-container">
           {favorites.map((e, i) => (
@@ -95,7 +102,7 @@ function FavoriteRecipes() {
                 <div className="favorite-and-share">
                   <button
                     type="button"
-                    onClick={() => copyToClipboard(e.type, e.id)}
+                    onClick={() => copyToClipboard(e.type, e.id, setHide)}
                   >
                     <img data-testid={`${i}-horizontal-share-btn`} src={share} alt="share" />
                   </button>

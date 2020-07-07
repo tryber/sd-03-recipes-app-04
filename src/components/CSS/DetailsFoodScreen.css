@@ -129,3 +129,15 @@ h2 {
   width: 360px;
   z-index: -1;
 }
+
+.alert {
+  background-color: rgb(41, 137, 192);
+  border-radius: 10px;
+  color: aqua;
+  font-size: 2rem;
+  opacity: 0.8;
+  position: absolute;
+  text-align: center;
+  top: -100px;
+  width: 250px;
+}

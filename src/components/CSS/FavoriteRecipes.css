@@ -13,7 +13,7 @@
 }
 
 .favorite-recipes-card p {
-  color: #3f77a6;
+  color: #1901ed;
   height: 10px;
 }
 
@@ -49,6 +49,8 @@
 }
 
 .favorite-filter-buttons {
+  align-items: center;
+  display: flex;
   position: relative;
   top: 20px;
 }
@@ -74,4 +76,17 @@
 .favorite-and-share button img {
   height: 15px;
   width: 15px;
+}
+
+.alert-favorite-screen {
+  background-color: rgb(41, 137, 192);
+  border-radius: 10px;
+  color: aqua;
+  font-size: 2rem;
+  left: 50px;
+  opacity: 0.8;
+  position: absolute;
+  text-align: center;
+  width: 250px;
+  z-index: 1;
 }
