@@ -82,3 +82,20 @@
   padding-top: 30px;
   width: 360px;
 }
+
+.fade-in-fwd {
+  animation: fade-in-fwd 1.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+@keyframes fade-in-fwd {
+
+  0% {
+    opacity: 0;
+    transform: translateZ(-80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}

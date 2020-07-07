@@ -13,7 +13,7 @@ function MealsList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
-              <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`}>
+              <div className={`product-pic product-pic-${i} slide-in-fwd-center`} data-testid={`${i}-recipe-card`}>
                 <img
                   className="recipe-image"
                   src={e.strMealThumb}
@@ -64,7 +64,7 @@ function ShowResultsByArea(Data, mealsByArea, areaFilter) {
           if (i < 12) {
             return [...arr,
               <Link to={`/comidas/${e.idMeal}`}>
-                <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`}>
+                <div className={`product-pic product-pic-${i} slide-in-fwd-center`} data-testid={`${i}-recipe-card`}>
                   <img
                     className="recipe-image"
                     src={e.strMealThumb}

@@ -90,7 +90,7 @@ function DrinkSearchBar() {
   const [disabled, setDisabled] = useState('true');
 
   return (
-    <div className="search-area">
+    <div className="search-area slide-in-top">
       <input
         data-testid="search-input"
         id="searched-item"

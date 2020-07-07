@@ -8,7 +8,7 @@ function ExploreHomeScreen() {
   return (
     <div className="explore-screen">
       <Header screen={'Explorar'} />
-      <div className="explore-menu">
+      <div className="explore-menu fade-in-fwd ">
         <Link to="/explorar/comidas">
           <p className="explore-button" data-testid="explore-food">Explorar Comidas</p>
         </Link>

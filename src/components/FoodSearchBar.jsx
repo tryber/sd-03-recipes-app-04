@@ -91,7 +91,7 @@ function FoodSearchBar() {
   const [disabled, setDisabled] = useState(true);
 
   return (
-    <div className="search-area">
+    <div className="search-area slide-in-top">
       <input
         id="searched-item"
         className="searched-item"
