@@ -1,13 +1,26 @@
 import React from 'react';
-import { cleanup, fireEvent, act } from '@testing-library/react';
-import renderWithRouter from './RenderService';
-import App from '../App';
+import {
+  cleanup,
+  fireEvent,
+  act,
+  waitForElement,
+} from '@testing-library/react';
+import renderWithRouter from './Mocks/RenderService';
+import 'jest-mock';
+import { ContextAplication } from '../context/ContextAplication';
+import LoginScreen from '../components/LoginScreen';
+
+const saveInput = jest.fn();
 
 describe('Testing login screen', () => {
   afterEach(cleanup);
 
   test('renders a reading with the text Login', () => {
-    const { getByText } = renderWithRouter(<App />);
+    const { getByText } = renderWithRouter(
+      <ContextAplication.Provider value={saveInput}>
+        <LoginScreen />
+      </ContextAplication.Provider>,
+    );
 
     act(() => {
       const login = getByText(/Login/i);
@@ -16,7 +29,7 @@ describe('Testing login screen', () => {
   });
 
   test('should check dataTestId', () => {
-    const { getByTestId } = renderWithRouter(<App />);
+    const { getByTestId } = renderWithRouter(<LoginScreen />);
 
     act(() => {
       const inputEmail = getByTestId('email-input');
@@ -29,41 +42,60 @@ describe('Testing login screen', () => {
     });
   });
 
-  test('should check event', () => {
-    const { getByTestId, getByRole } = renderWithRouter(<App />);
+  test('should check event', async () => {
+    const { getByTestId } = renderWithRouter(<LoginScreen />);
+
+    const [
+      email,
+      password,
+      inputEmail,
+      inputPassword,
+      inputButton,
+    ] = await waitForElement(() => [
+      'test@gmail.com',
+      '123456',
+      getByTestId('email-input'),
+      getByTestId('password-input'),
+      getByTestId('login-submit-btn'),
+    ]);
 
     act(() => {
-      const email = 'test@gmail.com';
-      const password = '1234567';
-      const inputEmail = getByTestId('email-input');
-      const inputPassword = getByTestId('password-input');
-
       fireEvent.input(inputEmail, {
         target: { value: email },
       });
       fireEvent.input(inputPassword, {
         taget: { value: password },
       });
-      expect(getByRole('button', { disabled: false }));
+      expect(inputButton).toBeVisible();
     });
   });
 
-  test('testing false results', () => {
-    const { getByTestId, getByRole } = renderWithRouter(<App />);
+  test('testing false results', async () => {
+    const { getByTestId } = renderWithRouter(<LoginScreen />);
+
+    const [
+      email,
+      password,
+      inputEmail,
+      inputPassword,
+      inputButton,
+    ] = await waitForElement(() => [
+      'test@gmail.com',
+      '123456',
+      getByTestId('email-input'),
+      getByTestId('password-input'),
+      getByTestId('login-submit-btn'),
+      getByTestId('login-submit-btn'),
+    ]);
 
     act(() => {
-      const email = 'testgmail.com';
-      const password = '123456';
-      const inputEmail = getByTestId('email-input');
-      const inputPassword = getByTestId('password-input');
-
       fireEvent.input(inputEmail, {
         target: { value: email },
       });
       fireEvent.input(inputPassword, {
         taget: { value: password },
       });
-      expect(getByRole('button', { disabled: true }));
+      expect(inputButton).toBeDisabled();
     });
   });
 });
