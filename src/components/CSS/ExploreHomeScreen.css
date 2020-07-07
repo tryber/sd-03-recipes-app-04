@@ -16,7 +16,13 @@
   line-height: 80px;
   margin-top: 40px;
   text-align: center;
+  transform: scale3d(1, 1, 1);
+  transition: transform 1s;
   width: 300px;
+}
+
+.explore-button:hover {
+  transform: scale3d(1.1, 1.1, 1.1);
 }
 
 .explore-food-button {
@@ -24,15 +30,21 @@
   border-radius: 50px;
   box-shadow: 0 15px 10px rgba(0, 0, 0, 0.25);
   color: white;
-  font-family: Crimson Text, serif;
-  font-size: 30px;
+  font-family: Chalkduster, serif;
+  font-size: 20px;
   height: 82px;
   left: 30px;
   line-height: 80px;
   margin-top: 50px;
   position: relative;
   text-align: center;
+  transform: scale3d(1, 1, 1);
+  transition: transform 1;
   width: 300px;
+}
+
+.explore-food-button:hover {
+  transform: scale3d(1.1, 1.1, 1.1);
 }
 
 .explore-menu {
@@ -46,7 +58,7 @@
 
 .explore-menu p {
   color: white;
-  font-family: Crimson Text, serif;
+  font-family: Chalkduster, serif;
   font-size: 1.5rem;
 }
 

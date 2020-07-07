@@ -25,8 +25,10 @@ export function renderFilterButtons(Categories, handleClick, pics) {
             onClick={handleClick}
             className="button-main-screen"
           >
-            <img src={pics[i]} width="20px" alt="pic" />
-            {e.strCategory}
+            <div>
+              <img src={pics[i]} width="20px" alt="pic" />
+              {e.strCategory}
+            </div>
           </button>,
         ];
       }
@@ -60,7 +62,7 @@ function MealsList(Data) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
               <div
-                className={`product-pic-${i} product-pic`}
+                className={`product-pic-${i} product-pic slide-in-fwd-center`}
                 data-testid={`${i}-recipe-card`}
               >
                 <img src={e.strMealThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
@@ -117,7 +119,7 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
-      <Header screen={'Comidas'} />
+      <Header screen="Comidas" />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
       {!isLoading && !searchInputVisible && MealsList(Data)}

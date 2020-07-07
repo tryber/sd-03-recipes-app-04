@@ -39,7 +39,7 @@ function DrinkList(Data) {
           return [...arr,
             <Link to={`/bebidas/${e.idDrink}`}>
               <div
-                className={`product-pic-${i} product-pic`}
+                className={`product-pic-${i} product-pic slide-in-fwd-center`}
                 data-testid={`${i}-recipe-card`}
               >
                 <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />

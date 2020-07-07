@@ -32,6 +32,18 @@
   display: flex;
   height: 60px;
   justify-content: center;
+  transform: scale3d(1, 1, 1);
+  transition: 1s;
+  width: 60px;
+}
+
+.headerDiv > div:hover {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  transform: scale3d(1.1, 1.1, 1.1);
   width: 60px;
 }
 

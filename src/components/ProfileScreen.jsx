@@ -10,7 +10,7 @@ function ProfileScreen() {
     <div className="container-profile">
       <Header screen="Perfil" />
       <div className="profile-screen-buttons">
-        <h1 data-testid="profile-email">{email}</h1>
+        <p data-testid="profile-email">{email}</p>
         <Link to="/receitas-feitas" data-testid="profile-done-btn">
           <button type="button">Receitas Feitas</button>
         </Link>
