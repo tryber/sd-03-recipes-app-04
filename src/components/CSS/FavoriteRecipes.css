@@ -41,6 +41,7 @@
   background-image: url('../../images/loginbackground.jpg');
   height: 90vh;
   margin-top: 70px;
+  width: 360px;
 }
 
 .filter-and-cards {

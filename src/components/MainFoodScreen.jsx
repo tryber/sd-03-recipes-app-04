@@ -55,6 +55,7 @@ function FilterButtons(Categories, handleClick) {
 }
 
 function MealsList(Data) {
+  console.log(Data)
   return (
     <div className="recipes-results">
       {Data.reduce((arr, e, i) => {
