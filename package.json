@@ -60,7 +60,7 @@
     "mochawesome": "^6.1.1",
     "mochawesome-merge": "^4.1.0",
     "mochawesome-report-generator": "^5.1.0",
-    "nock": "^13.0.0"
+    "nock": "^13.0.2"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
