@@ -9,16 +9,7 @@ function ListRecipeProgress(props) {
   const { listValues } = props;
   const {
     inProgressRecipe,
-    data,
-    checkLocalStorage,
-    buttonEnabled,
     id,
-    checked,
-    setCountChecked,
-    setChecked,
-    countChecked,
-    history,
-    changeChecked,
     isFavorite,
     setIsFavorite,
     getIfHasBeenFavorited,
@@ -36,19 +27,7 @@ function ListRecipeProgress(props) {
           : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
       </button>
       <ControlsRecipeProgress
-        valuesToRender={{
-          inProgressRecipe,
-          data,
-          checkLocalStorage,
-          buttonEnabled,
-          id,
-          checked,
-          setCountChecked,
-          setChecked,
-          countChecked,
-          history,
-          changeChecked,
-        }}
+        valuesToRender={listValues}
       />
     </div>
   );
