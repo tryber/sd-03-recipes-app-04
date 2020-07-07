@@ -12,7 +12,7 @@ export function changeChecked(event,
       }
     }
     if (checkbox.id === Number(event.target.id)) {
-      checkbox.name = event.target.name;
+      // checkbox.name = event.target.name;
       checkbox.checked = event.target.checked;
     }
   });
@@ -94,4 +94,13 @@ export function mountRecipeList(quantityPar, ingredientsPar,
   ));
 
   return ingredientsDoneList;
+}
+
+export function getIfHasBeenFavorited(idPar) {
+  const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (storage) {
+    const favorited = storage.find((e) => e.id === idPar);
+    return favorited;
+  }
+  return false;
 }

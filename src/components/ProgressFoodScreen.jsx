@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getMealById } from '../services/foodApi';
-import { mountRecipeList } from './functionsProgressScreen';
+import { mountRecipeList, getIfHasBeenFavorited } from './functionsProgressScreen';
 import checkedlist from './checklist';
 import RenderRecipesInProgressMeals from './RenderRecipesInProgress';
 
@@ -20,14 +20,7 @@ function ProgressFoodScreen(props) {
   const [checked, setChecked] = useState(checkedlist);
 
   useEffect(() => { getMealById(id).then((data) => { setInProgressRecipe(data.meals[0]); }); }, []);
-  function getIfHasBeenFavorited(idPar) {
-    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (storage) {
-      const favorited = storage.find((e) => e.id === idPar);
-      return favorited;
-    }
-    return false;
-  }
+ 
   useEffect(() => { if (getIfHasBeenFavorited(id)) { setIsFavorite(true); } }, [id]);
 
   useEffect(() => {
