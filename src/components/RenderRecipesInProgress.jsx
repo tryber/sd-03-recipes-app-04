@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { changeChecked, clickFavorite } from './functionsProgressScreen';
 import ListRecipeProgress from './ListRecipeProgress';
+import share from '../images/shareIcon.svg';
 
 function RenderRecipesInProgressMeals(props) {
   const { values } = props;
@@ -25,6 +26,17 @@ function RenderRecipesInProgressMeals(props) {
   } = values;
   return (
     <div>
+      <img src={inProgressRecipe.strMealThumb} alt="" data-testid="recipe-photo" />
+      {showCopyAlert ? <h2>Link copiado!</h2> : null}
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={(event) => copyContent(`http://localhost:3000/${pathname}`, event)}
+        className="favourite"
+      >
+        <img src={share} alt="icon" />
+      </button>
+
       <ListRecipeProgress listValues={{
         data,
         inProgressRecipe,
