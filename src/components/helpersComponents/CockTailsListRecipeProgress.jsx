@@ -8,7 +8,7 @@ import { clickFavorite, getIfHasBeenFavorited } from './MealsfunctionsProgressSc
 function CockTailsListRecipeProgress(props) {
   const { listValues } = props;
   const {
-    inProgressRecipe,
+    inProgressDrink,
     id,
     isFavorite,
     setIsFavorite,
@@ -18,7 +18,7 @@ function CockTailsListRecipeProgress(props) {
       <button
         type="button"
         className="favourite"
-        onClick={() => clickFavorite(inProgressRecipe, isFavorite, setIsFavorite, 'bebida')}
+        onClick={() => clickFavorite(inProgressDrink, isFavorite, setIsFavorite, 'bebida')}
         src={favorite}
       >
         {getIfHasBeenFavorited(id)
