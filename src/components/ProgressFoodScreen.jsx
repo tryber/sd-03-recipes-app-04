@@ -20,9 +20,7 @@ function ProgressFoodScreen(props) {
   const [checked, setChecked] = useState(checkedlist);
 
   useEffect(() => { getMealById(id).then((data) => { setInProgressRecipe(data.meals[0]); }); }, []);
- 
   useEffect(() => { if (getIfHasBeenFavorited(id)) { setIsFavorite(true); } }, [id]);
-
   useEffect(() => {
     if (checkLocalStorage === null) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox }, countChecked }));
