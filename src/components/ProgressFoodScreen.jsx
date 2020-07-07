@@ -26,7 +26,6 @@ function ProgressFoodScreen(props) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox }, countChecked }));
     }
   }, [checkLocalStorage]);
-
   useEffect(() => {}, [checked, countChecked]);
   const data = mountRecipeList(quantity,
     ingredients, inProgressRecipe, checked, ingredientsDoneList);
@@ -43,7 +42,6 @@ function ProgressFoodScreen(props) {
         setShowCopyAlert,
         checkLocalStorage,
         isFavorite,
-        getIfHasBeenFavorited,
         id,
         checked,
         setCountChecked,
@@ -56,7 +54,6 @@ function ProgressFoodScreen(props) {
     />
   );
 }
-
 ProgressFoodScreen.propTypes = {
   match: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
