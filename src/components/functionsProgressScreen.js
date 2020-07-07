@@ -1,5 +1,8 @@
 export function changeChecked(event,
-  value, setCountChecked, setChecked, checked, countChecked, checkLocalStorage, id, type) {
+  value, type, valuesToRender) {
+  const {
+    setCountChecked, countChecked, checkLocalStorage, setChecked, checked,
+  } = valuesToRender;
   checked.checkbox.forEach((checkbox) => {
     if (event.target.checked === true) {
       setCountChecked(countChecked + 1);
