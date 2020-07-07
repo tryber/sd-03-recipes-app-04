@@ -1,128 +1,106 @@
 import React from 'react';
-import { cleanup } from '@testing-library/react';
-import renderWithRouter from './RenderService';
+import { waitForDomChange, cleanup, fireEvent } from '@testing-library/react';
 import MainFoodScreen from '../components/MainFoodScreen';
-import { ContextAplication } from '../context/ContextAplication';
-import 'jest-mock';
 import mockFetch from './Mocks/Fetch';
+import renderWithRouter from './Mocks/RenderService';
+import meals from '../../cypress/mocks/meals';
+import breakfastMeals from '../../cypress/mocks/breakfastMeals';
+import mealCategories from '../../cypress/mocks/mealCategories';
+// import beefMeals from '../../cypress/mocks/beefMeals';
+// import chickenMeals from '../../cypress/mocks/chickenMeals';
+// import dessertMeals from '../../cypress/mocks/dessertMeals';
+// import goatMeals from '../../cypress/mocks/goatMeals';
 
-let Data = [];
-const setData = (value) => {
-  Data = value;
-}
-let ingredientFilter = '';
-const setingredientFilter = (value) => {
-  ingredientFilter = value;
-}
+const checkRecipes = (recipes, queryByTestId) => {
+  const recipeType = 'Meal';
 
-const meals = {meals: [
-  {
-    idMeal: '52882',
-    strMeal: 'Three Fish Pie',
-    strDrinkAlternate: null,
-    strCategory: 'Seafood',
-    strArea: 'British',
-    strInstructions: 'Preheat the oven to 200C/400F/Gas 6 (180C fan).\r\nPut the potatoes into a saucepan of cold salted water. Bring up to the boil and simmer until completely tender. Drain well and then mash with the butter and milk. Add pepper and taste to check the seasoning. Add salt and more pepper if necessary.\r\nFor the fish filling, melt the butter in a saucepan, add the leeks and stir over the heat. Cover with a lid and simmer gently for 10 minutes, or until soft. Measure the flour into a small bowl. Add the wine and whisk together until smooth.\r\nAdd the milk to the leeks, bring to the boil and then add the wine mixture. Stir briskly until thickened. Season and add the parsley and fish. Stir over the heat for two minutes, then spoon into an ovenproof casserole. Scatter over the eggs. Allow to cool until firm.\r\nSpoon the mashed potatoes over the fish mixture and mark with a fork. Sprinkle with cheese.\r\nBake for 30-40 minutes, or until lightly golden-brown on top and bubbling around the edges.',
-    strMealThumb: 'https://www.themealdb.com/images/media/meals/spswqs1511558697.jpg',
-    strTags: 'Fish,Seafood,Dairy,Pie',
-    strYoutube: 'https://www.youtube.com/watch?v=Ds1Jb8H5Sg8',
-    strIngredient1: 'Potatoes',
-    strIngredient2: 'Butter',
-    strIngredient3: 'Milk',
-    strIngredient4: 'Gruy\u00e8re',
-    strIngredient5: 'Butter',
-    strIngredient6: 'Leek',
-    strIngredient7: 'Plain Flour',
-    strIngredient8: 'White Wine',
-    strIngredient9: 'Milk',
-    strIngredient10: 'Parsley',
-    strIngredient11: 'Salmon',
-    strIngredient12: 'Haddock',
-    strIngredient13: 'Smoked Haddock',
-    strIngredient14: 'Eggs',
-    strMeasure1: '1kg',
-    strMeasure2: 'Knob',
-    strMeasure3: 'Dash',
-    strMeasure4: '50g',
-    strMeasure5: '75g',
-    strMeasure6: '2 sliced',
-    strMeasure7: '75g',
-    strMeasure8: '150ml',
-    strMeasure9: '568ml',
-    strMeasure10: '2 tbs chopped',
-    strMeasure11: '250g',
-    strMeasure12: '250g',
-    strMeasure13: '250g',
-    strMeasure14: '6',
-    strSource: 'https://www.bbc.co.uk/food/recipes/three_fish_pie_58875',
-    dateModified: null,
-  },
-  {
-    idMeal: '52882',
-    strMeal: 'Three Fish Pie',
-    strDrinkAlternate: null,
-    strCategory: 'Seafood',
-    strArea: 'British',
-    strInstructions: 'Preheat the oven to 200C/400F/Gas 6 (180C fan).\r\nPut the potatoes into a saucepan of cold salted water. Bring up to the boil and simmer until completely tender. Drain well and then mash with the butter and milk. Add pepper and taste to check the seasoning. Add salt and more pepper if necessary.\r\nFor the fish filling, melt the butter in a saucepan, add the leeks and stir over the heat. Cover with a lid and simmer gently for 10 minutes, or until soft. Measure the flour into a small bowl. Add the wine and whisk together until smooth.\r\nAdd the milk to the leeks, bring to the boil and then add the wine mixture. Stir briskly until thickened. Season and add the parsley and fish. Stir over the heat for two minutes, then spoon into an ovenproof casserole. Scatter over the eggs. Allow to cool until firm.\r\nSpoon the mashed potatoes over the fish mixture and mark with a fork. Sprinkle with cheese.\r\nBake for 30-40 minutes, or until lightly golden-brown on top and bubbling around the edges.',
-    strMealThumb: 'https://www.themealdb.com/images/media/meals/spswqs1511558697.jpg',
-    strTags: 'Fish,Seafood,Dairy,Pie',
-    strYoutube: 'https://www.youtube.com/watch?v=Ds1Jb8H5Sg8',
-    strIngredient1: 'Potatoes',
-    strIngredient2: 'Butter',
-    strIngredient3: 'Milk',
-    strIngredient4: 'Gruy\u00e8re',
-    strIngredient5: 'Butter',
-    strIngredient6: 'Leek',
-    strIngredient7: 'Plain Flour',
-    strIngredient8: 'White Wine',
-    strIngredient9: 'Milk',
-    strIngredient10: 'Parsley',
-    strIngredient11: 'Salmon',
-    strIngredient12: 'Haddock',
-    strIngredient13: 'Smoked Haddock',
-    strIngredient14: 'Eggs',
-    strMeasure1: '1kg',
-    strMeasure2: 'Knob',
-    strMeasure3: 'Dash',
-    strMeasure4: '50g',
-    strMeasure5: '75g',
-    strMeasure6: '2 sliced',
-    strMeasure7: '75g',
-    strMeasure8: '150ml',
-    strMeasure9: '568ml',
-    strMeasure10: '2 tbs chopped',
-    strMeasure11: '250g',
-    strMeasure12: '250g',
-    strMeasure13: '250g',
-    strMeasure14: '6',
-    strSource: 'https://www.bbc.co.uk/food/recipes/three_fish_pie_58875',
-    dateModified: null,
-  },
-]};
+  recipes.slice(0, 12).forEach((recipe, index) => {
+    const title = recipe[`str${recipeType}`];
+    expect(queryByTestId(`${index}-recipe-card`)).toBeInTheDocument();
+    expect(queryByTestId(`${index}-card-img`)).toHaveAttribute('src');
+    expect(queryByTestId(`${index}-card-name`)).toHaveTextContent(title);
+  });
 
-const getMeals = () => {
-  Data = meals;
+  expect(queryByTestId('12-recipe-card')).not.toBeInTheDocument();
+  expect(queryByTestId('12-card-img')).not.toBeInTheDocument();
+  expect(queryByTestId('12-card-name')).not.toBeInTheDocument();
 };
 
-const mockContext = {
-  Data,
-  getMeals,
-  setData,
-  searchInputVisible: false,
-  setingredientFilter,
-}
+describe('testing MainFoodScreen', () => {
+  afterEach(() => {
+    cleanup();
+  });
 
-describe('Testing Main Food Screen', () => {
-  afterEach(cleanup);
+  jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
 
-  test('renders a meal list', () => {
-    const { getByText } = renderWithRouter(
-      <ContextAplication.Provider value={mockContext}>
-        <MainFoodScreen />
-      </ContextAplication.Provider>
-    );
+  test('should fetch API', async () => {
+    const { getByText } = renderWithRouter(<MainFoodScreen />);
 
-    const meal = getByText('Three Fish Pie');
-    expect(meal).toBeInTheDocument();
-  })
+    expect(global.fetch).toHaveBeenCalledTimes(3);
+
+    await waitForDomChange();
+    expect(getByText('Comidas')).toBeInTheDocument();
+  });
+
+  test('should render recipes', async () => {
+    const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
+
+    await waitForDomChange();
+
+    meals.meals.slice(0, 12).forEach((food, idx) => {
+      const [
+        card,
+        cardName,
+        cardImage,
+      ] = [
+        queryByTestId(`${idx}-recipe-card`),
+        queryByTestId(`${idx}-card-name`),
+        queryByTestId(`${idx}-card-img`),
+      ];
+      expect(card).toBeInTheDocument();
+      expect(cardName).toHaveTextContent(food.strMeal);
+      expect(cardImage).toHaveAttribute('src', food.strMealThumb);
+    });
+  });
+});
+
+describe('Testing filters buttons', () => {
+  afterEach(() => {
+    cleanup();
+  });
+
+  jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
+
+  test('should 5 firts recipes buttons', async () => {
+    const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
+    await waitForDomChange();
+
+    mealCategories.meals.slice(0, 5).forEach(({ strCategory: category }) => {
+      const filterCategory = queryByTestId(`${category}-category-filter`);
+      expect(filterCategory).toBeInTheDocument();
+    });
+
+    mealCategories.meals.slice(5).forEach(({ strCategory: category }) => {
+      const filterCategory = queryByTestId(`${category}-category-filter`);
+      expect(filterCategory).not.toBeInTheDocument();
+    });
+  });
+});
+
+describe('Testing first recipes rendering', () => {
+  afterEach(() => {
+    cleanup();
+  });
+
+  jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
+
+  test('should 5 firts recipes buttons', async () => {
+    const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
+    await waitForDomChange();
+
+    const beef = queryByTestId('Breakfast-category-filter');
+    fireEvent.click(beef);
+    await waitForDomChange();
+    checkRecipes(breakfastMeals.meals, queryByTestId);
+  });
 });
