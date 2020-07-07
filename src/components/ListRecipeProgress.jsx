@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import ControlsRecipeProgress from './ControlsRecipeProgress';
+import { clickFavorite } from './functionsProgressScreen';
 
 function ListRecipeProgress(props) {
   const { listValues } = props;
@@ -18,7 +19,6 @@ function ListRecipeProgress(props) {
     countChecked,
     history,
     changeChecked,
-    clickFavorite,
     isFavorite,
     setIsFavorite,
     getIfHasBeenFavorited,
