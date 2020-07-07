@@ -8,21 +8,9 @@ function RenderRecipesInProgressMeals(props) {
   const { values } = props;
   const {
     inProgressRecipe,
-    data,
     showCopyAlert,
     copyContent,
-    checkLocalStorage,
-    isFavorite,
-    setIsFavorite,
-    getIfHasBeenFavorited,
-    buttonEnabled,
-    id,
-    checked,
-    setCountChecked,
-    setChecked,
-    countChecked,
     pathname,
-    history,
   } = values;
   return (
     <div>

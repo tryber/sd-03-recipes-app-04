@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { changeChecked} from './functionsProgressScreen';
+import { changeChecked } from './functionsProgressScreen';
 
 function ControlsRecipeProgress(props) {
   const { valuesToRender } = props;
