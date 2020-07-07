@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export function handleChecked(event, value, type, values) {
   const { checked, setCountChecked, countChecked, checkLocalStorage, setChecked, id } = values;
-  checked.checkbox.forEach((checkbox) => {
+  checked.checkbox.forEach((checkbox, i) => {
     if (event.target.checked === true) {
       setCountChecked(countChecked + 1);
     } if (event.target.checked === false) {
@@ -15,8 +15,7 @@ export function handleChecked(event, value, type, values) {
       }
     }
     if (checkbox.id === Number(event.target.id)) {
-      // checkbox.name = event.target.name;
-      checkbox.checked = event.target.checked;
+      checked.checkbox[i].checked = event.target.checked;
     }
   });
   setChecked((prevState) => ({
