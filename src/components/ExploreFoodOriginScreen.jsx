@@ -13,14 +13,15 @@ function MealsList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
+              <div className={`product-pic product-pic-${i} slide-in-fwd-center`} data-testid={`${i}-recipe-card`}>
                 <img
+                  className="recipe-image"
                   src={e.strMealThumb}
                   alt="thumbnail"
-                  width="150px"
+                  width="120px"
                   data-testid={`${i}-card-img`}
                 />
-                <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
+                <h5 data-testid={`${i}-card-name`}>{(e.strMeal.length > 30) ? `${e.strMeal.slice(0, 30)}...` : e.strMeal}</h5>
               </div>
             </Link>,
           ];
@@ -34,6 +35,7 @@ function MealsList(Data) {
 function renderAreaFilter(areas, setAreaFilter, areaFilter, setMealsByArea) {
   return (
     <select
+      className="select-filter"
       data-testid="explore-by-area-dropdown"
       onChange={(e) => {
         getMealByArea(e.target.value).then((data) => setMealsByArea(data.meals));
@@ -57,24 +59,27 @@ function renderAreaFilter(areas, setAreaFilter, areaFilter, setMealsByArea) {
 function ShowResultsByArea(Data, mealsByArea, areaFilter) {
   if (areaFilter !== 'All') {
     return (
-      mealsByArea.reduce((arr, e, i) => {
-        if (i < 12) {
-          return [...arr,
-            <Link to={`/comidas/${e.idMeal}`}>
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img
-                  src={e.strMealThumb}
-                  alt="thumbnail"
-                  width="150px"
-                  data-testid={`${i}-card-img`}
-                />
-                <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
-              </div>
-            </Link>,
-          ];
-        }
-        return arr;
-      }, [])
+      <div className="recipes-results">
+        {mealsByArea.reduce((arr, e, i) => {
+          if (i < 12) {
+            return [...arr,
+              <Link to={`/comidas/${e.idMeal}`}>
+                <div className={`product-pic product-pic-${i} slide-in-fwd-center`} data-testid={`${i}-recipe-card`}>
+                  <img
+                    className="recipe-image"
+                    src={e.strMealThumb}
+                    alt="thumbnail"
+                    width="120px"
+                    data-testid={`${i}-card-img`}
+                  />
+                  <h5 data-testid={`${i}-card-name`}>{(e.strMeal.length > 30) ? `${e.strMeal.slice(0, 30)}...` : e.strMeal}</h5>
+                </div>
+              </Link>,
+            ];
+          }
+          return arr;
+        }, [])}
+      </div>
     );
   }
   return MealsList(Data);

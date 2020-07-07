@@ -23,7 +23,7 @@ function ProgressFoodScreen(props) {
     getMealById(id)
       .then((data) => { setInProgressRecipe(data.meals[0]); });
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
-    if (checkLocalStorage === null) {
+    if (checkLocalStorage === null || checkLocalStorage.meals === undefined) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox }, countChecked }));
     }
   }, [id, checkLocalStorage, checked, countChecked]);

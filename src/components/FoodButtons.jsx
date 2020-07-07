@@ -1,10 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import share from '../images/shareIcon.svg';
 import notFavorite from '../images/whiteHeartIcon.svg';
 import favorite from '../images/blackHeartIcon.svg';
 import { ContextAplication } from '../context/ContextAplication';
+
+export function copyToClipboard(setHide) {
+  navigator.clipboard.writeText(window.location.href);
+  setHide(false);
+  setTimeout(() => {
+    setHide(true);
+  }, 2000);
+}
 
 export function getDoneLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -17,13 +24,13 @@ export function getDoneLocalStorage(id) {
   return done;
 }
 
-export function getStartedLocalStorage(id) {
+function getStartedLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let started;
   if (!storage) {
     started = false;
   } else {
-    started = Object.keys(storage).find((e) => e === id);
+    started = Object.keys(storage.meals).find((e) => e === id);
   }
   return started;
 }
@@ -65,9 +72,9 @@ function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
   }
 }
 
-function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, goToRoute, id) {
+function renderFavoriteButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id) {
   return (
-    <div>
+    <div className="share-and-favourite">
       <button
         type="button"
         className="favourite"
@@ -78,16 +85,21 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
           ? <img data-testid="favorite-btn" src={favorite} alt="favorite" />
           : <img data-testid="favorite-btn" src={notFavorite} alt="favorite" />}
       </button>
-      <CopyToClipboard text={window.location.href}>
-        <button
-          type="button"
-          onClick={() => alert('Link copiado!')}
-          className="favourite"
-        >
-          <img data-testid="share-btn" src={share} alt="icon" />
-        </button>
-      </CopyToClipboard>
       {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
+    </div>
+  );
+}
+
+function renderShareButton(setHide) {
+  return (
+    <div className="share-and-favourite">
+      <button
+        type="button"
+        onClick={() => copyToClipboard(setHide)}
+        className="favourite"
+      >
+        <img data-testid="share-btn" src={share} alt="icon" />
+      </button>
     </div>
   );
 }
@@ -95,6 +107,7 @@ function renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, go
 function Buttons() {
   const [goToRoute, setGoToRoute] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [hide, setHide] = useState(true);
   const { recipeInfo, id } = useContext(ContextAplication);
 
   useEffect(() => {
@@ -103,6 +116,7 @@ function Buttons() {
 
   return (
     <div className="bottom-buttons">
+      {renderFavoriteButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
       {!getDoneLocalStorage(id) && !getStartedLocalStorage(id) && (
         <button
           data-testid="start-recipe-btn"
@@ -123,9 +137,8 @@ function Buttons() {
           Continuar Receita
         </button>
       )}
-      <div className="share-and-favourite">
-        {renderShareAndFavoriteButtons(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}
-      </div>
+      {renderShareButton(setHide)}
+      <p className="alert" hidden={hide}>Link copiado!</p>
       {goToRoute && <Redirect to={`/comidas/${id}/in-progress`} />}
     </div>
   );

@@ -26,12 +26,13 @@ export function clickFavorite(recipeInfo, isFavoritePar, setIsFavorite) {
   }
 }
 
-export function mountRecipeList(quantityPar, ingredientsPar,
-  inProgressRecipe, checked, ingredientsDoneList) {
-  quantityPar.map((e, i) => (inProgressRecipe[e] !== null && inProgressRecipe[e] !== ''
+export function mountRecipeList(inProgressRecipe, checked, ingredientsDoneList) {
+  const quant = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
+  const ingred = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
+  quant.map((e, i) => (inProgressRecipe[e] !== null && inProgressRecipe[e] !== ''
     ? ingredientsDoneList.push({
       meal: inProgressRecipe[e],
-      mensure: inProgressRecipe[ingredientsPar[i]],
+      mensure: inProgressRecipe[ingred[i]],
       checked: checked.checkbox[i],
     })
     : null

@@ -17,6 +17,7 @@ import ProfileScreen from './components/ProfileScreen';
 import ProgressDrinkScreen from './components/ProgressDrinkScreen';
 import ProgressFoodScreen from './components/ProgressFoodScreen';
 import NotFound from './components/NotFound';
+import WelcomeScreen from './components/WelcomeScreen';
 import './App.css';
 
 import AplicationProvider from './context/ContextAplication';
@@ -26,6 +27,7 @@ function App() {
     <AplicationProvider>
       <Switch>
         <Route exact path="/" component={LoginScreen} />
+        <Route exact path="/welcome" component={WelcomeScreen} />
         <Route exact path="/comidas" component={MainFoodScreen} />
         <Route exact path="/bebidas" component={MainDrinkScreen} />
         <Route exact path="/comidas/:id" render={(props) => <DetailsFoodScreen props={props} />} />

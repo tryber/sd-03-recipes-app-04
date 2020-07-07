@@ -12,8 +12,6 @@ function ProgressDrinkScreen(props) {
   const [countChecked, setCountChecked] = useState(0);
   const ingredientsDoneList = [];
   const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const quant = Object.keys(inProgressDrink).filter((e) => e.includes('strIngredient'));
-  const ingred = Object.keys(inProgressDrink).filter((e) => e.includes('strMeasure'));
   const { match: { params: { id } } } = props;
 
   const [checked, setChecked] = useState(checkedlist);
@@ -23,16 +21,17 @@ function ProgressDrinkScreen(props) {
       setInProgressDrink(data.drinks[0]);
     });
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
-    if (checkLocalStorage === null) {
+    if (checkLocalStorage.cocktails === undefined || checkLocalStorage === null) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: { [id]: checked.checkbox }, countChecked }));
     }
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
   }, [id, checkLocalStorage, checked, countChecked]);
 
-  const data = mountRecipeList(quant, ingred, inProgressDrink, checked, ingredientsDoneList);
+  const data = mountRecipeList(inProgressDrink, checked, ingredientsDoneList);
   const buttonEnabled = countChecked === data.length;
   const { location, history } = props;
   const { pathname } = location;
+
   return (
     <CockTailsRenderRecipesInProgress
       values={{

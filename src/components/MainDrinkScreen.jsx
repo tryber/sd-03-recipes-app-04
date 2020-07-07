@@ -5,50 +5,44 @@ import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
 import './CSS/MainFoodScreen.css';
 import Header from './Header';
+import ordinary from '../images/ordinary.svg';
+import cocktail from '../images/cocktail.svg';
+import cocoa from '../images/cocoa.svg';
+import unknown from '../images/unknown.svg';
+import shake from '../images/shake.svg';
+import { renderFilterButtons } from './MainFoodScreen';
+
+const filterPics = [ordinary, cocktail, shake, unknown, cocoa];
 
 function FilterButtons(Categories, handleClick) {
   return (
-    <div>
-      <div className="button-div">
-        <button
-          data-testid="All-category-filter"
-          type="button"
-          value="All"
-          onClick={handleClick}
-          className="button-main-screen"
-        >
-          All
-        </button>
-        {Categories.reduce((arr, e, i) => {
-          if (i < 5) {
-            return [...arr,
-              <button
-                type="button"
-                data-testid={`${e.strCategory}-category-filter`}
-                value={e.strCategory}
-                onClick={handleClick}
-                className="button-main-screen"
-              >
-                {e.strCategory}
-              </button>,
-            ];
-          }
-          return arr;
-        }, [])}
-      </div>
+    <div className="button-div">
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        value="All"
+        onClick={handleClick}
+        className="button-main-screen"
+      >
+        All
+      </button>
+      {renderFilterButtons(Categories, handleClick, filterPics)}
     </div>
   );
 }
 
-function DrinksList(Data) {
+function DrinkList(Data) {
   return (
     <div className="recipes-results">
       {Data.reduce((arr, e, i) => {
         if (i < 12) {
           return [...arr,
             <Link to={`/bebidas/${e.idDrink}`}>
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+              <div
+                className={`product-pic-${i} product-pic slide-in-fwd-center`}
+                data-testid={`${i}-recipe-card`}
+              >
+                <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
                 <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
               </div>
             </Link>,
@@ -60,7 +54,7 @@ function DrinksList(Data) {
   );
 }
 
-function MainFoodScreen() {
+function MainDrinkScreen() {
   const {
     Data,
     getDrinks,
@@ -105,10 +99,10 @@ function MainFoodScreen() {
       <Header screen={'Bebidas'} />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
-      {!isLoading && !searchInputVisible && DrinksList(Data)}
+      {!isLoading && !searchInputVisible && DrinkList(Data)}
       <InferiorMenu />
     </div>
   );
 }
 
-export default MainFoodScreen;
+export default MainDrinkScreen;

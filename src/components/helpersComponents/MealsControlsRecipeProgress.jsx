@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { changeChecked } from './functionsProgressScreen';
 
 export function handleChecked(event, value, type, values) {
   const { checked, setCountChecked, countChecked, checkLocalStorage, setChecked, id } = values;

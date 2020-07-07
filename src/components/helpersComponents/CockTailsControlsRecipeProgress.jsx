@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { changeChecked } from './functionsProgressScreen';
 import { handleChecked } from './MealsControlsRecipeProgress';
 
 function CockTailsControlsRecipeProgress(props) {
@@ -21,7 +20,7 @@ function CockTailsControlsRecipeProgress(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
-            <input id={i} type="checkbox" checked={checkLocalStorage.cocktails[id][i].checked} name={element.meal} onClick={(event) => handleChecked(event, checked.checkbox[i].checked, 'cocktails', valuesToRender)} />
+            <input id={i} type="checkbox" checked={checkLocalStorage.cocktails[id][i].checked} name={element.drink} onClick={(event) => handleChecked(event, checked.checkbox[i].checked, 'cocktails', valuesToRender)} />
             <span>{element.meal}</span>
             {element.mensure}
           </span>

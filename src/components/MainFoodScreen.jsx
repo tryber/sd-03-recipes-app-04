@@ -5,6 +5,37 @@ import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
 import Header from './Header';
 import './CSS/MainFoodScreen.css';
+import chicken from '../images/chicken.svg';
+import beef from '../images/beef.svg';
+import goat from '../images/goat.svg';
+import dessert from '../images/dessert.svg';
+import breakfast from '../images/breakfast.svg';
+
+const filterPics = [beef, breakfast, chicken, dessert, goat];
+
+export function renderFilterButtons(Categories, handleClick, pics) {
+  return (
+    Categories.reduce((arr, e, i) => {
+      if (i < 5) {
+        return [...arr,
+          <button
+            type="button"
+            data-testid={`${e.strCategory}-category-filter`}
+            value={e.strCategory}
+            onClick={handleClick}
+            className="button-main-screen"
+          >
+            <div>
+              <img src={pics[i]} width="20px" alt="pic" />
+              {e.strCategory}
+            </div>
+          </button>,
+        ];
+      }
+      return arr;
+    }, [])
+  );
+}
 
 function FilterButtons(Categories, handleClick) {
   return (
@@ -18,22 +49,7 @@ function FilterButtons(Categories, handleClick) {
       >
         All
       </button>
-      {Categories.reduce((arr, e, i) => {
-        if (i < 5) {
-          return [...arr,
-            <button
-              type="button"
-              data-testid={`${e.strCategory}-category-filter`}
-              value={e.strCategory}
-              onClick={handleClick}
-              className="button-main-screen"
-            >
-              {e.strCategory}
-            </button>,
-          ];
-        }
-        return arr;
-      }, [])}
+      {renderFilterButtons(Categories, handleClick, filterPics)}
     </div>
   );
 }
@@ -46,10 +62,10 @@ function MealsList(Data) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
               <div
-                className="product-pic"
+                className={`product-pic-${i} product-pic slide-in-fwd-center`}
                 data-testid={`${i}-recipe-card`}
               >
-                <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+                <img src={e.strMealThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
                 <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
               </div>
             </Link>,
@@ -103,7 +119,7 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
-      <Header screen={'Comidas'} />
+      <Header screen="Comidas" />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
       {!isLoading && !searchInputVisible && MealsList(Data)}

@@ -46,11 +46,9 @@ export function copyContent(text, setShowCopyAlert) {
     .then(() => {
       setShowCopyAlert(true);
       alert(modifiedText);
-      alert('Link copiado!');
-      alert('Link copiado!');
     })
     .catch((err) => {
-      console.log(err);
+      alert(err);
     });
 }
 
