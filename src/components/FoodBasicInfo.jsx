@@ -47,8 +47,7 @@ function BasicInfo() {
       <h3>Ingredientes</h3>
       {quantity.reduce((arr, e, i) => {
         if (recipeInfo[e] !== '') {
-          return (
-          [...arr, (
+          return ([...arr, (
             <div data-testid={`${i}-ingredient-name-and-measure`}>
               <span>{recipeInfo[ingredients[i]]}</span>
               <span>{recipeInfo[e]}</span>

@@ -15,8 +15,9 @@ function CockTailsControlsRecipeProgress(props) {
   } = valuesToRender;
   return (
     <div>
-      <h1 data-testid="recipe-title"> Ingredients </h1>
-      <h3 data-testid="recipe-category">{inProgressDrink.strCategory}</h3>
+      <h1>{inProgressDrink.strDrink}</h1>
+      <h2 data-testid="recipe-category">{inProgressDrink.strCategory}</h2>
+      <h3 data-testid="recipe-title"> Ingredients </h3>
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
@@ -26,17 +27,18 @@ function CockTailsControlsRecipeProgress(props) {
           </span>
         </div>
       ))}
-      <div data-testid="instructions">
+      <div className="instructions" data-testid="instructions">
+        <h3>Instruções</h3>
         {inProgressDrink.strInstructions}
       </div>
       {buttonEnabled
         ? (
-          <button enable data-testid="finish-recipe-btn" onClick={(() => history.push('/receitas-feitas'))} type="button">
+          <button className="start-button in-progress" enable data-testid="finish-recipe-btn" onClick={(() => history.push('/receitas-feitas'))} type="button">
             Finish Recipe Button
           </button>
         )
         : (
-          <button disabled data-testid="finish-recipe-btn" type="button">
+          <button className="start-button in-progress" disabled data-testid="finish-recipe-btn" type="button">
             Finish Recipe Button
           </button>
         )}

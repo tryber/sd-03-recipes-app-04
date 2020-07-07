@@ -141,3 +141,44 @@ h2 {
   top: -100px;
   width: 250px;
 }
+
+.instructions {
+  margin-top: 20px;
+}
+
+.instructions p {
+  margin-bottom: 120px;
+  text-align: justify;
+}
+
+.start-button.in-progress {
+  left: 120px;
+}
+
+.start-button.in-progress:disabled {
+  background-color: rgb(51, 54, 50);
+  left: 120px;
+  opacity: 0.8;
+}
+
+.favourite-progress {
+  background-color:rgb(41, 137, 192);
+  border: groove 3px rgb(86, 230, 19);
+  border-radius: 50%;
+  bottom: 30px;
+  height: 50px;
+  left: 50px;
+  position: fixed;
+  width: 50px;
+}
+
+.share {
+  background-color:rgb(41, 137, 192);
+  border: groove 3px rgb(86, 230, 19);
+  border-radius: 50%;
+  bottom: 30px;
+  left: 240px;
+  height: 50px;
+  position: fixed;
+  width: 50px;
+}

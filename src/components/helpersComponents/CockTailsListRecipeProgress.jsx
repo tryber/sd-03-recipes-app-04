@@ -17,7 +17,7 @@ function CockTailsListRecipeProgress(props) {
     <div>
       <button
         type="button"
-        className="favourite"
+        className="favourite-progress"
         onClick={() => clickFavorite(inProgressDrink, isFavorite, setIsFavorite, 'bebida')}
         src={favorite}
       >
