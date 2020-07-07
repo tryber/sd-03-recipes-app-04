@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export function handleChecked(event, value, type, values) {
-  const { checked, setCountChecked, countChecked, checkLocalStorage, setChecked, id } = values;
+  const {
+    checked, setCountChecked, countChecked, checkLocalStorage, setChecked, id,
+  } = values;
   checked.checkbox.forEach((checkbox, i) => {
     if (event.target.checked === true) {
       setCountChecked(countChecked + 1);
@@ -63,7 +65,12 @@ function MealsControlsRecipeProgress(props) {
             </button>
           )
           : (
-            <button className="start-button in-progress" disabled data-testid="finish-recipe-btn" type="button">
+            <button
+              className="start-button in-progress"
+              disabled
+              data-testid="finish-recipe-btn"
+              type="button"
+            >
               Finish Recipe Button
             </button>
           )}

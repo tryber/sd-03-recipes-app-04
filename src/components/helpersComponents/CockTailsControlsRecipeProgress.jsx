@@ -38,7 +38,12 @@ function CockTailsControlsRecipeProgress(props) {
           </button>
         )
         : (
-          <button className="start-button in-progress" disabled data-testid="finish-recipe-btn" type="button">
+          <button
+            className="start-button in-progress"
+            disabled
+            data-testid="finish-recipe-btn"
+            type="button"
+          >
             Finish Recipe Button
           </button>
         )}
