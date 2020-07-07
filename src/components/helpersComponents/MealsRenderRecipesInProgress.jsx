@@ -10,7 +10,7 @@ function MealsRenderRecipesInProgress(props) {
     setShowCopyAlert,
     inProgressRecipe,
     showCopyAlert,
-    pathname,
+    id,
   } = values;
   return (
     <div>
@@ -19,7 +19,7 @@ function MealsRenderRecipesInProgress(props) {
       <button
         type="button"
         data-testid="share-btn"
-        onClick={() => copyContent(`http://localhost:3000/${pathname}`, setShowCopyAlert)}
+        onClick={() => copyContent(`http://localhost:3000/${id}`, setShowCopyAlert)}
         className="favourite"
       >
         <img src={share} alt="icon" />

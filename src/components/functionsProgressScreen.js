@@ -1,31 +1,3 @@
-export function changeChecked(event,
-  value, setCountChecked, setChecked, checked, countChecked, checkLocalStorage, id, type) {
-  checked.checkbox.forEach((checkbox) => {
-    if (event.target.checked === true) {
-      setCountChecked(countChecked + 1);
-    } if (event.target.checked === false) {
-      console.log(countChecked);
-      if (checkLocalStorage.countChecked < 0) {
-        setCountChecked(countChecked + 1);
-      } else {
-        setCountChecked(countChecked - 1);
-      }
-    }
-    if (checkbox.id === Number(event.target.id)) {
-      // checkbox.name = event.target.name;
-      checkbox.checked = event.target.checked;
-    }
-  });
-  setChecked((prevState) => ({
-    ...prevState,
-    checked: {
-      ...prevState.checkbox.checked,
-      checkbox: value,
-    },
-  }));
-  localStorage.setItem('inProgressRecipes', JSON.stringify({ [type]: { [id]: checked.checkbox }, countChecked }));
-}
-
 export function clickFavorite(recipeInfo, isFavoritePar, setIsFavorite, type) {
   setIsFavorite(!isFavoritePar);
   const {
@@ -82,12 +54,13 @@ export function copyContent(text, setShowCopyAlert) {
     });
 }
 
-export function mountRecipeList(quantityPar, ingredientsPar,
-  inProgressRecipe, checked, ingredientsDoneList) {
-  quantityPar.map((e, i) => (inProgressRecipe[e] !== null && inProgressRecipe[e] !== ''
+export function mountRecipeList(inProgressRecipe, checked, ingredientsDoneList) {
+  const quant = Object.keys(inProgressRecipe).filter((e) => e.includes('strIngredient'));
+  const ingred = Object.keys(inProgressRecipe).filter((e) => e.includes('strMeasure'));
+  quant.map((e, i) => (inProgressRecipe[e] !== null && inProgressRecipe[e] !== ''
     ? ingredientsDoneList.push({
       meal: inProgressRecipe[e],
-      mensure: inProgressRecipe[ingredientsPar[i]],
+      mensure: inProgressRecipe[ingred[i]],
       checked: checked.checkbox[i],
     })
     : null
