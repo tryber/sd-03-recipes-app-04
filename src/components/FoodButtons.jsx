@@ -36,15 +36,21 @@ function getStartedLocalStorage(id) {
 }
 
 export function getIfHasBeenFavorited(id) {
+  // console.log(id)
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (storage) {
-    const favorited = storage.find((e) => e.id === id);
+    const favorited = storage.some((e) => {
+      // console.log(e.id, id) 
+      return e.id === id
+    });
+    // console.log(favorited)
     return favorited;
   }
   return false;
 }
 
 function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
+  // console.log('dentro da funcao:', isFavorite)
   setIsFavorite((fav) => !fav);
   const {
     idMeal, strArea, strCategory, strMeal, strMealThumb,
@@ -67,7 +73,7 @@ function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
   if (isFavorite) {
-    const newStorage = storage.filter((e) => !e.id === idMeal);
+    const newStorage = storage.filter((e) => e.id !== idMeal);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
 }
@@ -110,9 +116,10 @@ function Buttons() {
   const [hide, setHide] = useState(true);
   const { recipeInfo, id } = useContext(ContextAplication);
 
+  console.log(id)
   useEffect(() => {
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
-  }, [id]);
+  }, []);
 
   return (
     <div className="bottom-buttons">

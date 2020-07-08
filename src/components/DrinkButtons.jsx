@@ -26,16 +26,14 @@ function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
   };
   let storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (!storage) {
-    console.log('teste')
     storage = [];
   }
   if (!isFavorite) {
     const newStorage = [...storage, drinkInfo];
-    console.log(newStorage)
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
   if (isFavorite) {
-    const newStorage = storage.filter((e) => !e.id === idDrink);
+    const newStorage = storage.filter((e) => e.id !== idDrink);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newStorage));
   }
 }
@@ -91,7 +89,6 @@ function Buttons() {
   useEffect(() => {
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
   }, [id]);
-
   return (
     <div className="bottom-buttons">
       {renderFavoriteButton(setIsFavorite, recipeInfo, isFavorite, goToRoute, id)}

@@ -21,7 +21,7 @@ function ProgressDrinkScreen(props) {
       setInProgressDrink(data.drinks[0]);
     });
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
-    if (checkLocalStorage.cocktails === undefined || checkLocalStorage === null) {
+    if (checkLocalStorage === null || checkLocalStorage.cocktails === undefined) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: { [id]: checked.checkbox }, countChecked }));
     }
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
