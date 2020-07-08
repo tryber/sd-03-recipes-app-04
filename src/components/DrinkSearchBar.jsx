@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import * as api from '../services/drink-api';
 
 function checkResults(data, setResult, setGoToRoute, setId) {
@@ -16,12 +16,12 @@ function checkResults(data, setResult, setGoToRoute, setId) {
 function renderRadioButtons(setSearchBy, setDisabled) {
   return (
     <div className="radio-buttons">
-      <label htmlFor="ingrediente">
+      <label htmlFor="ingredient">
         <input
-          data-testid="ingredient-search-radio"
           id="ingredient"
           type="radio"
           name="search"
+          data-testid="ingredient-search-radio"
           onChange={(e) => {
             setSearchBy(e.target.id);
             setDisabled(false);
@@ -90,13 +90,14 @@ function DrinkSearchBar() {
   const [disabled, setDisabled] = useState('true');
 
   return (
-    <div className="search-area">
+    <div className="search-area slide-in-top">
       <input
         data-testid="search-input"
         id="searched-item"
         type="text"
         onChange={(e) => setSearchedItem(e.target.value)}
         value={searchedItem}
+        placeholder="Buscar"
       />
       {renderRadioButtons(setSearchBy, setDisabled)}
       <button
@@ -112,10 +113,12 @@ function DrinkSearchBar() {
         {result.reduce((arr, e, i) => {
           if (i < 12) {
             return [...arr,
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img src={e.strDrinkThumb} data-testid={`${i}-card-img`} alt="thumbnail" width="150px" />
-                <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
-              </div>,
+              <Link to={`/bebidas/${e.idDrink}`}>
+                <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`}>
+                  <img src={e.strDrinkThumb} className="recipe-image" data-testid={`${i}-card-img`} alt="thumbnail" width="150px" />
+                  <h5 data-testid={`${i}-card-name`}>{(e.strDrink.length > 30) ? `${e.strDrink.slice(0, 30)}...` : e.strDrink}</h5>
+                </div>
+              </Link>,
             ];
           }
           return arr;
