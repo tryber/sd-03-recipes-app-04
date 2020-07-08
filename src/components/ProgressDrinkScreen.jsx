@@ -11,7 +11,7 @@ function ProgressDrinkScreen(props) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [countChecked, setCountChecked] = useState(0);
   const ingredientsDoneList = [];
-  const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  let checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const { match: { params: { id } } } = props;
 
   const [checked, setChecked] = useState(checkedlist);
@@ -21,8 +21,14 @@ function ProgressDrinkScreen(props) {
       setInProgressDrink(data.drinks[0]);
     });
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
-    if (checkLocalStorage === null || checkLocalStorage.cocktails === undefined) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: { [id]: checked.checkbox }, countChecked }));
+    if (checkLocalStorage === null) {
+      checkLocalStorage = { cocktails: [], meals: [] };
+    }
+    if (checkLocalStorage.cocktails === undefined) {
+      checkLocalStorage = { ...checkLocalStorage, cocktails: [] };
+      localStorage.setItem('inProgressRecipes', JSON.stringify({ ...checkLocalStorage, cocktails: { ...checkLocalStorage.meals, [id]: checked.checkbox, countChecked } }));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({ ...checkLocalStorage, cocktails: { ...checkLocalStorage.meals, [id]: checked.checkbox, countChecked } }));
     }
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
   }, [id, checkLocalStorage, checked, countChecked]);

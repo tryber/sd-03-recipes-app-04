@@ -7,7 +7,7 @@ import MealsRenderRecipesInProgress from './helpersComponents/MealsRenderRecipes
 
 function ProgressFoodScreen(props) {
   const ingredientsDoneList = [];
-  const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  let checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   const { match: { params: { id } } } = props;
   const { location, history } = props;
@@ -23,8 +23,14 @@ function ProgressFoodScreen(props) {
     getMealById(id)
       .then((data) => { setInProgressRecipe(data.meals[0]); });
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
-    if (checkLocalStorage === null || checkLocalStorage.meals === undefined) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox }, countChecked }));
+    if (checkLocalStorage === null) {
+      checkLocalStorage = { cocktails: [], meals: [] };
+    }
+    if (checkLocalStorage.meals === undefined) {
+      checkLocalStorage = { ...checkLocalStorage, meals: [] };
+      localStorage.setItem('inProgressRecipes', JSON.stringify({ ...checkLocalStorage, meals: { ...checkLocalStorage.meals, [id]: checked.checkbox, countChecked } }));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({ ...checkLocalStorage, meals: { ...checkLocalStorage.meals, [id]: checked.checkbox, countChecked } }));
     }
   }, [id, checkLocalStorage, checked, countChecked]);
 

@@ -19,7 +19,7 @@ export function getDoneLocalStorage(id) {
   if (!storage) {
     done = false;
   } else {
-    done = storage.find((e) => e.id !== id);
+    done = storage.find((e) => e.id === id);
   }
   return done;
 }
