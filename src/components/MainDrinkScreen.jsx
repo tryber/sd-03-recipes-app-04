@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom';
 import { getListDrinksCategories, getDrinkByCategories } from '../services/drink-api';
 import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
-import './CSS/MainFoodScreen.css';
 import Header from './Header';
-import ordinary from '../images/ordinary.svg';
-import cocktail from '../images/cocktail.svg';
-import cocoa from '../images/cocoa.svg';
-import unknown from '../images/unknown.svg';
-import shake from '../images/shake.svg';
-import { renderFilterButtons } from './MainFoodScreen';
+import './CSS/MainFoodScreen.css';
+import chicken from '../images/chicken.svg';
+import beef from '../images/beef.svg';
+import goat from '../images/goat.svg';
+import dessert from '../images/dessert.svg';
+import breakfast from '../images/breakfast.svg';
 
-const filterPics = [ordinary, cocktail, shake, unknown, cocoa];
+const filterPics = [beef, breakfast, chicken, dessert, goat];
 
 function FilterButtons(Categories, handleClick) {
   return (
@@ -26,12 +25,28 @@ function FilterButtons(Categories, handleClick) {
       >
         All
       </button>
-      {renderFilterButtons(Categories, handleClick, filterPics)}
+      {Categories.reduce((arr, e, i) => {
+        if (i < 5) {
+          return [...arr,
+            <button
+              type="button"
+              data-testid={`${e.strCategory}-category-filter`}
+              value={e.strCategory}
+              onClick={handleClick}
+              className="button-main-screen"
+            >
+              <img src={filterPics[i]} alt="" width="20px" />
+              {e.strCategory}
+            </button>,
+          ];
+        }
+        return arr;
+      }, [])}
     </div>
   );
 }
 
-function DrinkList(Data) {
+function DrinksList(Data) {
   return (
     <div className="recipes-results">
       {Data.reduce((arr, e, i) => {
@@ -54,7 +69,7 @@ function DrinkList(Data) {
   );
 }
 
-function MainDrinkScreen() {
+function MainFoodScreen() {
   const {
     Data,
     getDrinks,
@@ -63,7 +78,7 @@ function MainDrinkScreen() {
     setingredientFilter,
   } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
-  const [DrinkFilter, setDrinkFilter] = useState('All');
+  const [FoodFilter, setFoodFilter] = useState('All');
   const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
@@ -78,31 +93,31 @@ function MainDrinkScreen() {
   }, []);
 
   useEffect(() => {
-    if (DrinkFilter === 'All') {
+    if (FoodFilter === 'All') {
       getDrinks();
     } else {
-      getDrinkByCategories(DrinkFilter)
+      getDrinkByCategories(FoodFilter)
         .then((answer) => setData(answer.drinks));
     }
-  }, [DrinkFilter]);
+  }, [FoodFilter]);
 
   const handleClick = (event) => {
-    if (event.target.value !== DrinkFilter) {
-      setDrinkFilter(event.target.value);
+    if (event.target.value !== FoodFilter) {
+      setFoodFilter(event.target.value);
     } else {
-      setDrinkFilter('All');
+      setFoodFilter('All');
     }
   };
 
   return (
     <div className="food-screen">
-      <Header screen={'Bebidas'} />
+      <Header screen={'Comidas'} />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
-      {!isLoading && !searchInputVisible && DrinkList(Data)}
+      {!isLoading && !searchInputVisible && DrinksList(Data)}
       <InferiorMenu />
     </div>
   );
 }
 
-export default MainDrinkScreen;
+export default MainFoodScreen;
