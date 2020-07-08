@@ -44,8 +44,7 @@ const renderButton = () => (
 );
 
 function CockTailsControlsRecipeProgress(props) {
-  const [goToRoute, setGoToRoute] = useState(false);
-  const { valuesToRender } = props;
+  const [goToRoute, setGoToRoute] = useState(false); const { valuesToRender } = props;
   const {
     inProgressDrink, data, checkLocalStorage, buttonEnabled,
     id, checked,
