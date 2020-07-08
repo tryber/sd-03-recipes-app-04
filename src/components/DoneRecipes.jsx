@@ -70,37 +70,35 @@ const renderRecipes = (recipes, setClp) => (
     area,
     doneDate,
     tags,
-  }, idxMap) => {
-    return (
-      <div className="recipes-done" key={name}>
-        <Link to={`${type}s/${id}`}>
-          <img
-            data-testid={`${idxMap}-horizontal-image`}
-            src={image}
-            alt="Imagem da Receita Finalizada"
-            width="150px"
-          />
-        </Link>
-        <p data-testid={`${idxMap}-horizontal-top-text`}>{`${area} - ${category}`}</p>
-        {type === 'bebida'
-          ? <p data-testid={`${idxMap}-horizontal-top-text`}>{alcoholicOrNot}</p>
-          : null}
-        <Link to={`${type}s/${id}`} data-testid={`${idxMap}-horizontal-name`}>{name}</Link>
-        <p data-testid={`${idxMap}-horizontal-done-date`}>{doneDate}</p>
-        {tags.map((tag) => (
-          <p key={tag} data-testid={`${idxMap}-${tag}-horizontal-tag`}>{`${tag}`}</p>
-        ))}
-        <button
-          type="button"
-          data-testid={`${idxMap}-horizontal-share-btn`}
-          onClick={() => clipboard(type, id, setClp)}
-          src={shareIcon}
-        >
-          <img src={shareIcon} alt="icon" />
-        </button>
-      </div>
-    );
-  })
+  }, idxMap) => (
+    <div className="recipes-done" key={name}>
+      <Link to={`${type}s/${id}`}>
+        <img
+          data-testid={`${idxMap}-horizontal-image`}
+          src={image}
+          alt="Imagem da Receita Finalizada"
+          width="150px"
+        />
+      </Link>
+      <p data-testid={`${idxMap}-horizontal-top-text`}>{`${area} - ${category}`}</p>
+      {type === 'bebida'
+        ? <p data-testid={`${idxMap}-horizontal-top-text`}>{alcoholicOrNot}</p>
+        : null}
+      <Link to={`${type}s/${id}`} data-testid={`${idxMap}-horizontal-name`}>{name}</Link>
+      <p data-testid={`${idxMap}-horizontal-done-date`}>{doneDate}</p>
+      {tags.map((tag) => (
+        <p key={tag} data-testid={`${idxMap}-${tag}-horizontal-tag`}>{`${tag}`}</p>
+      ))}
+      <button
+        type="button"
+        data-testid={`${idxMap}-horizontal-share-btn`}
+        onClick={() => clipboard(type, id, setClp)}
+        src={shareIcon}
+      >
+        <img src={shareIcon} alt="icon" />
+      </button>
+    </div>
+  ))
 );
 
 const DoneRecipes = () => {

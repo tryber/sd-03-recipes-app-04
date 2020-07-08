@@ -30,6 +30,19 @@ function doneRecipe(recipeInfo, setGoToRoute) {
   setGoToRoute(true);
 }
 
+const renderButton = () => (
+  <div>
+    <button
+      className="start-button in-progress"
+      disabled
+      data-testid="finish-recipe-btn"
+      type="button"
+    >
+      Finish Recipe Button
+    </button>
+  </div>
+);
+
 function CockTailsControlsRecipeProgress(props) {
   const [goToRoute, setGoToRoute] = useState(false);
   const { valuesToRender } = props;
@@ -73,16 +86,7 @@ function CockTailsControlsRecipeProgress(props) {
             Finish Recipe Button
           </button>
         )
-        : (
-          <button
-            className="start-button in-progress"
-            disabled
-            data-testid="finish-recipe-btn"
-            type="button"
-          >
-            Finish Recipe Button
-          </button>
-        )}
+        : renderButton()}
       {goToRoute && <Redirect to="/receitas-feitas" />}
     </div>
   );
