@@ -86,8 +86,6 @@ const AplicationProvider = ({ children }) => {
     setingredientFilter,
   };
 
-  console.log(Data)
-
   return (
     <ContextAplication.Provider value={context}>
       {children}

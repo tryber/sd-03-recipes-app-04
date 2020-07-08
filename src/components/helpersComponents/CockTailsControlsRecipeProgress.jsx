@@ -1,12 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { handleChecked } from './MealsControlsRecipeProgress';
 
+function doneRecipe(recipeInfo, setGoToRoute) {
+  const {
+    idDrink, strDrink, strDrinkThumb, strAlcoholic, strCategory, strTags,
+  } = recipeInfo;
+  const drinkInfo = {
+    id: idDrink,
+    type: 'comida',
+    area: '',
+    category: strCategory,
+    alcoholicOrNot: strAlcoholic,
+    name: strDrink,
+    image: strDrinkThumb,
+    doneDate: new Date(),
+    tags: strTags === null ? [] : strTags.split(','),
+  };
+  let storage = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (!storage) {
+    storage = [];
+    const newStorage = [...storage, drinkInfo];
+    localStorage.setItem('doneRecipes', JSON.stringify(newStorage));
+  } else {
+    const newStorage = [...storage, drinkInfo];
+    localStorage.setItem('doneRecipes', JSON.stringify(newStorage));
+  }
+  setGoToRoute(true);
+}
+
 function CockTailsControlsRecipeProgress(props) {
+  const [goToRoute, setGoToRoute] = useState(false);
   const { valuesToRender } = props;
   const {
     inProgressDrink, data, checkLocalStorage, buttonEnabled,
-    id, checked, history,
+    id, checked,
   } = valuesToRender;
   return (
     <div>
@@ -28,7 +57,7 @@ function CockTailsControlsRecipeProgress(props) {
       </div>
       {buttonEnabled
         ? (
-          <button className="start-button in-progress" enable data-testid="finish-recipe-btn" onClick={(() => history.push('/receitas-feitas'))} type="button">
+          <button className="start-button in-progress" enable data-testid="finish-recipe-btn" onClick={() => doneRecipe(inProgressDrink, setGoToRoute)} type="button">
             Finish Recipe Button
           </button>
         )
@@ -42,6 +71,7 @@ function CockTailsControlsRecipeProgress(props) {
             Finish Recipe Button
           </button>
         )}
+      {goToRoute && <Redirect to="/receitas-feitas" />}
     </div>
   );
 }

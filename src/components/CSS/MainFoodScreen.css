@@ -1,6 +1,7 @@
 .food-screen {
-  background-image: url('../../images/loginbackground.jpg');
-  background-size: cover;
+
+  /* background-image: url('../../images/loginbackground.jpg');
+  background-size: cover; */
   margin: 70px 0;
   min-height: 80vh;
   width: 360px;
