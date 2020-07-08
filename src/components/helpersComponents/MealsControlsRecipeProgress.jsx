@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 export function handleChecked(event, value, type, values) {
   const {
@@ -28,11 +29,40 @@ export function handleChecked(event, value, type, values) {
   }));
   localStorage.setItem('inProgressRecipes', JSON.stringify({ [type]: { [id]: checked.checkbox }, countChecked }));
 }
+
+function doneRecipe(recipeInfo, setGoToRoute) {
+  const {
+    idMeal, strArea, strCategory, strMeal, strMealThumb, strTags,
+  } = recipeInfo;
+  const mealInfo = {
+    id: idMeal,
+    type: 'comida',
+    area: strArea,
+    category: strCategory,
+    alcoholicOrNot: '',
+    name: strMeal,
+    image: strMealThumb,
+    doneDate: new Date(),
+    tags: strTags === null ? [] : strTags.split(','),
+  };
+  let storage = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (!storage) {
+    storage = [];
+    const newStorage = [...storage, mealInfo];
+    localStorage.setItem('doneRecipes', JSON.stringify(newStorage));
+  } else {
+    const newStorage = [...storage, mealInfo];
+    localStorage.setItem('doneRecipes', JSON.stringify(newStorage));
+  }
+  setGoToRoute(true);
+}
+
 function MealsControlsRecipeProgress(props) {
+  const [goToRoute, setGoToRoute] = useState(false);
   const { valuesToRender } = props;
   const {
     inProgressRecipe, data, checkLocalStorage, buttonEnabled,
-    id, checked, history,
+    id, checked,
   } = valuesToRender;
   return (
     <div>
@@ -55,7 +85,7 @@ function MealsControlsRecipeProgress(props) {
       <div>
         {buttonEnabled
           ? (
-            <button className="start-button in-progress" enable data-testid="finish-recipe-btn" onClick={(() => history.push('/receitas-feitas'))} type="button">
+            <button className="start-button in-progress" enable data-testid="finish-recipe-btn" onClick={() => doneRecipe(inProgressRecipe, setGoToRoute)} type="button">
               Finish Recipe Button
             </button>
           )
@@ -70,6 +100,7 @@ function MealsControlsRecipeProgress(props) {
             </button>
           )}
       </div>
+      {goToRoute && <Redirect to="/receitas-feitas" />}
     </div>
   );
 }
