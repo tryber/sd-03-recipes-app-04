@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../components/CSS/DoneRecipes.css';
+import { ContextAplication } from '../context/ContextAplication';
 
 const header = () => (
   <div className="header-recipes-done">
@@ -50,16 +51,19 @@ const buttons = (setRecipes, state) => {
   );
 };
 
-function renderRecipes(recipes) {
+const renderRecipes = (recipes) => {
   console.log(recipes);
   return (
     <div>
       {recipes.map(({
-        image,
         id,
-        name,
-        category,
         type,
+        category,
+        name,
+        image,
+        area,
+        doneDate,
+        tags,
       }) => {
         return (
           <div className="recipes-done" key={id}>
@@ -72,14 +76,15 @@ function renderRecipes(recipes) {
               />
             </Link>
             <p data-testid={`${id}-horizontal-top-text`}>{category}</p>
+            <p>{area}</p>
             <Link to={`${type}s/${id}`} data-testid={`${id}-horizontal-name`}>{name}</Link>
-            <p data-testid={`${id}-horizontal-done-date`}>{id}</p>
-            <p data-testid={`${id}-${name}-horizontal-tag`}>{category}</p>
+            <p data-testid={`${id}-horizontal-done-date`}>{doneDate}</p>
+            <p data-testid={`${id}-${tags}-horizontal-tag`}>{`${tags}${tags}`}</p>
             <CopyToClipboard text={navigator.clipboard.writeText(window.location.href)}>
               <button
                 className="share"
                 type="button"
-                data-testid="filter-by-drink-btn"
+                data-testid={`${id}-horizontal-share-btn`}
                 onClick={() => alert('Link copiado!')}
               >
                 <img src={shareIcon} alt="icon" />
@@ -90,21 +95,25 @@ function renderRecipes(recipes) {
       })}
     </div>
   );
-}
+};
 
-function DoneRecipes() {
-  const [recipes, setRecipes] = useState(JSON.parse(localStorage.getItem('doneRecipes')));
-  const state = JSON.parse(localStorage.getItem('doneRecipes'));
+const DoneRecipes = () => {
+  const [recipes, setRecipes] = JSON.parse(localStorage.getItem('doneRecipes'));
+
+  // const state =
+
   useEffect(() => {
     renderRecipes(recipes);
   }, [recipes]);
+
+  console.log(recipes);
   return (
     <div className="container">
       {header()}
-      {buttons(setRecipes, state)}
-      {recipes && renderRecipes(recipes)}
+      {/* {buttons(setRecipes, state)} */}
+      {/* {recipes && renderRecipes(recipes)} */}
     </div>
   );
-}
+};
 
 export default DoneRecipes;
