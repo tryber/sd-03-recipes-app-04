@@ -53,17 +53,17 @@ const AplicationProvider = ({ children }) => {
   };
 
   const getFoodScreenInfos = (foodId) => {
+    setId(foodId);
     getMealById(foodId).then((data) => {
       setRecipeInfo(data.meals[0]);
-      setId(foodId);
     });
     getFirstDrinks().then((data) => setRecomendation(data.drinks));
   };
 
   const getDrinkScreenInfos = (drinkId) => {
+    setId(drinkId);
     getDrinkByID(drinkId).then((data) => {
       setRecipeInfo(data.drinks[0]);
-      setId(drinkId);
     });
     getFirstMeals().then((data) => setRecomendation(data.meals));
   };
