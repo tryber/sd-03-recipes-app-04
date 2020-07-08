@@ -6,19 +6,18 @@ import renderWithRouter from './Mocks/RenderService';
 import meals from '../../cypress/mocks/meals';
 import breakfastMeals from '../../cypress/mocks/breakfastMeals';
 import mealCategories from '../../cypress/mocks/mealCategories';
-// import beefMeals from '../../cypress/mocks/beefMeals';
-// import chickenMeals from '../../cypress/mocks/chickenMeals';
-// import dessertMeals from '../../cypress/mocks/dessertMeals';
-// import goatMeals from '../../cypress/mocks/goatMeals';
+import goatMeals from '../../cypress/mocks/goatMeals';
+
+global.alert = jest.fn();
 
 const checkRecipes = (recipes, queryByTestId) => {
   const recipeType = 'Meal';
 
-  recipes.slice(0, 12).forEach((recipe, index) => {
+  recipes.slice(0, 12).forEach((recipe, idx) => {
     const title = recipe[`str${recipeType}`];
-    expect(queryByTestId(`${index}-recipe-card`)).toBeInTheDocument();
-    expect(queryByTestId(`${index}-card-img`)).toHaveAttribute('src');
-    expect(queryByTestId(`${index}-card-name`)).toHaveTextContent(title);
+    expect(queryByTestId(`${idx}-recipe-card`)).toBeInTheDocument();
+    expect(queryByTestId(`${idx}-card-img`)).toHaveAttribute('src');
+    expect(queryByTestId(`${idx}-card-name`)).toHaveTextContent(title);
   });
 
   expect(queryByTestId('12-recipe-card')).not.toBeInTheDocument();
@@ -71,7 +70,7 @@ describe('Testing filters buttons', () => {
 
   jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
 
-  test('should 5 firts recipes buttons', async () => {
+  test('should 5 first recipes buttons', async () => {
     const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
     await waitForDomChange();
 
@@ -84,6 +83,18 @@ describe('Testing filters buttons', () => {
       const filterCategory = queryByTestId(`${category}-category-filter`);
       expect(filterCategory).not.toBeInTheDocument();
     });
+
+    const searchButton = queryByTestId('search-top-btn');
+    fireEvent.click(searchButton);
+    mealCategories.meals.slice(0, 5).forEach(({ strCategory: category }) => {
+      const filterCategory = queryByTestId(`${category}-category-filter`);
+      expect(filterCategory).not.toBeInTheDocument();
+    });
+    fireEvent.click(searchButton);
+    mealCategories.meals.slice(0, 5).forEach(({ strCategory: category }) => {
+      const filterCategory = queryByTestId(`${category}-category-filter`);
+      expect(filterCategory).toBeInTheDocument();
+    });
   });
 });
 
@@ -94,13 +105,75 @@ describe('Testing first recipes rendering', () => {
 
   jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
 
-  test('should 5 firts recipes buttons', async () => {
+  test('should render only breakfast recipes', async () => {
     const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
     await waitForDomChange();
 
-    const beef = queryByTestId('Breakfast-category-filter');
-    fireEvent.click(beef);
+    const breakfast = queryByTestId('Breakfast-category-filter');
+    fireEvent.click(breakfast);
     await waitForDomChange();
     checkRecipes(breakfastMeals.meals, queryByTestId);
+  });
+
+  test('should render only goat recipes', async () => {
+    const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
+    await waitForDomChange();
+
+    const goat = queryByTestId('Goat-category-filter');
+    fireEvent.click(goat);
+    await waitForDomChange();
+    checkRecipes(goatMeals.meals, queryByTestId);
+  });
+
+  test('double click on filter buttons return in recipes', async () => {
+    const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
+    await waitForDomChange();
+
+    const goat = queryByTestId('Goat-category-filter');
+    fireEvent.click(goat);
+    await waitForDomChange();
+    fireEvent.click(goat);
+    await waitForDomChange();
+    checkRecipes(meals.meals, queryByTestId);
+  });
+});
+
+describe('Testing search button', () => {
+  afterEach(() => {
+    cleanup();
+  });
+
+  jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
+
+  test('should render only recipes with chicken', async () => {
+    const { queryByTestId, getByText } = renderWithRouter(<MainFoodScreen />);
+    await waitForDomChange();
+
+    const searchButton = queryByTestId('search-top-btn');
+    fireEvent.click(searchButton);
+    fireEvent.click(queryByTestId('ingredient-search-radio'));
+    fireEvent.input(queryByTestId('search-input'), {
+      target: { value: 'Chicken' },
+    });
+    fireEvent.click(queryByTestId('exec-search-btn'));
+    await waitForDomChange();
+    expect(getByText('Thai Green Curry')).toBeInTheDocument();
+  });
+
+  test('should not render any recipe', async () => {
+    const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
+    await waitForDomChange();
+
+    window.alert = jest.fn();
+
+    const searchButton = queryByTestId('search-top-btn');
+    fireEvent.click(searchButton);
+    fireEvent.click(queryByTestId('ingredient-search-radio'));
+    fireEvent.input(queryByTestId('search-input'), {
+      target: { value: 'xablau' },
+    });
+    fireEvent.click(queryByTestId('exec-search-btn'));
+    await waitForDomChange();
+    expect(alert).not.toBeNull();
   });
 });
