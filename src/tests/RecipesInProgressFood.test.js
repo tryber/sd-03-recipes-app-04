@@ -13,8 +13,9 @@ describe('ProgressFoodScreen Tests', () => {
   test('test if label with text Instructions is in component', () => {
     expect(screen.getByText('Instructions:')).toBeInTheDocument();
   });
-  test('renders App component', () => {
+  test('renders button component in ProgressFoodScreen', () => {
     render(<ProgressFoodScreen />);
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    const button = screen.getByRole('button');
+    expect(button).toBeInTheDocument();
   });
 });
