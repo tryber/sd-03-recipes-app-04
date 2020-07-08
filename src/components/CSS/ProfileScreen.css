@@ -1,24 +1,39 @@
-.header-profile {
-  align-items: center;
-  background: #c4c4c4;
-  display: flex;
-  height: 58px;
-  margin-bottom: 60px;
+.container-profile {
+  background-image: url('../../images/loginbackground.jpg');
+  display: inline-block;
+  height: 100vh;
   width: 360px;
 }
 
-p {
-  font-size: 35px;
-  margin-left: 28%;
+.profile-screen-buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  justify-content: space-between;
+  width: 360px;
 }
 
-button {
-  background-color: #c4c4c4;
-  border-radius: 5px;
-  height: 53px;
-  width: 329px;
+.profile-screen-buttons p {
+  font-size: 20px;
+  margin: 100px 0 0;
 }
 
-.container-profile {
+.profile-screen-buttons button {
+  background: rgb(32, 193, 214);
+  border-radius: 50px;
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-family: Chalkduster, serif;
+  font-size: 25px;
+  height: 82px;
+  line-height: 50px;
   text-align: center;
+  transform: scale3d(1, 1, 1);
+  transition: transform 1s;
+  width: 300px;
+}
+
+.profile-screen-buttons button:hover {
+  transform: scale3d(1.1, 1.1, 1.1);
 }

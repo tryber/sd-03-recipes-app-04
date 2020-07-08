@@ -10,7 +10,11 @@ export async function getListDrinksCategories() {
 
 export async function getDrinkByCategories(categorie) {
   return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${categorie}`)
-    .then((resp) => resp.json());
+    .then((resp) => resp.json())
+    .catch(() => {
+      alert('Serviço Indisponível no momento');
+      return { drinks: [] };
+    });
 }
 
 export async function getRandomDrink() {

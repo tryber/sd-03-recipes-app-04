@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import FoodBasicInfo from './FoodBasicInfo';
 import FoodButtons from './FoodButtons';
 import { ContextAplication } from '../context/ContextAplication';
+import './CSS/DetailsFoodScreen.css';
 
 export default function DetailsFoodScreen(props) {
   const { id } = props.props.match.params;
@@ -17,7 +18,7 @@ export default function DetailsFoodScreen(props) {
     <div>
       {isLoading && <h1>Carregando...</h1>}
       {!isLoading && (
-        <div>
+        <div className="details-screen">
             {!isLoading && <FoodBasicInfo />}
             {!isLoading && <FoodButtons />}
         </div>

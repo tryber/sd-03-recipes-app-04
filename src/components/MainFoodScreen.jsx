@@ -5,6 +5,13 @@ import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
 import Header from './Header';
 import './CSS/MainFoodScreen.css';
+import chicken from '../images/chicken.svg';
+import beef from '../images/beef.svg';
+import goat from '../images/goat.svg';
+import dessert from '../images/dessert.svg';
+import breakfast from '../images/breakfast.svg';
+
+const filterPics = [beef, breakfast, chicken, dessert, goat];
 
 function FilterButtons(Categories, handleClick) {
   return (
@@ -28,6 +35,7 @@ function FilterButtons(Categories, handleClick) {
               onClick={handleClick}
               className="button-main-screen"
             >
+              <img src={filterPics[i]} alt="" width="20px" />
               {e.strCategory}
             </button>,
           ];
@@ -46,10 +54,10 @@ function MealsList(Data) {
           return [...arr,
             <Link to={`/comidas/${e.idMeal}`}>
               <div
-                className="product-pic"
+                className={`product-pic-${i} product-pic slide-in-fwd-center`}
                 data-testid={`${i}-recipe-card`}
               >
-                <img src={e.strMealThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+                <img src={e.strMealThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
                 <h5 data-testid={`${i}-card-name`}>{e.strMeal}</h5>
               </div>
             </Link>,
