@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
 
 import profileIcon from '../images/profileIcon.svg';
@@ -50,69 +49,75 @@ const buttons = (setRecipes, state) => {
   );
 };
 
-const renderRecipes = (recipes) => {
-  return (
-    <div width="360">
-      {recipes.map(({
-        id,
-        type,
-        category,
-        alcoholicOrNot,
-        name,
-        image,
-        area,
-        doneDate,
-        tags,
-      }) => {
-        return (
-          <div className="recipes-done" key={id}>
-            <Link to={`${type}s/${id}`}>
-              <img
-                data-testid={`${id}-horizontal-image`}
-                src={image}
-                alt="Imagem da Receita Finalizada"
-                width="150px"
-              />
-            </Link>
-            <p data-testid={`${id}-horizontal-top-text`}>{category}</p>
-            <p>{area}</p>
-            <p>{alcoholicOrNot}</p>
-            <Link to={`${type}s/${id}`} data-testid={`${id}-horizontal-name`}>{name}</Link>
-            <p data-testid={`${id}-horizontal-done-date`}>{doneDate}</p>
-            {tags.map((tag) => (
-              <p key={id} data-testid={`${id}-${tag}-horizontal-tag`}>{`${tag}`}</p>
-            ))}
-            <CopyToClipboard text={navigator.clipboard.writeText(window.location.href)}>
-              <button
-                className="share"
-                type="button"
-                data-testid={`${id}-horizontal-share-btn`}
-                onClick={() => alert('Link copiado!')}
-              >
-                <img src={shareIcon} alt="icon" />
-              </button>
-            </CopyToClipboard>
-          </div>
-        );
-      })}
-    </div>
-  );
+const copyToClipboard = (type, id, setHide) => {
+  navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)
+    .then(() => {
+      setHide(false);
+      setTimeout(() => {
+        setHide(true);
+      }, 2000);
+    });
 };
+
+const renderRecipes = (recipes, setHide) => (
+  recipes.map(({
+    id,
+    type,
+    category,
+    alcoholicOrNot,
+    name,
+    image,
+    area,
+    doneDate,
+    tags,
+  }, idxMap) => {
+    return (
+      <div className="recipes-done" key={name}>
+        <Link to={`${type}s/${id}`}>
+          <img
+            data-testid={`${idxMap}-horizontal-image`}
+            src={image}
+            alt="Imagem da Receita Finalizada"
+            width="150px"
+          />
+        </Link>
+        <p data-testid={`${idxMap}-horizontal-top-text`}>{`${area} - ${category}`}</p>
+        {type === 'bebida'
+          ? <p data-testid={`${idxMap}-horizontal-top-text`}>{alcoholicOrNot}</p>
+          : null}
+        <Link to={`${type}s/${id}`} data-testid={`${idxMap}-horizontal-name`}>{name}</Link>
+        <p data-testid={`${idxMap}-horizontal-done-date`}>{doneDate}</p>
+        {tags.map((tag, i) => (
+          <p key={i} data-testid={`${idxMap}-${tag}-horizontal-tag`}>{`${tag}`}</p>
+        ))}
+        <button
+          type="button"
+          data-testid={`${idxMap}-horizontal-share-btn`}
+          onClick={() => copyToClipboard(type, id, setHide)}
+          src={shareIcon}
+        >
+          <img src={shareIcon} alt="icon" />
+        </button>
+      </div>
+    );
+  })
+);
 
 const DoneRecipes = () => {
   const [recipes, setRecipes] = useState(JSON.parse(localStorage.getItem('doneRecipes')));
   const state = JSON.parse(localStorage.getItem('doneRecipes'));
+  const [hide, setHide] = useState(true);
 
   useEffect(() => {
     renderRecipes(recipes);
   }, [recipes]);
 
-  console.log(recipes);
   return (
     <div className="container">
       {state && header()}
       {state && buttons(setRecipes, state)}
-      {recipes && renderRecipes(recipes)}
+      {recipes && renderRecipes(recipes, setHide)}
+      <p className="alert" hidden={hide}>Link copiado!</p>
     </div>
   );
 };

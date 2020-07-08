@@ -45,7 +45,6 @@ export function getIfHasBeenFavorited(id) {
 }
 
 function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
-  // console.log('dentro da funcao:', isFavorite)
   setIsFavorite((fav) => !fav);
   const {
     idMeal, strArea, strCategory, strMeal, strMealThumb,
