@@ -14,7 +14,7 @@ const handleFormSubmit = (saveInput, input, history) => {
   localStorage.setItem('cocktailsToken', 1);
   saveInput(input);
 
-  return history.push('/comidas');
+  return history.push('./comidas');
 };
 
 function createForm(input, setInput) {

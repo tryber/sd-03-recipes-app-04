@@ -78,7 +78,7 @@ function MainFoodScreen() {
     setingredientFilter,
   } = useContext(ContextAplication);
   const [Categories, setCategories] = useState([]);
-  const [FoodFilter, setFoodFilter] = useState('All');
+  const [DrinkFilter, setDrinkFilter] = useState('All');
   const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
@@ -93,25 +93,25 @@ function MainFoodScreen() {
   }, []);
 
   useEffect(() => {
-    if (FoodFilter === 'All') {
+    if (DrinkFilter === 'All') {
       getDrinks();
     } else {
-      getDrinkByCategories(FoodFilter)
+      getDrinkByCategories(DrinkFilter)
         .then((answer) => setData(answer.drinks));
     }
-  }, [FoodFilter]);
+  }, [DrinkFilter]);
 
   const handleClick = (event) => {
-    if (event.target.value !== FoodFilter) {
-      setFoodFilter(event.target.value);
+    if (event.target.value !== DrinkFilter) {
+      setDrinkFilter(event.target.value);
     } else {
-      setFoodFilter('All');
+      setDrinkFilter('All');
     }
   };
 
   return (
     <div className="food-screen">
-      <Header screen={'Comidas'} />
+      <Header screen={'Bebidas'} />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
       {!isLoading && !searchInputVisible && DrinksList(Data)}

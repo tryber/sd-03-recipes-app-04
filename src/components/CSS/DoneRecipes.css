@@ -1,0 +1,51 @@
+.container {
+  height: 640px;
+  width: 360px;
+}
+
+.header-recipes-done {
+  align-items: center;
+  background-color: grey;
+  display: flex;
+  font-size: 30px;
+  font-style: normal;
+  height: 58px;
+  justify-content: space-around;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 360px;
+}
+
+.buttons-filter {
+  background-color: #c4c4c4;
+  border-radius: 5px;
+  color: black;
+  font-size: 18px;
+  height: 45px;
+  width: 100px;
+}
+
+.test {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10%;
+}
+
+.recipes-done {
+  background-color: ghostwhite;
+  border-radius: 10px;
+  box-shadow: gray 5px 5px 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px;
+}
+
+.share {
+  background-color: ghostwhite;
+  border-radius: 10px;
+  box-shadow: gray 1px 1px 1px;
+  height: 40px;
+  width: 40px;
+}
