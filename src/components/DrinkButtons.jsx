@@ -41,7 +41,7 @@ function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
 function getStartedLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let started;
-  if (!storage || storage.drinks) {
+  if (!storage || storage.cocktails === undefined) {
     started = false;
   } else {
     started = Object.keys(storage.cocktails).find((e) => e === id);

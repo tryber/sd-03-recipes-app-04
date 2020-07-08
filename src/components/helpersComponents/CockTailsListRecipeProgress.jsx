@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import notFavorite from '../../images/whiteHeartIcon.svg';
 import favorite from '../../images/blackHeartIcon.svg';
 import CockTailsControlsRecipeProgress from './CockTailsControlsRecipeProgress';
-import { clickFavorite, getIfHasBeenFavorited } from './MealsfunctionsProgressScreen';
+import { clickFavorite, getIfHasBeenFavorited } from '../functionsProgressScreen';
 
 function CockTailsListRecipeProgress(props) {
   const { listValues } = props;

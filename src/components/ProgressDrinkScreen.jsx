@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getDrinkByID } from '../services/drink-api';
-import { mountRecipeList, getIfHasBeenFavorited } from './helpersComponents/CockTailsfunctionsProgressScreen';
+import { mountRecipeList, getIfHasBeenFavorited } from './functionsProgressScreen';
 import checkedlist from './checklist';
 import CockTailsRenderRecipesInProgress from './helpersComponents/CockTailsRenderRecipesInProgress';
 

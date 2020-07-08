@@ -146,16 +146,16 @@ h2 {
   margin-top: 20px;
 }
 
-.instructions p {
+.instructions {
   margin-bottom: 120px;
   text-align: justify;
 }
 
-.start-button.in-progress {
+.in-progress {
   left: 120px;
 }
 
-.start-button.in-progress:disabled {
+.in-progress:disabled {
   background-color: rgb(51, 54, 50);
   left: 120px;
   opacity: 0.8;

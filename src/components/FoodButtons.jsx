@@ -36,14 +36,9 @@ function getStartedLocalStorage(id) {
 }
 
 export function getIfHasBeenFavorited(id) {
-  // console.log(id)
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (storage) {
-    const favorited = storage.some((e) => {
-      // console.log(e.id, id) 
-      return e.id === id
-    });
-    // console.log(favorited)
+    const favorited = storage.some((e) => e.id === id);
     return favorited;
   }
   return false;
