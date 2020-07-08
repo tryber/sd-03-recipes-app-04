@@ -27,7 +27,7 @@ export function getDoneLocalStorage(id) {
 function getStartedLocalStorage(id) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let started;
-  if (!storage) {
+  if (!storage || storage.meals === undefined) {
     started = false;
   } else {
     started = Object.keys(storage.meals).find((e) => e === id);
@@ -115,8 +115,6 @@ function Buttons() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [hide, setHide] = useState(true);
   const { recipeInfo, id } = useContext(ContextAplication);
-
-  console.log(id)
   useEffect(() => {
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
   }, []);
