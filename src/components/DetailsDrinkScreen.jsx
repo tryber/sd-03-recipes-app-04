@@ -17,7 +17,7 @@ export default function DetailsDrinkScreen(props) {
     <div>
       {isLoading && <h1>Carregando...</h1>}
       {!isLoading && (
-        <div>
+        <div className="details-screen">
             {!isLoading && <DrinkBasicInfo />}
             {!isLoading && <DrinkButtons />}
         </div>
