@@ -85,7 +85,12 @@ function MealsControlsRecipeProgress(props) {
       <div>
         {buttonEnabled
           ? (
-            <button className="start-button in-progress" enable data-testid="finish-recipe-btn" onClick={() => doneRecipe(inProgressRecipe, setGoToRoute)} type="button">
+            <button
+              className="start-button in-progress"
+              enable data-testid="finish-recipe-btn"
+              onClick={() => doneRecipe(inProgressRecipe, setGoToRoute)}
+              type="button"
+            >
               Finish Recipe Button
             </button>
           )

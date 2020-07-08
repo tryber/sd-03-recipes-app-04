@@ -49,17 +49,17 @@ const buttons = (setRecipes, state) => {
   );
 };
 
-const copyToClipboard = (type, id, setHide) => {
+const clipboard = (type, id, setClp) => {
   navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`)
     .then(() => {
-      setHide(false);
+      setClp(false);
       setTimeout(() => {
-        setHide(true);
+        setClp(true);
       }, 2000);
     });
 };
 
-const renderRecipes = (recipes, setHide) => (
+const renderRecipes = (recipes, setClp) => (
   recipes.map(({
     id,
     type,
@@ -87,13 +87,13 @@ const renderRecipes = (recipes, setHide) => (
           : null}
         <Link to={`${type}s/${id}`} data-testid={`${idxMap}-horizontal-name`}>{name}</Link>
         <p data-testid={`${idxMap}-horizontal-done-date`}>{doneDate}</p>
-        {tags.map((tag, i) => (
-          <p key={i} data-testid={`${idxMap}-${tag}-horizontal-tag`}>{`${tag}`}</p>
+        {tags.map((tag) => (
+          <p key={tag} data-testid={`${idxMap}-${tag}-horizontal-tag`}>{`${tag}`}</p>
         ))}
         <button
           type="button"
           data-testid={`${idxMap}-horizontal-share-btn`}
-          onClick={() => copyToClipboard(type, id, setHide)}
+          onClick={() => clipboard(type, id, setClp)}
           src={shareIcon}
         >
           <img src={shareIcon} alt="icon" />
@@ -106,7 +106,7 @@ const renderRecipes = (recipes, setHide) => (
 const DoneRecipes = () => {
   const [recipes, setRecipes] = useState(JSON.parse(localStorage.getItem('doneRecipes')));
   const state = JSON.parse(localStorage.getItem('doneRecipes'));
-  const [hide, setHide] = useState(true);
+  const [clp, setClp] = useState(true);
 
   useEffect(() => {
     renderRecipes(recipes);
@@ -116,8 +116,8 @@ const DoneRecipes = () => {
     <div className="container">
       {state && header()}
       {state && buttons(setRecipes, state)}
-      {recipes && renderRecipes(recipes, setHide)}
-      <p className="alert" hidden={hide}>Link copiado!</p>
+      {recipes && renderRecipes(recipes, setClp)}
+      <p className="alert" hidden={clp}>Link copiado!</p>
     </div>
   );
 };
