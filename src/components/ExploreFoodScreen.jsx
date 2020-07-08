@@ -18,18 +18,18 @@ function ExploreFoodScreen() {
       <Header screen={'Explorar Comidas'} />
       <Link to="/explorar/comidas/ingredientes">
         <button
-          className="explore-food-button"
+          className="explore-food-button fade-in-fwd"
           data-testid="explore-by-ingredient"
         >Por Ingredientes</button>
       </Link>
       <Link to="/explorar/comidas/area">
         <button
-          className="explore-food-button"
+          className="explore-food-button fade-in-fwd"
           data-testid="explore-by-area"
         >Por Local de Origem</button>
       </Link>
       <button
-        className="explore-food-button"
+        className="explore-food-button fade-in-fwd"
         data-testid="explore-surprise"
         onClick={handleClick}
       >Me Surpreenda!</button>
