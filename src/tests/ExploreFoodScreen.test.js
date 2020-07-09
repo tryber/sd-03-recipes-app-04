@@ -1,5 +1,5 @@
 import React from 'react';
-import { waitForDomChange, cleanup, fireEvent, waitForElement } from '@testing-library/react';
+import { waitForDomChange, cleanup, fireEvent, wait } from '@testing-library/react';
 import ExploreFoodScreen from '../components/ExploreFoodScreen';
 import ExploreFoodIngredientScreen from '../components/ExploreFoodIngredientScreen';
 import ExploreFoodOriginScreen from '../components/ExploreFoodOriginScreen';
@@ -51,11 +51,11 @@ describe('testing Explore Food Screen', () => {
     expect(history.location.pathname).toEqual('/explorar/comidas/area');
   });
 
-  test.skip('should take to randon recipe details screen', async () => {
+  test('should take to randon recipe details screen', async () => {
     const { getByTestId, history } = renderWithRouter(<ExploreFoodScreen />);
 
     fireEvent.click(getByTestId('explore-surprise'));
-    await waitForElement(() => expect(global.fetch).toHaveBeenCalled());
+    await wait(() => expect(global.fetch).toHaveBeenCalled());
     expect(history.location.pathname).toEqual('/comidas/52771');
   });
 
@@ -103,11 +103,12 @@ describe('testing Explore Food by Ingredient Screen', () => {
     });
   });
 
-  test.skip('should take to main recipe screen displaying only chicken recipes', async () => {
+  test('should take to main recipe screen displaying only chicken recipes', async () => {
     const { getByTestId, history } = renderWithRouter(<ExploreFoodIngredientScreen />);
+    await waitForDomChange();
 
     fireEvent.click(getByTestId(`0-ingredient-card`));
-    await waitForElement(() => expect(global.fetch).toHaveBeenCalled());
+    await wait(() => expect(global.fetch).toHaveBeenCalled());
     expect(history.location.pathname).toEqual('/comidas');
   });
 
@@ -154,13 +155,26 @@ describe('testing Explore Food by Area Screen', () => {
     checkRecipes(meals.meals, queryByTestId);
   });
 
-  test.skip('should render japanese recipes', async () => {
-    const { queryByTestId, getByText } = renderWithRouter(<ExploreFoodOriginScreen />);
-    await waitForDomChange();
+  test('should render japanese recipes', async () => {
+    const { queryByTestId, getByText, getByTestId } = renderWithRouter(<ExploreFoodOriginScreen />);
+    
+    await wait(() => getByTestId('explore-by-area-dropdown'));
+    await wait(() => getByTestId('Japanese-option'));
+    const areaDropdown = getByTestId('explore-by-area-dropdown');
+    const japaneseOption = getByTestId('Japanese-option');
 
     expect(getByText('Japanese')).toBeInTheDocument();
     fireEvent.click(getByText('Japanese'));
-    await waitForDomChange();
+    await wait();
+
+    expect(areaDropdown).toBeInTheDocument();
+    expect(japaneseOption).toBeInTheDocument();
+    const fetchMock = jest.spyOn(global, 'fetch');
+
+    fireEvent.change(areaDropdown, { target: { value: 'Japanese' } });
+    await wait();
+
+    expect(fetchMock).toHaveBeenLastCalledWith('https://www.themealdb.com/api/json/v1/1/filter.php?a=Japanese');
 
     checkRecipes(japaneseMeals.meals, queryByTestId);
   });

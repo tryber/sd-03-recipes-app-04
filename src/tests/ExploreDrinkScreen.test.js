@@ -1,10 +1,11 @@
 import React from 'react';
-import { waitForDomChange, cleanup, fireEvent, waitForElement } from '@testing-library/react';
+import { waitForDomChange, cleanup, fireEvent, screen, wait } from '@testing-library/react';
 import ExploreDrinkScreen from '../components/ExploreDrinkScreen';
 import ExploreDrinkIngredientScreen from '../components/ExploreDrinkIngredientScreen';
 import mockFetch from './Mocks/Fetch';
 import renderWithRouter from './Mocks/RenderService';
 import drinkIngredients from '../../cypress/mocks/drinkIngredients';
+import { act } from 'react-dom/test-utils';
 
 describe('testing Explore Drink Screen', () => {
   afterEach(() => {
@@ -25,11 +26,11 @@ describe('testing Explore Drink Screen', () => {
     expect(history.location.pathname).toEqual('/explorar/bebidas/ingredientes');
   });
 
-  test.skip('should take to randon recipe details screen', async () => {
+  test('should take to randon recipe details screen', async () => {
     const { getByTestId, history } = renderWithRouter(<ExploreDrinkScreen />);
 
     fireEvent.click(getByTestId('explore-surprise'));
-    await waitForElement(() => expect(global.fetch).toHaveBeenCalled());
+    await wait(() => expect(global.fetch).toHaveBeenCalled());
     expect(history.location.pathname).toEqual('/bebidas/178319');
   });
 
@@ -77,20 +78,22 @@ describe('testing Explore Drink by Ingredient Screen', () => {
     });
   });
 
-  test.skip('should take to main recipe screen displaying only light rum recipes', async () => {
+  test('should take to main recipe screen displaying only light rum recipes', async () => {
     const { getByTestId, history } = renderWithRouter(<ExploreDrinkIngredientScreen />);
+    await waitForDomChange();
 
     fireEvent.click(getByTestId(`0-ingredient-card`));
-    await waitForElement(() => expect(global.fetch).toHaveBeenCalled());
+    await wait(() => expect(global.fetch).toHaveBeenCalled());
     expect(history.location.pathname).toEqual('/bebidas');
   });
 
   test('should render header', async () => {
-    const { getByTestId, queryByTestId } = renderWithRouter(<ExploreDrinkIngredientScreen />);
-
-    expect(getByTestId('profile-top-btn')).toBeInTheDocument();
-    expect(getByTestId('page-title')).toBeInTheDocument();
-    expect(queryByTestId('search-top-btn')).not.toBeInTheDocument();
+    act(() => {
+      renderWithRouter(<ExploreDrinkIngredientScreen />);
+    })
+    expect(screen.getByTestId('profile-top-btn')).toBeInTheDocument();
+    expect(screen.getByTestId('page-title')).toBeInTheDocument();
+    expect(screen.queryByTestId('search-top-btn')).not.toBeInTheDocument();
   });
 
   test('should render footer', async () => {

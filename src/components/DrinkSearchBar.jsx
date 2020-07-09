@@ -114,7 +114,7 @@ function DrinkSearchBar() {
           if (i < 12) {
             return [...arr,
               <Link to={`/bebidas/${e.idDrink}`}>
-                <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`}>
+                <div className={`product-pic product-pic-${i}`} data-testid={`${i}-recipe-card`} key={e.idDrink}>
                   <img src={e.strDrinkThumb} className="recipe-image" data-testid={`${i}-card-img`} alt="thumbnail" width="150px" />
                   <h5 data-testid={`${i}-card-name`}>{(e.strDrink.length > 30) ? `${e.strDrink.slice(0, 30)}...` : e.strDrink}</h5>
                 </div>
