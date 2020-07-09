@@ -162,17 +162,6 @@ h2 {
   opacity: 0.8;
 }
 
-.share {
-  background-color: rgb(41, 137, 192);
-  border: groove 3px rgb(86, 230, 19);
-  border-radius: 50%;
-  bottom: 30px;
-  height: 50px;
-  left: 240px;
-  position: fixed;
-  width: 50px;
-}
-
 .favourite-progress {
   background-color: rgb(41, 137, 192);
   border: groove 3px rgb(86, 230, 19);
@@ -180,6 +169,17 @@ h2 {
   bottom: 30px;
   height: 50px;
   left: 50px;
+  position: fixed;
+  width: 50px;
+}
+
+.share {
+  background-color: rgb(41, 137, 192);
+  border: groove 3px rgb(86, 230, 19);
+  border-radius: 50%;
+  bottom: 30px;
+  height: 50px;
+  left: 240px;
   position: fixed;
   width: 50px;
 }
