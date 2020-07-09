@@ -111,7 +111,7 @@ function MainFoodScreen() {
 
   return (
     <div className="food-screen">
-      <Header screen="Bebidas" />
+      <Header screen={'Bebidas'} />
       {isLoading && <div className="loader" />}
       {!isLoading && !searchInputVisible && FilterButtons(Categories, handleClick)}
       {!isLoading && !searchInputVisible && DrinksList(Data)}

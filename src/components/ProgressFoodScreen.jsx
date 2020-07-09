@@ -49,6 +49,7 @@ function ProgressFoodScreen(props) {
 
   const data = mountRecipeList(inProgressRecipe, checked, ingredientsDoneList);
   const buttonEnabled = countChecked === data.length;
+  console.log(data);
   return (
     <MealsRenderRecipesInProgress
       values={{

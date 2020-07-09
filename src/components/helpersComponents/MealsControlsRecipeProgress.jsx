@@ -61,6 +61,20 @@ function doneRecipe(recipeInfo, setGoToRoute) {
   setGoToRoute(true);
 }
 
+const renderButton = (inProgressRecipe, setGoToRoute) => (
+  <div>
+    <button
+      className="start-button in-progress"
+      enable
+      data-testid="finish-recipe-btn"
+      onClick={() => doneRecipe(inProgressRecipe, setGoToRoute)}
+      type="button"
+    >
+      Finish Recipe Button
+    </button>
+  </div>
+);
+
 function MealsControlsRecipeProgress(props) {
   const [goToRoute, setGoToRoute] = useState(false);
   const { valuesToRender } = props;
@@ -90,9 +104,7 @@ function MealsControlsRecipeProgress(props) {
       <div>
         {buttonEnabled
           ? (
-            <button className="start-button in-progress" enable data-testid="finish-recipe-btn" onClick={() => doneRecipe(inProgressRecipe, setGoToRoute)} type="button">
-              Finish Recipe Button
-            </button>
+            renderButton(inProgressRecipe, setGoToRoute)
           )
           : (
             <button

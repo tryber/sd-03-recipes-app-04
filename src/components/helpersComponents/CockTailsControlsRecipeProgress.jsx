@@ -61,9 +61,21 @@ function doneRecipe(recipeInfo, setGoToRoute) {
   setGoToRoute(true);
 }
 
+const renderButton = () => (
+  <div>
+    <button
+      className="start-button in-progress"
+      disabled
+      data-testid="finish-recipe-btn"
+      type="button"
+    >
+      Finish Recipe Button
+    </button>
+  </div>
+);
+
 function CockTailsControlsRecipeProgress(props) {
-  const [goToRoute, setGoToRoute] = useState(false);
-  const { valuesToRender } = props;
+  const [goToRoute, setGoToRoute] = useState(false); const { valuesToRender } = props;
   const {
     inProgressDrink, data, checkLocalStorage, buttonEnabled,
     id, checked,
@@ -76,7 +88,13 @@ function CockTailsControlsRecipeProgress(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
-            <input id={i} type="checkbox" checked={checkLocalStorage.cocktails[id][i].checked} name={element.drink} onClick={(event) => handleChecked(event, checked.checkbox[i].checked, 'cocktails', valuesToRender)} />
+            <input
+              id={i}
+              type="checkbox"
+              checked={checkLocalStorage.cocktails[id][i].checked}
+              name={element.drink}
+              onClick={(event) => handleChecked(event, checked.checkbox[i].checked, 'cocktails', valuesToRender)}
+            />
             <span>{element.meal}</span>
             {element.mensure}
           </span>
@@ -88,20 +106,17 @@ function CockTailsControlsRecipeProgress(props) {
       </div>
       {buttonEnabled
         ? (
-          <button className="start-button in-progress" enable data-testid="finish-recipe-btn" onClick={() => doneRecipe(inProgressDrink, setGoToRoute)} type="button">
-            Finish Recipe Button
-          </button>
-        )
-        : (
           <button
             className="start-button in-progress"
-            disabled
+            enable
             data-testid="finish-recipe-btn"
+            onClick={() => doneRecipe(inProgressDrink, setGoToRoute)}
             type="button"
           >
             Finish Recipe Button
           </button>
-        )}
+        )
+        : renderButton()}
       {goToRoute && <Redirect to="/receitas-feitas" />}
     </div>
   );
