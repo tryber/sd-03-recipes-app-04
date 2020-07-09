@@ -1,8 +1,7 @@
 .login-screen {
   align-items: center;
-
-  /* background-image: url('../../images/loginbackground.jpg');
-  background-size: cover; */
+  background-image: url('../../images/loginbackground.jpg');
+  background-size: cover;
   border: 1px solid black;
   box-shadow: gray 5px 5px 2px;
   display: flex;

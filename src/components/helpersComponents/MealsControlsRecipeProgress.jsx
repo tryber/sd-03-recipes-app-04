@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { getDate } from './CockTailsControlsRecipeProgress';
 
 export function handleChecked(event, value, type, values) {
   const {
@@ -27,7 +28,11 @@ export function handleChecked(event, value, type, values) {
       checkbox: value,
     },
   }));
-  localStorage.setItem('inProgressRecipes', JSON.stringify({ [type]: { [id]: checked.checkbox }, countChecked }));
+  const newStorage = {
+    ...checkLocalStorage,
+    meals: { ...checkLocalStorage.meals, [id]: [...checked.checkbox] },
+  };
+  localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
 }
 
 function doneRecipe(recipeInfo, setGoToRoute) {
@@ -42,7 +47,7 @@ function doneRecipe(recipeInfo, setGoToRoute) {
     alcoholicOrNot: '',
     name: strMeal,
     image: strMealThumb,
-    doneDate: new Date(),
+    doneDate: getDate(),
     tags: strTags === null ? [] : strTags.split(','),
   };
   let storage = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -86,6 +91,7 @@ function MealsControlsRecipeProgress(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
+            {/* {console.log(checkLocalStorage.meals[id][i])} */}
             <input id={i} type="checkbox" checked={checkLocalStorage.meals[id][i].checked} name={element.meal} onClick={(event) => handleChecked(event, checked.checkbox[i].checked, 'meals', valuesToRender)} />
             <span>{element.meal}</span>
             {element.mensure}
