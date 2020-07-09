@@ -1,5 +1,10 @@
 import React from 'react';
-import { waitForDomChange, cleanup, fireEvent, waitForElement } from '@testing-library/react';
+import {
+  waitForDomChange,
+  cleanup,
+  fireEvent,
+  waitForElement,
+} from '@testing-library/react';
 import MainFoodScreen from '../components/MainFoodScreen';
 import mockFetch from './Mocks/Fetch';
 import renderWithRouter from './Mocks/RenderService';
@@ -193,7 +198,7 @@ describe('Testing search button', () => {
 
   // tentar enteder como validar a api calling
   test.skip('should redirect to details page', async () => {
-    const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
+    const { queryByTestId, history } = renderWithRouter(<MainFoodScreen />);
     await waitForDomChange();
 
     const searchButton = queryByTestId('search-top-btn');

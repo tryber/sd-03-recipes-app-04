@@ -193,7 +193,7 @@ describe('Testing search button', () => {
 
   // tentar enteder como validar a api calling
   test.skip('should redirect to details page', async () => {
-    const { queryByTestId, getByText } = renderWithRouter(<MainDrinkScreen />);
+    const { queryByTestId, history } = renderWithRouter(<MainDrinkScreen />);
     await waitForDomChange();
 
     const searchButton = queryByTestId('search-top-btn');
