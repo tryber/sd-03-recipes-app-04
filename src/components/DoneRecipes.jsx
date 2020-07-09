@@ -115,7 +115,7 @@ const DoneRecipes = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="favorite-recipes-screen">
       <Header screen="Receitas Feitas" />
       {state && buttons(setRecipes, state)}
       {recipes && renderRecipes(recipes, setClp)}
