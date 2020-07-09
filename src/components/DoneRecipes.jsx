@@ -112,7 +112,7 @@ const DoneRecipes = () => {
   useEffect(() => {
     renderRecipes(recipes);
     setRecipes(storage);
-  }, [recipes]);
+  }, []);
 
   return (
     <div className="container">
