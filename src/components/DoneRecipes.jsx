@@ -102,12 +102,17 @@ const renderRecipes = (recipes, setClp) => (
 );
 
 const DoneRecipes = () => {
-  const [recipes, setRecipes] = useState(JSON.parse(localStorage.getItem('doneRecipes')));
+
+  const [recipes, setRecipes] = useState([]);
   const state = JSON.parse(localStorage.getItem('doneRecipes'));
   const [clp, setClp] = useState(true);
 
+  let storage = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (!storage) { storage = []; }
+
   useEffect(() => {
     renderRecipes(recipes);
+    setRecipes(storage);
   }, [recipes]);
 
   return (
