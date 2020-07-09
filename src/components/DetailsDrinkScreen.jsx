@@ -5,7 +5,7 @@ import DrinkButtons from './DrinkButtons';
 import { ContextAplication } from '../context/ContextAplication';
 
 export default function DetailsDrinkScreen(props) {
-  const { id } = props.props.match.params;
+  const { props: { match: { params: { id } } } } = props;
   const { getDrinkScreenInfos } = useContext(ContextAplication);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
