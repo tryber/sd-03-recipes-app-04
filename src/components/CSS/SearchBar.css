@@ -1,0 +1,76 @@
+.searched-item {
+  display: block;
+  margin: 10px auto;
+  width: 90%;
+}
+
+.radio-buttons {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 20px;
+}
+
+.search-button {
+  background-color: rgb(32, 193, 214);
+  border-radius: 30px;
+  color: white;
+  display: block;
+  font-family: Chalkduster, serif;
+  font-weight: 900;
+  height: 50px;
+  margin: auto;
+  margin-bottom: 20px;
+  width: 150px;
+}
+
+.recipes-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 60px;
+}
+
+.recipes-results > img , h5 , h1 {
+  text-align: center;
+  width: 100%;
+}
+
+.search-area > input {
+  background-color: transparent;
+  border: transparent;
+  border-bottom: rgb(32, 193, 214) 3px solid;
+  color: rgb(32, 193, 214);
+  font-size: 2rem;
+  transition: background-color 5000s;
+  width: 80%;
+}
+
+.radio-buttons label {
+  color: rgb(41, 33, 158);
+  font-family: Chalkduster, serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-top: 10px;
+}
+
+span {
+  margin: 5px;
+}
+
+p {
+  text-align: justify;
+}
+
+.search-area {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+::placeholder {
+  color: rgb(32, 193, 214);
+  font-family: Chalkduster, serif;
+}

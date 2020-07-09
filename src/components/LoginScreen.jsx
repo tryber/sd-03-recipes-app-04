@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../context/ContextAplication';
+
 import './CSS/LoginScreen.css';
 
 const handleChangeInput = (name, event, input, setInput) => {
@@ -19,23 +20,24 @@ const handleFormSubmit = (saveInput, input, history) => {
 function createForm(input, setInput) {
   return (
     <form>
-      <h2>Login</h2>
-      <input
-        className="email"
-        data-testid="email-input"
-        onChange={(ele) => handleChangeInput('email', ele.target.value, input, setInput)}
-        type="email"
-        name="email"
-        placeholder="Email"
-      />
-      <input
-        className="password"
-        data-testid="password-input"
-        onChange={(ele) => handleChangeInput('password', ele.target.value, input, setInput)}
-        type="password"
-        name="password"
-        placeholder="Senha"
-      />
+      <div className="input-field col s6 ">
+        <input
+          className="input-login"
+          data-testid="email-input"
+          onChange={(ele) => handleChangeInput('email', ele.target.value, input, setInput)}
+          type="email"
+          name="email"
+          placeholder="Email"
+        />
+        <input
+          className="input-login"
+          data-testid="password-input"
+          onChange={(ele) => handleChangeInput('password', ele.target.value, input, setInput)}
+          type="password"
+          name="password"
+          placeholder="Senha"
+        />
+      </div>
     </form>
   );
 }
@@ -55,16 +57,20 @@ function LoginScreen() {
     return setInformations(false);
   }, [input]);
 
+  if (user) return <Redirect to="/welcome" />;
+          
   return (
     <div className="login-screen">
+      <h1 className="app-name">Cooking Time</h1>
       {createForm(input, setInput, informations)}
       <button
         type="button"
+        className=" btn btn-login"
         disabled={informations}
         data-testid="login-submit-btn"
         onClick={() => handleFormSubmit(saveInput, input, history)}
       >
-        <h3>Entrar</h3>
+        Entrar
       </button>
     </div>
   );
