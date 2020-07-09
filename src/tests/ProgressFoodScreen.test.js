@@ -4,6 +4,9 @@ import renderWithRouter from './RenderService';
 
 describe('ProgressFoodScreen Tests', () => {
   test('renders App component', () => {
-    renderWithRouter(<ProgressFoodScreen />);
+    const id = 1000;
+    const params = 'history';
+    const obj = { [params]: { id } };
+    renderWithRouter(<ProgressFoodScreen match={obj} />);
   });
 });

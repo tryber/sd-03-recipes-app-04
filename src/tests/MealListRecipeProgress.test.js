@@ -1,4 +1,4 @@
-/* import React from 'react';
+import React from 'react';
 import renderWithRouter from './RenderService';
 import MealListRecipeProgress from '../components/helpersComponents/MealListRecipeProgress';
 
@@ -7,4 +7,3 @@ describe('MealsRenderRecipesInProgress Tests', () => {
     renderWithRouter(<MealListRecipeProgress />);
   });
 });
- */
