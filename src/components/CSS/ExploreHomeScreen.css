@@ -75,16 +75,16 @@
   width: 50%;
 }
 
+.fade-in-fwd {
+  animation: fade-in-fwd 1.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
 .ingridients-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding-top: 30px;
   width: 360px;
-}
-
-.fade-in-fwd {
-  animation: fade-in-fwd 1.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
 @keyframes fade-in-fwd {
