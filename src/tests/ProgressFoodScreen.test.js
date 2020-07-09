@@ -3,7 +3,7 @@ import ProgressFoodScreen from '../components/ProgressFoodScreen';
 import renderWithRouter from './RenderService';
 
 describe('ProgressFoodScreen Tests', () => {
-  test('renders App component', () => {
+  test('renders ProgressFoodScreen component', () => {
     const id = 1000;
     const params = 'history';
     const obj = { [params]: { id } };
