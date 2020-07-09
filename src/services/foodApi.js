@@ -6,11 +6,7 @@ export const getMealByName = async (food) => {
 
 export const getMealByCategorie = async (category) => {
   const meal = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-  let mealInfo = await meal.json();
-  if (mealInfo.meals === null) {
-    alert('Serviço Indisponível');
-    mealInfo = { meals: [] };
-  }
+  const mealInfo = await meal.json();
   return mealInfo;
 };
 
