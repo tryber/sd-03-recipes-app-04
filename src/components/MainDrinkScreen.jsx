@@ -3,39 +3,45 @@ import { Link } from 'react-router-dom';
 import { getListDrinksCategories, getDrinkByCategories } from '../services/drink-api';
 import { ContextAplication } from '../context/ContextAplication';
 import InferiorMenu from './InferiorMenu';
-import './CSS/MainFoodScreen.css';
 import Header from './Header';
+import './CSS/MainFoodScreen.css';
+import chicken from '../images/chicken.svg';
+import beef from '../images/beef.svg';
+import goat from '../images/goat.svg';
+import dessert from '../images/dessert.svg';
+import breakfast from '../images/breakfast.svg';
+
+const filterPics = [beef, breakfast, chicken, dessert, goat];
 
 function FilterButtons(Categories, handleClick) {
   return (
-    <div>
-      <div className="button-div">
-        <button
-          data-testid="All-category-filter"
-          type="button"
-          value="All"
-          onClick={handleClick}
-          className="button-main-screen"
-        >
-          All
-        </button>
-        {Categories.reduce((arr, e, i) => {
-          if (i < 5) {
-            return [...arr,
-              <button
-                type="button"
-                data-testid={`${e.strCategory}-category-filter`}
-                value={e.strCategory}
-                onClick={handleClick}
-                className="button-main-screen"
-              >
-                {e.strCategory}
-              </button>,
-            ];
-          }
-          return arr;
-        }, [])}
-      </div>
+    <div className="button-div">
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        value="All"
+        onClick={handleClick}
+        className="button-main-screen"
+      >
+        All
+      </button>
+      {Categories.reduce((arr, e, i) => {
+        if (i < 5) {
+          return [...arr,
+            <button
+              type="button"
+              data-testid={`${e.strCategory}-category-filter`}
+              value={e.strCategory}
+              onClick={handleClick}
+              className="button-main-screen"
+            >
+              <img src={filterPics[i]} alt="" width="20px" />
+              {e.strCategory}
+            </button>,
+          ];
+        }
+        return arr;
+      }, [])}
     </div>
   );
 }
@@ -47,8 +53,11 @@ function DrinksList(Data) {
         if (i < 12) {
           return [...arr,
             <Link to={`/bebidas/${e.idDrink}`}>
-              <div className="product-pic" data-testid={`${i}-recipe-card`}>
-                <img src={e.strDrinkThumb} alt="thumbnail" width="150px" data-testid={`${i}-card-img`} />
+              <div
+                className={`product-pic-${i} product-pic slide-in-fwd-center`}
+                data-testid={`${i}-recipe-card`}
+              >
+                <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
                 <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>
               </div>
             </Link>,

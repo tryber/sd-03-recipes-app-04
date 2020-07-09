@@ -1,34 +1,101 @@
 .explore-screen {
-  margin: 60px 0;
+  background-image: url('../../images/loginbackground.jpg');
+  background-size: cover;
+  height: 90vh;
+  margin: 60px 0 0;
   width: 360px;
 }
 
 .explore-button {
-  background: white;
-  border-radius: 6px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background: rgb(32, 193, 214);
+  border-radius: 50px;
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.25);
   color: black;
-  display: inline-block;
   font-size: 30px;
   height: 82px;
-  left: 15px;
+  line-height: 80px;
+  margin-top: 40px;
   text-align: center;
-  text-decoration: none;
-  top: 81px;
-  width: 327px;
+  transform: scale3d(1, 1, 1);
+  transition: transform 1s;
+  width: 300px;
+}
+
+.explore-button:hover {
+  transform: scale3d(1.1, 1.1, 1.1);
 }
 
 .explore-food-button {
-  background: white;
-  border-radius: 6px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  color: black;
-  display: inline-block;
-  font-size: 30px;
-  height: 81px;
-  left: 15px;
+  background: rgb(32, 193, 214);
+  border-radius: 50px;
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-family: Chalkduster, serif;
+  font-size: 20px;
+  height: 82px;
+  left: 30px;
+  line-height: 80px;
+  margin-top: 50px;
+  position: relative;
   text-align: center;
-  text-decoration: none;
-  top: 82px;
-  width: 161px;
+  transform: scale3d(1, 1, 1);
+  transition: transform 1;
+  width: 300px;
+}
+
+.explore-food-button:hover {
+  transform: scale3d(1.1, 1.1, 1.1);
+}
+
+.explore-menu {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  justify-content: center;
+  position: relative;
+}
+
+.explore-menu p {
+  color: white;
+  font-family: Chalkduster, serif;
+  font-size: 1.5rem;
+}
+
+.select-filter {
+  background-color: rgb(32, 193, 214);
+  border-radius: 20px;
+  color: white;
+  display: block;
+  height: 40px;
+  margin: 20px auto;
+  position: relative;
+  text-align: center;
+  top: 20px;
+  width: 50%;
+}
+
+.ingridients-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-top: 30px;
+  width: 360px;
+}
+
+.fade-in-fwd {
+  animation: fade-in-fwd 1.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+
+@keyframes fade-in-fwd {
+
+  0% {
+    opacity: 0;
+    transform: translateZ(-80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
 }

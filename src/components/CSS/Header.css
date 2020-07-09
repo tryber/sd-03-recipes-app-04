@@ -1,45 +1,66 @@
-.userProfileIcon {
-  height: 30px;
-  left: 15px;
-  position: absolute;
-  top: 16px;
-  width: 30px;
-}
-
 .foodTitle {
-  align-items: flex-end;
-  color: black;
-  display: flex;
-  font-family: Roboto, Times New Roman, Times, serif;
+  color: rgb(32, 193, 214);
+  font-family: Chalkduster, Times New Roman, Times, serif;
   font-size: 30px;
   font-style: normal;
-  font-weight: 400;
-  height: 35px;
-  left: 123px;
-  line-height: 35px;
-  position: absolute;
-  top: -10px;
-  width: 119px;
+  font-weight: 900;
+  margin: 0;
+  width: 200px;
 }
 
 .searchIcon {
   background-color: transparent;
   border: none;
-  height: 30px;
-  left: 280px;
-  position: absolute;
-  top: 0;
-  width: 30px;
 }
 
 .headerDiv {
   align-items: center;
-  background-color: grey;
+  background-color: #cce8ed;
   display: flex;
-  height: 58px;
-  justify-content: space-between;
+  height: 70px;
+  justify-content: space-around;
   overflow: hidden;
   position: fixed;
   top: 0;
   width: 360px;
+  z-index: 1;
+}
+
+.headerDiv > div {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  transform: scale3d(1, 1, 1);
+  transition: 1s;
+  width: 60px;
+}
+
+.headerDiv > div:hover {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  transform: scale3d(1.1, 1.1, 1.1);
+  width: 60px;
+}
+
+.headerDiv > div:first-child {
+  background-color: rgb(32, 193, 214);
+}
+
+.no-search-button {
+  background-color: transparent;
+}
+
+.with-search-button {
+  align-items: center;
+  background-color: rgb(32, 193, 214);
+  border-radius: 50%;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  width: 60px;
 }
