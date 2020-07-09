@@ -2,34 +2,55 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getDrinkByID } from '../services/drink-api';
 import { mountRecipeList, getIfHasBeenFavorited } from './functionsProgressScreen';
-import checkedlist from './checklist';
+import checkedlist, { checkedList } from './checklist';
 import CockTailsRenderRecipesInProgress from './helpersComponents/CockTailsRenderRecipesInProgress';
 
+function getLocalStorage(id) {
+  let checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+  if (checkLocalStorage === null) {
+    checkLocalStorage = { meals: [], cocktails: [] };
+  }
+
+  let arr;
+
+  if (checkLocalStorage.cocktails[id] === undefined) {
+    arr = checkedList.checkbox;
+    const newStorage = {
+      ...checkLocalStorage,
+      cocktails: { ...checkLocalStorage.cocktails, [id]: arr },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+    checkLocalStorage = newStorage;
+  } else {
+    arr = checkLocalStorage.cocktails[id];
+    const newStorage = {
+      ...checkLocalStorage,
+      cocktails: { ...checkLocalStorage.cocktails, [id]: arr },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+    checkLocalStorage = newStorage;
+  }
+
+  return checkLocalStorage;
+}
 function ProgressDrinkScreen(props) {
   const [inProgressDrink, setInProgressDrink] = useState([]);
   const [showCopyAlert, setShowCopyAlert] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [countChecked, setCountChecked] = useState(0);
+  const [checked, setChecked] = useState(checkedlist);
+
   const ingredientsDoneList = [];
-  let checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
   const { match: { params: { id } } } = props;
 
-  const [checked, setChecked] = useState(checkedlist);
+  const checkLocalStorage = getLocalStorage(id);
 
   useEffect(() => {
     getDrinkByID(id).then((data) => {
       setInProgressDrink(data.drinks[0]);
     });
-    if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
-    if (checkLocalStorage === null) {
-      checkLocalStorage = { cocktails: [], meals: [] };
-    }
-    if (checkLocalStorage.cocktails === undefined) {
-      checkLocalStorage = { ...checkLocalStorage, cocktails: [] };
-      localStorage.setItem('inProgressRecipes', JSON.stringify({ ...checkLocalStorage, cocktails: { ...checkLocalStorage.meals, [id]: checked.checkbox, countChecked } }));
-    } else {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({ ...checkLocalStorage, cocktails: { ...checkLocalStorage.meals, [id]: checked.checkbox, countChecked } }));
-    }
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
   }, [id, checkLocalStorage, checked, countChecked]);
 
