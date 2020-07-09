@@ -11,7 +11,7 @@
   width: 360px;
 }
 
-.wrapper > img {
+.wrapper>img {
   border-radius: 50%;
   height: 200px;
   position: relative;
@@ -48,7 +48,7 @@ h2 {
   margin: 10px;
 }
 
-.product-pic-recomendation img , h5 {
+.product-pic-recomendation img, h5 {
   text-align: center;
   width: 170px;
 }
@@ -65,6 +65,10 @@ h2 {
   display: flex;
   overflow-x: auto;
   padding-bottom: 110px;
+}
+
+.product-pic-recomendation div {
+  margin: 0 20px;
 }
 
 .youtube {
@@ -87,7 +91,7 @@ h2 {
   width: 100px;
 }
 
-.share-and-favourite > button {
+.share-and-favourite>button {
   background-color: rgb(41, 137, 192);
   border: groove 3px rgb(86, 230, 19);
   border-radius: 50%;

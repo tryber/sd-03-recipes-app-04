@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { getDate } from './CockTailsControlsRecipeProgress';
 
 export function handleChecked(event, value, type, values) {
   const {
@@ -46,7 +47,7 @@ function doneRecipe(recipeInfo, setGoToRoute) {
     alcoholicOrNot: '',
     name: strMeal,
     image: strMealThumb,
-    doneDate: new Date(),
+    doneDate: getDate(),
     tags: strTags === null ? [] : strTags.split(','),
   };
   let storage = JSON.parse(localStorage.getItem('doneRecipes'));

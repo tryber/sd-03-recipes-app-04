@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
+export function getDate() {
+  let today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+  today = `${mm}/${dd}/${yyyy}`;
+  return today;
+}
+
 export function handleChecked(event, value, type, values) {
   const {
     checked, setCountChecked, countChecked, checkLocalStorage, setChecked, id,
@@ -46,7 +55,7 @@ function doneRecipe(recipeInfo, setGoToRoute) {
     alcoholicOrNot: strAlcoholic,
     name: strDrink,
     image: strDrinkThumb,
-    doneDate: new Date(),
+    doneDate: getDate(),
     tags: strTags === null ? [] : strTags.split(','),
   };
   let storage = JSON.parse(localStorage.getItem('doneRecipes'));
