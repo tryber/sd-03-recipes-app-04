@@ -63,8 +63,8 @@
   height: 40px;
   justify-content: center;
   left: 100px;
-  top: 90px;
   position: absolute;
+  top: 90px;
   width: 40px;
 }
 
@@ -95,15 +95,15 @@
   width: 150px;
 }
 
-.favorite-recipes-card div p {
-  font-size: 0.75rem;
-}
-
 .tags p {
   background-color: blueviolet;
   border-radius: 5px;
   color: white;
   font-weight: 900;
-  padding: 5px;
   height: 20px;
+  padding: 5px;
+}    
+
+.favorite-recipes-card div p {
+  font-size: 0.75rem;
 }
