@@ -20,7 +20,7 @@ function copyToClipboard(type, id, setHide) {
     });
 }
 
-function getColors() {
+export function getColors() {
   const color = Math.floor(Math.random() * 12);
   return colors[color];
 }

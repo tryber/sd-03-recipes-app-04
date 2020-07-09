@@ -2,12 +2,32 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getMealById } from '../services/foodApi';
 import { mountRecipeList, getIfHasBeenFavorited } from './functionsProgressScreen';
-import checkedlist from './checklist';
+import checkedlist, { checkedList } from './checklist';
 import MealsRenderRecipesInProgress from './helpersComponents/MealsRenderRecipesInProgress';
 
+function getLocalStorage(id) {
+  let checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (checkLocalStorage === null) {
+    checkLocalStorage = { cocktails: [], meals: [] };
+  }
+
+  let arr;
+
+  if (checkLocalStorage.meals[id] === undefined) {
+    arr = checkedList.checkbox;
+    const newStorage = { ...checkLocalStorage, meals: { ...checkLocalStorage.meals, [id]: arr } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+    checkLocalStorage = newStorage;
+  } else {
+    arr = checkLocalStorage.meals[id];
+    const newStorage = { ...checkLocalStorage, meals: { ...checkLocalStorage.meals, [id]: arr } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
+    checkLocalStorage = newStorage;
+  }
+  return checkLocalStorage;
+}
 function ProgressFoodScreen(props) {
   const ingredientsDoneList = [];
-  const checkLocalStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   const { match: { params: { id } } } = props;
   const { location, history } = props;
@@ -19,17 +39,17 @@ function ProgressFoodScreen(props) {
   const [countChecked, setCountChecked] = useState(0);
   const [checked, setChecked] = useState(checkedlist);
 
+  const checkLocalStorage = getLocalStorage(id);
+
   useEffect(() => {
     getMealById(id)
       .then((data) => { setInProgressRecipe(data.meals[0]); });
     if (getIfHasBeenFavorited(id)) { setIsFavorite(true); }
-    if (checkLocalStorage === null || checkLocalStorage.meals === undefined) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: { [id]: checked.checkbox }, countChecked }));
-    }
   }, [id, checkLocalStorage, checked, countChecked]);
 
   const data = mountRecipeList(inProgressRecipe, checked, ingredientsDoneList);
   const buttonEnabled = countChecked === data.length;
+  console.log(data);
   return (
     <MealsRenderRecipesInProgress
       values={{

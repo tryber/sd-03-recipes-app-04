@@ -5,7 +5,7 @@ import Header from './Header';
 import './CSS/ProfileScreen.css';
 
 function ProfileScreen() {
-  const { email } = JSON.parse(localStorage.getItem('user'));
+  const { email } = (JSON.parse(localStorage.getItem('user')) || { email: null });
   return (
     <div className="container-profile">
       <Header screen="Perfil" />

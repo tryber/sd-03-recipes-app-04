@@ -19,7 +19,7 @@ export function getDoneLocalStorage(id) {
   if (!storage) {
     done = false;
   } else {
-    done = storage.find((e) => e.id !== id);
+    done = storage.find((e) => e.id === id);
   }
   return done;
 }
@@ -45,7 +45,6 @@ export function getIfHasBeenFavorited(id) {
 }
 
 function clickFavorite(setIsFavorite, recipeInfo, isFavorite) {
-  // console.log('dentro da funcao:', isFavorite)
   setIsFavorite((fav) => !fav);
   const {
     idMeal, strArea, strCategory, strMeal, strMealThumb,

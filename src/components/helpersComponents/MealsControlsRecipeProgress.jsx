@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { getDate } from './CockTailsControlsRecipeProgress';
 
 export function handleChecked(event, value, type, values) {
   const {
@@ -26,13 +28,60 @@ export function handleChecked(event, value, type, values) {
       checkbox: value,
     },
   }));
-  localStorage.setItem('inProgressRecipes', JSON.stringify({ [type]: { [id]: checked.checkbox }, countChecked }));
+  const newStorage = {
+    ...checkLocalStorage,
+    meals: { ...checkLocalStorage.meals, [id]: [...checked.checkbox] },
+  };
+  localStorage.setItem('inProgressRecipes', JSON.stringify(newStorage));
 }
+
+function doneRecipe(recipeInfo, setGoToRoute) {
+  const {
+    idMeal, strArea, strCategory, strMeal, strMealThumb, strTags,
+  } = recipeInfo;
+  const mealInfo = {
+    id: idMeal,
+    type: 'comida',
+    area: strArea,
+    category: strCategory,
+    alcoholicOrNot: '',
+    name: strMeal,
+    image: strMealThumb,
+    doneDate: getDate(),
+    tags: strTags === null ? [] : strTags.split(','),
+  };
+  let storage = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (!storage) {
+    storage = [];
+    const newStorage = [...storage, mealInfo];
+    localStorage.setItem('doneRecipes', JSON.stringify(newStorage));
+  } else {
+    const newStorage = [...storage, mealInfo];
+    localStorage.setItem('doneRecipes', JSON.stringify(newStorage));
+  }
+  setGoToRoute(true);
+}
+
+const renderButton = (inProgressRecipe, setGoToRoute) => (
+  <div>
+    <button
+      className="start-button in-progress"
+      enable
+      data-testid="finish-recipe-btn"
+      onClick={() => doneRecipe(inProgressRecipe, setGoToRoute)}
+      type="button"
+    >
+      Finish Recipe Button
+    </button>
+  </div>
+);
+
 function MealsControlsRecipeProgress(props) {
+  const [goToRoute, setGoToRoute] = useState(false);
   const { valuesToRender } = props;
   const {
     inProgressRecipe, data, checkLocalStorage, buttonEnabled,
-    id, checked, history,
+    id, checked,
   } = valuesToRender;
   return (
     <div>
@@ -42,6 +91,7 @@ function MealsControlsRecipeProgress(props) {
       {data.map((element, i) => (
         <div key={element.meal} data-testid={`${i}-ingredient-step`}>
           <span>
+            {/* {console.log(checkLocalStorage.meals[id][i])} */}
             <input id={i} type="checkbox" checked={checkLocalStorage.meals[id][i].checked} name={element.meal} onClick={(event) => handleChecked(event, checked.checkbox[i].checked, 'meals', valuesToRender)} />
             <span>{element.meal}</span>
             {element.mensure}
@@ -55,9 +105,7 @@ function MealsControlsRecipeProgress(props) {
       <div>
         {buttonEnabled
           ? (
-            <button className="start-button in-progress" enable data-testid="finish-recipe-btn" onClick={(() => history.push('/receitas-feitas'))} type="button">
-              Finish Recipe Button
-            </button>
+            renderButton(inProgressRecipe, setGoToRoute)
           )
           : (
             <button
@@ -70,6 +118,7 @@ function MealsControlsRecipeProgress(props) {
             </button>
           )}
       </div>
+      {goToRoute && <Redirect to="/receitas-feitas" />}
     </div>
   );
 }

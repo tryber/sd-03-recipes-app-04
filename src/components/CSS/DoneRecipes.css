@@ -1,0 +1,109 @@
+.container {
+  height: 640px;
+  width: 360px;
+}
+
+.header-recipes-done {
+  align-items: center;
+  background-color: grey;
+  display: flex;
+  font-size: 30px;
+  font-style: normal;
+  height: 58px;
+  justify-content: space-around;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 360px;
+}
+
+.buttons-filter {
+  background-color: #c4c4c4;
+  border-radius: 5px;
+  color: black;
+  font-size: 18px;
+  height: 45px;
+  width: 100px;
+}
+
+.test {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10%;
+}
+
+.recipes-done {
+  background-color: ghostwhite;
+  border-radius: 10px;
+  box-shadow: gray 5px 5px 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px;
+}
+
+.share-progress {
+  background-color: ghostwhite;
+  border-radius: 10px;
+  box-shadow: gray 1px 1px 1px;
+  height: 40px;
+  width: 40px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.done-recipes-card button {
+  align-items: center;
+  background-color: rgb(32, 193, 214);
+  border-radius: 50%;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  left: 100px;
+  position: absolute;
+  top: 90px;
+  width: 40px;
+}
+
+.done-recipes-card a img {
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+}
+
+.done-recipes-card p {
+  color: #1901ed;
+  height: 10px;
+}
+
+.done-recipes-card div {
+  height: 20px;
+  margin: 0;
+}
+
+.done-recipes-card {
+  align-items: center;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  margin: 5px;
+  position: relative;
+  width: 150px;
+}
+
+.tags p {
+  background-color: blueviolet;
+  border-radius: 5px;
+  color: white;
+  font-weight: 900;
+  height: 20px;
+  padding: 5px;
+}
+
+.favorite-recipes-card div p {
+  font-size: 0.75rem;
+}
