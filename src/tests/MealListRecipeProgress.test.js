@@ -4,6 +4,8 @@ import MealListRecipeProgress from '../components/helpersComponents/MealListReci
 
 describe('MealListRecipeProgress Tests', () => {
   test('testing component MealsRenderRecipesInProgress', () => {
-    renderWithRouter(<MealListRecipeProgress />);
+    const obj = { params: { id: '1' } };
+    // const obj2 = { location: 'test/1200' };
+    renderWithRouter(<MealListRecipeProgress listValues={obj} />);
   });
 });
