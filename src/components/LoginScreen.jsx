@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { ContextAplication } from '../context/ContextAplication';
 
 import './CSS/LoginScreen.css';
@@ -8,7 +7,7 @@ const handleChangeInput = (name, event, input, setInput) => {
   setInput({ ...input, [name]: event });
 };
 
-const handleFormSubmit = (saveInput, input, history) => {
+const handleFormSubmit = (saveInput, input) => {
   localStorage.setItem('user', JSON.stringify({ email: input.email }));
   localStorage.setItem('mealsToken', 1);
   localStorage.setItem('cocktailsToken', 1);
@@ -46,7 +45,6 @@ function LoginScreen() {
   const { saveInput } = useContext(ContextAplication);
   const [input, setInput] = useState({ email: '', password: '' });
   const [informations, setInformations] = useState(true);
-  const history = useHistory();
 
   useEffect(() => {
     const validEmailRegEx = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
@@ -66,7 +64,7 @@ function LoginScreen() {
         className=" btn btn-login"
         disabled={informations}
         data-testid="login-submit-btn"
-        onClick={() => handleFormSubmit(saveInput, input, history)}
+        onClick={() => handleFormSubmit(saveInput, input)}
       >
         Entrar
       </button>

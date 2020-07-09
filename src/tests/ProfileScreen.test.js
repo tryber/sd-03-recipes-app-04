@@ -6,9 +6,9 @@ import {
   act,
 } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import renderWithRouter from './RenderService';
+import renderWithRouter from './Mocks/RenderService';
 import ProfileScreen from '../components/ProfileScreen';
-import LocalStorage from './MockLocalStorage';
+import LocalStorage from './Mocks/MockLocalStorage';
 
 window.localStorage = new LocalStorage();
 

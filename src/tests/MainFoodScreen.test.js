@@ -150,6 +150,17 @@ describe('Testing search button', () => {
 
   jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
 
+
+  test('button should be disabled when input is empty', async () => {
+    const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
+    await waitForDomChange();
+
+    const searchButton = queryByTestId('search-top-btn');
+    fireEvent.click(searchButton);
+    const execSearchButton = queryByTestId('exec-search-btn');
+    expect(execSearchButton).toBeDisabled();
+  });
+
   test('should render only recipes with chicken', async () => {
     const { queryByTestId, getByText } = renderWithRouter(<MainFoodScreen />);
     await waitForDomChange();
@@ -165,10 +176,11 @@ describe('Testing search button', () => {
     expect(getByText('Thai Green Curry')).toBeInTheDocument();
   });
 
-  // dando falso positivo
-  test.skip('should not render any recipe', async () => {
+  test('should not render any recipe', async () => {
     const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
     await waitForDomChange();
+
+    window.alert = jest.fn().mockImplementation(() => true);
 
     const searchButton = queryByTestId('search-top-btn');
     fireEvent.click(searchButton);
@@ -178,7 +190,8 @@ describe('Testing search button', () => {
     });
     fireEvent.click(queryByTestId('exec-search-btn'));
 
-    expect(alert).not.toBeNull();
+    await wait(() => expect(global.fetch).toHaveBeenCalled());
+    expect(window.alert).toHaveBeenLastCalledWith('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   });
 
   test('should render only recipes with soup', async () => {
@@ -196,19 +209,26 @@ describe('Testing search button', () => {
     expect(getByText('Tunisian Lamb Soup')).toBeInTheDocument();
   });
 
-  // tentar enteder como validar a api calling
-  test.skip('should redirect to details page', async () => {
-    const { queryByTestId, history } = renderWithRouter(<MainFoodScreen />);
-    await waitForDomChange();
+  test('should redirect to details page', async () => {
+    const { getByTestId, history } = renderWithRouter(<MainFoodScreen />);
 
-    const searchButton = queryByTestId('search-top-btn');
+    const searchButton = getByTestId('search-top-btn');
     fireEvent.click(searchButton);
-    fireEvent.click(queryByTestId('name-search-radio'));
-    fireEvent.input(queryByTestId('search-input'), {
+
+    const [
+      nameButton,
+      searchInput,
+    ] = await waitForElement(() => [
+      getByTestId('name-search-radio'),
+      getByTestId('search-input'),
+    ]);
+
+    fireEvent.click(nameButton);
+    fireEvent.input(searchInput, {
       target: { value: 'Arrabiata' },
     });
-    fireEvent.click(queryByTestId('exec-search-btn'));
-    await waitForElement(() => expect(global.fetch).toHaveBeenCalled());
+    fireEvent.click(getByTestId('exec-search-btn'));
+    await wait(() => expect(global.fetch).toHaveBeenCalled());
     expect(history.location.pathname).toEqual('/comidas/52771');
   });
 });

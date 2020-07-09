@@ -1,5 +1,5 @@
 import React from 'react';
-import { waitForDomChange, cleanup, fireEvent, waitForElement } from '@testing-library/react';
+import { waitForDomChange, cleanup, fireEvent, wait } from '@testing-library/react';
 import MainDrinkScreen from '../components/MainDrinkScreen';
 import mockFetch from './Mocks/Fetch';
 import renderWithRouter from './Mocks/RenderService';
@@ -145,6 +145,16 @@ describe('Testing search button', () => {
 
   jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
 
+  test('button should be disabled when input is empty', async () => {
+    const { queryByTestId } = renderWithRouter(<MainDrinkScreen />);
+    await waitForDomChange();
+
+    const searchButton = queryByTestId('search-top-btn');
+    fireEvent.click(searchButton);
+    const execSearchButton = queryByTestId('exec-search-btn');
+    expect(execSearchButton).toBeDisabled();
+  });
+
   test('should render only recipes with Light rum', async () => {
     const { queryByTestId, getByText } = renderWithRouter(<MainDrinkScreen />);
     await waitForDomChange();
@@ -160,10 +170,11 @@ describe('Testing search button', () => {
     expect(getByText('Banana Daiquiri')).toBeInTheDocument();
   });
 
-  // dando falso positivo
-  test.skip('should not render any recipe', async () => {
+  test('should not render any recipe', async () => {
     const { queryByTestId } = renderWithRouter(<MainDrinkScreen />);
     await waitForDomChange();
+
+    window.alert = jest.fn().mockImplementation(() => true);
 
     const searchButton = queryByTestId('search-top-btn');
     fireEvent.click(searchButton);
@@ -173,7 +184,8 @@ describe('Testing search button', () => {
     });
     fireEvent.click(queryByTestId('exec-search-btn'));
 
-    expect(alert).not.toBeNull();
+    await wait(() => expect(global.fetch).toHaveBeenCalled());
+    expect(window.alert).toHaveBeenLastCalledWith('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   });
 
   test('should render only recipes with gin', async () => {
@@ -191,8 +203,7 @@ describe('Testing search button', () => {
     expect(getByText('Gin And Tonic')).toBeInTheDocument();
   });
 
-  // tentar enteder como validar a api calling
-  test.skip('should redirect to details page', async () => {
+  test('should redirect to details page', async () => {
     const { queryByTestId, history } = renderWithRouter(<MainDrinkScreen />);
     await waitForDomChange();
 
@@ -200,10 +211,10 @@ describe('Testing search button', () => {
     fireEvent.click(searchButton);
     fireEvent.click(queryByTestId('name-search-radio'));
     fireEvent.input(queryByTestId('search-input'), {
-      target: { value: 'Arrabiata' },
+      target: { value: 'Aquamarine' },
     });
     fireEvent.click(queryByTestId('exec-search-btn'));
-    await waitForElement(() => expect().toHaveBeenCalledTimes());
-    expect(history.location.pathname).toEqual('/comidas/52771');
+    await wait(() => expect(global.fetch).toHaveBeenCalled());
+    expect(history.location.pathname).toEqual('/bebidas/178319');
   });
 });
