@@ -69,6 +69,11 @@ describe('A lista de ingredientes deve conter um checkbox para cada um dos items
 });
 
 describe('Ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado" da lista', () => {
+  const getIngredients = () => (
+    cy.get('[data-testid*="ingredient-step"]')
+      .find('input[type="checkbox"]')
+  );
+
   it('verifica se é possível marcar todos os passos da receita de comida', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
@@ -76,9 +81,10 @@ describe('Ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado
       },
     });
 
-    cy.get('[data-testid*="ingredient-step"]')
-      .find('input[type="checkbox"]')
-      .check()
+    getIngredients()
+      .check();
+
+    getIngredients()
       .should('have.css', 'text-decoration', 'none solid rgb(0, 0, 0)');
   });
 
@@ -89,9 +95,10 @@ describe('Ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado
       },
     });
 
-    cy.get('[data-testid*="ingredient-step"]')
-      .find('input[type="checkbox"]')
-      .check()
+    getIngredients()
+      .check();
+
+    getIngredients()
       .should('have.css', 'text-decoration', 'none solid rgb(0, 0, 0)');
   });
 });
