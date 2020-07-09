@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { ContextAplication } from '../context/ContextAplication';
 
 import './CSS/LoginScreen.css';
@@ -8,13 +8,12 @@ const handleChangeInput = (name, event, input, setInput) => {
   setInput({ ...input, [name]: event });
 };
 
-const handleFormSubmit = (saveInput, input, history) => {
+const handleFormSubmit = (saveInput, input) => {
   localStorage.setItem('user', JSON.stringify({ email: input.email }));
   localStorage.setItem('mealsToken', 1);
   localStorage.setItem('cocktailsToken', 1);
-  saveInput(input);
 
-  return history.push('/comidas');
+  saveInput(input);
 };
 
 function createForm(input, setInput) {
@@ -46,7 +45,7 @@ function LoginScreen() {
   const { saveInput } = useContext(ContextAplication);
   const [input, setInput] = useState({ email: '', password: '' });
   const [informations, setInformations] = useState(true);
-  const history = useHistory();
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     const validEmailRegEx = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
@@ -58,7 +57,7 @@ function LoginScreen() {
   }, [input]);
 
   if (user) return <Redirect to="/welcome" />;
-          
+
   return (
     <div className="login-screen">
       <h1 className="app-name">Cooking Time</h1>
@@ -68,7 +67,7 @@ function LoginScreen() {
         className=" btn btn-login"
         disabled={informations}
         data-testid="login-submit-btn"
-        onClick={() => handleFormSubmit(saveInput, input, history)}
+        onClick={() => handleFormSubmit(saveInput, input)}
       >
         Entrar
       </button>
