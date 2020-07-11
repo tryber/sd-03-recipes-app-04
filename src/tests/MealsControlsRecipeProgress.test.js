@@ -13,8 +13,9 @@ describe('MealsControlsRecipeProgress Tests', () => {
     const inProgressRecipe = food;
     const checked = checkedlist;
     const ingredientsDoneList = [];
+    const countChecked = 10;
+    const checkLocalStorage = { meals: { 15555: checked.checkbox }, countChecked };
     const data = mountRecipeList(inProgressRecipe, checked, ingredientsDoneList);
-
-    renderWithRouter(<MealsControlsRecipeProgress valuesToRender={{ inProgressRecipe, data, 'meals' }} />);
+    renderWithRouter(<MealsControlsRecipeProgress valuesToRender={{ inProgressRecipe, data, checkLocalStorage }} />);
   });
 });

@@ -14,10 +14,13 @@ describe('MealListRecipeProgress Tests', () => {
     const inProgressRecipe = food;
     const checked = checkedlist;
     const ingredientsDoneList = [];
+    const countChecked = 10;
+    const id= 500;
+    const checkLocalStorage = { meals: { [id]: checked.checkbox }, countChecked };
     const data = mountRecipeList(inProgressRecipe, checked, ingredientsDoneList);
     const setIsFavorite = () => null;
     const { getByTestId } = renderWithRouter(<MealListRecipeProgress listValues={{
-      obj, inProgressRecipe, setIsFavorite, data,
+      obj, inProgressRecipe, setIsFavorite, data, checkLocalStorage,
     }}
     />);
     const btnFavorite = getByTestId('favorite-btn');
