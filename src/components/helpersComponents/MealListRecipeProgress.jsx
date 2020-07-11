@@ -18,6 +18,7 @@ function MealsListRecipeProgress(props) {
       <button
         type="button"
         className="favourite-progress"
+        data-testid="favorite-btn"
         onClick={() => clickFavorite(inProgressRecipe, isFavorite, setIsFavorite, 'comida')}
         src={favorite}
       >
