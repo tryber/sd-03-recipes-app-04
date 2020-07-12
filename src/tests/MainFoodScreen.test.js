@@ -150,7 +150,6 @@ describe('Testing search button', () => {
 
   jest.spyOn(global, 'fetch').mockImplementation(mockFetch);
 
-
   test('button should be disabled when input is empty', async () => {
     const { queryByTestId } = renderWithRouter(<MainFoodScreen />);
     await waitForDomChange();
