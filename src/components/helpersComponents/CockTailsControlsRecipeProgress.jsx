@@ -49,7 +49,7 @@ function doneRecipe(recipeInfo, setGoToRoute) {
   } = recipeInfo;
   const drinkInfo = {
     id: idDrink,
-    type: 'comida',
+    type: 'bebia',
     area: '',
     category: strCategory,
     alcoholicOrNot: strAlcoholic,
