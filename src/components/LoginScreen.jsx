@@ -13,31 +13,29 @@ const handleFormSubmit = (saveInput, input, history) => {
   localStorage.setItem('mealsToken', 1);
   localStorage.setItem('cocktailsToken', 1);
   saveInput(input);
-
-  return history.push('./comidas');
+  return history.push('/comidas');
 };
 
 function createForm(input, setInput) {
   return (
     <form>
-      <div className="input-field col s6 ">
-        <input
-          className="input-login"
-          data-testid="email-input"
-          onChange={(ele) => handleChangeInput('email', ele.target.value, input, setInput)}
-          type="email"
-          name="email"
-          placeholder="Email"
-        />
-        <input
-          className="input-login"
-          data-testid="password-input"
-          onChange={(ele) => handleChangeInput('password', ele.target.value, input, setInput)}
-          type="password"
-          name="password"
-          placeholder="Senha"
-        />
-      </div>
+      <h2>Login</h2>
+      <input
+        className="email"
+        data-testid="email-input"
+        onChange={(ele) => handleChangeInput('email', ele.target.value, input, setInput)}
+        type="email"
+        name="email"
+        placeholder="Email"
+      />
+      <input
+        className="password"
+        data-testid="password-input"
+        onChange={(ele) => handleChangeInput('password', ele.target.value, input, setInput)}
+        type="password"
+        name="password"
+        placeholder="Senha"
+      />
     </form>
   );
 }
