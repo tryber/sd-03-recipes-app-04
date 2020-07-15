@@ -3,14 +3,6 @@
   width: 360px;
 }
 
-.wrapper {
-  display: flex;
-  height: 300px;
-  overflow: hidden;
-  position: relative;
-  width: 360px;
-}
-
 .wrapper > img {
   border-radius: 50%;
   height: 200px;
@@ -18,6 +10,14 @@
   right: -160px;
   width: 200px;
   z-index: 1;
+}
+
+.wrapper {
+  display: flex;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  width: 360px;
 }
 
 .wrapper .square {
