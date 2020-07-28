@@ -22,6 +22,7 @@ function FilterButtons(Categories, handleClick) {
         value="All"
         onClick={handleClick}
         className="button-main-screen"
+        key="All"
       >
         All
       </button>
@@ -34,6 +35,7 @@ function FilterButtons(Categories, handleClick) {
               value={e.strCategory}
               onClick={handleClick}
               className="button-main-screen"
+              key={e.strCategory}
             >
               <img src={filterPics[i]} alt="" width="20px" />
               {e.strCategory}
@@ -56,6 +58,7 @@ function DrinksList(Data) {
               <div
                 className={`product-pic-${i} product-pic slide-in-fwd-center`}
                 data-testid={`${i}-recipe-card`}
+                key={e.idDrink}
               >
                 <img src={e.strDrinkThumb} className="recipe-image" alt="thumbnail" width="120px" data-testid={`${i}-card-img`} />
                 <h5 data-testid={`${i}-card-name`}>{e.strDrink}</h5>

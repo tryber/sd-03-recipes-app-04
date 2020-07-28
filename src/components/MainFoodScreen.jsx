@@ -22,6 +22,7 @@ function FilterButtons(Categories, handleClick) {
         value="All"
         onClick={handleClick}
         className="button-main-screen"
+        key="All"
       >
         All
       </button>
@@ -34,6 +35,7 @@ function FilterButtons(Categories, handleClick) {
               value={e.strCategory}
               onClick={handleClick}
               className="button-main-screen"
+              key={e.strCategory}
             >
               <img src={filterPics[i]} alt="" width="20px" />
               {e.strCategory}
@@ -52,7 +54,7 @@ function MealsList(Data) {
       {Data.reduce((arr, e, i) => {
         if (i < 12) {
           return [...arr,
-            <Link to={`/comidas/${e.idMeal}`}>
+            <Link to={`/comidas/${e.idMeal}`} key={e.idMeal}>
               <div
                 className={`product-pic-${i} product-pic slide-in-fwd-center`}
                 data-testid={`${i}-recipe-card`}
